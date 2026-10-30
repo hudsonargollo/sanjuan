@@ -9,26 +9,26 @@
    ============================================================ */
 @theme {
   /* Brand — deep wine/maroon */
-  --color-maroon: #1c2b23;     /* primary dark — footer, buttons, frames */
-  --color-maroon-2: #152018;
-  --color-wine-deep: #0f1913;
-  --color-panel: #e8f2ea;      /* hero / framed panel (deeper cream) */
-  --color-panel-2: #dcebe0;
+  --color-maroon: #1f3d2b;     /* primary dark — forest green */
+  --color-maroon-2: #162e20;
+  --color-wine-deep: #0d1f14;
+  --color-panel: #eaf5ee;      /* hero / framed panel (deeper cream) */
+  --color-panel-2: #ddeee3;
 
   /* Antique gold */
-  --color-gold: #659a4b;
-  --color-gold-hi: #8fc46a;
-  --color-gold-deep: #4f8b4c;
+  --color-gold: #4a9d6e;
+  --color-gold-hi: #7ec99a;
+  --color-gold-deep: #2f7a52;
 
   /* Neutrals — warm */
-  --color-ink: #1c2b23;        /* warm dark text on cream */
-  --color-cream: #f4f9f5;      /* page background (warm ivory) */
-  --color-cream-soft: #f9fcfa;
-  --color-sand: #e6f0e8;
+  --color-ink: #1f3d2b;        /* dark green text */
+  --color-cream: #f3faf5;      /* mint cream bg */
+  --color-cream-soft: #f7fcf9;
+  --color-sand: #e4f2ea;
   --color-surface: #ffffff;    /* cards / inputs (flips in dark mode) */
   --color-light: #f4e8d5;      /* fixed ivory — light text on dark buttons/footer (never flips) */
-  --color-muted: #6b8a72;      /* muted text on light */
-  --color-muted-dark: #b8d4be; /* muted text on dark maroon */
+  --color-muted: #5a8a6e;      /* muted text on light */
+  --color-muted-dark: #b0d4bc; /* muted text on dark maroon */
 
   /* Form feedback — jewel-tone emerald / garnet that sit well with maroon + gold */
   --color-ok: #2f7d5c;
@@ -55,25 +55,25 @@
 
   /* Deep wine so full bg-maroon sections stay elegant (not washed) on dark.
      Maroon-as-text/icon contrast is handled per-element with dark: variants. */
-  --color-maroon: #152018;
-  --color-maroon-2: #0f1913;
-  --color-wine-deep: #0a140e;
-  --color-panel: #1a2b23;
-  --color-panel-2: #203328;
+  --color-maroon: #162e20;
+  --color-maroon-2: #0d1f14;
+  --color-wine-deep: #081510;
+  --color-panel: #162e20;
+  --color-panel-2: #1d3a28;
 
   /* Gold brightens for dark backgrounds */
-  --color-gold: #7bb85a;
-  --color-gold-hi: #a3d48a;
-  --color-gold-deep: #659a4b;
+  --color-gold: #5ab88a;
+  --color-gold-hi: #8fd4b0;
+  --color-gold-deep: #4a9d6e;
 
   /* Neutrals invert: light text on a deep, warm-dark ground */
-  --color-ink: #e8f2ea;
-  --color-cream: #0f1913;
-  --color-cream-soft: #162018;
-  --color-sand: #1c2b23;
+  --color-ink: #eaf5ee;
+  --color-cream: #0d1f14;
+  --color-cream-soft: #142518;
+  --color-sand: #1a3324;
   --color-surface: #241319;
-  --color-muted: #9bb8a3;
-  --color-muted-dark: #cfe3d4;
+  --color-muted: #8ab8a0;
+  --color-muted-dark: #c0e3ce;
   --color-ok: #6cc59a;
   --color-bad: #f08a80;
 

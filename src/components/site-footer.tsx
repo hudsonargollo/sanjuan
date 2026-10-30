@@ -53,10 +53,10 @@ export function SiteFooter({ settings }: { settings: StoreSettings }) {
         <div className="flex flex-col items-center text-center md:col-span-4 md:items-start md:text-left">
           <div className="flex items-center gap-2.5">
             <Emblem size={34} className="text-gold" />
-            <span className="gold-text font-serif text-2xl font-bold tracking-[0.24em]">ZARIERA</span>
+            <span className="gold-text font-serif text-2xl font-bold tracking-[0.24em]">SanJuan Mini Market</span>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-light/60">
-            Premium stainless steel &amp; artificial jewelry — rust-free and made to last.
+            Premium stainless steel &amp; productos de higiene y cuidado personal — rust-free and made to last.
             Every jewel tells a story.
           </p>
           <div className="mt-6 flex gap-3">
@@ -148,8 +148,8 @@ export function SiteFooter({ settings }: { settings: StoreSettings }) {
       {/* Bottom bar */}
       <div className="relative border-t border-[rgba(230,205,139,0.15)]">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-5 text-center text-xs text-light/45 sm:flex-row sm:text-left">
-          <span>© {new Date().getFullYear()} ZARIERA. All rights reserved.</span>
-          <span>Crafted with care · Premium Stainless Steel Jewelry</span>
+          <span>© {new Date().getFullYear()} SanJuan Mini Market. All rights reserved.</span>
+          <span>Crafted with care · Premium Stainless Steel productos</span>
         </div>
       </div>
     </footer>

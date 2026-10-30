@@ -1,6 +1,6 @@
-# ZARIERA — E-Commerce Store
+# SanJuan Mini Market — E-Commerce Store
 
-Luxury jewelry storefront for **ZARIERA** — _"Every Jewel Tells a Story."_
+Luxury jewelry storefront for **SanJuan Mini Market** — _"Every Jewel Tells a Story."_
 Built to the approved **Standard package** scope.
 
 ## Tech stack
@@ -22,7 +22,7 @@ Built to the approved **Standard package** scope.
 2. **Configure the database**
    Copy `.env.example` to `.env` and set your PostgreSQL connection string:
    ```env
-   DATABASE_URL="postgresql://USER:PASSWORD@HOST:5432/zariera?schema=public"
+   DATABASE_URL="postgresql://USER:PASSWORD@HOST:5432/sanjuan?schema=public"
    ```
    > Free hosted Postgres: [Neon](https://neon.tech) or [Supabase](https://supabase.com).
 
@@ -145,8 +145,8 @@ cloud Postgres (Neon), `npm run db:copy` to move local data, env vars from
 Use a **single long-running instance** (live order alerts + rate limits are in-memory).
 
 ```bash
-docker build -t zariera .
-docker run -p 3000:3000 --env-file .env -v zariera-uploads:/app/uploads zariera
+docker build -t sanjuan .
+docker run -p 3000:3000 --env-file .env -v sanjuan-uploads:/app/uploads sanjuan
 ```
 
 > Product images uploaded from the admin are stored in `UPLOAD_DIR` (default

@@ -14,7 +14,7 @@ const MESSAGES: Record<
   { variant: "success" | "error" | "info"; message: string; title?: string }
 > = {
   login: { variant: "success", message: "Welcome back!", title: "Signed in" },
-  register: { variant: "success", message: "Welcome to ZARIERA ✨", title: "Account created" },
+  register: { variant: "success", message: "Welcome to SanJuan Mini Market ✨", title: "Account created" },
   "admin-login": { variant: "success", message: "Signed in to the dashboard.", title: "Welcome" },
   "signed-out": { variant: "info", message: "You've been signed out." },
   "product-created": { variant: "success", message: "Product created.", title: "Saved" },

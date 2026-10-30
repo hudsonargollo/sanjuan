@@ -160,7 +160,7 @@ export function SearchBox({ initial = "", autoFocus = false }: { initial?: strin
           spellCheck={false}
           enterKeyHint="search"
           placeholder={`Try “${EXAMPLES[hint]}”`}
-          aria-label="Search jewelry"
+          aria-label="Search productos"
           role="combobox"
           aria-expanded={open && !!shown}
           aria-controls={listId}

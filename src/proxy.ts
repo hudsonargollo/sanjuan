@@ -6,8 +6,8 @@ import { NextResponse, type NextRequest } from "next/server";
 // sign-in screen.) Only cookie presence is checked here — the pages still verify
 // the session itself, so a stale or forged cookie gets the in-page redirect.
 
-const CUSTOMER_COOKIE = "zariera_customer";
-const ADMIN_COOKIE = "zariera_admin";
+const CUSTOMER_COOKIE = "SanJuan Mini Market_customer";
+const ADMIN_COOKIE = "SanJuan Mini Market_admin";
 
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
@@ -27,8 +27,8 @@ export function proxy(request: NextRequest) {
 // Literals only — the matcher is read statically at build time.
 export const config = {
   matcher: [
-    { source: "/account/:path*", missing: [{ type: "cookie", key: "zariera_customer" }] },
-    { source: "/checkout", missing: [{ type: "cookie", key: "zariera_customer" }] },
-    { source: "/admin/:path*", missing: [{ type: "cookie", key: "zariera_admin" }] },
+    { source: "/account/:path*", missing: [{ type: "cookie", key: "SanJuan Mini Market_customer" }] },
+    { source: "/checkout", missing: [{ type: "cookie", key: "SanJuan Mini Market_customer" }] },
+    { source: "/admin/:path*", missing: [{ type: "cookie", key: "SanJuan Mini Market_admin" }] },
   ],
 };

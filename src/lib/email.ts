@@ -74,7 +74,7 @@ function shell(title: string, inner: string): string {
   <div style="background:#f4e8d5;padding:24px;font-family:Arial,Helvetica,sans-serif">
     <div style="max-width:560px;margin:0 auto;background:#fffaf2;border:1px solid #eadfce;border-radius:12px;overflow:hidden">
       <div style="background:#5b1a2b;padding:22px;text-align:center">
-        <div style="color:#e6cd8b;font-size:24px;letter-spacing:6px;font-weight:700">ZARIERA</div>
+        <div style="color:#e6cd8b;font-size:24px;letter-spacing:6px;font-weight:700">SanJuan Mini Market</div>
         <div style="color:#dcc6ad;font-style:italic;font-size:13px;margin-top:4px">Every Jewel Tells a Story</div>
       </div>
       <div style="padding:28px">
@@ -82,7 +82,7 @@ function shell(title: string, inner: string): string {
         ${inner}
       </div>
       <div style="background:#5b1a2b;padding:16px;text-align:center;color:#dcc6ad;font-size:12px">
-        Premium Stainless Steel Jewelry · Made to last
+        Premium Stainless Steel productos · Made to last
       </div>
     </div>
   </div>`;
@@ -128,7 +128,7 @@ export async function sendOrderEmails(o: OrderEmailData): Promise<void> {
     return;
   }
 
-  const from = process.env.MAIL_FROM || `ZARIERA <${process.env.SMTP_USER}>`;
+  const from = process.env.MAIL_FROM || `SanJuan Mini Market <${process.env.SMTP_USER}>`;
   const adminTo = await alertAddress();
 
   try {
@@ -137,7 +137,7 @@ export async function sendOrderEmails(o: OrderEmailData): Promise<void> {
       transport.sendMail({
         from,
         to: o.email,
-        subject: `Your ZARIERA order ${o.orderNumber}`,
+        subject: `Your SanJuan Mini Market order ${o.orderNumber}`,
         html: customerHtml(o),
       }),
       transport.sendMail({
@@ -158,12 +158,12 @@ export async function sendPasswordResetEmail(p: { to: string; name: string; url:
     console.warn("[email] SMTP not configured — password reset email not sent.");
     return;
   }
-  const from = process.env.MAIL_FROM || `ZARIERA <${process.env.SMTP_USER}>`;
+  const from = process.env.MAIL_FROM || `SanJuan Mini Market <${process.env.SMTP_USER}>`;
   try {
     await getTransport().sendMail({
       from,
       to: p.to,
-      subject: "Reset your ZARIERA password",
+      subject: "Reset your SanJuan Mini Market password",
       html: shell(
         "Reset your password",
         `<p style="color:#3a231e;font-size:14px">Hi ${escape(p.name)}, we received a request to reset your password.</p>
@@ -186,7 +186,7 @@ export async function sendContactNotification(m: {
   topic?: string;
 }): Promise<void> {
   if (!emailConfigured()) return; // message is still saved in the admin "Messages" page
-  const from = process.env.MAIL_FROM || `ZARIERA <${process.env.SMTP_USER}>`;
+  const from = process.env.MAIL_FROM || `SanJuan Mini Market <${process.env.SMTP_USER}>`;
   const to = await alertAddress();
   try {
     await getTransport().sendMail({
@@ -224,24 +224,24 @@ export async function sendOtpEmail(
     console.error("[email] SMTP not configured — cannot send verification code");
     return { ok: false, error: "We can't send verification emails right now. Please try again later or contact us." };
   }
-  const from = process.env.MAIL_FROM || `ZARIERA <${process.env.SMTP_USER}>`;
+  const from = process.env.MAIL_FROM || `SanJuan Mini Market <${process.env.SMTP_USER}>`;
   const spaced = code.split("").join(" ");
   const title = purpose === "register" ? "Confirm your email" : "Verify your email";
   try {
     await getTransport().sendMail({
       from,
       to,
-      subject: `${code} is your ZARIERA verification code`,
-      text: `Your ZARIERA verification code is ${code}. It expires in 10 minutes. If you didn't request it, you can ignore this email.`,
+      subject: `${code} is your SanJuan Mini Market verification code`,
+      text: `Your SanJuan Mini Market verification code is ${code}. It expires in 10 minutes. If you didn't request it, you can ignore this email.`,
       html: shell(
         title,
         `<p style="color:#3a231e;font-size:14px">Use this code to ${
-          purpose === "register" ? "finish creating your ZARIERA account" : "verify your email address"
+          purpose === "register" ? "finish creating your SanJuan Mini Market account" : "verify your email address"
         }:</p>
          <p style="margin:22px 0;text-align:center">
            <span style="display:inline-block;background:#f4e8d5;border:1px solid #c39a4e;border-radius:10px;padding:14px 22px;font-size:30px;font-weight:700;letter-spacing:8px;color:#5b1a2b;font-family:'Courier New',monospace">${escape(spaced)}</span>
          </p>
-         <p style="color:#8a6f63;font-size:13px">This code expires in <strong>10 minutes</strong>. Never share it with anyone — ZARIERA will never ask you for it by phone or WhatsApp.</p>
+         <p style="color:#8a6f63;font-size:13px">This code expires in <strong>10 minutes</strong>. Never share it with anyone — SanJuan Mini Market will never ask you for it by phone or WhatsApp.</p>
          <p style="color:#8a6f63;font-size:13px">If you didn&rsquo;t try to sign up, you can safely ignore this email.</p>`
       ),
     });

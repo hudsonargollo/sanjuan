@@ -14,7 +14,7 @@ export function Newsletter() {
 
   useEffect(() => {
     if (state.error) toast.error(state.error);
-    else if (state.ok) toast.success("You're on the list — welcome to ZARIERA ✨", { title: "Subscribed" });
+    else if (state.ok) toast.success("You're on the list — welcome to SanJuan Mini Market ✨", { title: "Subscribed" });
   }, [state, toast]);
 
   return (
@@ -49,7 +49,7 @@ export function Newsletter() {
             Newsletter
           </span>
           <h2 className="mt-2 font-serif text-3xl font-bold text-light sm:text-4xl">
-            Join the ZARIERA list
+            Join the SanJuan Mini Market list
           </h2>
           <p className="mx-auto mt-3 max-w-md text-light/70">
             Be first to know about new arrivals, exclusive offers and special deals.

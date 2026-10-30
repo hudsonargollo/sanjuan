@@ -30,7 +30,7 @@ export function SaleRibbon({ percent }: { percent: number }) {
   );
 }
 
-/** Small "Save Rs 700" line under a card price. */
+/** Small "Save Bs 700" line under a card price. */
 export function SaveLine({ amount }: { amount: number }) {
   return (
     <p className="mt-1 inline-flex items-center gap-1 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-gold-deep">
@@ -93,7 +93,7 @@ export function DealPanel({
   );
 }
 
-/** Maroon strip for cart / checkout: "You're saving Rs 1,400 on this order". */
+/** Maroon strip for cart / checkout: "You're saving Bs 1,400 on this order". */
 export function SavingsStrip({ amount, className = "" }: { amount: number; className?: string }) {
   return (
     <div className={`flex items-center gap-3 rounded-xl bg-maroon px-4 py-3 text-light ${className}`}>

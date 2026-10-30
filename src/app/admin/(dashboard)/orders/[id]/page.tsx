@@ -39,7 +39,7 @@ export default async function AdminOrderDetailPage({
         </Link>
       </div>
       <p className="mt-1 text-sm text-muted">
-        Placed {new Date(order.createdAt).toLocaleString("en-PK")}
+        Placed {new Date(order.createdAt).toLocaleString("es-BO")}
       </p>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_320px]">

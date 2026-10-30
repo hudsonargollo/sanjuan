@@ -19,7 +19,7 @@ export default async function InvoicePage({ params }: PageProps<"/admin/invoice/
   const [order, settings] = await Promise.all([getAdminOrder(id), getStoreSettings()]);
   if (!order) notFound();
 
-  const date = new Date(order.createdAt).toLocaleDateString("en-PK", {
+  const date = new Date(order.createdAt).toLocaleDateString("es-BO", {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -41,7 +41,7 @@ export default async function InvoicePage({ params }: PageProps<"/admin/invoice/
         {/* Header */}
         <header className="flex items-start justify-between border-b-2 border-[#5b1a2b] pb-5">
           <div>
-            <p className="font-serif text-3xl font-bold tracking-[0.25em] text-[#5b1a2b]">ZARIERA</p>
+            <p className="font-serif text-3xl font-bold tracking-[0.25em] text-[#5b1a2b]">SanJuan Mini Market</p>
             <p className="mt-1 text-xs italic text-[#8a6f63]">Every Jewel Tells a Story</p>
             <p className="mt-3 text-xs text-[#6b5a52]">{[c.city, c.phone, c.email].filter(Boolean).join(" · ")}</p>
           </div>
@@ -127,7 +127,7 @@ export default async function InvoicePage({ params }: PageProps<"/admin/invoice/
         )}
 
         <p className="mt-8 text-center text-xs text-[#8a6f63]">
-          Thank you for shopping with ZARIERA ✦ Exchanges within 7 days on unused items in original packaging.
+          Thank you for shopping with SanJuan Mini Market ✦ Exchanges within 7 days on unused items in original packaging.
         </p>
 
         {/* Packing slip — cut off and put in / on the parcel */}

@@ -71,7 +71,7 @@ export function LoginForm({ next }: { next?: string }) {
 
       <div className="mt-6 flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.2em] text-muted">
         <span className="h-px flex-1 bg-[var(--line)]" />
-        New to ZARIERA?
+        New to SanJuan Mini Market?
         <span className="h-px flex-1 bg-[var(--line)]" />
       </div>
       <Link

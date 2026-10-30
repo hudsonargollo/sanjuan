@@ -38,7 +38,7 @@ type CartContextValue = {
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
-const STORAGE_KEY = "zariera_cart_v1";
+const STORAGE_KEY = "SanJuan Mini Market_cart_v1";
 const EMPTY: CartItem[] = [];
 
 // ---------- localStorage-backed external store (synced across tabs) ----------

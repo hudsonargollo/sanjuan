@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 // Classic double-line frame with ornamental corners — evokes a fine
-// jewelry box. Used around the hero and feature panels.
+// productos box. Used around the hero and feature panels.
 
 export function OrnateFrame({
   children,

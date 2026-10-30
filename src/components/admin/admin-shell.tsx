@@ -8,7 +8,7 @@ import { AdminMobileNav } from "./admin-mobile-nav";
 import { OrderNotifications } from "./order-notifications";
 import { logoutAction } from "@/app/admin/login/actions";
 
-const STORAGE_KEY = "zariera-admin-collapsed";
+const STORAGE_KEY = "SanJuan Mini Market-admin-collapsed";
 
 // Sidebar collapsed state persisted in localStorage (tiny external store).
 const collapseListeners = new Set<() => void>();
@@ -74,7 +74,7 @@ export function AdminShell({ email, children }: { email: string; children: React
             style={labelStyle}
             className={`gold-text font-serif text-lg font-bold tracking-[0.2em] ${labelCls}`}
           >
-            ZARIERA
+            SanJuan Mini Market
           </span>
         </Link>
 
@@ -150,7 +150,7 @@ export function AdminShell({ email, children }: { email: string; children: React
               href="/admin"
               className="gold-text font-serif text-lg font-bold tracking-[0.2em] md:hidden"
             >
-              ZARIERA
+              SanJuan Mini Market
             </Link>
           </div>
 

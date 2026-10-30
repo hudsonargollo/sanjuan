@@ -284,7 +284,7 @@ export function CheckoutForm({
               {submitting ? "Placing order…" : "Complete Order"}
             </button>
             <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-xs text-muted">
-              <LockIcon /> Secure &amp; encrypted checkout · ZARIERA
+              <LockIcon /> Secure &amp; encrypted checkout · SanJuan Mini Market
             </p>
           </div>
         </aside>

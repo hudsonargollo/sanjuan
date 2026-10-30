@@ -4,7 +4,7 @@ import { OrderLookup } from "@/components/order-lookup";
 
 export const metadata: Metadata = {
   title: "Order Status",
-  description: "Track your ZARIERA order — enter your order number and email.",
+  description: "Track your SanJuan Mini Market order — enter your order number and email.",
   alternates: { canonical: "/account/orders" },
 };
 

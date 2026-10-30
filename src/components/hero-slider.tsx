@@ -5,8 +5,8 @@ import { preload } from "react-dom";
 import Link from "next/link";
 import { Emblem } from "./brand/emblem";
 
-// Mix of product shots and models wearing jewelry.
-// Models wearing modern, everyday jewelry (gold-plated / silver-tone stainless steel).
+// Mix of product shots and models wearing productos.
+// Models wearing modern, everyday productos (gold-plated / silver-tone stainless steel).
 const SLIDES = [
   "/images/girl-1.webp",
   "/images/girl-2.webp",
@@ -70,13 +70,13 @@ export function HeroSlider() {
       <div className="relative mx-auto max-w-4xl px-6 py-32 text-center sm:py-44">
         <Emblem size={56} className="mx-auto animate-floaty text-gold" />
         <h1 className="mt-5 gold-text font-serif text-5xl font-bold tracking-[0.2em] sm:text-7xl">
-          ZARIERA
+          SanJuan Mini Market
         </h1>
         <p className="mt-4 font-serif text-2xl italic text-light/90 sm:text-3xl">
           Every Jewel Tells a Story
         </p>
         <p className="mt-2 text-sm uppercase tracking-[0.2em] text-light/70">
-          Premium Stainless Steel Jewelry
+          Premium Stainless Steel productos
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
           <Link

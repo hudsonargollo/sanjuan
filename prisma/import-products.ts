@@ -231,7 +231,7 @@ const CATEGORIES = [
 ];
 
 async function main() {
-  console.log("Importing ZARIERA products…");
+  console.log("Importing SanJuan Mini Market products…");
 
   // ⚠️ DESTRUCTIVE: wipes ALL orders and products. Pre-launch only — refuses to
   // run unless explicitly confirmed, and never against a production env.

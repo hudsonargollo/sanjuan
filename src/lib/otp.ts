@@ -19,7 +19,7 @@ const CODE_TTL_MS = 10 * 60_000;
 const MAX_ATTEMPTS = 5;
 export const RESEND_COOLDOWN_S = 60;
 const MAX_SENDS_PER_HOUR = 5;
-const PENDING_COOKIE = "zariera_verify";
+const PENDING_COOKIE = "SanJuan Mini Market_verify";
 const PENDING_TTL_S = 30 * 60;
 
 type Pending = { email: string; purpose: OtpPurpose; exp: number };

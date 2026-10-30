@@ -42,10 +42,10 @@ export function ProductForm({
       </Row>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Row label="Price (Rs)" required>
+        <Row label="Price (Bs)" required>
           <input name="price" type="number" min="0" step="1" required defaultValue={v?.price ?? product?.price} className={input} />
         </Row>
-        <Row label="Compare-at price (Rs)" hint="Optional — shows a strikethrough">
+        <Row label="Compare-at price (Bs)" hint="Optional — shows a strikethrough">
           <input name="compareAtPrice" type="number" min="0" step="1" defaultValue={v?.compareAtPrice ?? product?.compareAtPrice ?? ""} className={input} />
         </Row>
         <Row label="Stock" required>

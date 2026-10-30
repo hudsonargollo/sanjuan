@@ -7,7 +7,7 @@ import { AccordionItem } from "@/components/ui/accordion-item";
 export const metadata: Metadata = {
   alternates: { canonical: "/faq" },
   title: "FAQ",
-  description: "Answers to common questions about ordering, payment, shipping and returns at ZARIERA.",
+  description: "Answers to common questions about ordering, payment, shipping and returns at SanJuan Mini Market.",
 };
 
 const faqs = (DELIVERY_TIME: string) => [
@@ -17,7 +17,7 @@ const faqs = (DELIVERY_TIME: string) => [
   },
   {
     q: "What payment methods do you accept?",
-    a: "Cash on Delivery (COD) across Pakistan, and online payments via PayFast and Safepay (card and wallet).",
+    a: "Cash on Delivery (COD) a nivel nacional, and online payments via PayFast and Safepay (card and wallet).",
   },
   {
     q: "How long does delivery take?",
@@ -32,11 +32,11 @@ const faqs = (DELIVERY_TIME: string) => [
     a: "Unworn items in original condition can be returned within 7 days of delivery. Custom pieces are non-returnable unless faulty. See Shipping & Returns for details.",
   },
   {
-    q: "Do you make custom jewelry?",
+    q: "Do you make productos personalizados?",
     a: "Yes. Visit the Custom page to start a custom design — tell us your idea and we'll create it in stainless steel.",
   },
   {
-    q: "What is your jewelry made of?",
+    q: "What is your productos están hechos de?",
     a: "Premium stainless steel — many pieces gold-plated or rose-gold plated. It is rust-free, hypoallergenic (skin-friendly) and won't tarnish or fade with everyday wear. Material details are listed on each product page.",
   },
 ];

@@ -33,11 +33,11 @@ export const DEFAULT_SETTINGS: StoreSettings = {
     deliveryTime: DELIVERY_TIME,
   },
   announcements: [
-    `Free shipping on orders over {freeThreshold}`,
-    "Cash on Delivery available nationwide",
-    "Premium stainless steel — rust-free & hypoallergenic",
-    "Complimentary care guidance with every order",
-    "Secure checkout",
+    `Envío gratis en pedidos desde Bs {freeThreshold}`,
+    "Pago contra entrega en todo el país",
+    "Productos de limpieza y diario · Calidad garantizada",
+    "Atención rápida por WhatsApp",
+    "Checkout seguro",
   ],
   inventory: { lowStockThreshold: 5 },
   notifications: { orderEmail: process.env.ADMIN_NOTIFY_EMAIL || "" },
@@ -92,7 +92,7 @@ export async function saveStoreSettings<K extends keyof StoreSettings>(
 
 /** Announcement lines with placeholders filled in ({freeThreshold}, {flatFee}). */
 export function renderAnnouncements(s: StoreSettings): string[] {
-  const fmt = (n: number) => `Rs ${new Intl.NumberFormat("en-PK", { maximumFractionDigits: 0 }).format(n)}`;
+  const fmt = (n: number) => `Bs ${new Intl.NumberFormat("es-BO", { maximumFractionDigits: 0 }).format(n)}`;
   return s.announcements
     .map((line) =>
       line

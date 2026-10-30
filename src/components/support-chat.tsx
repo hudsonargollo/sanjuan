@@ -33,7 +33,7 @@ function linkify(text: string): ReactNode[] {
   return out;
 }
 
-const STORAGE_KEY = "zariera-chat-v1";
+const STORAGE_KEY = "SanJuan Mini Market-chat-v1";
 
 type Faq = { id: string; label: string; answer: string; keywords: string[] };
 
@@ -44,7 +44,7 @@ function buildFaqs(st: StoreSettings): Faq[] {
     id: "shipping",
     label: "🚚 Shipping & delivery",
     keywords: ["shipping", "delivery", "courier", "days", "how long", "kitne din", "kab aayega", "leopard", "tcs"],
-    answer: `We deliver across Pakistan. Orders arrive in ${deliveryTime} via Leopards / TCS. Shipping is a flat ${formatPrice(
+    answer: `We deliver a nivel nacional. Orders arrive in ${deliveryTime} via servicios de mensajería. Shipping is a flat ${formatPrice(
       flatFee
     )} — and FREE on orders over ${formatPrice(freeThreshold)}.`,
   },
@@ -100,7 +100,7 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
   const [input, setInput] = useState("");
   const greeting: Msg = {
     from: "bot",
-    text: "Hi! 👋 I'm the ZARIERA assistant. Ask me anything — products, prices, delivery, payment, returns or your order. You can write in English or Urdu.",
+    text: "Hi! 👋 I'm the SanJuan Mini Market assistant. Ask me anything — products, prices, delivery, payment, returns or your order. You can write in English or Urdu.",
   };
   const [msgs, setMsgs] = useState<Msg[]>([greeting]);
   const [typing, setTyping] = useState(false);
@@ -239,7 +239,7 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
                 </svg>
               </span>
               <div className="min-w-0 flex-1">
-                <p className="font-serif text-lg font-semibold leading-tight">ZARIERA Support</p>
+                <p className="font-serif text-lg font-semibold leading-tight">SanJuan Mini Market Support</p>
                 <p className="mt-0.5 flex items-center gap-1.5 text-xs text-light/75">
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                   Instant answers 24/7 · team replies {CONTACT.hours}
@@ -330,7 +330,7 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
 
           {/* WhatsApp CTA (or contact page when no number is configured) */}
           <a
-            href={HAS_WHATSAPP ? waLink("Hi ZARIERA! I have a question 😊") : "/contact"}
+            href={HAS_WHATSAPP ? waLink("Hi SanJuan Mini Market! I have a question 😊") : "/contact"}
             target={HAS_WHATSAPP ? "_blank" : undefined}
             rel={HAS_WHATSAPP ? "noopener noreferrer" : undefined}
             className="flex items-center justify-center gap-2 bg-[#25D366] py-2.5 text-sm font-semibold text-white transition hover:brightness-105"

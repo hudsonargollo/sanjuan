@@ -15,7 +15,7 @@ export async function generateMetadata({
   if (!cat) return { title: "Not found" };
   return {
     title: cat.name,
-    description: cat.description ?? `Shop ZARIERA ${cat.name.toLowerCase()}.`,
+    description: cat.description ?? `Shop SanJuan Mini Market ${cat.name.toLowerCase()}.`,
     alternates: { canonical: `/shop/${cat.slug}` },
   };
 }

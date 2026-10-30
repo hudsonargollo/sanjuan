@@ -61,7 +61,7 @@ export function AdminLoginForm({ notice }: { notice?: string }) {
       </form>
 
       <p className="mt-6 text-center text-xs text-muted">
-        Authorized staff only · ZARIERA
+        Authorized staff only · SanJuan Mini Market
       </p>
     </AuthShell>
   );

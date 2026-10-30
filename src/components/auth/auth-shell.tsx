@@ -18,7 +18,7 @@ export function AuthShell({
   children,
   backHref = "/",
   backLabel = "Back to store",
-  eyebrow = "Fine everyday jewelry",
+  eyebrow = "Fine everyday productos",
 }: Props) {
   return (
     <section
@@ -67,7 +67,7 @@ export function AuthShell({
                 <Emblem size={38} className="text-gold-deep" />
               </span>
               <span className="gold-text mt-3 font-serif text-[1.7rem] font-bold tracking-[0.28em]">
-                ZARIERA
+                SanJuan Mini Market
               </span>
               {eyebrow && (
                 <span className="mt-1 text-[0.62rem] uppercase tracking-[0.32em] text-muted">

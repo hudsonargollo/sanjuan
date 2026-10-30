@@ -18,7 +18,7 @@ const REVIEWS: Review[] = [
     rating: 5,
   },
   {
-    text: "Ordered a custom ring for my engagement — ZARIERA made the whole process effortless and the result was stunning.",
+    text: "Ordered a custom ring for my engagement — SanJuan Mini Market made the whole process effortless and the result was stunning.",
     name: "Bilal Raza",
     place: "Karachi",
     rating: 5,

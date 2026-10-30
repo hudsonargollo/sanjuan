@@ -18,7 +18,7 @@ export const CONTACT = {
   phone,
   phoneHref: phone ? `tel:${phone.replace(/[^0-9+]/g, "")}` : "",
   email: clean(process.env.NEXT_PUBLIC_CONTACT_EMAIL),
-  city: clean(process.env.NEXT_PUBLIC_CONTACT_CITY) || "Lahore, Pakistan",
+  city: clean(process.env.NEXT_PUBLIC_CONTACT_CITY) || "Santa Cruz, Bolivia",
   hours: clean(process.env.NEXT_PUBLIC_CONTACT_HOURS) || "Mon–Sat, 11am – 8pm",
   instagram: clean(process.env.NEXT_PUBLIC_INSTAGRAM_URL),
   facebook: clean(process.env.NEXT_PUBLIC_FACEBOOK_URL),

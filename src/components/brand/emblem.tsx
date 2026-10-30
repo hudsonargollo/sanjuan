@@ -1,4 +1,4 @@
-// ZARIERA lotus emblem — matches the client's approved logo mark:
+// SanJuan Mini Market lotus emblem — matches the client's approved logo mark:
 // a top diamond sparkle, a central petal with an inner sparkle, and two
 // outward-sweeping side petals. Petals inherit the theme color (gold);
 // the diamonds are white (with a hairline gold outline so they stay

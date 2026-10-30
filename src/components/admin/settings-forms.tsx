@@ -132,7 +132,7 @@ export function StoreSettingsForms({ settings, canEdit }: { settings: StoreSetti
       >
         {(s) => (
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field name="email" label="Email" type="email" defaultValue={v(s, "email", settings.contact.email)} placeholder="hello@zariera.com" />
+            <Field name="email" label="Email" type="email" defaultValue={v(s, "email", settings.contact.email)} placeholder="hello@SanJuan Mini Market.com" />
             <Field name="phone" label="Phone" defaultValue={v(s, "phone", settings.contact.phone)} placeholder="+92 300 1234567" />
             <Field
               name="whatsapp"
@@ -141,7 +141,7 @@ export function StoreSettingsForms({ settings, canEdit }: { settings: StoreSetti
               placeholder="923001234567"
               hint="International format, digits only. Enables the WhatsApp icon + chat button."
             />
-            <Field name="city" label="City / address" defaultValue={v(s, "city", settings.contact.city)} placeholder="Lahore, Pakistan" />
+            <Field name="city" label="City / address" defaultValue={v(s, "city", settings.contact.city)} placeholder="Santa Cruz, Bolivia" />
             <div className="sm:col-span-2">
               <Field name="hours" label="Opening hours" defaultValue={v(s, "hours", settings.contact.hours)} placeholder="Mon–Sat, 11am – 8pm" />
             </div>
@@ -176,10 +176,10 @@ export function StoreSettingsForms({ settings, canEdit }: { settings: StoreSetti
       >
         {(s) => (
           <div className="grid gap-4 sm:grid-cols-3">
-            <Field name="flatFee" label="Shipping fee (Rs)" type="number" defaultValue={v(s, "flatFee", settings.shipping.flatFee)} required />
+            <Field name="flatFee" label="Shipping fee (Bs)" type="number" defaultValue={v(s, "flatFee", settings.shipping.flatFee)} required />
             <Field
               name="freeThreshold"
-              label="Free shipping over (Rs)"
+              label="Free shipping over (Bs)"
               type="number"
               defaultValue={v(s, "freeThreshold", settings.shipping.freeThreshold)}
               required

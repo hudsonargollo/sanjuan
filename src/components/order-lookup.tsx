@@ -46,7 +46,7 @@ export function OrderLookup({ defaultOrder = "" }: { defaultOrder?: string }) {
             <div>
               <p className="font-serif text-xl font-semibold text-ink">{state.order.orderNumber}</p>
               <p className="text-sm text-muted">
-                Placed {new Date(state.order.createdAt).toLocaleDateString("en-PK")}
+                Placed {new Date(state.order.createdAt).toLocaleDateString("es-BO")}
               </p>
             </div>
             <StatusBadge status={state.order.status} />

@@ -27,13 +27,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) return { title: "Not found" };
-  const description = product.description ?? `${product.name} — ZARIERA stainless steel jewelry.`;
+  const description = product.description ?? `${product.name} — SanJuan Mini Market stainless steel productos.`;
   return {
     title: product.name,
     description,
     alternates: { canonical: `/product/${product.slug}` },
     openGraph: {
-      title: `${product.name} · ZARIERA`,
+      title: `${product.name} · SanJuan Mini Market`,
       description,
       type: "website",
       url: `${siteUrl}/product/${product.slug}`,
@@ -127,10 +127,10 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
     category: product.category.name,
     ...(product.material ? { material: product.material } : {}),
     ...(product.images.length ? { image: product.images } : {}),
-    brand: { "@type": "Brand", name: "ZARIERA" },
+    brand: { "@type": "Brand", name: "SanJuan Mini Market" },
     offers: {
       "@type": "Offer",
-      priceCurrency: "PKR",
+      priceCurrency: "BOB",
       price: product.price,
       availability: inStock
         ? "https://schema.org/InStock"
@@ -263,7 +263,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
 
             <Accordion title="Shipping & returns">
               <p>
-                We ship nationwide via Leopards / TCS with <b className="font-medium text-ink">Cash on Delivery</b>{" "}
+                We ship nationwide via servicios de mensajería with <b className="font-medium text-ink">Cash on Delivery</b>{" "}
                 available. Orders are dispatched within 1–2 days and typically arrive in {DELIVERY_TIME}.
                 Not happy? Return unused items in original condition within <b className="font-medium text-ink">7 days</b>.
               </p>
@@ -274,7 +274,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
         {/* Sticky assurance rail on desktop */}
         <aside className="hidden lg:block">
           <div className="sticky top-24 rounded-2xl border border-[var(--line)] bg-surface p-6 shadow-[0_20px_50px_-40px_rgba(38,8,16,0.5)]">
-            <p className="font-serif text-xl font-semibold text-ink">Why ZARIERA</p>
+            <p className="font-serif text-xl font-semibold text-ink">Why SanJuan Mini Market</p>
             <ul className="mt-4 space-y-3 text-sm text-ink/80">
               <li className="flex gap-2.5"><Dot /> Premium stainless steel — rust-free &amp; made to last</li>
               <li className="flex gap-2.5"><Dot /> Skin-friendly &amp; hypoallergenic</li>

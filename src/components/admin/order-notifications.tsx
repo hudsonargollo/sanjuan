@@ -104,7 +104,7 @@ export function OrderNotifications() {
       // OS notification (works even if the tab is in the background)
       try {
         if (typeof Notification !== "undefined" && Notification.permission === "granted") {
-          const n = new Notification("New order · ZARIERA", {
+          const n = new Notification("New order · SanJuan Mini Market", {
             body: `${order.orderNumber} — ${formatPrice(order.total)} · ${order.customerName}`,
             tag: order.id,
           });

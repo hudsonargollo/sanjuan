@@ -7,7 +7,7 @@ import { EmailLink } from "@/components/email-link";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Questions about an order, a custom piece, or anything else? Get in touch with ZARIERA.",
+  description: "Questions about an order, a custom piece, or anything else? Get in touch with SanJuan Mini Market.",
   alternates: { canonical: "/contact" },
 };
 

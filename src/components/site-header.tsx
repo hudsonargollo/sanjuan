@@ -33,7 +33,7 @@ export function SiteHeader() {
           <Emblem size={28} className="shrink-0 transition-transform duration-300 group-hover:scale-105" />
           <span className="flex min-w-0 flex-col leading-none">
             <span className="gold-text truncate font-serif text-lg font-bold tracking-[0.2em] sm:text-2xl sm:tracking-[0.26em]">
-              ZARIERA
+              SanJuan Mini Market
             </span>
             <span className="mt-1 hidden truncate text-[0.5rem] uppercase tracking-[0.32em] text-muted sm:block sm:tracking-[0.42em]">
               Every Jewel Tells a Story

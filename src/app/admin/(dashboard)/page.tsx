@@ -7,7 +7,7 @@ import { StatusBadge } from "@/components/status-badge";
 import { requireAdmin } from "@/lib/admin";
 import { TagIcon } from "@/components/icons";
 
-export const metadata = { title: { absolute: "Dashboard · ZARIERA Admin" } };
+export const metadata = { title: { absolute: "Dashboard · SanJuan Mini Market Admin" } };
 
 export const dynamic = "force-dynamic";
 
@@ -43,7 +43,7 @@ export default async function AdminDashboard() {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="font-serif text-3xl font-bold text-ink">Dashboard</h1>
-          <p className="mt-1 text-sm text-muted">Welcome back to ZARIERA management.</p>
+          <p className="mt-1 text-sm text-muted">Welcome back to SanJuan Mini Market management.</p>
         </div>
         <div className="flex gap-3">
           <Link

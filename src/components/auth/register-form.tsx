@@ -28,7 +28,7 @@ export function RegisterForm({ next }: { next?: string }) {
       <div className="text-center">
         <h1 className="font-serif text-3xl font-bold text-ink">Create account</h1>
         <p className="mt-1 text-sm text-muted">
-          Join ZARIERA for a faster checkout. We&apos;ll email you a code to confirm it&apos;s you.
+          Join SanJuan Mini Market for a faster checkout. We&apos;ll email you a code to confirm it&apos;s you.
         </p>
       </div>
 

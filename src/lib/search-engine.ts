@@ -21,7 +21,7 @@ export type SearchResult = {
 };
 
 const STOP = new Set(
-  "a an and the for of with in on to my me i want need show find looking some any all piece pieces jewelry jewellery jewel item items product products buy rs pkr price under below above over less more than upto up max min within from between ki ka ke ky chahiye chahye dikhao wala wali waly".split(" ")
+  "a an and the for of with in on to my me i want need show find looking some any all piece pieces productos jewellery jewel item items product products buy Bs BOB price under below above over less more than upto up max min within from between ki ka ke ky chahiye chahye dikhao wala wali waly".split(" ")
 );
 
 /** Everyday / Urdu words → the word the catalog uses. */
@@ -106,7 +106,7 @@ function parsePrice(text: string): { min: number | null; max: number | null; res
     const n = Number(s.replace(/,/g, "").replace(/k$/i, ""));
     return /k$/i.test(s) ? n * 1000 : n;
   };
-  const N = String.raw`(?:rs\.?\s*)?(\d[\d,]*k?)`;
+  const N = String.raw`(?:Bs\.?\s*)?(\d[\d,]*k?)`;
   let rest = text
     .replace(new RegExp(String.raw`\b${N}\s*(?:-|to)\s*${N}\b`, "gi"), (_, a, b) => {
       min = num(a);

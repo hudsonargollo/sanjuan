@@ -1,4 +1,4 @@
-// ZARIERA — Prisma schema (PostgreSQL)
+// SanJuan Mini Market — Prisma schema (PostgreSQL)
 // Scope: Standard package — products, categories, orders, admin
 
 generator client {
@@ -29,6 +29,10 @@ model Category {
 }
 
 model Product {
+  brand          String?     // e.g. "Leche PIL", "Ariel", "Olafuturo", "Olas", "Borita", "Skip", "Untar"
+  contents       String?     // e.g. "1 L", "900 ml", "1 kg", "5 L"
+  details        String?     // e.g. "Materia Grasa: 1.9%", "17 efectos", "100% Vegetal"
+
   id             String      @id @default(cuid())
   name           String
   slug           String      @unique

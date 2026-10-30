@@ -24,34 +24,34 @@ const jost = Jost({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "ZARIERA — Every Jewel Tells a Story",
-    template: "%s · ZARIERA",
+    default: "SanJuan Mini Market — Every Jewel Tells a Story",
+    template: "%s · SanJuan Mini Market",
   },
   description:
-    "ZARIERA — premium stainless steel & artificial jewelry. Elegant, gold-plated, rust-free and hypoallergenic pieces made to last.",
+    "SanJuan Mini Market — premium stainless steel & productos de higiene y cuidado personal. Elegant, gold-plated, rust-free and hypoallergenic pieces made to last.",
   keywords: [
-    "ZARIERA",
-    "stainless steel jewelry",
-    "artificial jewelry",
-    "gold-plated jewelry",
+    "SanJuan Mini Market",
+    "stainless steel productos",
+    "productos de higiene y cuidado personal",
+    "productos con acabado dorado",
     "necklaces",
     "rings",
     "earrings",
-    "artificial jewelry Pakistan",
-    "hypoallergenic jewelry",
+    "productos de higiene y cuidado personal Bolivia",
+    "hypoallergenic productos",
   ],
-  applicationName: "ZARIERA",
+  applicationName: "SanJuan Mini Market",
   openGraph: {
-    title: "ZARIERA — Every Jewel Tells a Story",
-    description: "Premium stainless steel & artificial jewelry — elegant, gold-plated, made to last.",
+    title: "SanJuan Mini Market — Every Jewel Tells a Story",
+    description: "Premium stainless steel & productos de higiene y cuidado personal — elegant, gold-plated, made to last.",
     type: "website",
-    siteName: "ZARIERA",
+    siteName: "SanJuan Mini Market",
     url: siteUrl,
   },
   twitter: {
     card: "summary_large_image",
-    title: "ZARIERA — Every Jewel Tells a Story",
-    description: "Premium stainless steel & artificial jewelry — elegant, gold-plated, made to last.",
+    title: "SanJuan Mini Market — Every Jewel Tells a Story",
+    description: "Premium stainless steel & productos de higiene y cuidado personal — elegant, gold-plated, made to last.",
   },
 };
 
@@ -67,7 +67,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var t=localStorage.getItem('zariera-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}else if(t==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();",
+              "(function(){try{var t=localStorage.getItem('SanJuan Mini Market-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}else if(t==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();",
           }}
         />
         <ToastProvider>

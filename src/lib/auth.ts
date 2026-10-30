@@ -7,7 +7,7 @@ import { createToken, readToken } from "./session-token";
 
 export { hashPassword, verifyPassword } from "./password";
 
-const SESSION_COOKIE = "zariera_admin";
+const SESSION_COOKIE = "SanJuan Mini Market_admin";
 const SESSION_TTL_SECONDS = 60 * 60 * 8; // 8 hours
 export const ADMIN_ROLES = ["ADMIN", "STAFF"];
 

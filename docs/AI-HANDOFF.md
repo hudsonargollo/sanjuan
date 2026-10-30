@@ -1,4 +1,4 @@
-# ZARIERA — AI Handoff Book
+# SanJuan Mini Market — AI Handoff Book
 
 > A complete context handoff for any AI assistant or developer picking up this project.
 > Last updated: 2026-10-26 — dev machine moved to Ubuntu (§3); session log in §14.
@@ -11,13 +11,13 @@
 
 ## 1. What this is
 
-**ZARIERA** is a premium **stainless-steel / artificial jewelry** e-commerce store (necklaces,
+**SanJuan Mini Market** is a premium **stainless-steel / artificial jewelry** e-commerce store (necklaces,
 rings, earrings, bracelets/bangles) for a Pakistani client, selling in PKR (Rs). It is **not** real
 gold. Storefront + a full admin dashboard.
 
-- **Project root:** `/home/ahmad/zariera_project` (Ubuntu, since 2026-10-26; was `C:\Users\Gigalabs\Downloads\zariera` on Windows)
-- **Live site:** <https://zariera-project.vercel.app/> — **Vercel**, auto-deploys every push to GitHub `main`
-  (repo `mian76951-ui/zariera_project`). Netlify is not used for the live site.
+- **Project root:** `/home/ahmad/sanjuan_project` (Ubuntu, since 2026-10-26; was `C:\Users\Gigalabs\Downloads\sanjuan` on Windows)
+- **Live site:** <https://sanjuan-project.vercel.app/> — **Vercel**, auto-deploys every push to GitHub `main`
+  (repo `mian76951-ui/sanjuan_project`). Netlify is not used for the live site.
 - **Branches:** since 2026-10-26 (later the same day) all work is done **directly on `main`** and every push
   goes live (owner's choice). The old `dev` branch is fully merged and no longer used.
 - **Owner/developer:** Muhammad Ahmad Waseem (communicates in Roman Urdu)
@@ -43,7 +43,7 @@ gold. Storefront + a full admin dashboard.
 ## 3. Run it
 
 ```bash
-cd /home/ahmad/zariera_project
+cd /home/ahmad/sanjuan_project
 npm install
 npm run dev          # http://localhost:3000
 ```
@@ -62,10 +62,10 @@ which fails on Ubuntu's `nodejs` package (built without TypeScript support → `
 
 ### Ubuntu dev machine (since 2026-10-26)
 - Ubuntu 26.04, Node 22 + npm 9.2 from apt, VS Code, Git (SSH key works for `mian76951-ui`).
-- Local DB: PostgreSQL 18 on **`localhost:5433`**, db `zariera`, user `postgres`. `.env` points
+- Local DB: PostgreSQL 18 on **`localhost:5433`**, db `sanjuan`, user `postgres`. `.env` points
   `DATABASE_URL` and `DIRECT_URL` there (never at Neon for day-to-day work — that is the live data).
 - Fresh-machine setup: `sudo apt install postgresql` → set the `postgres` password to match `.env` →
-  `createdb zariera` → `npm install` → `npx prisma migrate dev` → `npm run db:seed` → `npm run db:create-admin`.
+  `createdb sanjuan` → `npm install` → `npx prisma migrate dev` → `npm run db:seed` → `npm run db:create-admin`.
   To get the **real store data** instead of the seed, copy it from Neon (see the 2026-10-26 log in §14).
 - `.env` also holds **`NEON_DIRECT_URL`** (live Neon, non-pooled) — only for copying live → local. Never use it
   as `DATABASE_URL`. It has no port and keeps `channel_binding=require`: Ubuntu's `psql` then defaults to the
@@ -199,7 +199,7 @@ Data layer: **`src/lib/admin-data.ts`** — all admin aggregations
 - **Shipping backend** — Leopards / TCS adapter (`src/lib/couriers.ts`), simulation fallback.
 - **Admin dashboard** — KPIs, zoomable sales graph, radial gauges, order-pipeline donut,
   top products, category mix, new customers, low-stock alerts.
-- **Favicon** = ZARIERA lotus emblem (`src/app/icon.svg`, `favicon.ico`, `apple-icon.png`).
+- **Favicon** = SanJuan Mini Market lotus emblem (`src/app/icon.svg`, `favicon.ico`, `apple-icon.png`).
 
 ---
 
@@ -211,12 +211,12 @@ KPI cards, orders list, and analytics.
 
 **Remove all demo data (orders + items cascade) when done:**
 ```bash
-cd C:\Users\Gigalabs\Downloads\zariera
+cd C:\Users\Gigalabs\Downloads\sanjuan
 node -e "const{PrismaClient}=require('@prisma/client');const p=new PrismaClient();p.order.deleteMany({where:{orderNumber:{startsWith:'QATEST-'}}}).then(r=>{console.log('removed',r.count);return p.$disconnect()})"
 ```
 There is also one real earlier test order **`ZR-G2MACF-8SX`** ("hamza") — the client's, leave or remove as they wish.
 
-> Note: temporary QA admin accounts (`qa-toast-admin@zariera.com`) were used during testing and
+> Note: temporary QA admin accounts (`qa-toast-admin@sanjuan.com`) were used during testing and
 > deleted. Only the real admin (`ADMIN_EMAIL`) should exist.
 
 ---
@@ -266,7 +266,7 @@ There is also one real earlier test order **`ZR-G2MACF-8SX`** ("hamza") — the 
 ## 13. Full audit — 2026-10-02
 
 Complete read-through of every source file (`src/**`, `prisma/**`, config, docs) and the three PDFs
-(`ZARIERA-Proposal.pdf`, `ZARIERA-Requirements.pdf`, `ZARIERA-Project-Handbook.pdf`).
+(`SanJuan Mini Market-Proposal.pdf`, `SanJuan Mini Market-Requirements.pdf`, `SanJuan Mini Market-Project-Handbook.pdf`).
 **No code was changed during the audit.** Items marked ✅ *verified* were confirmed by reading the code
 directly; the rest come from static review and have not been reproduced in a running app.
 
@@ -295,8 +295,8 @@ directly; the rest come from static review and have not been reproduced in a run
 1. ✅ *verified* **Customer cookie works as admin cookie (privilege escalation).**
    `lib/auth.ts` and `lib/customer-auth.ts` sign with the same `AUTH_SECRET` and the same
    `payload.sig` format; `readToken` (`auth.ts:29`) only checks signature + `exp`, and
-   `requireAdmin` (`lib/admin.ts:27`) never checks `role`. Copying a `zariera_customer` value into
-   `zariera_admin` grants `/admin`. Fix: domain-separate the HMAC (e.g. sign `"admin:"+payload`),
+   `requireAdmin` (`lib/admin.ts:27`) never checks `role`. Copying a `sanjuan_customer` value into
+   `sanjuan_admin` grants `/admin`. Fix: domain-separate the HMAC (e.g. sign `"admin:"+payload`),
    require `role` in the admin payload, and/or re-check the `User` row.
 2. ✅ *verified* **Hardcoded fallback secret** `"dev-secret-change-me"` (`auth.ts:13`, `customer-auth.ts:12`)
    when `AUTH_SECRET` is unset → forgeable sessions. Fix: throw in production if unset.
@@ -433,7 +433,7 @@ Append one entry per AI/dev session: date, what was done, files changed, DB comm
 - **Moved:** `components/admin/status-badge.tsx` → `components/status-badge.tsx` (imports updated);
   login/register page bodies → `components/auth/*-form.tsx` (pages are now server components).
 - **Removed:** fabricated testimonials list, product-page 5-star line, `OrderPipelinePanel`.
-- **DB (local dev `localhost:5432/zariera`) — migrations applied with `prisma migrate deploy`:**
+- **DB (local dev `localhost:5432/sanjuan`) — migrations applied with `prisma migrate deploy`:**
   - `20261002120000_payment_ref` → `Order.paymentRef` + index
   - `20261002130000_contact_newsletter` → `ContactMessage`, `Subscriber` tables
   - Verified: `prisma migrate diff` DB ↔ schema = *No difference*.
@@ -472,10 +472,10 @@ Append one entry per AI/dev session: date, what was done, files changed, DB comm
 
 ### 2026-10-02 — Social links + email wired (Claude)
 - **Client-provided links** added to `.env` (all icons read them via `src/lib/contact.ts`):
-  - Email: `zariera.jewelry@gmail.com`
-  - Instagram: `https://www.instagram.com/zariera_realm`
-  - Facebook: `https://www.facebook.com/share/1BNJEB67dh/` (redirects to the "Zariera Jewellery" page)
-  - TikTok: `https://www.tiktok.com/@zariera_realm`
+  - Email: `sanjuan.jewelry@gmail.com`
+  - Instagram: `https://www.instagram.com/sanjuan_realm`
+  - Facebook: `https://www.facebook.com/share/1BNJEB67dh/` (redirects to the "SanJuan Mini Market Jewellery" page)
+  - TikTok: `https://www.tiktok.com/@sanjuan_realm`
   - Tracking params (`utm_*`, `share_id`, `user_id`, `sec_uid`…) were stripped from the shared TikTok /
     Instagram URLs — same profile, clean link, no personal share identifiers.
 - **Where they appear:** footer social icons (Instagram, Facebook, TikTok, Email) + "Get in touch" email,
@@ -498,7 +498,7 @@ Append one entry per AI/dev session: date, what was done, files changed, DB comm
 - **Tested** in the browser: click → toast with the address appears; `tsc`/`eslint` clean.
   (In the automated test pane the clipboard is blocked, so the fallback toast showed; real user clicks copy.)
 - Option if the client prefers: open Gmail web compose instead
-  (`https://mail.google.com/mail/?view=cm&to=zariera.jewelry@gmail.com`) — not done, awaiting preference.
+  (`https://mail.google.com/mail/?view=cm&to=sanjuan.jewelry@gmail.com`) — not done, awaiting preference.
 
 ### 2026-10-03 — Dev crash fix, image optimisation, full QA pass, Netlify-ready (Claude)
 **1. "Jest worker encountered 2 child process exceptions" (dev only)**
@@ -530,7 +530,7 @@ Append one entry per AI/dev session: date, what was done, files changed, DB comm
   - Home page didn't show admin product/category changes for up to 5 min → `revalidatePath("/", "layout")`.
   - Category Delete had no confirmation (one click deleted Necklaces/Earrings) → `DeleteButton` confirm.
   - Cart page + all admin pages had the generic site title → `cart/layout.tsx` metadata; admin titles
-    "<Page> · ZARIERA Admin" + admin `noindex`.
+    "<Page> · SanJuan Mini Market Admin" + admin `noindex`.
   - Checkout labels not linked to inputs (screen readers) → `id`/`htmlFor` pairs.
 - QA data cleaned up afterwards (see below).
 
@@ -548,7 +548,7 @@ Append one entry per AI/dev session: date, what was done, files changed, DB comm
 - Live order bell works on serverless: SSE route now also polls the DB every 5 s from a `since` cursor;
   client reconnects with the last seen `createdAt`, de-duplicates by id.
 - New `npm run db:copy` (`prisma/copy-data.ts`): copies all data local → cloud DB, idempotent
-  (tested into a temp DB `zariera_copytest`: 4 categories, 15 products, 1 admin, 4 customers, 18 orders,
+  (tested into a temp DB `sanjuan_copytest`: 4 categories, 15 products, 1 admin, 4 customers, 18 orders,
   37 items; re-run skipped all; temp DB dropped).
 - `NETLIFY=true next build` → success, no standalone folder (correct).
 - ⚠️ Local admin password is weak (`.env`) — the guide sets a strong one on the cloud DB via
@@ -557,7 +557,7 @@ Append one entry per AI/dev session: date, what was done, files changed, DB comm
   server function `___netlify-server-handler` contains `libquery_engine-rhel-openssl-3.0.x.so.node`.
   `/.netlify/` added to `.gitignore`.
 - **Final regression on the latest build:** e2e 44/45 (only the expected sample-reviews check), admin
-  titles ("Orders · ZARIERA Admin"), cart title ("Shopping Bag · ZARIERA"), upload + serve OK, and live
+  titles ("Orders · SanJuan Mini Market Admin"), cart title ("Shopping Bag · SanJuan Mini Market"), upload + serve OK, and live
   order alert **delivered via DB polling** (order inserted straight into the DB → `event: order` on the
   admin stream within 5 s — this is the Netlify path). Stream poll errors are now logged.
   (A first "fail" here was a bug in the test script's stream reader, not the app.)
@@ -570,7 +570,7 @@ Append one entry per AI/dev session: date, what was done, files changed, DB comm
 ### 2026-10-03 — Commit + push attempt, dev server restarted (Claude)
 - Committed everything locally on `main`: **`8e35c02`** "Netlify-ready demo: QA fixes, socials, optimized
   images, deploy setup" (86 files). Secrets scan before commit: `.env`, uploads, `.netlify/` not included.
-- **Push FAILED:** `Permission to mian76951-ui/zariera_project.git denied to nabeel-warraich` — the SSH key
+- **Push FAILED:** `Permission to mian76951-ui/sanjuan_project.git denied to nabeel-warraich` — the SSH key
   on this PC belongs to GitHub user `nabeel-warraich`, who has no write access to the repo.
   Fix (user): add `nabeel-warraich` as a collaborator on the repo (GitHub → repo → Settings →
   Collaborators → Add people → accept the invite), **or** push from the `mian76951-ui` account
@@ -690,8 +690,8 @@ falls back to env defaults, `saveStoreSettings`, `renderAnnouncements`), `src/li
 ### 2026-10-20 — Client-reported mistakes + self-QA pass (Claude)
 **Reported by user**
 1. Admin login: "Authorised personnel only" (British spelling on an American-English site) and the email
-   box placeholder showed the real admin email `admin@zariera.com` (tells attackers which account to target).
-   → now "Authorized staff only · ZARIERA", placeholder `you@example.com`.
+   box placeholder showed the real admin email `admin@sanjuan.com` (tells attackers which account to target).
+   → now "Authorized staff only · SanJuan Mini Market", placeholder `you@example.com`.
 2. Custom page "Start Your Design" jumped to the generic Contact page. → Custom page now has its own
    **design request form** (`src/components/custom-design-form.tsx`, section `#design-request`); the button
    scrolls to it. Fields: name, email, phone/WhatsApp, piece type, finish, budget (options in
@@ -708,7 +708,7 @@ falls back to env defaults, `saveStoreSettings`, `renderAnnouncements`), `src/li
 - **Admin product form lost everything typed after a failed save** (e.g. duplicate slug) → actions return
   `values`, form refills all fields, category select and checkboxes.
 - Shop price filter button "Go" → "Apply". 404 page title "Page not found"; search title "Search: <q>";
-  admin dashboard title "Dashboard · ZARIERA Admin" (layout template doesn't apply to the segment's own page).
+  admin dashboard title "Dashboard · SanJuan Mini Market Admin" (layout template doesn't apply to the segment's own page).
 - `.playwright-mcp/` added to `.gitignore`.
 - Link/button audit (all storefront pages): every internal link 200/expected redirect, every #anchor exists,
   no placeholder/test words in visible text, all pages titled. Custom form verified desktop + mobile (no
@@ -741,7 +741,7 @@ falls back to env defaults, `saveStoreSettings`, `renderAnnouncements`), `src/li
   - Rate limit 20 messages / 10 min per IP; ≤12 turns, ≤600 chars per message; `maxDuration = 30`.
 - **UI (`src/components/support-chat.tsx`):** typed questions go to /api/chat with a typing indicator; product
   and page paths in replies become links (`/product/...`, `/shop/...`, full URLs); conversation kept in
-  sessionStorage (`zariera-chat-v1`, restored when the chat is opened); quick-reply chips stay instant; local
+  sessionStorage (`sanjuan-chat-v1`, restored when the chat is opened); quick-reply chips stay instant; local
   fallback if the request fails.
 - **Bugs found while testing & fixed:** "cash on delivery" answered as shipping (check order); product question
   listed 4 items instead of the match; Python edit wrote literal backspace chars instead of `\b` in regexes
@@ -768,7 +768,7 @@ account is created **already verified** → logged in → `next` page with the "
 - Expires in **10 min**; **5 wrong attempts** burn the code ("Incorrect code. 4 attempts left." …).
 - Resend: **60 s cooldown** (live countdown on the page), max **5 codes / hour** per email; rate limits per IP
   (`otp:` 25/10 min, `otp-resend:` 10/h, register 8/h).
-- The pending sign-up lives in a signed httpOnly cookie `zariera_verify` (30 min, token kind `verify`) — the
+- The pending sign-up lives in a signed httpOnly cookie `sanjuan_verify` (30 min, token kind `verify`) — the
   email never goes in the URL. Name + password **hash** wait in `EmailVerification.payload` until verified.
 - Code is deleted after use (can't be reused).
 
@@ -811,7 +811,7 @@ Added empty SMTP placeholders to the local `.env` (`SMTP_HOST=smtp.gmail.com`, p
 `SMTP_PASS`, `MAIL_FROM` blank). User must fill in the store Gmail and its App Password, then restart dev.
 Same values are needed on Vercel. Not pushed yet (commit `fec3707` is local only).
 
-**2026-10-21 — Store Gmail changed to `jewelryzariera@gmail.com`** (old: zariera.jewelry@gmail.com).
+**2026-10-21 — Store Gmail changed to `jewelrysanjuan@gmail.com`** (old: sanjuan.jewelry@gmail.com).
 - Saved as `contact.email` in the `Setting "store"` row on **local + Neon** (live site shows it immediately;
   Neon socials kept). Local `.env`: `NEXT_PUBLIC_CONTACT_EMAIL`, `SMTP_USER`, `MAIL_FROM` set to it;
   `netlify.env.example` updated.
@@ -822,7 +822,7 @@ Same values are needed on Vercel. Not pushed yet (commit `fec3707` is local only
   and optionally `NEXT_PUBLIC_CONTACT_EMAIL` → Redeploy. OTP commit `fec3707` still not pushed.
 
 **2026-10-21 — SMTP live test:** owner added the Gmail App Password (new one) to local `.env` and Vercel
-(Production). `nodemailer.verify()` → login OK for jewelryzariera@gmail.com; local sign-up sent a real code email
+(Production). `nodemailer.verify()` → login OK for jewelrysanjuan@gmail.com; local sign-up sent a real code email
 (no "DEV ONLY" log line). `src/lib/email.ts` now strips spaces from `SMTP_PASS` when the host is Gmail (Google
 displays App Passwords as "abcd efgh ijkl mnop"; Vercel value was pasted with spaces). Vercel has a key
 `CONTACT_EMAIL` (owner dropped the `NEXT_PUBLIC_` prefix because of a Sensitive warning) — unused by the code;
@@ -834,7 +834,7 @@ auto-deploys with the new env vars.
 - Owner redeployed → live now on the OTP build (`/register/verify` → 307 redirect, `/api/health` has no SMTP
   warning; only the Blob-store warning remains). Live sign-up test is left to the owner (the AI doesn't enter
   passwords / create accounts on the production site); steps sent: register with a real Gmail → code from
-  jewelryzariera@gmail.com → verify → "✓ Verified". If it fails: screenshot + Vercel Logs search `[email]`.
+  jewelrysanjuan@gmail.com → verify → "✓ Verified". If it fails: screenshot + Vercel Logs search `[email]`.
 
 ### 2026-10-22 — Product details: only one section open at a time
 
@@ -881,7 +881,7 @@ inspected running animations (close 57.5px→0 / 320 ms, open 0→58px / 420 ms,
 no console errors; eslint + tsc clean. Pushed → live.
 
 **2026-10-22 — Admin password forgotten (owner).** Passwords are stored as scrypt hashes, so they can't be
-recovered, only reset. Checked without printing: local admin `admin@zariera.com` matches `.env`
+recovered, only reset. Checked without printing: local admin `admin@sanjuan.com` matches `.env`
 `ADMIN_PASSWORD` (line 10); the **live (Neon)** admin hash does NOT match (it was set to something else).
 Reset process: owner writes a new strong password in `.env` `ADMIN_PASSWORD` → run `npm run db:create-admin`
 (upsert, re-hashes) against local and against Neon with `DATABASE_URL=<Neon direct URL>`. The AI runs the
@@ -896,7 +896,7 @@ script but never reads/prints the password.
 ### 2026-10-26 — Moved to Ubuntu: local setup, db scripts fixed (Claude)
 
 **Context:** owner replaced Windows with Ubuntu 26.04 on the laptop and asked what is needed to keep
-working locally. The repo was already cloned at `/home/ahmad/zariera_project` (`main` = `0574c95`).
+working locally. The repo was already cloned at `/home/ahmad/sanjuan_project` (`main` = `0574c95`).
 
 - **Checked the machine:** Git, Node 22, VS Code, GitHub SSH access were already OK. Missing: PostgreSQL
   server (only the `psql` client was installed) and `.env` (stayed on Windows). Owner installed Postgres 18
@@ -914,7 +914,7 @@ working locally. The repo was already cloned at `/home/ahmad/zariera_project` (`
   from the DB; `/admin/login` → 200. **Local DB only — Neon was not touched.**
 - **Pushed `58b5515` to `main` → Vercel deployed it to Production** (GitHub deployment status "success";
   live site → 200). Only dev scripts/README changed, so the live store is unaffected. Mistake: I told the
-  owner Netlify would deploy it — the live site is on **Vercel** (<https://zariera-project.vercel.app/>).
+  owner Netlify would deploy it — the live site is on **Vercel** (<https://sanjuan-project.vercel.app/>).
 - **Owner's decision:** finish the whole project first, go live at the end → new house rule in §12
   (no push to `main` without the owner's go-ahead). This handoff updated: §1 root + live URL, §3 Ubuntu setup.
 - Prisma warns that `package.json#prisma` is deprecated (removed in Prisma 7) — harmless on Prisma 6; move
@@ -991,8 +991,8 @@ Test cart cleared afterwards. On `dev` only — not live.
 
 ### 2026-10-26 — Vercel Blob store connected; uploads accept OIDC (Claude)
 - Live `/api/health` said `uploads: NOT CONFIGURED` → live admin image upload would fail. Guided the owner:
-  Vercel → Storage → Create → **Blob** `zariera-uploads` (**Public**, region SIN1) → connected to
-  `zariera-project` (All Environments, "read-write token" box ticked).
+  Vercel → Storage → Create → **Blob** `sanjuan-uploads` (**Public**, region SIN1) → connected to
+  `sanjuan-project` (All Environments, "read-write token" box ticked).
 - Vercel now connects Blob stores with **OIDC**: the connection lists `BLOB_STORE_ID` +
   `BLOB_WEBHOOK_PUBLIC_KEY`, and a banner suggests revoking the read-write token. Our code only looked for
   `BLOB_READ_WRITE_TOKEN`, so uploads could still have failed.
@@ -1006,7 +1006,7 @@ Test cart cleared afterwards. On `dev` only — not live.
 - **Owner confirmed (2026-10-26):** "Maine live admin mein photo upload karke dekha, upload ho gaya." → live
   admin image upload works through Vercel Blob. Revoking the read-write token is optional (the SDK uses OIDC
   when `BLOB_STORE_ID` is set); if revoked, upload one photo again to re-check. A test upload that wasn't saved
-  leaves an unused file in the store (Storage → zariera-uploads → Manage Blobs) — harmless, can be deleted.
+  leaves an unused file in the store (Storage → sanjuan-uploads → Manage Blobs) — harmless, can be deleted.
 
 ### 2026-10-26 — Premium shop sidebar: price slider, categories, offers, mobile drawer (Claude)
 **Request:** the price filter (two number boxes with spinner arrows + "Apply") looked "beginner"; owner wanted a
@@ -1090,7 +1090,7 @@ shake on wrong entries, red fields on errors, green on correct input, and a more
   as the no-JS fallback; with JS, `onSubmit` validates and dispatches in a transition (no React form reset).
 - `globals.css`: `--color-ok` (#2f7d5c / dark #6cc59a) and `--color-bad` (#b3261e / dark #f08a80) tokens,
   `.animate-shake` ("no" shake) and `.animate-auth-in` (card rise-in on `AuthShell`), both off for reduced motion.
-- Rewritten on the kit: `login-form.tsx` (Forgot password? in the label row, "New to ZARIERA?" divider +
+- Rewritten on the kit: `login-form.tsx` (Forgot password? in the label row, "New to SanJuan Mini Market?" divider +
   outlined "Create an account"), `register-form.tsx` (name/email/password + strength meter),
   `password-reset-forms.tsx` (forgot + reset; "Check your inbox" success card). Toasts for these errors were
   dropped (the in-card alert + red fields + shake replace them). Admin login untouched (still `PasswordInput`).
@@ -1234,8 +1234,8 @@ still worked).
   rendered `/account` first, so the header and footer showed around an empty page for ~200ms. Only then did the
   server-side `requireCustomer` redirect to `/login`.
   - **Fix: new `src/proxy.ts` (Next 16's renamed middleware).** It redirects before anything renders when the cookie
-    is missing: `/account/*` and `/checkout` without `zariera_customer` go to `/login?next=…`, and `/admin/*` (except
-    `/admin/login`) without `zariera_admin` goes to `/admin/login`.
+    is missing: `/account/*` and `/checkout` without `sanjuan_customer` go to `/login?next=…`, and `/admin/*` (except
+    `/admin/login`) without `sanjuan_admin` goes to `/admin/login`.
   - The matcher uses `missing: [{type:"cookie"}]`. Values must be literals, because Next reads the config statically.
     The pages still verify the session itself, so a stale cookie gets the in-page redirect with no loop.
   - Verified with a DOM mutation log: the click now goes from the shop straight to the sign-in card in one commit.
@@ -1407,5 +1407,5 @@ Owner's test feedback on the Custom form:
     - The account was created (`emailVerifiedAt` set), the user was signed in and landed on `/account`.
     - The test customer was deleted afterwards.
   - **Live step 1:** the code email was sent and the page went to `/register/verify` (before: "couldn't send the code").
-    - The leftover live `EmailVerification` row for the test address (`zariera.qa.signup@gmail.com`) was deleted.
+    - The leftover live `EmailVerification` row for the test address (`sanjuan.qa.signup@gmail.com`) was deleted.
     - No live account was created.

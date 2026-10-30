@@ -7,7 +7,7 @@ import { getStoreSettings } from "@/lib/settings";
 export const metadata: Metadata = {
   alternates: { canonical: "/shipping" },
   title: "Shipping & Returns",
-  description: "ZARIERA shipping options, delivery times, and our returns policy.",
+  description: "SanJuan Mini Market shipping options, delivery times, and our returns policy.",
 };
 
 export default async function ShippingPage() {
@@ -26,9 +26,9 @@ export default async function ShippingPage() {
         <section>
           <h2 className="font-serif text-2xl font-semibold text-ink">Shipping</h2>
           <ul className="mt-4 space-y-3 text-ink/80">
-            <li>• Nationwide delivery across Pakistan, typically <strong>{DELIVERY_TIME}</strong>.</li>
+            <li>• Nationwide delivery a nivel nacional, typically <strong>{DELIVERY_TIME}</strong>.</li>
             <li>• Flat shipping of <strong>{formatPrice(FLAT_SHIPPING)}</strong> — <strong>free</strong> on orders over {formatPrice(FREE_SHIPPING_THRESHOLD)}.</li>
-            <li>• Every order is carefully packaged in ZARIERA signature packaging.</li>
+            <li>• Every order is carefully packaged in SanJuan Mini Market signature packaging.</li>
             <li>• You&apos;ll receive an order confirmation, and our team may call to confirm delivery details.</li>
           </ul>
         </section>

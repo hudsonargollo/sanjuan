@@ -4,17 +4,17 @@ import { Emblem } from "@/components/brand/emblem";
 export const metadata: Metadata = {
   alternates: { canonical: "/care" },
   title: "Care Guide",
-  description: "How to care for your ZARIERA stainless steel jewelry so it stays brilliant for years.",
+  description: "How to care for your SanJuan Mini Market stainless steel productos so it stays brilliant for years.",
 };
 
 const TIPS = [
   {
     title: "Keep it dry",
-    body: "Remove jewelry before showering, swimming or exercising. Moisture and sweat can dull the finish over time.",
+    body: "Remove productos before showering, swimming or exercising. Moisture and sweat can dull the finish over time.",
   },
   {
     title: "Last on, first off",
-    body: "Put jewelry on after applying perfume, lotion and makeup, and take it off before bed to avoid buildup and snags.",
+    body: "Put productos on after applying perfume, lotion and makeup, and take it off before bed to avoid buildup and snags.",
   },
   {
     title: "Store separately",
@@ -42,7 +42,7 @@ export default function CarePage() {
         <span className="eyebrow mt-3 block">Help</span>
         <h1 className="mt-2 font-serif text-4xl font-semibold text-ink">Care Guide</h1>
         <p className="mx-auto mt-4 max-w-xl text-muted">
-          A little care keeps your jewelry brilliant for generations.
+          A little care keeps your productos brilliant for generations.
         </p>
       </div>
 

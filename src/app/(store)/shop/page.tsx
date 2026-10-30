@@ -5,8 +5,8 @@ import { ShopBrowser } from "@/components/shop/shop-browser";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/shop" },
-  title: "Shop All Jewelry",
-  description: "Browse the full ZARIERA collection of premium stainless steel & artificial jewelry.",
+  title: "Shop All productos",
+  description: "Browse the full SanJuan Mini Market collection of premium stainless steel & productos de higiene y cuidado personal.",
 };
 
 export default async function ShopPage({ searchParams }: PageProps<"/shop">) {
@@ -17,7 +17,7 @@ export default async function ShopPage({ searchParams }: PageProps<"/shop">) {
   return (
     <ShopBrowser
       eyebrow="The Collection"
-      title="All Jewelry"
+      title="All productos"
       description="Premium stainless steel & gold-plated pieces — rust-free and made to last. Refine by category, price, offers or material to find your next favorite."
       products={products}
       facets={facets}

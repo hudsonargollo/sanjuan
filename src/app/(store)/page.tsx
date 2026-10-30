@@ -24,17 +24,17 @@ export const metadata: Metadata = {
 const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "ZARIERA",
+  name: "SanJuan Mini Market",
   url: siteUrl,
   slogan: "Every Jewel Tells a Story",
   description:
-    "Premium stainless steel and artificial jewelry — elegant, gold-plated, rust-free and hypoallergenic.",
+    "Premium stainless steel and productos de higiene y cuidado personal — elegant, gold-plated, rust-free and hypoallergenic.",
 };
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "ZARIERA",
+  name: "SanJuan Mini Market",
   url: siteUrl,
   potentialAction: {
     "@type": "SearchAction",
@@ -225,7 +225,7 @@ export default async function HomePage() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/story-model.webp"
-                alt="A model wearing ZARIERA gold-plated stainless steel jewelry"
+                alt="A model wearing SanJuan Mini Market gold-plated stainless steel productos"
                 className="h-full w-full object-cover"
               />
               <div className="pointer-events-none absolute inset-3 border border-[rgba(230,205,139,0.6)]" />
@@ -238,19 +238,19 @@ export default async function HomePage() {
                 Craft, care &amp; a little sparkle
               </h2>
               <p className="mt-5 leading-relaxed text-ink/80">
-                ZARIERA creates premium stainless steel and artificial jewelry — elegant,
+                SanJuan Mini Market creates premium stainless steel and productos de higiene y cuidado personal — elegant,
                 affordable and made to last. Our pieces are crafted in premium stainless steel
                 with gold- and silver-tone finishes, so they stay rust-free and skin-friendly.
               </p>
               <p className="mt-4 leading-relaxed text-ink/80">
                 We believe every jewel tells a story — of confidence, of everyday moments, of the
-                people we treasure. Beautiful designs, without the fine-jewelry price tag.
+                people we treasure. Beautiful designs, without the fine-productos price tag.
               </p>
               <Link
                 href="/about"
                 className="mt-7 inline-block rounded-full border border-[var(--line-strong)] px-8 py-3 text-sm font-medium uppercase tracking-[0.12em] text-ink transition hover:border-gold hover:text-gold-deep"
               >
-                Discover ZARIERA
+                Discover SanJuan Mini Market
               </Link>
             </div>
           </Reveal>

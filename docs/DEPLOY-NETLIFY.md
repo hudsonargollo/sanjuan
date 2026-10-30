@@ -1,8 +1,8 @@
-# ZARIERA — Netlify deploy guide (client demo)
+# SanJuan Mini Market — Netlify deploy guide (client demo)
 
 Step-by-step. Roman Urdu hints in *italics*. Takes ~20–30 minutes the first time.
 
-> **What you need:** a GitHub account (repo `mian76951-ui/zariera_project` already exists),
+> **What you need:** a GitHub account (repo `mian76951-ui/sanjuan_project` already exists),
 > a free **Netlify** account, and a free cloud **PostgreSQL** database (**Neon**, or Netlify's
 > built-in "Netlify DB", which is Neon too). Your local database stays on your PC — Netlify
 > can't reach it, so the data is copied to the cloud DB in step 2.
@@ -38,10 +38,10 @@ Check on GitHub that `public/images/...`, `prisma/migrations/...`, `netlify.toml
 DATABASE_URL="CLOUD_URL" DIRECT_URL="CLOUD_URL" npx prisma migrate deploy
 
 # b) copy products, categories, admin, customers, orders… from your local DB
-SOURCE_DATABASE_URL="postgresql://postgres:YOURPASS@localhost:5432/zariera?schema=public" TARGET_DATABASE_URL="CLOUD_URL" npm run db:copy
+SOURCE_DATABASE_URL="postgresql://postgres:YOURPASS@localhost:5432/sanjuan?schema=public" TARGET_DATABASE_URL="CLOUD_URL" npm run db:copy
 
 # c) set a STRONG admin password on the cloud DB (the local one is weak)
-DATABASE_URL="CLOUD_URL" DIRECT_URL="CLOUD_URL" ADMIN_EMAIL="admin@zariera.com" ADMIN_PASSWORD="choose-a-strong-password" npm run db:create-admin
+DATABASE_URL="CLOUD_URL" DIRECT_URL="CLOUD_URL" ADMIN_EMAIL="admin@sanjuan.com" ADMIN_PASSWORD="choose-a-strong-password" npm run db:create-admin
 ```
 
 *(PowerShell mein ye `VAR=value command` style nahi chalta — Git Bash use karein, ya
@@ -52,7 +52,7 @@ PowerShell mein pehle `$env:DATABASE_URL="CLOUD_URL"` likh kar phir command chal
 ## 3. Create the Netlify site
 
 1. <https://app.netlify.com> → **Add new site → Import an existing project → GitHub** →
-   pick `zariera_project`.
+   pick `sanjuan_project`.
 2. Build settings are read from `netlify.toml` automatically — leave them as they are
    (build command `npx prisma migrate deploy && npm run build`, Node 22, Next.js runtime).
 3. **Before the first deploy** open **Site configuration → Environment variables →
@@ -63,7 +63,7 @@ PowerShell mein pehle `$env:DATABASE_URL="CLOUD_URL"` likh kar phir command chal
    - `AUTH_SECRET` = a NEW long random value:
      `node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"`
    - `NEXT_PUBLIC_SITE_URL` = your site URL (you'll know it after step 4 — e.g.
-     `https://zariera.netlify.app`; you can rename the site under *Site configuration → Change site name*)
+     `https://sanjuan.netlify.app`; you can rename the site under *Site configuration → Change site name*)
    - socials / email are pre-filled in the template
    - `COURIER_SIMULATION="true"` so "Book shipment" works in the demo
 4. **Deploy site**. First build takes ~3–5 minutes.

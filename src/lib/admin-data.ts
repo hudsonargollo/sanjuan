@@ -340,7 +340,7 @@ function buildDay(rows: Row[]): SalesRange {
         ord++;
       }
     points.push({
-      label: day.toLocaleDateString("en-PK", { day: "numeric", month: "short" }),
+      label: day.toLocaleDateString("es-BO", { day: "numeric", month: "short" }),
       revenue: rev,
       orders: ord,
     });
@@ -374,7 +374,7 @@ function buildMonth(rows: Row[]): SalesRange {
         ord++;
       }
     points.push({
-      label: m.toLocaleDateString("en-PK", { month: "short" }),
+      label: m.toLocaleDateString("es-BO", { month: "short" }),
       revenue: rev,
       orders: ord,
     });

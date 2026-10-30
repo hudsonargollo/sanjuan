@@ -187,7 +187,7 @@ export function SalesChartPro({ points }: { points: DailyPoint[] }) {
       lineWidth: 2,
       priceLineVisible: false,
       lastValueVisible: false,
-      priceFormat: { type: "custom", formatter: (v: number) => `Rs ${shortMoney(v)}`, minMove: 1 },
+      priceFormat: { type: "custom", formatter: (v: number) => `Bs ${shortMoney(v)}`, minMove: 1 },
       crosshairMarkerVisible: true,
       crosshairMarkerRadius: 5,
       crosshairMarkerBorderColor: c.marker,

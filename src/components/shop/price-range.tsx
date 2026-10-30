@@ -6,7 +6,7 @@ import { formatPrice } from "@/lib/format";
 const STEP = 100;
 
 type Props = {
-  /** Cheapest / dearest piece in scope (rounded to Rs 100). */
+  /** Cheapest / dearest piece in scope (rounded to Bs 100). */
   bounds: [number, number];
   /** Active range from the URL (undefined = open end). */
   min?: number;
@@ -15,8 +15,8 @@ type Props = {
   onCommit: (min: number | null, max: number | null) => void;
 };
 
-// Quick ranges derived from the real price spread, rounded to Rs 500:
-// "Under Rs 3,000" · "Rs 3,000 – 4,000" · "Rs 4,000 & above".
+// Quick ranges derived from the real price spread, rounded to Bs 500:
+// "Under Bs 3,000" · "Bs 3,000 – 4,000" · "Bs 4,000 & above".
 function presets(lo: number, hi: number) {
   const span = hi - lo;
   if (span < 1000) return [];
@@ -26,12 +26,12 @@ function presets(lo: number, hi: number) {
   if (t2 <= t1) return [];
   return [
     { label: `Under ${formatPrice(t1)}`, min: null, max: t1 },
-    { label: `${formatPrice(t1)} – ${formatPrice(t2).replace("Rs ", "")}`, min: t1, max: t2 },
+    { label: `${formatPrice(t1)} – ${formatPrice(t2).replace("Bs ", "")}`, min: t1, max: t2 },
     { label: `${formatPrice(t2)} & above`, min: t2, max: null },
   ];
 }
 
-/** Dual-thumb price slider with editable "Rs" fields and quick-range chips. */
+/** Dual-thumb price slider with editable "Bs" fields and quick-range chips. */
 export function PriceRange({ bounds: [lo, hi], min, max, onCommit }: Props) {
   const clamp = (n: number) => Math.min(hi, Math.max(lo, n));
   const [a, setA] = useState(clamp(min ?? lo));
@@ -123,15 +123,15 @@ export function PriceRange({ bounds: [lo, hi], min, max, onCommit }: Props) {
               i === 1 ? "col-start-3" : ""
             }`}
           >
-            <span className="mr-1.5 text-xs font-medium uppercase tracking-wide text-muted">Rs</span>
+            <span className="mr-1.5 text-xs font-medium uppercase tracking-wide text-muted">Bs</span>
             <input
               type="text"
               inputMode="numeric"
               aria-label={which === "a" ? "Minimum price in rupees" : "Maximum price in rupees"}
               value={
                 which === "a"
-                  ? (draftA ?? a.toLocaleString("en-PK"))
-                  : (draftB ?? b.toLocaleString("en-PK"))
+                  ? (draftA ?? a.toLocaleString("es-BO"))
+                  : (draftB ?? b.toLocaleString("es-BO"))
               }
               onChange={(e) => (which === "a" ? setDraftA(e.target.value) : setDraftB(e.target.value))}
               onFocus={(e) => e.target.select()}

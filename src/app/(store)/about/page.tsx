@@ -6,7 +6,7 @@ import { Emblem } from "@/components/brand/emblem";
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
   title: "About",
-  description: "The ZARIERA story — premium stainless steel & artificial jewelry, made to last.",
+  description: "The SanJuan Mini Market story — premium stainless steel & productos de higiene y cuidado personal, made to last.",
 };
 
 export default function AboutPage() {
@@ -20,13 +20,13 @@ export default function AboutPage() {
             Craft, care &amp; a little sparkle
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-ink/80">
-            ZARIERA creates premium stainless steel and artificial jewelry — elegant,
+            SanJuan Mini Market creates premium stainless steel and productos de higiene y cuidado personal — elegant,
             affordable and made to last. Every piece is crafted in premium stainless steel,
             many with a gold-plated finish, so it stays rust-free and skin-friendly.
           </p>
           <p className="mx-auto mt-4 max-w-2xl text-ink/80">
             We believe every jewel tells a story — of confidence and everyday moments. Our
-            mission is to bring you beautiful, long-lasting designs without the fine-jewelry
+            mission is to bring you beautiful, long-lasting designs without the fine-productos
             price tag.
           </p>
           <Link

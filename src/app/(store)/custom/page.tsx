@@ -7,8 +7,8 @@ import { whatsappUrl } from "@/lib/settings-shared";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/custom" },
-  title: "Custom Jewelry",
-  description: "Design a one-of-a-kind piece with ZARIERA's custom jewelry service.",
+  title: "Custom productos",
+  description: "Design a one-of-a-kind piece with SanJuan Mini Market's productos personalizados service.",
 };
 
 const STEPS = [
@@ -26,7 +26,7 @@ export default async function CustomPage() {
           <Emblem size={48} className="mx-auto text-gold-deep" />
           <span className="eyebrow mt-4 block">Bespoke</span>
           <h1 className="mt-2 font-serif text-4xl font-semibold text-ink sm:text-5xl">
-            Custom Jewelry
+            Custom productos
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-ink/80">
             From personalized name necklaces to custom sets for your big day, we bring your

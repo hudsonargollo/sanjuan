@@ -25,7 +25,7 @@ const maxLen = (n: number, message: string) => (v: string) => (v.trim().length >
 const textBetween = (min: number, max: number, short: string) => (v: string) => {
   const t = v.trim();
   if (t.length < min) return short;
-  if (t.length > max) return `Please keep this under ${max.toLocaleString("en-PK")} characters`;
+  if (t.length > max) return `Please keep this under ${max.toLocaleString("es-BO")} characters`;
   return null;
 };
 

@@ -1,8 +1,8 @@
 // Default shipping policy — the starting values for Admin → Settings
 // (the live rules come from getStoreSettings; see settings-shared.ts).
-// Free shipping over the threshold, otherwise a flat fee (PKR).
+// Free shipping over the threshold, otherwise a flat fee (BOB).
 // Override via NEXT_PUBLIC_FREE_SHIPPING_THRESHOLD / NEXT_PUBLIC_FLAT_SHIPPING
-// (confirm the threshold with the client — Rs 50,000 is high for this range).
+// (confirm the threshold with the client — Bs 50,000 is high for this range).
 function num(v: string | undefined, fallback: number): number {
   const n = Number(v);
   return v && Number.isFinite(n) && n >= 0 ? n : fallback;

@@ -1,4 +1,4 @@
-// Payment gateway integration — PayFast (Pakistan) & Safepay.
+// Payment gateway integration — PayFast (Bolivia) & Safepay.
 //
 // Both require a merchant account (arranged by the client). Until the relevant
 // env vars are set, `configured` is false and checkout falls back to placing a
@@ -18,7 +18,7 @@ export type PaymentMethod = "COD" | "PAYFAST" | "SAFEPAY";
 
 export type PaymentInitInput = {
   orderNumber: string;
-  amount: number; // PKR
+  amount: number; // BOB
   customer: { name: string; email: string; phone: string };
   returnUrl: string; // where the gateway sends the buyer back on success
   cancelUrl: string; // ... and on failure / cancel
@@ -64,7 +64,7 @@ async function initiatePayfast(input: PaymentInitInput): Promise<PaymentInitResu
       SECURED_KEY: process.env.PAYFAST_SECURED_KEY!,
       BASKET_ID: input.orderNumber,
       TXNAMT: input.amount.toFixed(2),
-      CURRENCY_CODE: "PKR",
+      CURRENCY_CODE: "BOB",
     });
     const tokenRes = await fetch(`${base}/GetAccessToken`, {
       method: "POST",
@@ -79,21 +79,21 @@ async function initiatePayfast(input: PaymentInitInput): Promise<PaymentInitResu
     // 2) Build the hosted-checkout redirect (buyer completes payment there)
     const params = new URLSearchParams({
       MERCHANT_ID: process.env.PAYFAST_MERCHANT_ID!,
-      MERCHANT_NAME: "ZARIERA",
+      MERCHANT_NAME: "SanJuan Mini Market",
       TOKEN: token,
       PROCCODE: "00",
       TXNAMT: input.amount.toFixed(2),
       CUSTOMER_MOBILE_NO: input.customer.phone,
       CUSTOMER_EMAIL_ADDRESS: input.customer.email,
       SIGNATURE: randomBytes(12).toString("hex"),
-      VERSION: "ZARIERA-1.0",
-      TXNDESC: `ZARIERA order ${input.orderNumber}`,
+      VERSION: "SanJuan Mini Market-1.0",
+      TXNDESC: `SanJuan Mini Market order ${input.orderNumber}`,
       SUCCESS_URL: input.returnUrl,
       FAILURE_URL: input.cancelUrl,
       CHECKOUT_URL: input.notifyUrl,
       BASKET_ID: input.orderNumber,
       ORDER_DATE: new Date().toISOString(),
-      CURRENCY_CODE: "PKR",
+      CURRENCY_CODE: "BOB",
     });
     return {
       configured: true,
@@ -128,7 +128,7 @@ async function initiateSafepay(input: PaymentInitInput): Promise<PaymentInitResu
       body: JSON.stringify({
         client: process.env.SAFEPAY_API_KEY,
         amount: input.amount,
-        currency: "PKR",
+        currency: "BOB",
         environment,
       }),
       signal: AbortSignal.timeout(15000),

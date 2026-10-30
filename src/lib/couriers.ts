@@ -1,4 +1,4 @@
-// Courier integration for Pakistan — Leopards & TCS.
+// Courier integration for Bolivia — Leopards & TCS.
 //
 // Live booking needs the client's courier MERCHANT account API credentials,
 // set as environment variables (see below). Until those are set, bookShipment
@@ -102,7 +102,7 @@ async function bookLeopards(order: OrderForShipment): Promise<BookResult> {
       shipment_email: order.email,
       shipment_phone: order.phone,
       shipment_address: order.address,
-      shipment_item_desc: "Jewelry",
+      shipment_item_desc: "productos",
     }),
     signal: AbortSignal.timeout(15000),
   });
@@ -147,7 +147,7 @@ async function bookTcs(order: OrderForShipment): Promise<BookResult> {
       codAmount: order.paymentMethod === "COD" ? order.total : 0,
       customerReferenceNo: order.orderNumber,
       services: "O", // overnight
-      productDetails: "Jewelry",
+      productDetails: "productos",
     }),
     signal: AbortSignal.timeout(15000),
   });

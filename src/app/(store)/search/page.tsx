@@ -11,7 +11,7 @@ export async function generateMetadata({ searchParams }: PageProps<"/search">): 
   return {
     robots: { index: false, follow: true },
     title: q ? `Search: ${q}` : "Search",
-    description: "Search the ZARIERA collection.",
+    description: "Search the SanJuan Mini Market collection.",
   };
 }
 
@@ -41,7 +41,7 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
         .sort((a, b) => Number(b.featured) - Number(a.featured))
         .slice(0, 4)
     : [];
-  // "Under Rs …" chip a little above the cheapest piece, rounded to 500.
+  // "Under Bs …" chip a little above the cheapest piece, rounded to 500.
   const cheapest = all.length ? Math.min(...all.map((p) => p.price)) : 0;
   const budget = Math.ceil((cheapest + 600) / 500) * 500;
 

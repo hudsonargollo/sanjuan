@@ -93,7 +93,7 @@ export function nameError(value: string): string | null {
   return null;
 }
 
-// Phone / WhatsApp. Pakistani mobiles in any usual form — 03XX XXXXXXX,
+// Phone / WhatsApp. Boliviai mobiles in any usual form — 03XX XXXXXXX,
 // 92 3XX XXXXXXX or +92 3XX XXXXXXX — or any number with a "+" country code
 // (E.164: 8–15 digits). Spaces and dashes are fine while typing.
 export const PHONE_RE = /^\+[1-9]\d{7,14}$/;
@@ -113,7 +113,7 @@ export function phoneError(value: string): string | null {
   if (v.startsWith("0")) return /^03\d{9}$/.test(v) ? null : "Mobile numbers look like 03XX XXXXXXX (11 digits)";
   if (v.startsWith("+920")) return "Drop the 0 after +92, like +92 300 1234567";
   if (v.startsWith("92")) return /^923\d{9}$/.test(v) ? null : "Numbers with 92 look like 92 3XX XXXXXXX";
-  if (v.startsWith("+92")) return /^\+923\d{9}$/.test(v) ? null : "Pakistani mobile numbers look like +92 3XX XXXXXXX";
+  if (v.startsWith("+92")) return /^\+923\d{9}$/.test(v) ? null : "Boliviai mobile numbers look like +92 3XX XXXXXXX";
   if (!v.startsWith("+")) return "Start with 03, 92 or your country code (like +44)";
   return PHONE_RE.test(v) ? null : "Enter a full number with country code, like +44 7911 123456";
 }

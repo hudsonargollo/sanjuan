@@ -16,7 +16,7 @@ export default function CartPage() {
     toast.info(`${name} removed from your bag`);
   }
 
-  // Cart lives in localStorage — avoid flashing an empty "Rs 0" bag before it loads.
+  // Cart lives in localStorage — avoid flashing an empty "Bs 0" bag before it loads.
   if (!ready) {
     return (
       <div className="mx-auto max-w-6xl px-5 py-14" aria-busy="true">

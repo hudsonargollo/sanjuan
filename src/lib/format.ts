@@ -1,10 +1,8 @@
-// Money is in PKR. Clean, no-decimal display for a luxury feel: "Rs 48,000".
-const pkr = new Intl.NumberFormat("en-PK", {
-  maximumFractionDigits: 0,
-});
+// Money is in Bolivian Pesos. Clean, no-decimal display: "Bs 48,000".
+const bo = new Intl.NumberFormat("es-BO", { maximumFractionDigits: 0 });
 
 export function formatPrice(amount: number): string {
-  return `Rs ${pkr.format(Math.round(amount))}`;
+  return `Bs ${bo.format(Math.round(amount))}`;
 }
 
 export function discountPercent(price: number, compareAt: number | null | undefined): number | null {
@@ -12,7 +10,7 @@ export function discountPercent(price: number, compareAt: number | null | undefi
   return Math.round(((compareAt - price) / compareAt) * 100);
 }
 
-/** Rupees saved per piece vs the compare-at price, or null when not on sale. */
+/** Saved per product vs the compare-at price, or null when not on sale. */
 export function savingsOf(price: number, compareAt: number | null | undefined): number | null {
   if (!compareAt || compareAt <= price) return null;
   return compareAt - price;
@@ -27,5 +25,5 @@ export function formatDate(
   const opts: Intl.DateTimeFormatOptions = { day: "numeric", month: "short" };
   if (year) opts.year = "numeric";
   if (time) Object.assign(opts, { hour: "numeric", minute: "2-digit" });
-  return time ? d.toLocaleString("en-PK", opts) : d.toLocaleDateString("en-PK", opts);
+  return time ? d.toLocaleString("es-BO", opts) : d.toLocaleDateString("es-BO", opts);
 }

@@ -31,7 +31,7 @@ export async function GET(request: Request) {
   const header = [
     "Order number", "Date", "Status", "Payment method", "Payment status",
     "Customer", "Phone", "Email", "City", "Address", "Postal code",
-    "Items", "Item count", "Subtotal (Rs)", "Shipping (Rs)", "Total (Rs)",
+    "Items", "Item count", "Subtotal (Bs)", "Shipping (Bs)", "Total (Bs)",
     "Courier", "Tracking number", "Notes",
   ];
   const rows = orders.map((o) => [
@@ -62,7 +62,7 @@ export async function GET(request: Request) {
   return new Response(csv, {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="zariera-orders-${status?.toLowerCase() || "all"}-${stamp}.csv"`,
+      "Content-Disposition": `attachment; filename="SanJuan Mini Market-orders-${status?.toLowerCase() || "all"}-${stamp}.csv"`,
       "Cache-Control": "no-store",
     },
   });

@@ -96,7 +96,7 @@ export function MobileMenu() {
         <div className="flex items-center justify-between border-b border-[var(--line)] bg-maroon px-5 py-4">
           <span className="flex items-center gap-2 text-gold">
             <Emblem size={22} />
-            <span className="gold-text font-serif text-lg font-bold tracking-[0.22em]">ZARIERA</span>
+            <span className="gold-text font-serif text-lg font-bold tracking-[0.22em]">SanJuan Mini Market</span>
           </span>
           <button
             onClick={() => setOpen(false)}

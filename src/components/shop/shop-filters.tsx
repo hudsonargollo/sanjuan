@@ -113,7 +113,7 @@ export function ShopFilters({ facets }: { facets: ShopFacets }) {
     <div className="space-y-5">
       <Section title="Categories">
         <ul className="space-y-0.5 text-sm">
-          {[{ name: "All Jewelry", slug: "", count: facets.total }, ...facets.categories].map((c) => {
+          {[{ name: "All productos", slug: "", count: facets.total }, ...facets.categories].map((c) => {
             const active = activeCategory === c.slug;
             return (
               <li key={c.slug || "all"}>

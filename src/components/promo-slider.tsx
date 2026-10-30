@@ -4,11 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Emblem } from "./brand/emblem";
 
-// Editorial model & statement-jewelry shots. Horizontal sliding carousel
+// Editorial model & statement-productos shots. Horizontal sliding carousel
 // (auto right→left) with a seamless two-way infinite loop and manual arrows.
 // Split layout: text on the maroon panel, photo in its own frame so the
-// jewelry is always fully visible. `focus` sets the vertical crop point
-// (where the jewelry sits in each photo) so necklaces/earrings stay in view.
+// productos is always fully visible. `focus` sets the vertical crop point
+// (where the productos sits in each photo) so necklaces/earrings stay in view.
 const SLIDES: { src: string; focus: string }[] = [
   { src: "/images/promo/promo-01.webp", focus: "center 60%" },
   { src: "/images/promo/promo-02.webp", focus: "center 42%" },

@@ -32,7 +32,7 @@ export function QuickAdd({ product }: { product: ProductView }) {
       }}
       className="mt-3 block w-full rounded-full border border-maroon bg-transparent py-2 text-center text-xs font-medium uppercase tracking-[0.12em] text-maroon transition hover:bg-maroon hover:text-light dark:border-gold-deep/50 dark:text-gold-deep"
     >
-      {added ? "Added ✓" : "Add to cart"}
+      {added ? "Agregado ✓" : "Agregar al carrito"}
     </button>
   );
 }

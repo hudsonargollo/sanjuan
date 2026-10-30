@@ -49,3 +49,11 @@ next-env.d.ts
 
 # Playwright MCP scratch output
 /.playwright-mcp/
+
+# OpenNext
+.open-next
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example

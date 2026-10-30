@@ -100,7 +100,7 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
   const [input, setInput] = useState("");
   const greeting: Msg = {
     from: "bot",
-    text: "Hi! 👋 I'm the SanJuan Mini Market assistant. Ask me anything — products, prices, delivery, payment, returns or your order. You can write in English or Urdu.",
+    text: "Hi! 👋 I'm the SanJuan Mini Market assistant. Ask me anything — products, prices, delivery, payment, returns or your order. Puedes escribir en español.",
   };
   const [msgs, setMsgs] = useState<Msg[]>([greeting]);
   const [typing, setTyping] = useState(false);
@@ -352,7 +352,7 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask anything… (English / اردو)"
+              placeholder="Pregunta lo que quieras… (español)"
               maxLength={600}
               className="min-w-0 flex-1 rounded-full border border-[var(--line-strong)] bg-cream-soft px-4 py-2.5 text-sm text-ink outline-none transition focus:border-gold focus:ring-2 focus:ring-[rgba(195,154,78,0.22)]"
             />

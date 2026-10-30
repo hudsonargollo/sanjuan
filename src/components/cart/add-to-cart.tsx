@@ -64,7 +64,7 @@ export function AddToCart({ product }: { product: Omit<CartItem, "quantity"> }) 
           onClick={handleAdd}
           className="flex-1 rounded-full border border-[var(--line-strong)] bg-surface px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-ink transition hover:border-gold hover:text-gold-deep"
         >
-          {added ? "Added to cart ✓" : "Add to cart"}
+          {added ? "Agregado al carrito ✓" : "Agregar al carrito"}
         </button>
       </div>
 

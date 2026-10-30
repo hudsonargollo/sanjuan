@@ -27,7 +27,7 @@ export function SiteHeader() {
       <div className="flex w-full items-center justify-between gap-3 px-4 py-3.5 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-10">
         {/* Brand */}
         <Link href="/" className="group flex min-w-0 shrink items-center gap-2 text-gold-deep sm:gap-2.5 lg:shrink-0 lg:justify-self-start">
-          <Emblem size={28} className="shrink-0 transition-transform duration-300 group-hover:scale-105" />
+          <img src="/images/sanjuan-icon.webp" alt="SanJuan Mini Market" className="h-8 w-8 shrink-0 transition-transform duration-300 group-hover:scale-105" />
           <span className="flex min-w-0 flex-col leading-none">
             <span className="gold-text truncate font-serif text-lg font-bold tracking-[0.2em] sm:text-2xl sm:tracking-[0.26em]">
               SanJuan Mini Market

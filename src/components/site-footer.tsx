@@ -51,7 +51,7 @@ export function SiteFooter({ settings }: { settings: StoreSettings }) {
         {/* Brand + socials */}
         <div className="flex flex-col items-center text-center md:col-span-4 md:items-start md:text-left">
           <div className="flex items-center gap-2.5">
-            <Emblem size={34} className="text-gold" />
+            <img src="/images/sanjuan-icon.webp" alt="SanJuan Mini Market" className="h-9 w-9" />
             <span className="gold-text font-serif text-2xl font-bold tracking-[0.24em]">SanJuan Mini Market</span>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-light/60">

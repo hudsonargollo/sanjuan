@@ -14,7 +14,7 @@ export function Newsletter() {
 
   useEffect(() => {
     if (state.error) toast.error(state.error);
-    else if (state.ok) toast.success("You're on the list — welcome to SanJuan Mini Market ✨", { title: "Subscribed" });
+    else if (state.ok) toast.success("Ya estás en la lista — bienvenido a SanJuan Mini Market ✨", { title: "Suscrito" });
   }, [state, toast]);
 
   return (
@@ -43,16 +43,16 @@ export function Newsletter() {
 
         <div className="relative">
           <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[rgba(169,126,48,0.45)] bg-[radial-gradient(circle,rgba(214,178,104,0.18),transparent_70%)]">
-            <Emblem size={32} className="text-gold" />
+            <img src="/images/sanjuan-icon.webp" alt="" className="h-8 w-8" />
           </span>
           <span className="mt-4 block text-xs font-medium uppercase tracking-[0.34em] text-gold">
             Newsletter
           </span>
           <h2 className="mt-2 font-serif text-3xl font-bold text-light sm:text-4xl">
-            Join the SanJuan Mini Market list
+            Únete a la lista de SanJuan Mini Market
           </h2>
           <p className="mx-auto mt-3 max-w-md text-light/70">
-            Be first to know about new arrivals, exclusive offers and special deals.
+            Sé el primero en conocer nuevos productos, ofertas exclusivas y promociones especiales.
           </p>
 
           {sent ? (
@@ -60,7 +60,7 @@ export function Newsletter() {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold-hi)" strokeWidth="2.4">
                 <path d="M5 12l5 5L20 6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              Thank you for subscribing!
+              ¡Gracias por suscribirte!
             </div>
           ) : (
             <form action={formAction} className="mx-auto mt-7 flex max-w-md flex-col gap-3 sm:flex-row">
@@ -70,7 +70,7 @@ export function Newsletter() {
                 type="email"
                 name="email"
                 required
-                placeholder="Enter your email"
+                placeholder="Ingresa tu correo"
                 aria-label="Email address"
                 className="w-full rounded-full border border-[rgba(230,205,139,0.35)] bg-[rgba(255,255,255,0.06)] px-5 py-3.5 text-sm text-light outline-none transition placeholder:text-light/50 focus:border-gold focus:bg-[rgba(255,255,255,0.1)]"
               />
@@ -79,7 +79,7 @@ export function Newsletter() {
                 disabled={pending}
                 className="shrink-0 rounded-full bg-gradient-to-r from-gold-hi to-gold px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-maroon transition hover:opacity-90 disabled:opacity-60"
               >
-                {pending ? "Joining…" : "Subscribe"}
+                {pending ? "Uniéndose…" : "Suscribirse"}
               </button>
             </form>
           )}

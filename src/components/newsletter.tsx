@@ -84,7 +84,7 @@ export function Newsletter() {
             </form>
           )}
 
-          <p className="mt-4 text-xs text-light/45">No spam, just sparkle — unsubscribe anytime.</p>
+          <p className="mt-4 text-xs text-light/45">No spam, solo buenosProductos — suscríbete para recibir ofertas.</p>
         </div>
       </div>
     </section>

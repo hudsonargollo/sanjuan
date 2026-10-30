@@ -6,7 +6,7 @@ import { Emblem } from "@/components/brand/emblem";
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
   title: "About",
-  description: "The SanJuan Mini Market story — premium stainless steel & productos de higiene y cuidado personal, made to last.",
+  description: "SanJuan Mini Market - productos de higiene y cuidado personal premium para toda la familia. Calidad garantizada.",
 };
 
 export default function AboutPage() {
@@ -15,34 +15,32 @@ export default function AboutPage() {
       <OrnateFrame className="mx-auto max-w-4xl bg-panel">
         <div className="px-6 py-16 text-center sm:px-14">
           <Emblem size={48} className="mx-auto text-gold-deep" />
-          <span className="eyebrow mt-4 block">Our Story</span>
+          <span className="eyebrow mt-4 block">Nuestra historia</span>
           <h1 className="mt-2 font-serif text-4xl font-semibold text-ink sm:text-5xl">
-            Craft, care &amp; a little sparkle
+            Calidad premium en cada detalle
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-ink/80">
-            SanJuan Mini Market creates premium stainless steel and productos de higiene y cuidado personal — elegant,
-            affordable and made to last. Every piece is crafted in premium stainless steel,
-            many with a gold-plated finish, so it stays rust-free and skin-friendly.
+            SanJuan Mini Market crea productos de higiene y cuidado personal premium, 
+            artículos de limpieza y cuidado diario—elegantes, duraderos y hechos para usted. 
+            Nuestros productos tienen acabado dorado premium y son ideales para el día a día.
           </p>
           <p className="mx-auto mt-4 max-w-2xl text-ink/80">
-            We believe every jewel tells a story — of confidence and everyday moments. Our
-            mission is to bring you beautiful, long-lasting designs without the fine-productos
-            price tag.
+            En SanJuan Mini Market, cada producto cuenta una historia—de confianza y cuidado. 
+            Diseños premium sin precios de lujo.
           </p>
           <Link
             href="/shop"
-            className="mt-9 inline-block rounded-full bg-maroon px-9 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-light transition hover:bg-maroon-2"
+            className="mt-7 inline-block rounded-full bg-maroon px-8 py-3 text-sm font-medium uppercase tracking-[0.12em] text-light transition hover:bg-maroon-2"
           >
-            Explore Our Collection
+            Ver nuestros productos
           </Link>
         </div>
       </OrnateFrame>
 
       <section className="mx-auto mt-16 grid max-w-4xl gap-8 sm:grid-cols-3">
-        {[
-          { title: "Rust-free", body: "Premium stainless steel that never rusts." },
-          { title: "Skin-friendly", body: "Hypoallergenic — gentle on sensitive skin." },
-          { title: "Made to last", body: "Durable finishes that keep their shine with simple care." },
+        {[{ title: "Calidad premium", body: "Productos de higiene y cuidado personal de alta calidad." },
+          { title: "Acabado dorado", body: "Terminaciones doradas elegantes que duran." },
+          { title: "Total confianza", body: "Diseñados para uso diario seguro y efectivo." },
         ].map((p) => (
           <div key={p.title} className="text-center">
             <h3 className="font-serif text-xl font-semibold text-ink">{p.title}</h3>

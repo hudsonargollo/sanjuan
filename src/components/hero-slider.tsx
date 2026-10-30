@@ -5,8 +5,8 @@ import { preload } from "react-dom";
 import Link from "next/link";
 import { Emblem } from "./brand/emblem";
 
-// Mix of product shots and models wearing productos.
-// Models wearing modern, everyday productos (gold-plated / silver-tone stainless steel).
+// Mix of fresh product shots and models using productos.
+// Models using everyday productos (gold-plated finish / clean aesthetics).
 const SLIDES = [
   "/images/girl-1.webp",
   "/images/girl-2.webp",
@@ -73,23 +73,23 @@ export function HeroSlider() {
           SanJuan Mini Market
         </h1>
         <p className="mt-4 font-serif text-2xl italic text-light/90 sm:text-3xl">
-          Every Jewel Tells a Story
+          Productos de higiene y cuidado personal premium
         </p>
         <p className="mt-2 text-sm uppercase tracking-[0.2em] text-light/70">
-          Premium Stainless Steel productos
+          Envío a todo el país · Pago contra entrega
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/shop"
             className="inline-block rounded-full bg-gradient-to-r from-gold-hi to-gold px-9 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-maroon transition hover:opacity-90"
           >
-            Explore Our Collection
+            Ver productos
           </Link>
           <Link
             href="/about"
             className="inline-block rounded-full border border-[rgba(230,205,139,0.5)] px-9 py-3.5 text-sm font-light uppercase tracking-[0.12em] text-light transition hover:border-gold hover:text-gold"
           >
-            Our Story
+            Nuestra historia
           </Link>
         </div>
       </div>

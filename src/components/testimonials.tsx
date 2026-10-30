@@ -12,39 +12,39 @@ type Review = {
 
 const REVIEWS: Review[] = [
   {
-    text: "The craftsmanship is exquisite. My necklace arrived beautifully packaged and looks even better in person.",
+    text: "The craftsmanship is exquisite. My purchase arrived beautifully packaged and looks even better in person.",
     name: "Ayesha Khan",
-    place: "Lahore",
+    place: "Lima",
     rating: 5,
   },
   {
-    text: "Ordered a custom ring for my engagement — SanJuan Mini Market made the whole process effortless and the result was stunning.",
+    text: "Ordered a custom piece for my mom — SanJuan Mini Market made the whole process effortless and the result was stunning.",
     name: "Bilal Raza",
-    place: "Karachi",
+    place: "Lima",
     rating: 5,
   },
   {
-    text: "Elegant, timeless pieces and wonderful service. Cash on delivery made it so easy. Highly recommend.",
+    text: "Elegant, timeless pieces and wonderful service. Pago contra entrega made it so easy. Highly recommend.",
     name: "Sana Malik",
-    place: "Islamabad",
+    place: "Lima",
     rating: 5,
   },
   {
-    text: "I gifted my mother a pendant and she hasn't taken it off since. The finish is flawless and feels premium.",
+    text: "I gifted my mother a piece and she hasn't taken it off since. The finish is flawless and feels premium.",
     name: "Hamza Sheikh",
-    place: "Rawalpindi",
+    place: "Lima",
     rating: 5,
   },
   {
-    text: "Fast delivery and the earrings sparkle beautifully. Exactly what I hoped for — will definitely order again.",
+    text: "Fast delivery and the finish looks beautiful. Exactly what I hoped for — will definitely order again.",
     name: "Fatima Noor",
-    place: "Faisalabad",
+    place: "Lima",
     rating: 5,
   },
   {
     text: "Genuinely luxury quality at a fair price. The team even called to confirm my order. Five stars.",
     name: "Zainab Ali",
-    place: "Multan",
+    place: "Lima",
     rating: 5,
   },
 ];

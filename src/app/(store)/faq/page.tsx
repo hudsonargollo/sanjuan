@@ -7,37 +7,37 @@ import { AccordionItem } from "@/components/ui/accordion-item";
 export const metadata: Metadata = {
   alternates: { canonical: "/faq" },
   title: "FAQ",
-  description: "Answers to common questions about ordering, payment, shipping and returns at SanJuan Mini Market.",
+  description: "Respuestas a preguntas comunes sobre pedidos, pago, envío y devoluciones en SanJuan Mini Market.",
 };
 
 const faqs = (DELIVERY_TIME: string) => [
   {
-    q: "How do I place an order?",
-    a: "Browse the collection, add pieces to your bag, and check out. You can pay Cash on Delivery or securely online by card/wallet.",
+    q: "¿Cómo realizo un pedido?",
+    a: "Explora nuestra colección, agrega productos a tu carrito y finaliza en elcheckout. Puedes pagar contra entrega o de forma segura online.",
   },
   {
-    q: "What payment methods do you accept?",
-    a: "Cash on Delivery (COD) a nivel nacional, and online payments via PayFast and Safepay (card and wallet).",
+    q: "¿Qué métodos de pago aceptan?",
+    a: "Pago contra entrega (COD) a nivel nacional, y pagos online vía PayFast y Safepay (tarjeta y billetera).",
   },
   {
-    q: "How long does delivery take?",
-    a: `Orders are typically delivered within ${DELIVERY_TIME} nationwide. Our team may call to confirm delivery details.`,
+    q: "¿Cuánto tarda el envío?",
+    a: `Los pedidos llegan típicamente en ${DELIVERY_TIME}. Nuestro equipo puede llamarte para confirmar detalles de entrega.`,
   },
   {
-    q: "Can I track my order?",
-    a: "Yes — use the Order Status page and enter your order number and email to see the latest status.",
+    q: "¿Puedo rastrear mi pedido?",
+    a: "Sí — usa la página de Estado de Pedidos e ingresa tu número de orden y email para ver el estado actualizado.",
   },
   {
-    q: "What is your returns policy?",
-    a: "Unworn items in original condition can be returned within 7 days of delivery. Custom pieces are non-returnable unless faulty. See Shipping & Returns for details.",
+    q: "¿Cuál es su política de devoluciones?",
+    a: "Artículos sin usar en condición original pueden devolverse en 7 días. Productos personalizados no son elegibles para devolución. Ver Envíos y Devoluciones.",
   },
   {
-    q: "Do you make productos personalizados?",
-    a: "Yes. Visit the Custom page to start a custom design — tell us your idea and we'll create it in stainless steel.",
+    q: "¿Hacen productos personalizados?",
+    a: "Sí. Visita la página Personalizado para crear tu diseño — cuéntanos tu idea y lo haremos en acero inoxidable.",
   },
   {
-    q: "What is your productos están hechos de?",
-    a: "Premium stainless steel — many pieces gold-plated or rose-gold plated. It is rust-free, hypoallergenic (skin-friendly) and won't tarnish or fade with everyday wear. Material details are listed on each product page.",
+    q: "¿De qué están hechos sus productos?",
+    a: "Acero inoxidable pulido — muchos con acabado dorado o plata. Antialérgico y no oxida con uso diario. Detalles en cada página de producto.",
   },
 ];
 

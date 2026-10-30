@@ -8,25 +8,24 @@ import { InstagramIcon } from "@/components/icons";
 // hidden rather than showing a placeholder.
 
 const NAV = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Collection", href: "/shop" },
-  { label: "Custom", href: "/custom" },
-  { label: "Contact", href: "/contact" },
+  { label: "Inicio", href: "/" },
+  { label: "Productos", href: "/shop" },
+  { label: "Cuidado personal", href: "/about" },
+  { label: "Contacto", href: "/contact" },
 ];
 
 const HELP = [
-  { label: "Order Status", href: "/account/orders" },
-  { label: "Shipping & Returns", href: "/shipping" },
-  { label: "Care Guide", href: "/care" },
-  { label: "FAQ", href: "/faq" },
+  { label: "Estado de pedido", href: "/account/orders" },
+  { label: "Envíos y devoluciones", href: "/shipping" },
+  { label: "Guía de cuidado", href: "/care" },
+  { label: "Preguntas", href: "/faq" },
 ];
 
 const TRUST = [
-  "Cash on Delivery",
-  "Secure Checkout",
-  "Nationwide Shipping",
-  "Rust-free & Hypoallergenic",
+  "Pago contra entrega",
+  "Checkout seguro",
+  "Envío a todo el país",
+  "Calidad premium garantizada",
 ];
 
 export function SiteFooter({ settings }: { settings: StoreSettings }) {
@@ -56,8 +55,7 @@ export function SiteFooter({ settings }: { settings: StoreSettings }) {
             <span className="gold-text font-serif text-2xl font-bold tracking-[0.24em]">SanJuan Mini Market</span>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-light/60">
-            Premium stainless steel &amp; productos de higiene y cuidado personal — rust-free and made to last.
-            Every jewel tells a story.
+            Productos de higiene y cuidado personal premium — calidad garantizada y envío a todo el país.
           </p>
           <div className="mt-6 flex gap-3">
             {CONTACT.instagram && (
@@ -93,14 +91,14 @@ export function SiteFooter({ settings }: { settings: StoreSettings }) {
         </div>
 
         {/* Explore */}
-        <FooterCol title="Explore" links={NAV} className="md:col-span-2" />
+        <FooterCol title="Explorar" links={NAV} className="md:col-span-2" />
 
         {/* Help */}
-        <FooterCol title="Help" links={HELP} className="md:col-span-3" />
+        <FooterCol title="Ayuda" links={HELP} className="md:col-span-3" />
 
         {/* Contact */}
         <div className="flex flex-col items-center text-center md:col-span-3 md:items-start md:text-left">
-          <h3 className="eyebrow mb-4 text-gold">Get in touch</h3>
+          <h3 className="eyebrow mb-4 text-gold">Contáctanos</h3>
           <ul className="space-y-3 text-sm text-light/70">
             <li className="flex items-center justify-center gap-2.5 md:justify-start">
               <PinIcon /> {CONTACT.city}
@@ -124,7 +122,7 @@ export function SiteFooter({ settings }: { settings: StoreSettings }) {
             </li>
             <li>
               <Link href="/contact" className="flex items-center justify-center gap-2.5 transition-colors hover:text-gold md:justify-start">
-                <MailIcon /> Send us a message
+                <MailIcon /> Envíanos un mensaje
               </Link>
             </li>
           </ul>
@@ -148,8 +146,8 @@ export function SiteFooter({ settings }: { settings: StoreSettings }) {
       {/* Bottom bar */}
       <div className="relative border-t border-[rgba(230,205,139,0.15)]">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-5 text-center text-xs text-light/45 sm:flex-row sm:text-left">
-          <span>© {new Date().getFullYear()} SanJuan Mini Market. All rights reserved.</span>
-          <span>Crafted with care · Premium Stainless Steel productos</span>
+          <span>© {new Date().getFullYear()} SanJuan Mini Market. Todos los derechos reservados.</span>
+          <span>Productos premium · Calidad garantizada</span>
         </div>
       </div>
     </footer>
@@ -219,6 +217,14 @@ function WhatsAppIcon() {
     </svg>
   );
 }
+function TikTokIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M16.6 3c.4 2.2 1.8 3.7 4 3.9v3.1c-1.5 0-2.9-.4-4-1.2v6.1c0 3.4-2.6 6.1-6 6.1s-6-2.7-6-6.1 2.6-6.1 6-6.1c.3 0 .6 0 .9.1v3.2c-.3-.1-.6-.1-.9-.1-1.6 0-2.9 1.3-2.9 2.9s1.3 2.9 2.9 2.9 3-1.3 3-2.9V3h3z" />
+    </svg>
+  );
+}
+
 function MailIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
@@ -230,7 +236,7 @@ function MailIcon() {
 function PhoneIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-      <path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L20 13l1 5v3H4z" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L20 13l1 5v3H4z" strokeLinecap="round" />
     </svg>
   );
 }
@@ -246,15 +252,7 @@ function ClockIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
       <circle cx="12" cy="12" r="9" />
-      <path d="M12 7v5l3 2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function TikTokIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M16.6 3c.4 2.2 1.8 3.7 4 3.9v3.1c-1.5 0-2.9-.4-4-1.2v6.1c0 3.4-2.6 6.1-6 6.1s-6-2.7-6-6.1 2.6-6.1 6-6.1c.3 0 .6 0 .9.1v3.2c-.3-.1-.6-.1-.9-.1-1.6 0-2.9 1.3-2.9 2.9s1.3 2.9 2.9 2.9 3-1.3 3-2.9V3h3z" />
+      <path d="M12 7v5l3 2" strokeLinecap="round" />
     </svg>
   );
 }

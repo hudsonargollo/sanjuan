@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HeaderCart } from "./cart/header-cart";
@@ -8,11 +6,10 @@ import { MobileMenu } from "./mobile-menu";
 import { ThemeToggle } from "./theme-toggle";
 
 const NAV = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Collection", href: "/shop" },
-  { label: "Custom", href: "/custom" },
-  { label: "Contact", href: "/contact" },
+  { label: "Inicio", href: "/" },
+  { label: "Productos", href: "/shop" },
+  { label: "Cuidado personal", href: "/about" },
+  { label: "Contacto", href: "/contact" },
 ];
 
 // Shared style for the header's circular icon buttons
@@ -36,12 +33,12 @@ export function SiteHeader() {
               SanJuan Mini Market
             </span>
             <span className="mt-1 hidden truncate text-[0.5rem] uppercase tracking-[0.32em] text-muted sm:block sm:tracking-[0.42em]">
-              Every Jewel Tells a Story
+              Productos de higiene premium
             </span>
           </span>
         </Link>
 
-        {/* Primary nav — animated gold underline, centered */}
+        {/* Primary nav */}
         <nav className="hidden items-center gap-8 lg:flex lg:justify-self-center">
           {NAV.map((item) => {
             const active = isActive(item.href);

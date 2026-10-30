@@ -29,7 +29,7 @@ export default async function CustomPage() {
             Custom productos
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-ink/80">
-            From personalized name necklaces to custom sets for your big day, we bring your
+            From personalized custom sets for your big day, we bring your
             idea to life in premium stainless steel. Share your design and we&apos;ll craft
             something uniquely yours.
           </p>

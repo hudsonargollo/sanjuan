@@ -75,7 +75,7 @@ function shell(title: string, inner: string): string {
     <div style="max-width:560px;margin:0 auto;background:#fffaf2;border:1px solid #eadfce;border-radius:12px;overflow:hidden">
       <div style="background:#5b1a2b;padding:22px;text-align:center">
         <div style="color:#e6cd8b;font-size:24px;letter-spacing:6px;font-weight:700">SanJuan Mini Market</div>
-        <div style="color:#dcc6ad;font-style:italic;font-size:13px;margin-top:4px">Every Jewel Tells a Story</div>
+        <div style="color:#dcc6ad;font-style:italic;font-size:13px;margin-top:4px">Elaboración premium de SanJuan Mini Market</div>
       </div>
       <div style="padding:28px">
         <h1 style="margin:0 0 8px;color:#3a231e;font-size:22px">${title}</h1>

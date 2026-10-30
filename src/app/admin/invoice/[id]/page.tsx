@@ -42,7 +42,7 @@ export default async function InvoicePage({ params }: PageProps<"/admin/invoice/
         <header className="flex items-start justify-between border-b-2 border-[#5b1a2b] pb-5">
           <div>
             <p className="font-serif text-3xl font-bold tracking-[0.25em] text-[#5b1a2b]">SanJuan Mini Market</p>
-            <p className="mt-1 text-xs italic text-[#8a6f63]">Every Jewel Tells a Story</p>
+            <p className="mt-1 text-xs italic text-[#8a6f63]">Elaboration premium de SanJuan Mini Market</p>
             <p className="mt-3 text-xs text-[#6b5a52]">{[c.city, c.phone, c.email].filter(Boolean).join(" · ")}</p>
           </div>
           <div className="text-right">

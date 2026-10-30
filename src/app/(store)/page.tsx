@@ -26,9 +26,9 @@ const orgJsonLd = {
   "@type": "Organization",
   name: "SanJuan Mini Market",
   url: siteUrl,
-  slogan: "Every Jewel Tells a Story",
+  slogan: "Productos de higiene y cuidado personal premium",
   description:
-    "Premium stainless steel and productos de higiene y cuidado personal — elegant, gold-plated, rust-free and hypoallergenic.",
+    "SanJuan Mini Market - productos de higiene y cuidado personal, limpieza del día y artículos para el hogar. Calidad premium que dura.",
 };
 
 const websiteJsonLd = {
@@ -44,10 +44,10 @@ const websiteJsonLd = {
 };
 
 const trustBadges = (freeThreshold: number) => [
-  { title: "Rust-free & hypoallergenic", body: "Premium stainless steel, gentle on skin." },
-  { title: "Cash on Delivery", body: "Pay at your doorstep, nationwide." },
-  { title: "Free shipping", body: `On orders over ${formatPrice(freeThreshold)}.` },
-  { title: "Won't tarnish", body: "Keeps its shine wear after wear." },
+  { title: "Premium calidad", body: "Productos premium de higiene y cuidado personal." },
+  { title: "Pago contra entrega", body: "Paga al recibir, en toda la ciudad." },
+  { title: "Envío gratis", body: `En pedidos desde ${formatPrice(freeThreshold)}.` },
+  { title: "Durable", body: "Hecho para durar día a día." },
 ];
 
 export const revalidate = 300;
@@ -109,8 +109,8 @@ export default async function HomePage() {
       <section className="mx-auto max-w-6xl px-5 py-20">
         <Reveal>
           <div className="text-center">
-            <span className="eyebrow">Collections</span>
-            <h2 className="mt-3 font-serif text-4xl font-bold sm:text-5xl">Shop by category</h2>
+              <span className="eyebrow">Categorías</span>
+            <h2 className="mt-3 font-serif text-4xl font-bold sm:text-5xl">Explorar por categoría</h2>
           </div>
         </Reveal>
         <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
@@ -233,18 +233,18 @@ export default async function HomePage() {
           </Reveal>
           <Reveal delay={120}>
             <div>
-              <span className="eyebrow">Our story</span>
+              <span className="eyebrow">Nuestra historia</span>
               <h2 className="mt-3 font-serif text-4xl font-bold text-ink sm:text-5xl">
-                Craft, care &amp; a little sparkle
+                Cuidado premium, hecho para ti
               </h2>
               <p className="mt-5 leading-relaxed text-ink/80">
-                SanJuan Mini Market creates premium stainless steel and productos de higiene y cuidado personal — elegant,
-                affordable and made to last. Our pieces are crafted in premium stainless steel
-                with gold- and silver-tone finishes, so they stay rust-free and skin-friendly.
+                SanJuan Mini Market crea productos de higiene y cuidado personal premium — elegantes,
+                duraderos y hechos para tu día a día. Nuestros productos tienen acabado dorado premium 
+                y son ideales para el cuidado personal y limpieza del hogar.
               </p>
               <p className="mt-4 leading-relaxed text-ink/80">
-                We believe every jewel tells a story — of confidence, of everyday moments, of the
-                people we treasure. Beautiful designs, without the fine-productos price tag.
+                En SanJuan Mini Market, cada producto cuenta una historia—de confianza y cuidado. 
+                Diseños que combinan elegancia y funcionalidad sin precios de lujo.
               </p>
               <Link
                 href="/about"
@@ -272,12 +272,12 @@ export default async function HomePage() {
         <div className="relative mx-auto max-w-6xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-[var(--line-strong)] bg-cream px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-gold-deep">
             <InstagramIcon size={15} />
-            Lookbook
+            Galería
           </span>
-          <h2 className="mt-4 font-serif text-4xl font-bold text-ink sm:text-5xl">Follow our journey</h2>
+          <h2 className="mt-4 font-serif text-4xl font-bold text-ink sm:text-5xl">Productos que cuidan de ti</h2>
           <p className="mt-3 text-muted">
-            Real pieces, real sparkle — tag us with{" "}
-            <span className="font-medium text-gold-deep">#EveryJewelTellsAStory</span>
+            Real productos, calidad premium — etiquétanos con{" "}
+            <span className="font-medium text-gold-deep">#SanJuanMiniMarket</span>
           </p>
 
           <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
@@ -321,7 +321,7 @@ export default async function HomePage() {
               href="/shop"
               className="rounded-full border border-[var(--line-strong)] px-8 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-ink transition hover:border-gold hover:text-gold-deep"
             >
-              Shop the Collection
+              Ver productos
             </Link>
           </div>
         </div>
@@ -335,7 +335,7 @@ export default async function HomePage() {
 
 function TrustIcon({ i }: { i: number }) {
   const p = { width: 22, height: 22, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  // 0 Rust-free/skin-safe · 1 Cash on Delivery · 2 Free shipping · 3 Won't tarnish
+  // 0 Premium calidad · 1 Pago contra entrega · 2 Envío gratis · 3 Durable
   if (i === 0)
     return (
       <svg {...p}>

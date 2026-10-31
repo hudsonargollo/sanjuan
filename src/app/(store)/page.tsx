@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getDestacadoProducts, getProducts, getCategories } from "@/lib/catalog";
+import { getFeaturedProducts, getProducts, getCategories } from "@/lib/catalog";
 import { ProductCard } from "@/components/product-card";
 import { ProductImage } from "@/components/product-image";
 import { HeroSlider } from "@/components/hero-slider";
 import { PromoSlider } from "@/components/promo-slider";
 import { CategoryArt } from "@/components/category-art";
-import { DestacadoCarousel } from "@/components/featured-carousel";
+import { FeaturedCarousel } from "@/components/featured-carousel";
 import { Testimonials } from "@/components/testimonials";
 import { Newsletter } from "@/components/newsletter";
 import { Reveal } from "@/components/reveal";
@@ -57,7 +57,7 @@ export default async function HomePage() {
   const TRUST = trustBadges(settings.shipping.freeThreshold);
   const CONTACT = settings.social;
   const [featured, newest, categories] = await Promise.all([
-    getDestacadoProducts(8),
+    getFeaturedProducts(8),
     getProducts({ sort: "newest" }),
     getCategories(),
   ]);
@@ -213,7 +213,7 @@ export default async function HomePage() {
           </div>
         </Reveal>
         <div className="mt-10">
-          <DestacadoCarousel products={featured} />
+          <FeaturedCarousel products={featured} />
         </div>
       </section>
 

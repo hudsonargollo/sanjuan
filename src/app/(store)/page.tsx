@@ -5,6 +5,7 @@ import { ProductCard } from "@/components/product-card";
 import { ProductImage } from "@/components/product-image";
 import { HeroSlider } from "@/components/hero-slider";
 import { PromoSlider } from "@/components/promo-slider";
+import { PromoOverlay } from "@/components/promo-overlay";
 import { CategoryArt } from "@/components/category-art";
 import { FeaturedCarousel } from "@/components/featured-carousel";
 import { Testimonials } from "@/components/testimonials";
@@ -84,6 +85,9 @@ export default async function HomePage() {
 
       {/* Hero slideshow */}
       <HeroSlider />
+
+      {/* Immediate local promo for Buena Vista delivery */}
+      <PromoOverlay />
 
       {/* Trust badges */}
       <section className="border-y border-[var(--line)] bg-cream-soft/50 px-5 py-11">

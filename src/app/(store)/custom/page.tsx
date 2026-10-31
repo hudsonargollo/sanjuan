@@ -7,14 +7,14 @@ import { whatsappUrl } from "@/lib/settings-shared";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/custom" },
-  title: "Custom productos",
-  description: "Design a one-of-a-kind piece with SanJuan Mini Market's productos personalizados service.",
+  title: "Custom products",
+  description: "Request a made-to-measure product with SanJuan Mini Market's made-to-order service.",
 };
 
 const STEPS = [
-  { n: "1", title: "Share your vision", body: "Tell us your idea, occasion and budget." },
-  { n: "2", title: "Design & approve", body: "We craft a design and refine it with you." },
-  { n: "3", title: "Handcrafted for you", body: "Your one-of-a-kind piece is made and delivered." },
+  { n: "1", title: "Share your idea", body: "Tell us your need, size and budget." },
+  { n: "2", title: "Review & approve", body: "We prepare an option and refine it with you." },
+  { n: "3", title: "Handed over", body: "Your made-to-order piece is ready and delivered." },
 ];
 
 export default async function CustomPage() {
@@ -24,24 +24,24 @@ export default async function CustomPage() {
       <OrnateFrame className="mx-auto max-w-4xl bg-panel">
         <div className="px-6 py-16 text-center sm:px-14">
           <Emblem size={48} className="mx-auto text-gold-deep" />
-          <span className="eyebrow mt-4 block">Bespoke</span>
+          <span className="eyebrow mt-4 block">Hecho a medida</span>
           <h1 className="mt-2 font-serif text-4xl font-semibold text-ink sm:text-5xl">
-            Custom productos
+            Productos personalizados
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-ink/80">
-            From personalized custom sets for your big day, we bring your
-            idea to life in premium stainless steel. Share your design and we&apos;ll craft
-            something uniquely yours.
+            From personalised made-to-order sets, we bring your idea to life in
+            stainless steel with the finish you choose. Share your request and we&apos;ll craft
+            something just for you.
           </p>
           {/* Jumps to the design request form further down this page */}
           <a
             href="#design-request"
             className="mt-9 inline-block rounded-full bg-maroon px-9 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-light transition hover:bg-maroon-2"
           >
-            Request a Custom Piece
+            Pedir un producto personalizado
           </a>
           <p className="mt-3 text-xs text-muted">
-            Fill a short form — takes 2 minutes, no payment needed.
+            Rellena un formulario breve — toma 2 minutos, sin pago.
           </p>
         </div>
       </OrnateFrame>
@@ -68,7 +68,7 @@ export default async function CustomPage() {
       >
         <div className="text-center">
           <span className="eyebrow">Step 1</span>
-          <h2 className="mt-2 font-serif text-3xl font-semibold text-ink">Tell us about your piece</h2>
+          <h2 className="mt-2 font-serif text-3xl font-semibold text-ink">Tell us about your product</h2>
           <p className="mx-auto mt-2 max-w-xl text-sm text-muted">
             Completa lo que puedas — te responderemos en 1–2 días hábiles con ideas de diseño y un presupuesto.
           </p>

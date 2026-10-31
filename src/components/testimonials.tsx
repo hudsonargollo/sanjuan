@@ -12,37 +12,37 @@ type Review = {
 
 const REVIEWS: Review[] = [
   {
-    text: "The craftsmanship is exquisite. My purchase arrived beautifully packaged and looks even better in person.",
+    text: "This is exactly what I needed for my home — clean, practical and well made. Will order again.",
     name: "Ayesha Khan",
     place: "Lima",
     rating: 5,
   },
   {
-    text: "Ordered a custom piece for my mom — SanJuan Mini Market made the whole process effortless and the result was stunning.",
+    text: "Order a set for my family — the process was effortless and the result was just as described.",
     name: "Bilal Raza",
     place: "Lima",
     rating: 5,
   },
   {
-    text: "Elegant, timeless pieces and wonderful service. Pago contra entrega made it so easy. Highly recommend.",
+    text: "Practical, reliable and good value. Delivery was fast and everything arrived in perfect condition.",
     name: "Sana Malik",
     place: "Lima",
     rating: 5,
   },
   {
-    text: "I gifted my mother a piece and she hasn't taken it off since. The finish is flawless and feels premium.",
+    text: "I gifted my mother a set and she hasn't stopped using it. The finish is flawless and feels premium.",
     name: "Hamza Sheikh",
     place: "Lima",
     rating: 5,
   },
   {
-    text: "Fast delivery and the finish looks beautiful. Exactly what I hoped for — will definitely order again.",
+    text: "Fast delivery and the quality is exactly what I hoped for — will definitely order again.",
     name: "Fatima Noor",
     place: "Lima",
     rating: 5,
   },
   {
-    text: "Genuinely luxury quality at a fair price. The team even called to confirm my order. Five stars.",
+    text: "Genuinely solid quality at a fair price. The team was quick to confirm my order. Five stars.",
     name: "Zainab Ali",
     place: "Lima",
     rating: 5,
@@ -60,7 +60,7 @@ export function Testimonials() {
       <div className="mx-auto max-w-6xl px-5 text-center">
         <Emblem size={40} className="mx-auto text-gold" />
         <span className="eyebrow mt-4 block text-gold">Testimonials</span>
-        <h2 className="mt-3 font-serif text-4xl font-bold sm:text-5xl">Loved by our clients</h2>
+        <h2 className="mt-3 font-serif text-4xl font-bold sm:text-5xl">Loved at home</h2>
         <div className="mt-4 flex items-center justify-center gap-3 text-sm text-light/80">
           <Stars rating={5} />
           <span>

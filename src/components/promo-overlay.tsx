@@ -73,11 +73,11 @@ export function PromoOverlay() {
           {/* Product image with Framer Motion pulse */}
           <motion.div variants={slideUp} className="flex justify-center">
             <motion.img
-              animate={pulse}
+              animate={{ scale: [1, 1.06, 1] } as any}
+              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
               src={PROMO_IMAGE}
               alt="Ola Suavecito Sensaciones — oferta limitada"
               className="max-h-[320px] w-auto drop-shadow-[0_24px_40px_-16px_rgba(0,0,0,0.7)]"
-              priority
             />
           </motion.div>
         </div>

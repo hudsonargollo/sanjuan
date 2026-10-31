@@ -4,11 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Emblem } from "./brand/emblem";
 
-// Editorial model & statement-productos shots. Horizontal sliding carousel
+// Editorial lookbook & statement-productos shots. Horizontal sliding carousel
 // (auto right→left) with a seamless two-way infinite loop and manual arrows.
 // Split layout: text on the maroon panel, photo in its own frame so the
 // productos is always fully visible. `focus` sets the vertical crop point
-// (where the productos sits in each photo) so necklaces/earrings stay in view.
+// (where the productos sits in each photo).
 const SLIDES: { src: string; focus: string }[] = [
   { src: "/images/promo/promo-01.webp", focus: "center 60%" },
   { src: "/images/promo/promo-02.webp", focus: "center 42%" },
@@ -22,10 +22,10 @@ const SLIDES: { src: string; focus: string }[] = [
   { src: "/images/promo/promo-10.webp", focus: "center 55%" },
   { src: "/images/promo/promo-11.webp", focus: "center 64%" },
   { src: "/images/promo/promo-12.webp", focus: "center 55%" },
-  { src: "/images/promo/promo-13.webp", focus: "center 45%" }, // rings on satin
-  { src: "/images/promo/promo-14.webp", focus: "center 52%" }, // stacked bangles
-  { src: "/images/promo/promo-15.webp", focus: "center 52%" }, // rings + bracelet
-  { src: "/images/promo/promo-16.webp", focus: "center 42%" }, // bracelets + face
+  { src: "/images/promo/promo-13.webp", focus: "center 45%" }, // cream bottle in frame
+  { src: "/images/promo/promo-14.webp", focus: "center 52%" }, // suavizante & crema
+  { src: "/images/promo/promo-15.webp", focus: "center 52%" }, // detergentes & suavizantes
+  { src: "/images/promo/promo-16.webp", focus: "center 42%" }, // mantequilla & lácteos
 ];
 
 const INTERVAL = 4500;
@@ -89,12 +89,12 @@ export function PromoSlider() {
           <Emblem size={40} className="text-gold" />
           <span className="eyebrow mt-4 block text-gold">Signature edit</span>
           <h2 className="mt-3 font-serif text-4xl font-bold sm:text-5xl">
-            Handcrafted for every occasion
+            Nueva temporada para tu casa
           </h2>
           <p className="mt-4 max-w-md text-light/80">
-            From everyday elegance to bridal statements — discover pieces made to be treasured
-            for generations.
-          </p>
+            From everyday essentials to the little luxuries — a curated collection
+            for your home and routine.</p>
+
           <Link
             href="/shop"
             className="mt-8 inline-block rounded-full bg-gradient-to-r from-gold-hi to-gold px-9 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-maroon shadow-[0_14px_34px_-14px_rgba(230,205,139,0.7)] transition hover:opacity-90"

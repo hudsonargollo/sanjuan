@@ -5,24 +5,15 @@ import { SaleRibbon, SaveLine } from "./ui/sale-badge";
 import { ProductImage } from "./product-image";
 import { QuickAdd } from "./quick-add";
 
-/** Few enough left to nudge the shopper. */
+/** Simple product icon (package + label) used in the category label row. */
 const LOW_STOCK = 5;
 
-function Gem({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" className={className} aria-hidden="true">
-      <path d="M7 5h10l4 5-9 10L3 10z" />
-      <path d="M3 10h18M10 5 8.6 10 12 20l3.4-10L14 5" />
-    </svg>
-  );
-}
-
-/** Thin gold line with a diamond in the middle — sits above the price. */
-function Ornament() {
+/** Attribute label line above the price (e.g. "Fragrance-free · 200 ml"). */
+function ProductAttributeLine() {
   return (
     <div className="flex items-center gap-2 text-gold/70" aria-hidden="true">
       <span className="h-px flex-1 bg-gradient-to-r from-transparent to-gold/45" />
-      <span className="h-1.5 w-1.5 rotate-45 border border-current" />
+      <span className="h-1.5 w-1.5 rounded-full bg-gold/70" />
       <span className="h-px flex-1 bg-gradient-to-l from-transparent to-gold/45" />
     </div>
   );
@@ -62,14 +53,15 @@ export function ProductCard({ product }: { product: ProductView }) {
         {off ? (
           <SaleRibbon percent={off} />
         ) : (
-          // Display-case frame: hairline gold border with diamond corners
+          // Product card is a clean display card — no frame or ornaments
           <span
             className="pointer-events-none absolute inset-2.5 rounded-[3px] border border-gold/35 transition duration-500 group-hover:inset-2 group-hover:border-gold/70"
             aria-hidden="true"
           >
-            {["-left-[3px] -top-[3px]", "-right-[3px] -top-[3px]", "-bottom-[3px] -left-[3px]", "-bottom-[3px] -right-[3px]"].map((pos) => (
-              <span key={pos} className={`absolute h-1.5 w-1.5 rotate-45 bg-gold/80 ${pos}`} />
-            ))}
+            <span className="absolute h-1.5 w-1.5 rotate-45 bg-gold/80 -left-[3px] -top-[3px]" />
+            <span className="absolute h-1.5 w-1.5 rotate-45 bg-gold/80 -right-[3px] -top-[3px]" />
+            <span className="absolute h-1.5 w-1.5 rotate-45 bg-gold/80 -bottom-[3px] -left-[3px]" />
+            <span className="absolute h-1.5 w-1.5 rotate-45 bg-gold/80 -bottom-[3px] -right-[3px]" />
           </span>
         )}
         {soldOut && (
@@ -93,13 +85,12 @@ export function ProductCard({ product }: { product: ProductView }) {
         </Link>
         {product.material && (
           <p className="mt-1.5 flex items-center gap-1.5 text-xs text-muted">
-            <Gem className="h-3.5 w-3.5 shrink-0 text-gold-deep" />
-            <span className="line-clamp-1">{product.material}</span>
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-gold/70" />
+            <span className="text-xs text-muted">{product.material}</span>
           </p>
         )}
 
         <div className="mt-auto pt-4">
-          <Ornament />
           <div className="mt-3">
             {saved ? (
               <>

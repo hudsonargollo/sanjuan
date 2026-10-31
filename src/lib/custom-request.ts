@@ -1,6 +1,6 @@
 // Options for the custom-design request form (shared by the form + server action).
-export const PIECE_TYPES = ["Ring", "Necklace / Pendant", "Bracelet / Bangle", "Earrings", "Full set", "Other"] as const;
-export const FINISHES = ["Gold-tone", "Silver-tone", "Rose gold-tone", "Two-tone", "Not sure yet"] as const;
+export const PIECE_TYPES = ["Box / set", "Bottle / pump", "Bar / soap", "Wipes / towel", "Other"] as const;
+export const FINISHES = ["Matte", "Glossy", "Fragrance-free", "Scented", "Not sure yet"] as const;
 export const BUDGETS = ["Under Bs 3,000", "Bs 3,000 – 6,000", "Bs 6,000 – 10,000", "Bs 10,000+", "Not sure yet"] as const;
 
 // Reference photos attached to a custom-design request.

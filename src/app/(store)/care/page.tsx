@@ -30,7 +30,7 @@ const TIPS = [
   },
   {
     title: "Check settings",
-    body: "Periodically check clasps and stone settings. If something feels loose, reach out — we're happy to help.",
+    body: "Periodically check closures and seams. If something feels loose, reach out — we're happy to help.",
   },
 ];
 

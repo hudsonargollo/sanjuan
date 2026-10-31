@@ -44,9 +44,9 @@ export default async function CategoryPage({
         <Emblem size={48} className="mx-auto text-gold-deep" />
         <span className="eyebrow mt-4 block">{cat.name}</span>
         <h1 className="mt-2 font-serif text-4xl font-bold text-ink sm:text-5xl">Coming soon</h1>
-        <p className="mx-auto mt-4 max-w-md text-muted">
-          Nuestra colección de {cat.name.toLowerCase()} está en camino. Estar atento — hermosos productos nuevos
-          pieces are launching shortly.
+        <p className="relative mx-auto mt-2 max-w-md text-muted">
+          Nuestra colección de {cat.name.toLowerCase()} está en camino. Estar atento — piezas
+          nuevas llegando pronto.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link

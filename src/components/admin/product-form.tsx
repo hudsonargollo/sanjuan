@@ -80,7 +80,7 @@ export function ProductForm({
           rows={6}
           defaultValue={v?.specs ?? product?.specs ?? ""}
           className={input}
-          placeholder={`Metal type: Sterling Silver\nFinish: 18K Gold-plated\nStone: Cubic Zirconia\nClasp: Lobster clasp\nSize: Adjustable, 7"+2"\nWeight: 12 g`}
+          placeholder={`Size: 200 ml\nFormula: Light lotion\nScent: Fresh\nPackaging: Recyclable bottle`}
         />
       </Row>
 

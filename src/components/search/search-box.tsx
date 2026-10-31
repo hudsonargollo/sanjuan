@@ -27,7 +27,7 @@ type Suggest = {
   }[];
 };
 
-const EXAMPLES = ["rings", "bangles", "gold ring", "butterfly", "under 3000", "sale"];
+const EXAMPLES = ["limpieza", "higiene", "crema", "suavizante", "desinfectante", "sale"];
 
 export function BuscarBox({ initial = "", autoFocus = false }: { initial?: string; autoFocus?: boolean }) {
   const router = useRouter();
@@ -264,7 +264,7 @@ export function BuscarBox({ initial = "", autoFocus = false }: { initial?: strin
             {shown.total === 0 && !shown.category && (
               <div className="px-3 py-5 text-center">
                 <p className="font-serif text-lg text-ink">Nothing matches “{term}” yet</p>
-                <p className="mt-1 text-xs text-muted">Try a type of piece — ring, bracelet, bangle — or a word like gold, pearl, butterfly.</p>
+                <p className="mt-1 text-xs text-muted">Escribe el nombre de un producto, una categoría o un precio.</p>
               </div>
             )}
           </div>

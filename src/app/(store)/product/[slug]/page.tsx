@@ -49,14 +49,18 @@ function isGoldTone(material?: string | null): boolean {
 function finishOf(material?: string | null): string {
   if (!material) return "Polished stainless steel";
   if (/two-tone/i.test(material)) return "Two-tone silver & gold";
+  if (/matte/i.test(material)) return "Matte";
+  if (/glossy|brillante/i.test(material)) return "Glossy";
   if (/gold-plated|gold plated/i.test(material)) return "Gold-plated";
   return material;
 }
 
-function stoneOf(text: string): string | null {
-  if (/cubic zirconia|pavé|pave|crystal/i.test(text)) return "Cubic zirconia";
-  if (/onyx/i.test(text)) return "Black onyx";
-  if (/mother-of-pearl|pearl/i.test(text)) return "Mother-of-pearl";
+/** Returns a short neutral attribute note inferred from the product description. */
+function attributeOf(text: string): string | null {
+  if (/anti-bacterial|antiséptico/i.test(text)) return "Antibacterial";
+  if (/sin aroma|unscented/i.test(text)) return "Fragrance-free";
+  if (/refresco|crudo/i.test(text)) return "Refreshing";
+  if (/natural|orgánico|eco/i.test(text)) return "Natural";
   return null;
 }
 
@@ -76,9 +80,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
   const sentences = desc.split(/(?<=\.)\s+/).map((s) => s.trim()).filter(Boolean);
   const lead = sentences.slice(0, 2).join(" ");
   const finish = finishOf(product.material);
-  const stone = stoneOf(desc);
-
-  // Admin-entered per-product specs ("Label: Value" per line) take priority.
+  const attribute = attributeOf(desc);
   const customSpecs: [string, string][] = (product.specs ?? "")
     .split(/\r?\n/)
     .map((l) => l.trim())
@@ -93,7 +95,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
   const derivedHighlights: [string, string][] = [
     ["Material", product.material || "Stainless steel"],
     ["Finish", finish],
-    ["Calidad", "Libre de óxido e hipoalergénico"],
+    ["Quality", "Tarnish-resistant & hypoallergenic"],
     ["Category", product.category.name],
   ];
   const highlights = hasCustom ? customSpecs.slice(0, 4) : derivedHighlights;
@@ -105,18 +107,18 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
         ["Material", product.material || "Stainless steel"],
         ["Base metal", "Surgical-grade stainless steel"],
         ["Finish", finish],
-        ...(stone ? ([["Stone", stone]] as [string, string][]) : []),
-        ["Amigable con la piel", "Hipoalergénico"],
+        ...(attribute ? ([["Attribute", attribute]] as [string, string][]) : []),
+        ["Skin-friendly", "Hypoallergenic"],
         ["Care", "Keep away from water & perfume"],
         ["Category", product.category.name],
       ];
 
   const aboutBullets = [
     ...sentences,
-    "Libre de óxido, hipoalergénico y suave con la piel sensible.",
+    "Tarnish-resistant, hypoallergenic and gentle on sensitive skin.",
     isGoldTone(product.material)
-      ? "Gold-plated over stainless steel — made to keep its shine with simple care."
-      : "Solid stainless steel — made to keep its shine with simple care.",
+      ? "Gold-plated over stainless steel — with simple care it keeps its shine for years."
+      : "Solid stainless steel — with simple care it keeps its shine for years.",
   ];
 
   const productJsonLd = {
@@ -212,7 +214,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
             <Assure icon="truck">Delivery in <b className="font-medium text-ink">{DELIVERY_TIME}</b> nationwide</Assure>
             <Assure icon="cash">Cash on Delivery available</Assure>
             <Assure icon="return">Easy <b className="font-medium text-ink">7-day returns</b></Assure>
-            <Assure icon="shield">Pago seguro · libre de óxido e hipoalergénico</Assure>
+            <Assure icon="shield">Secure payment · tarnish-resistant & hypoallergenic</Assure>
           </div>
         </div>
       </div>
@@ -246,18 +248,18 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
 
             <Accordion title="Size & fit">
               <p>
-                Designed for a comfortable everyday fit. Bracelets &amp; bangles come with an adjustable
-                clasp or standard sizing; rings follow standard sizes. Exact measurements for this piece
-                are shown on the photos — <Link href="/contact" className="text-gold-deep underline">message us</Link> if you need help choosing a size.
+                Designed for a comfortable everyday fit. Home and personal-care products use
+                adjustable or standard packaging — exact measurements are shown on the product page.
+                <Link href="/contact" className="text-gold-deep underline">Contact us</Link> if you need help choosing the right size.
               </p>
             </Accordion>
 
             <Accordion title="Care & cleaning">
               <ul className="space-y-2 [&>li]:flex [&>li]:gap-2.5">
-                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" /> Keep away from water, perfume, lotion and hand sanitiser.</li>
-                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" /> Wipe gently with a soft, dry cloth after wear.</li>
-                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" /> Store in a dry pouch or box, away from direct sunlight.</li>
-                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" /> Remove before showering, swimming or workouts.</li>
+                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" /> Keep away from water, perfume and lotion.</li>
+                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" /> Wipe gently with a soft, dry cloth after use.</li>
+                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" /> Store in a dry place, away from direct sunlight.</li>
+                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" /> Avoid harsh chemicals, chlorine and abrasive cleaners.</li>
               </ul>
             </Accordion>
 

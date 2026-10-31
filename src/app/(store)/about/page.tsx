@@ -22,10 +22,12 @@ export default function AboutPage() {
           <p className="mx-auto mt-6 max-w-2xl text-ink/80">
             SanJuan Mini Market crea productos de higiene y cuidado personal premium, 
             artículos de limpieza y cuidado diario—elegantes, duraderos y hechos para usted. 
-            Nuestros productos tienen acabado dorado premium y son ideales para el día a día.
+            SanJuan Mini Market crea productos de higiene y cuidado personal premium, artículos de
+            limpieza y cuidado diario—elegantes, duraderos y hechos para usted. Algunos tienen
+            acabado mate, otros brillante, todo pensado para el día a día.
           </p>
           <p className="mx-auto mt-4 max-w-2xl text-ink/80">
-            En SanJuan Mini Market, cada producto cuenta una historia—de confianza y cuidado. 
+            En SanJuan Mini Market, cada producto cuenta una historia — de confianza y cuidado.
             Diseños premium sin precios de lujo.
           </p>
           <Link
@@ -39,7 +41,7 @@ export default function AboutPage() {
 
       <section className="mx-auto mt-16 grid max-w-4xl gap-8 sm:grid-cols-3">
         {[{ title: "Calidad premium", body: "Productos de higiene y cuidado personal de alta calidad." },
-          { title: "Acabado dorado", body: "Terminaciones doradas elegantes que duran." },
+          { title: "Acabado matte", body: "Terminaciones elegantes que duran." },
           { title: "Total confianza", body: "Diseñados para uso diario seguro y efectivo." },
         ].map((p) => (
           <div key={p.title} className="text-center">

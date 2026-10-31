@@ -33,7 +33,7 @@ const faqs = (DELIVERY_TIME: string) => [
   },
   {
     q: "¿Hacen productos personalizados?",
-    a: "Sí. Visita la página Personalizado para crear tu diseño — cuéntanos tu idea y lo haremos en acero inoxidable.",
+    a: "Sí. Visita la página Personalizados para crear tu diseño — cuéntanos tu necesidad y lo prepararemos en acero inoxidable.",
   },
   {
     q: "¿De qué están hechos sus productos?",

@@ -229,7 +229,7 @@ export default async function HomePage() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/story-model.webp"
-                alt="A model wearing SanJuan Mini Market gold-plated stainless steel productos"
+                alt="SanJuan Mini Market: temporada de productos de higiene y cuidado personal premium"
                 className="h-full w-full object-cover"
               />
               <div className="pointer-events-none absolute inset-3 border border-[rgba(230,205,139,0.6)]" />

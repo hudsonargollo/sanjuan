@@ -81,7 +81,7 @@ export function CustomDesignForm({ whatsappUrl }: { whatsappUrl?: string }) {
       </div>
 
       <Field label="Needed by (optional)" {...f.field("neededBy")}>
-        {(a11y) => <input {...a11y} {...bind("neededBy")} maxLength={60} placeholder="e.g. Wedding on 15 December, or flexible" className={control} />}
+        {(a11y) => <input {...a11y} {...bind("neededBy")} maxLength={60} placeholder="e.g. 15 December, or flexible" className={control} />}
       </Field>
 
       <Field label="Describe your design" multiline {...f.field("details")}>
@@ -91,7 +91,7 @@ export function CustomDesignForm({ whatsappUrl }: { whatsappUrl?: string }) {
             {...bind("details")}
             rows={5}
             maxLength={3000}
-            placeholder="Names or initials to engrave, ring size or chain length, stones, style you like, the occasion…"
+            placeholder="Tell us what you need — size, formula, scent, packaging, the occasion…"
             className={`${control} resize-y`}
           />
         )}

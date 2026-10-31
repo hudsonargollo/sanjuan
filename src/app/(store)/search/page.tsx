@@ -54,7 +54,7 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
           <span className="absolute -top-24 left-1/2 h-56 w-[32rem] max-w-full -translate-x-1/2 rounded-full bg-gold/20 blur-3xl" />
         </span>
         <div className="relative">
-          <span className="eyebrow">Find your piece</span>
+          <span className="eyebrow">Encuentra lo que buscas</span>
           <h1 className="mt-3 font-serif text-4xl text-ink sm:text-5xl">Busca en el catálogo</h1>
           <p className="mx-auto mt-3 max-w-md text-sm text-muted">
             Type a piece, a style or a budget — spelling doesn&apos;t have to be perfect.
@@ -122,9 +122,10 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
               <span className="relative mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-gold/60 text-2xl text-gold-deep">✦</span>
               {category && category.count === 0 ? (
                 <>
-                  <h2 className="relative mt-4 font-serif text-2xl text-ink">Our {category.name.toLowerCase()} are coming soon</h2>
+                  <h2 className="relative mt-4 font-serif text-2xl text-ink">Nuestra {category.name.toLowerCase()} está llegando pronto</h2>
                   <p className="relative mx-auto mt-2 max-w-md text-sm text-muted">
-                    This collection is being crafted right now. Get a note the moment it launches — or explore the pieces below.
+                    Esto se está preparando ahora. Recibe un aviso en cuanto esté disponible — o explora los
+                    productos abajo.
                   </p>
                   <Link href={`/shop/${category.slug}`} className="relative mt-6 inline-flex rounded-full bg-maroon px-6 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-light transition hover:bg-wine-deep">
                     Notify me when it launches
@@ -134,7 +135,7 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
                 <>
                   <h2 className="relative mt-4 font-serif text-2xl text-ink">Nothing matches “{q}” yet</h2>
                   <p className="relative mx-auto mt-2 max-w-md text-sm text-muted">
-                    Try a type of piece — ring, bracelet, bangle — a detail like pearl or butterfly, or a budget like “under 3000”.
+                    Escribe el nombre de un producto, la categoría o un presupuesto — la ortografía no importa.
                   </p>
                 </>
               )}
@@ -154,7 +155,7 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
           <div className="mb-6 flex items-end justify-between gap-3">
             <div>
               <span className="eyebrow">{q ? "You may love" : "Trending now"}</span>
-              <h2 className="mt-2 font-serif text-3xl text-ink">{q ? "Pieces our clients adore" : "Most loved pieces"}</h2>
+              <h2 className="mt-2 font-serif text-3xl text-ink">{q ? "Lo que más compra" : "Más populares"}</h2>
             </div>
             <Link href="/shop" className="text-sm text-gold-deep hover:underline">
               View all →

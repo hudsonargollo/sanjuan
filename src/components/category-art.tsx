@@ -1,4 +1,4 @@
-// Elegant gold line-art illustrations for category tiles (until real photos).
+/** Elegant product icons for category tiles (until real photos). */
 
 type Props = { className?: string };
 

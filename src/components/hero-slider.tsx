@@ -7,12 +7,9 @@ import { Emblem } from "./brand/emblem";
 
 // Mix of fresh product shots and models using productos.
 // Models using everyday productos (gold-plated finish / clean aesthetics).
+const HERO = "/imgs/sanjuan-hero1.webp";
 const SLIDES = [
-  "/images/girl-1.webp",
-  "/images/girl-2.webp",
-  "/images/model1.webp",
-  "/images/girl-3.webp",
-  "/images/story-model.webp",
+  HERO,
 ];
 
 const INTERVAL = 5000;

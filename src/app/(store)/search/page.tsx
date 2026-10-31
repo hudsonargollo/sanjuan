@@ -3,7 +3,7 @@ import Link from "next/link";
 import { searchStore } from "@/lib/catalog";
 import { formatPrice } from "@/lib/format";
 import { ProductGrid } from "@/components/product-grid";
-import { SearchBox } from "@/components/search/search-box";
+import { BuscarBox } from "@/components/search/search-box";
 
 export async function generateMetadata({ searchParams }: PageProps<"/search">): Promise<Metadata> {
   const sp = await searchParams;
@@ -60,7 +60,7 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
             Type a piece, a style or a budget — spelling doesn&apos;t have to be perfect.
           </p>
           <div className="mt-7">
-            <SearchBox key={q} initial={q} autoFocus={!q} />
+            <BuscarBox key={q} initial={q} autoFocus={!q} />
           </div>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-2">

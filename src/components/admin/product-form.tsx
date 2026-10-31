@@ -91,7 +91,7 @@ export function ProductForm({
       <div className="flex gap-6">
         <label className="flex items-center gap-2 text-sm text-ink">
           <input type="checkbox" name="featured" defaultChecked={v ? v.featured === "on" : product?.featured} className="accent-[var(--color-gold-deep)]" />
-          Featured
+          Destacado
         </label>
         <label className="flex items-center gap-2 text-sm text-ink">
           <input type="checkbox" name="active" defaultChecked={v ? v.active === "on" : product?.active ?? true} className="accent-[var(--color-gold-deep)]" />

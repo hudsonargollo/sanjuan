@@ -11,14 +11,14 @@ import { Emblem } from "./brand/emblem";
 const NAV = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Collection", href: "/shop" },
+  { label: "Catálogo", href: "/shop" },
   { label: "Custom", href: "/custom" },
   { label: "Contact", href: "/contact" },
 ];
 
 const HELP = [
-  { label: "My Account", href: "/account" },
-  { label: "Track Order", href: "/account/orders" },
+  { label: "Mi cuenta", href: "/account" },
+  { label: "Rastrear pedido", href: "/account/orders" },
   { label: "Shipping & Returns", href: "/shipping" },
   { label: "Care Guide", href: "/care" },
   { label: "FAQ", href: "/faq" },
@@ -137,7 +137,7 @@ export function MobileMenu() {
                 <circle cx="11" cy="11" r="7" />
                 <path d="M21 21l-4.3-4.3" strokeLinecap="round" />
               </svg>
-              Search
+              Buscar
             </Link>
             <Link
               href="/cart"
@@ -175,7 +175,7 @@ export function MobileMenu() {
             onClick={() => setOpen(false)}
             className="block rounded-full bg-maroon px-6 py-3 text-center text-sm font-medium uppercase tracking-[0.12em] text-light transition hover:bg-maroon-2"
           >
-            Explore Collection
+            Explorar catálogo
           </Link>
         </div>
           </aside>

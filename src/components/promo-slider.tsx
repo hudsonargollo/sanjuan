@@ -99,7 +99,7 @@ export function PromoSlider() {
             href="/shop"
             className="mt-8 inline-block rounded-full bg-gradient-to-r from-gold-hi to-gold px-9 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-maroon shadow-[0_14px_34px_-14px_rgba(230,205,139,0.7)] transition hover:opacity-90"
           >
-            Shop the Collection
+            Explorar el catálogo
           </Link>
 
           {/* Controls — one row under the CTA (never on top of the photo):

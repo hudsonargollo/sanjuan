@@ -26,9 +26,9 @@ export function RegisterForm({ next }: { next?: string }) {
   return (
     <AuthShell>
       <div className="text-center">
-        <h1 className="font-serif text-3xl font-bold text-ink">Create account</h1>
+        <h1 className="font-serif text-3xl font-bold text-ink">Crear cuenta</h1>
         <p className="mt-1 text-sm text-muted">
-          Join SanJuan Mini Market for a faster checkout. We&apos;ll email you a code to confirm it&apos;s you.
+          Únete a SanJuan Mini Market para un pago más rápido. Te enviaremos un código para confirmar que eres tú.
         </p>
       </div>
 
@@ -86,7 +86,7 @@ export function RegisterForm({ next }: { next?: string }) {
           href={next ? `/login?next=${encodeURIComponent(next)}` : "/login"}
           className="font-semibold text-gold-deep hover:underline"
         >
-          Sign in
+          Iniciar sesión
         </Link>
       </p>
     </AuthShell>

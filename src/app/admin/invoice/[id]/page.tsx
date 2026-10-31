@@ -32,7 +32,7 @@ export default async function InvoicePage({ params }: PageProps<"/admin/invoice/
     <div className="min-h-screen bg-[#f3efe8] py-8 print:bg-white print:py-0">
       <div className="mx-auto mb-5 flex max-w-[800px] items-center justify-between px-4 print:hidden">
         <Link href={`/admin/orders/${order.id}`} className="text-sm text-[#6b5a52] hover:underline">
-          ← Back to order
+          ← Volver al pedido
         </Link>
         <PrintButton label="Print invoice" />
       </div>

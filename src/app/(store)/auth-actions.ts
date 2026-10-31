@@ -65,7 +65,7 @@ async function register(_prev: AuthState, formData: FormData): Promise<AuthState
   try {
     if (await prisma.customer.findUnique({ where: { email: e }, select: { id: true } })) {
       return {
-        error: "An account with this email already exists. Please sign in or reset your password.",
+        error: "Ya existe una cuenta con este correo. Inicia sesión o restablece tu contraseña.",
         fields: ["email"],
       };
     }
@@ -115,7 +115,7 @@ export async function verifyRegistrationAction(_prev: OtpState, formData: FormDa
   } catch (err) {
     if (isRedirect(err)) throw err;
     const kind = logDbError("register-verify", err);
-    if (kind === "duplicate") return { error: "An account with this email already exists. Please sign in." };
+    if (kind === "duplicate") return { error: "Ya existe una cuenta con este correo. Inicia sesión." };
     return { error: "Service unavailable. Please try again shortly." };
   }
 }
@@ -203,7 +203,7 @@ async function login(_prev: AuthState, formData: FormData): Promise<AuthState> {
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
   const password = String(formData.get("password") ?? "");
   if (!email || !password) {
-    return { error: "Please enter your email and password.", fields: [!email ? "email" : "password"] };
+    return { error: "Ingresa tu correo y contraseña.", fields: [!email ? "email" : "password"] };
   }
   if (emailError(email)) return { error: emailError(email)!, fields: ["email"] };
 

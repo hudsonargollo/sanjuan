@@ -25,7 +25,7 @@ export default async function AdminOrderDetailPage({
   return (
     <div>
       <Link href="/admin/orders" className="text-sm text-muted hover:text-ink">
-        ← Back to orders
+        ← Volver a pedidos
       </Link>
 
       <div className="mt-2 flex flex-wrap items-center gap-3">
@@ -102,13 +102,13 @@ export default async function AdminOrderDetailPage({
           />
 
           <div className="rounded-xl border border-[var(--line)] bg-surface p-5">
-            <h2 className="mb-3 font-serif text-lg font-semibold text-ink">Order status</h2>
+            <h2 className="mb-3 font-serif text-lg font-semibold text-ink">Estado del pedido</h2>
             <StatusUpdateForm
               action={updateOrderStatus.bind(null, order.id)}
               name="status"
               defaultValue={order.status}
               options={[order.status, ...ORDER_TRANSITIONS[order.status]]}
-              successMessage="Order status updated"
+              successMessage="Estado del pedido actualizado"
             />
           </div>
 

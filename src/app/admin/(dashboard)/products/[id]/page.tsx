@@ -23,7 +23,7 @@ export default async function EditProductPage({ params }: PageProps<"/admin/prod
   return (
     <div>
       <Link href="/admin/products" className="text-sm text-muted hover:text-ink">
-        ← Back to products
+        ← Volver a productos
       </Link>
       <h1 className="mt-2 font-serif text-3xl font-semibold text-ink">Edit Product</h1>
 

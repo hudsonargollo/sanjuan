@@ -15,7 +15,7 @@ export function AddCategoryForm() {
   useEffect(() => {
     if (state.ok) {
       formRef.current?.reset();
-      toast.success("Category added", { title: "Saved" });
+      toast.success("Categoría agregada", { title: "Guardado" });
     } else if (state.error) {
       toast.error(state.error);
     }
@@ -38,7 +38,7 @@ export function AddCategoryForm() {
         <input name="description" placeholder="Short description" className={input} />
       </div>
       {state.error && <p className="text-xs text-red-600">{state.error}</p>}
-      {state.ok && <p className="text-xs text-green-700">Category added ✓</p>}
+      {state.ok && <p className="text-xs text-green-700">Categoría agregada ✓</p>}
       <button
         disabled={pending}
         className="rounded-full bg-maroon px-6 py-2.5 text-sm font-medium text-light transition hover:bg-maroon-2 disabled:opacity-60"

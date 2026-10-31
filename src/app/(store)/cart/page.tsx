@@ -39,7 +39,7 @@ export default function CartPage() {
           href="/shop"
           className="mt-8 inline-block rounded-full bg-gradient-to-r from-gold-hi to-gold px-8 py-3 text-sm font-medium text-maroon transition hover:opacity-90"
         >
-          Explore the Collection
+          Explorar el catálogo
         </Link>
       </div>
     );
@@ -119,7 +119,7 @@ export default function CartPage() {
             </div>
             <div className="flex justify-between">
               <dt className="text-muted">Shipping</dt>
-              <dd className="text-ink">Calculated at checkout</dd>
+              <dd className="text-ink">Calculado al pagar</dd>
             </div>
           </dl>
           <div className="mt-5 flex justify-between border-t border-[var(--line)] pt-5">
@@ -134,13 +134,13 @@ export default function CartPage() {
             href="/checkout"
             className="mt-6 block rounded-full bg-gradient-to-r from-gold-hi to-gold px-8 py-3.5 text-center text-sm font-medium text-maroon transition hover:opacity-90"
           >
-            Proceed to Checkout
+            Proceder al pago
           </Link>
           <Link
             href="/shop"
             className="mt-3 block text-center text-sm text-gold-deep hover:underline"
           >
-            Continue shopping
+            Seguir comprando
           </Link>
         </aside>
       </div>

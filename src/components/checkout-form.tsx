@@ -68,7 +68,7 @@ export function CheckoutForm({
   if (!ready) {
     return (
       <div className="mx-auto max-w-6xl px-5 py-12" aria-busy="true">
-        <h1 className="font-serif text-4xl font-semibold text-ink">Checkout</h1>
+        <h1 className="font-serif text-4xl font-semibold text-ink">Pago</h1>
         <div className="mt-8 h-96 animate-pulse rounded-2xl bg-cream-soft" />
       </div>
     );
@@ -82,7 +82,7 @@ export function CheckoutForm({
           href="/shop"
           className="mt-6 inline-block rounded-full bg-gradient-to-r from-gold-hi to-gold px-8 py-3 text-sm font-medium text-maroon"
         >
-          Explore the Collection
+          Explorar el catálogo
         </Link>
       </div>
     );
@@ -141,7 +141,7 @@ export function CheckoutForm({
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-12">
-      <h1 className="font-serif text-4xl font-semibold text-ink">Checkout</h1>
+      <h1 className="font-serif text-4xl font-semibold text-ink">Pago</h1>
       {defaults?.email && (
         <p className="mt-2 text-sm text-muted">
           Signed in as <span className="text-ink">{defaults.email}</span> — this order will be
@@ -284,7 +284,7 @@ export function CheckoutForm({
               {submitting ? "Placing order…" : "Complete Order"}
             </button>
             <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-xs text-muted">
-              <LockIcon /> Secure &amp; encrypted checkout · SanJuan Mini Market
+              <LockIcon /> Pago seguro y encriptado · SanJuan Mini Market
             </p>
           </div>
         </aside>

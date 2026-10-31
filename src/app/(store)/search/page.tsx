@@ -10,8 +10,8 @@ export async function generateMetadata({ searchParams }: PageProps<"/search">): 
   const q = (Array.isArray(sp.q) ? sp.q[0] : sp.q)?.trim().slice(0, 60);
   return {
     robots: { index: false, follow: true },
-    title: q ? `Search: ${q}` : "Search",
-    description: "Search the SanJuan Mini Market collection.",
+    title: q ? `Buscar: ${q}` : "Buscar",
+    description: "Busca en el catálogo de SanJuan Mini Market.",
   };
 }
 
@@ -55,7 +55,7 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
         </span>
         <div className="relative">
           <span className="eyebrow">Find your piece</span>
-          <h1 className="mt-3 font-serif text-4xl text-ink sm:text-5xl">Search the collection</h1>
+          <h1 className="mt-3 font-serif text-4xl text-ink sm:text-5xl">Busca en el catálogo</h1>
           <p className="mx-auto mt-3 max-w-md text-sm text-muted">
             Type a piece, a style or a budget — spelling doesn&apos;t have to be perfect.
           </p>
@@ -71,7 +71,7 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
               </Link>
             ))}
             <Link href="/search?q=sale" className={chip}>
-              <span className="text-gold-deep">✦</span> On sale
+              <span className="text-gold-deep">✦</span> En oferta
             </Link>
             {cheapest > 0 && (
               <Link href={`/search?q=${encodeURIComponent(`under ${budget}`)}`} className={chip}>
@@ -103,7 +103,7 @@ export default async function SearchPage({ searchParams }: PageProps<"/search">)
             </div>
             <div className="flex flex-wrap gap-2">
               {category && <Tag>Category · {category.name}</Tag>}
-              {onSale && <Tag>On sale</Tag>}
+              {onSale && <Tag>En oferta</Tag>}
               {minPrice != null && <Tag>From {formatPrice(minPrice)}</Tag>}
               {maxPrice != null && <Tag>Up to {formatPrice(maxPrice)}</Tag>}
               {category && category.count > 0 && (

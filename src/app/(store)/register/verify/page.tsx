@@ -5,7 +5,7 @@ import { OtpForm } from "@/components/auth/otp-form";
 import { getPending, maskEmail, resendWaitSeconds } from "@/lib/otp";
 import { verifyRegistrationAction, resendRegistrationCode } from "../../auth-actions";
 
-export const metadata: Metadata = { title: "Verify your email", robots: { index: false } };
+export const metadata: Metadata = { title: "Verifica tu correo", robots: { index: false } };
 export const dynamic = "force-dynamic";
 
 // Step 2 of sign-up. The pending email comes from a signed httpOnly cookie set
@@ -19,7 +19,7 @@ export default async function RegisterVerifyPage() {
     <AuthShell backHref="/register" backLabel="Back">
       <div className="text-center">
         <span className="eyebrow">Step 2 of 2</span>
-        <h1 className="mt-1 font-serif text-3xl font-bold text-ink">Verify your email</h1>
+        <h1 className="mt-1 font-serif text-3xl font-bold text-ink">Verifica tu correo</h1>
       </div>
       <div className="mt-5">
         <OtpForm
@@ -28,7 +28,7 @@ export default async function RegisterVerifyPage() {
           resendAction={resendRegistrationCode}
           initialWait={wait}
           changeHref="/register"
-          changeLabel="Wrong email? Change it"
+          changeLabel="¿Correo incorrecto? Cámbialo"
         />
       </div>
     </AuthShell>

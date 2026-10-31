@@ -32,7 +32,7 @@ export function ShopToolbar({ count, facets }: { count: number; facets: ShopFace
           : `Up to ${formatPrice(maxPrice!)}`;
     chips.push({ label, clear: { minPrice: null, maxPrice: null } });
   }
-  if (params.get("sale") === "1") chips.push({ label: "On sale", clear: { sale: null } });
+  if (params.get("sale") === "1") chips.push({ label: "En oferta", clear: { sale: null } });
   if (params.get("stock") === "1") chips.push({ label: "In stock", clear: { stock: null } });
   if (material) chips.push({ label: material, clear: { material: null } });
 

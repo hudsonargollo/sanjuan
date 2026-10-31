@@ -30,7 +30,7 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
         <h1 className="mt-2 font-serif text-4xl font-semibold text-ink sm:text-5xl">Contact</h1>
         <p className="mx-auto mt-4 max-w-xl text-muted">
           {topic === "custom"
-            ? "Tell us about the piece you have in mind — names, sizes, finish, occasion and budget — and we'll get back to you with ideas."
+            ? "Cuéntanos sobre la pieza que tienes en mente — nombres, tallas, acabado, ocasión y presupuesto — y te responderemos en 1–2 días hábiles"o you with ideas."
             : "Questions about an order, a custom piece, or anything else? We'd love to hear from you."}
         </p>
       </div>

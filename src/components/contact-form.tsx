@@ -19,7 +19,7 @@ export function ContactForm({ topic, defaultSubject }: { topic?: string; default
 
   useEffect(() => {
     if (state.error) toast.error(state.error);
-    else if (state.ok) toast.success("We'll get back to you soon.", { title: "Message sent" });
+    else if (state.ok) toast.success("Te responderemos pronto.", { title: "Mensaje enviado" });
   }, [state, toast]);
 
   if (state.ok) {

@@ -169,7 +169,7 @@ export function StoreSettingsForms({ settings, canEdit }: { settings: StoreSetti
       <Card
         id="shipping"
         title="Shipping & delivery"
-        description="Used at checkout (the order total is calculated with these) and on the shipping, FAQ and product pages."
+        description="Se usa al pagar (el total del pedido se calcula con estos) y en las páginas de envío, FAQ y producto pages."
         action={saveShippingSettings}
         success="Shipping settings updated"
         disabled={lock}
@@ -250,8 +250,8 @@ export function PasswordForm() {
   return (
     <Card
       id="account"
-      title="My account"
-      description="Change the password you use to sign in to this dashboard."
+      title="Mi cuenta"
+      description="Cambia la contraseña que usas para iniciar sesión en este panel."
       action={changePassword}
       success="Password changed"
       resetOnSuccess
@@ -274,7 +274,7 @@ export function AddTeamMemberForm() {
       title="Add team member"
       description="Staff can manage orders, products and categories. Only admins can change settings and the team."
       action={addTeamMember}
-      success="Team member added"
+      success="Miembro del equipo agregado"
       resetOnSuccess
     >
       {(s) => (

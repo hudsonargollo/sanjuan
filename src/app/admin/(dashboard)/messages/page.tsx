@@ -62,7 +62,7 @@ export default async function AdminMessagesPage() {
     <div>
       <h1 className="font-serif text-3xl font-bold text-ink">Messages</h1>
       <p className="mt-1 text-sm text-muted">
-        Contact-form messages ({open} open) and newsletter / “notify me” sign-ups.
+        Mensajes del formulario de contacto ({open} abiertos) y suscripciones al newsletter / “avísame”.
       </p>
 
       <div className="mt-6 space-y-8">
@@ -109,7 +109,7 @@ export default async function AdminMessagesPage() {
 
         <section className="rounded-2xl border border-[var(--line)] bg-surface shadow-[0_10px_30px_-22px_rgba(38,8,16,0.4)]">
           <h2 className="border-b border-[var(--line)] px-5 py-4 font-serif text-xl font-semibold text-ink">
-            Subscribers <span className="text-sm font-normal text-muted">({subscriberCount})</span>
+            Suscriptores <span className="text-sm font-normal text-muted">({subscriberCount})</span>
           </h2>
           {subscribers.length === 0 ? (
             <p className="px-5 py-12 text-center text-sm text-muted">No sign-ups yet.</p>
@@ -120,7 +120,7 @@ export default async function AdminMessagesPage() {
                   <tr className="border-b border-[var(--line)] text-left text-[0.68rem] uppercase tracking-wider text-muted">
                     <th className="px-5 py-3 font-medium">Email</th>
                     <th className="px-5 py-3 font-medium">Source</th>
-                    <th className="px-5 py-3 font-medium">Joined</th>
+                    <th className="px-5 py-3 font-medium">Se unió</th>
                   </tr>
                 </thead>
                 <tbody>

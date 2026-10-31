@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { ClearCart } from "@/components/cart/clear-cart";
 
 export const metadata: Metadata = {
-  title: "Order Confirmed",
+  title: "Pedido confirmado",
   robots: { index: false },
 };
 
@@ -108,7 +108,7 @@ export default async function SuccessPage({
 
       <p className="mx-auto mt-6 max-w-md text-sm text-muted">
         {online
-          ? "Keep your order number handy — you can track it anytime from the Order Status page."
+          ? "Guarda tu número de pedido — puedes rastrearlo cuando quieras desde la página de Estado del pedido."
           : "For Cash on Delivery, please keep the amount ready at delivery. Our team will call to confirm your order."}
       </p>
 
@@ -117,13 +117,13 @@ export default async function SuccessPage({
           href="/shop"
           className="inline-block rounded-full bg-gradient-to-r from-gold-hi to-gold px-8 py-3 text-sm font-medium text-maroon transition hover:opacity-90"
         >
-          Continue Shopping
+          Seguir comprando
         </Link>
         <Link
           href="/account/orders"
           className="inline-block rounded-full border border-[var(--line-strong)] px-8 py-3 text-sm font-medium text-ink transition hover:border-gold hover:text-gold-deep"
         >
-          Track Order
+          Rastrear pedido
         </Link>
       </div>
     </div>

@@ -36,7 +36,7 @@ export function CustomDesignForm({ whatsappUrl }: { whatsappUrl?: string }) {
           href="/shop"
           className="mt-6 inline-block rounded-full border border-[var(--line-strong)] px-7 py-2.5 text-sm font-medium text-ink transition hover:border-gold hover:text-gold-deep"
         >
-          Browse the collection meanwhile
+          Explora el catálogo mientras tanto
         </Link>
       </div>
     );

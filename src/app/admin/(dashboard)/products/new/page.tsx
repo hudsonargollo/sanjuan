@@ -15,7 +15,7 @@ export default async function NewProductPage() {
   return (
     <div>
       <Link href="/admin/products" className="text-sm text-muted hover:text-ink">
-        ← Back to products
+        ← Volver a productos
       </Link>
       <h1 className="mt-2 font-serif text-3xl font-semibold text-ink">Add Product</h1>
 

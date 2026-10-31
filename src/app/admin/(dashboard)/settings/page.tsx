@@ -15,7 +15,7 @@ const SECTIONS = [
   { id: "shipping", label: "Shipping" },
   { id: "announcements", label: "Announcement bar" },
   { id: "alerts", label: "Alerts" },
-  { id: "account", label: "My account" },
+  { id: "account", label: "Mi cuenta" },
   { id: "team", label: "Team" },
 ];
 
@@ -75,7 +75,7 @@ export default async function AdminSettingsPage() {
           className="scroll-mt-24 rounded-2xl border border-[var(--line)] bg-surface p-5 shadow-[0_10px_30px_-22px_rgba(38,8,16,0.4)] sm:p-6"
         >
           <h2 className="font-serif text-xl font-semibold text-ink">Team</h2>
-          <p className="mt-1 text-sm text-muted">People who can sign in to this dashboard.</p>
+          <p className="mt-1 text-sm text-muted">Personas que pueden iniciar sesión en este panel.</p>
           <ul className="mt-4 divide-y divide-[var(--line)]">
             {team.users.map((u) => {
               const isSelf = u.email === session.email;
@@ -101,7 +101,7 @@ export default async function AdminSettingsPage() {
                       <DeleteButton
                         action={removeTeamMember.bind(null, u.id)}
                         label="Remove"
-                        confirmText={`Remove ${u.email} from the team? They will no longer be able to sign in.`}
+                        confirmText={`¿Quitar a ${u.email} del equipo? Ya no podrá iniciar sesión.`}
                       />
                     )}
                   </div>

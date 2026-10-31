@@ -24,12 +24,12 @@ export function LoginForm({ next }: { next?: string }) {
     <AuthShell>
       <div className="text-center">
         <h1 className="font-serif text-3xl font-bold text-ink">Welcome back</h1>
-        <p className="mt-1 text-sm text-muted">Sign in to continue shopping.</p>
+        <p className="mt-1 text-sm text-muted">Inicia sesión para seguir comprando.</p>
       </div>
 
       {next?.startsWith("/checkout") && (
         <p className="mt-5 rounded-xl border border-gold/50 bg-gold/10 px-3.5 py-3 text-center text-sm text-ink">
-          Please sign in or create a free account to place your order — your cart is saved.
+          Inicia sesión o crea una cuenta gratis para realizar tu pedido — tu carrito se guarda.
         </p>
       )}
 
@@ -55,7 +55,7 @@ export function LoginForm({ next }: { next?: string }) {
           {...f.bind("password")}
           labelAside={
             <Link href="/forgot-password" className="text-xs font-medium text-gold-deep hover:underline">
-              Forgot password?
+              ¿Olvidaste tu contraseña?
             </Link>
           }
           {...password}
@@ -64,7 +64,7 @@ export function LoginForm({ next }: { next?: string }) {
         {state.error && <AuthAlert>{state.error}</AuthAlert>}
 
         <div>
-          <AuthSubmit pending={pending} label="Sign In" pendingLabel="Signing in…" />
+          <AuthSubmit pending={pending} label="Iniciar sesión" pendingLabel="Iniciando sesión…" />
           <SecureNote />
         </div>
       </form>

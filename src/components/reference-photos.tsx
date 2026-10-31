@@ -107,7 +107,7 @@ export function ReferencePhotos({
       setError(
         room === 0
           ? `You can add up to ${MAX_REFERENCE_PHOTOS} photos.`
-          : `Only ${room} more photo${room === 1 ? "" : "s"} can be added.`
+          : `Solo se pueden agregar ${room} foto${room === 1 ? "" : "s"} más.`
       );
     }
     setBusy(true);
@@ -243,7 +243,7 @@ export function ReferencePhotos({
           </ul>
           <p className="mt-3 flex items-center gap-1.5 text-xs text-muted">
             <span className="text-gold-deep" aria-hidden="true">✓</span>
-            {items.length} of {MAX_REFERENCE_PHOTOS} photos added — they&apos;ll be sent with your request.
+            {items.length} de {MAX_REFERENCE_PHOTOS} fotos agregadas — se enviarán con tu solicitud.
           </p>
         </div>
       )}

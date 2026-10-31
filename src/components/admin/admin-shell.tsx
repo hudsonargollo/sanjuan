@@ -93,7 +93,7 @@ export function AdminShell({ email, children }: { email: string; children: React
           </p>
           <form action={logoutAction}>
             <button
-              title={collapsed ? "Sign out" : undefined}
+              title={collapsed ? "Cerrar sesión" : undefined}
               className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm text-light/80 transition-colors hover:bg-maroon-2 hover:text-gold"
             >
               <svg className="shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
@@ -101,7 +101,7 @@ export function AdminShell({ email, children }: { email: string; children: React
                 <path d="M13 4h6a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <span style={labelStyle} className={labelCls}>
-                Sign out
+                Cerrar sesión
               </span>
             </button>
           </form>
@@ -160,7 +160,7 @@ export function AdminShell({ email, children }: { email: string; children: React
               View store
             </Link>
             <form action={logoutAction} className="md:hidden">
-              <button className="text-light/80 transition-colors hover:text-gold">Sign out</button>
+              <button className="text-light/80 transition-colors hover:text-gold">Cerrar sesión</button>
             </form>
           </div>
         </header>

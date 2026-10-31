@@ -24,13 +24,13 @@ export function OrderLookup({ defaultOrder = "" }: { defaultOrder?: string }) {
           placeholder="Order number (e.g. ZR-XXXXXX-XXXXXXXX)"
           className={inputCls}
         />
-        <input name="email" type="email" required placeholder="Email used at checkout" defaultValue={state.values?.email} className={inputCls} />
+        <input name="email" type="email" required placeholder="Correo usado al pagar" defaultValue={state.values?.email} className={inputCls} />
         <button
           type="submit"
           disabled={pending}
           className="w-full rounded-full bg-maroon px-8 py-3 text-sm font-medium uppercase tracking-[0.12em] text-light transition hover:bg-maroon-2 disabled:opacity-60"
         >
-          {pending ? "Looking up…" : "Track Order"}
+          {pending ? "Buscando…" : "Rastrear pedido"}
         </button>
       </form>
 
@@ -85,7 +85,7 @@ export function OrderLookup({ defaultOrder = "" }: { defaultOrder?: string }) {
                   rel="noopener noreferrer"
                   className="mt-2 inline-block text-sm font-medium text-gold-deep underline underline-offset-4 hover:text-gold"
                 >
-                  Track your parcel →
+                  Rastrea tu paquete →
                 </a>
               )}
             </div>

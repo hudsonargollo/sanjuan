@@ -78,7 +78,7 @@ export default async function FaqPage() {
       <p className="mt-10 text-center text-sm text-muted">
         Still have a question?{" "}
         <Link href="/contact" className="text-gold-deep hover:underline">
-          Contact us
+          Contáctanos
         </Link>
         .
       </p>

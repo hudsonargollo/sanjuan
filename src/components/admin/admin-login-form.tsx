@@ -25,10 +25,10 @@ export function AdminLoginForm({ notice }: { notice?: string }) {
   }, [state, toast]);
 
   return (
-    <AuthShell backHref="/" backLabel="Back to store" eyebrow="Management dashboard">
+    <AuthShell backHref="/" backLabel="Volver a la tienda" eyebrow="Panel de gestión">
       <div className="text-center">
         <h1 className="font-serif text-3xl font-bold text-ink">Admin Login</h1>
-        <p className="mt-1 text-sm text-muted">Sign in to the management dashboard.</p>
+        <p className="mt-1 text-sm text-muted">Inicia sesión en el panel de gestión.</p>
       </div>
 
       {notice && !state.error && (

@@ -9,7 +9,7 @@ import type { CartItem } from "@/components/cart/cart-provider";
 import { toCartLine } from "@/lib/cart";
 
 export const metadata: Metadata = {
-  title: "Checkout",
+  title: "Pago",
   robots: { index: false },
 };
 

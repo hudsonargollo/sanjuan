@@ -45,7 +45,7 @@ export default async function CategoryPage({
         <span className="eyebrow mt-4 block">{cat.name}</span>
         <h1 className="mt-2 font-serif text-4xl font-bold text-ink sm:text-5xl">Coming soon</h1>
         <p className="mx-auto mt-4 max-w-md text-muted">
-          Our {cat.name.toLowerCase()} collection is on its way. Stay tuned — beautiful new
+          Nuestra colección de {cat.name.toLowerCase()} está en camino. Estar atento — hermosos productos nuevos
           pieces are launching shortly.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -66,7 +66,7 @@ export default async function CategoryPage({
 
   return (
     <ShopBrowser
-      eyebrow="Collection"
+      eyebrow="Catálogo"
       title={cat.name}
       description={cat.description}
       products={products}

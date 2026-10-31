@@ -152,7 +152,7 @@ export function OtpForm({
         )}
 
         <button type="submit" disabled={pending || code.length < LENGTH} className={submitBtn}>
-          {pending ? "Verifying…" : "Verify & Continue"}
+          {pending ? "Verificando…" : "Verificar y continuar"}
         </button>
       </form>
 

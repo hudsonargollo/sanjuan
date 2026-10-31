@@ -70,8 +70,7 @@ export default async function CustomPage() {
           <span className="eyebrow">Step 1</span>
           <h2 className="mt-2 font-serif text-3xl font-semibold text-ink">Tell us about your piece</h2>
           <p className="mx-auto mt-2 max-w-xl text-sm text-muted">
-            Fill in what you can — we&apos;ll get back to you within 1–2 working days with design ideas and a
-            price.
+            Completa lo que puedas — te responderemos en 1–2 días hábiles con ideas de diseño y un presupuesto.
           </p>
         </div>
         <div className="mt-8">

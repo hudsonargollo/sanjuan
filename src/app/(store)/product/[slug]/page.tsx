@@ -93,7 +93,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
   const derivedHighlights: [string, string][] = [
     ["Material", product.material || "Stainless steel"],
     ["Finish", finish],
-    ["Quality", "Rust-free & hypoallergenic"],
+    ["Calidad", "Libre de óxido e hipoalergénico"],
     ["Category", product.category.name],
   ];
   const highlights = hasCustom ? customSpecs.slice(0, 4) : derivedHighlights;
@@ -106,14 +106,14 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
         ["Base metal", "Surgical-grade stainless steel"],
         ["Finish", finish],
         ...(stone ? ([["Stone", stone]] as [string, string][]) : []),
-        ["Skin-friendly", "Hypoallergenic"],
+        ["Amigable con la piel", "Hipoalergénico"],
         ["Care", "Keep away from water & perfume"],
         ["Category", product.category.name],
       ];
 
   const aboutBullets = [
     ...sentences,
-    "Rust-free, hypoallergenic and gentle on sensitive skin.",
+    "Libre de óxido, hipoalergénico y suave con la piel sensible.",
     isGoldTone(product.material)
       ? "Gold-plated over stainless steel — made to keep its shine with simple care."
       : "Solid stainless steel — made to keep its shine with simple care.",
@@ -165,7 +165,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
             <p className="text-[0.7rem] uppercase tracking-[0.2em] text-muted">{product.category.name}</p>
             {product.featured && (
               <span className="rounded-full bg-maroon px-2.5 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wide text-gold">
-                Featured
+                Destacado
               </span>
             )}
           </div>
@@ -212,7 +212,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
             <Assure icon="truck">Delivery in <b className="font-medium text-ink">{DELIVERY_TIME}</b> nationwide</Assure>
             <Assure icon="cash">Cash on Delivery available</Assure>
             <Assure icon="return">Easy <b className="font-medium text-ink">7-day returns</b></Assure>
-            <Assure icon="shield">Secure checkout · rust-free &amp; hypoallergenic</Assure>
+            <Assure icon="shield">Pago seguro · libre de óxido e hipoalergénico</Assure>
           </div>
         </div>
       </div>
@@ -264,7 +264,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
             <Accordion title="Shipping & returns">
               <p>
                 We ship nationwide via servicios de mensajería with <b className="font-medium text-ink">Cash on Delivery</b>{" "}
-                available. Orders are dispatched within 1–2 days and typically arrive in {DELIVERY_TIME}.
+                disponible. Los pedidos se envían en 1–2 días y suelen llegar en {DELIVERY_TIME}.
                 Not happy? Return unused items in original condition within <b className="font-medium text-ink">7 days</b>.
               </p>
             </Accordion>
@@ -276,8 +276,8 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
           <div className="sticky top-24 rounded-2xl border border-[var(--line)] bg-surface p-6 shadow-[0_20px_50px_-40px_rgba(38,8,16,0.5)]">
             <p className="font-serif text-xl font-semibold text-ink">Why SanJuan Mini Market</p>
             <ul className="mt-4 space-y-3 text-sm text-ink/80">
-              <li className="flex gap-2.5"><Dot /> Premium stainless steel — rust-free &amp; made to last</li>
-              <li className="flex gap-2.5"><Dot /> Skin-friendly &amp; hypoallergenic</li>
+              <li className="flex gap-2.5"><Dot /> Acero inoxidable premium — libre de óxido y hecho para durar</li>
+              <li className="flex gap-2.5"><Dot /> Amigable con la piel e hipoalergénico</li>
               <li className="flex gap-2.5"><Dot /> Cash on Delivery, nationwide</li>
               <li className="flex gap-2.5"><Dot /> Complimentary care guidance with every order</li>
             </ul>

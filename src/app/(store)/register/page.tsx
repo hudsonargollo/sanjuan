@@ -4,7 +4,7 @@ import { getCustomerSession, safeNext } from "@/lib/customer-auth";
 import { RegisterForm } from "@/components/auth/register-form";
 
 export const metadata: Metadata = {
-  title: "Create Account",
+  title: "Crear cuenta",
   robots: { index: false },
 };
 

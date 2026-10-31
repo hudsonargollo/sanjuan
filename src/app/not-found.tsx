@@ -13,20 +13,20 @@ export default function NotFound() {
       </h1>
       <p className="mx-auto mt-3 max-w-md text-muted">
         The page you&apos;re looking for may have moved or no longer exists. Let&apos;s get you
-        back to something beautiful.
+        de vuelta a algo hermoso.
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
         <Link
           href="/"
           className="rounded-full bg-maroon px-8 py-3 text-sm font-medium uppercase tracking-[0.12em] text-light transition hover:bg-maroon-2"
         >
-          Back to home
+          Volver al inicio
         </Link>
         <Link
           href="/shop"
           className="rounded-full border border-[var(--line-strong)] px-8 py-3 text-sm font-medium uppercase tracking-[0.12em] text-ink transition hover:border-gold hover:text-gold-deep"
         >
-          Shop the collection
+          Explorar el catálogo
         </Link>
       </div>
     </main>

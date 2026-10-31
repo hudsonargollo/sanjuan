@@ -43,7 +43,7 @@ export default async function AdminDashboard() {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="font-serif text-3xl font-bold text-ink">Dashboard</h1>
-          <p className="mt-1 text-sm text-muted">Welcome back to SanJuan Mini Market management.</p>
+          <p className="mt-1 text-sm text-muted">Bienvenido de nuevo al panel de gestión de SanJuan Mini Market.</p>
         </div>
         <div className="flex gap-3">
           <Link

@@ -222,11 +222,11 @@ export async function sendOtpEmail(
       return { ok: true };
     }
     console.error("[email] SMTP not configured — cannot send verification code");
-    return { ok: false, error: "We can't send verification emails right now. Please try again later or contact us." };
+    return { ok: false, error: "No podemos enviar correos de verificación ahora. Intenta más tarde o contáctanos." };
   }
   const from = process.env.MAIL_FROM || `SanJuan Mini Market <${process.env.SMTP_USER}>`;
   const spaced = code.split("").join(" ");
-  const title = purpose === "register" ? "Confirm your email" : "Verify your email";
+  const title = purpose === "register" ? "Confirma tu correo" : "Verifica tu correo";
   try {
     await getTransport().sendMail({
       from,
@@ -236,13 +236,13 @@ export async function sendOtpEmail(
       html: shell(
         title,
         `<p style="color:#3a231e;font-size:14px">Use this code to ${
-          purpose === "register" ? "finish creating your SanJuan Mini Market account" : "verify your email address"
+          purpose === "register" ? "terminar de crear tu cuenta de SanJuan Mini Market" : "verificar tu correo electrónico"
         }:</p>
          <p style="margin:22px 0;text-align:center">
            <span style="display:inline-block;background:#f4e8d5;border:1px solid #c39a4e;border-radius:10px;padding:14px 22px;font-size:30px;font-weight:700;letter-spacing:8px;color:#5b1a2b;font-family:'Courier New',monospace">${escape(spaced)}</span>
          </p>
          <p style="color:#8a6f63;font-size:13px">This code expires in <strong>10 minutes</strong>. Never share it with anyone — SanJuan Mini Market will never ask you for it by phone or WhatsApp.</p>
-         <p style="color:#8a6f63;font-size:13px">If you didn&rsquo;t try to sign up, you can safely ignore this email.</p>`
+         <p style="color:#8a6f63;font-size:13px">Si no intentaste registrarte, puedes ignorar este correo.</p>`
       ),
     });
     return { ok: true };
@@ -256,7 +256,7 @@ export async function sendOtpEmail(
       ok: false,
       error: badRecipient
         ? "We couldn't send the code to that address. Please check your email and try again."
-        : "We can't send verification emails right now. Please try again in a little while or contact us.",
+        : "No podemos enviar correos de verificación ahora. Intenta en un momento o contáctanos.",
     };
   }
 }

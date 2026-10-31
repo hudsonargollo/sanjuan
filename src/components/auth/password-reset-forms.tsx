@@ -18,9 +18,9 @@ export function ForgotPasswordForm() {
   const [formRef, f] = useAuthForm(formAction, state, { email: emailError });
 
   return (
-    <AuthShell backHref="/login" backLabel="Back to sign in">
+    <AuthShell backHref="/login" backLabel="Volver a iniciar sesión">
       <div className="text-center">
-        <h1 className="font-serif text-3xl font-bold text-ink">Forgot password</h1>
+        <h1 className="font-serif text-3xl font-bold text-ink">Olvidé mi contraseña</h1>
         <p className="mt-1 text-sm text-muted">We&apos;ll email you a link to choose a new one.</p>
       </div>
 
@@ -49,7 +49,7 @@ export function ForgotPasswordForm() {
       <p className="mt-6 text-center text-sm text-muted">
         Remembered it?{" "}
         <Link href="/login" className="font-semibold text-gold-deep hover:underline">
-          Sign in
+          Iniciar sesión
         </Link>
       </p>
     </AuthShell>
@@ -62,7 +62,7 @@ export function ResetPasswordForm({ token }: { token: string }) {
   const password = f.field("password");
 
   return (
-    <AuthShell backHref="/login" backLabel="Back to sign in">
+    <AuthShell backHref="/login" backLabel="Volver a iniciar sesión">
       <div className="text-center">
         <h1 className="font-serif text-3xl font-bold text-ink">Choose a new password</h1>
         <p className="mt-1 text-sm text-muted">You&apos;ll be signed in right after.</p>

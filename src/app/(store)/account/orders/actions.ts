@@ -40,8 +40,8 @@ async function lookup(_prev: LookupState, formData: FormData): Promise<LookupSta
       status: "error",
       message:
         result.reason === "db-down"
-          ? "Order tracking is not available right now. Please try again later or contact us."
-          : "No order found with that number and email. Please check and try again.",
+          ? "El rastreo de pedidos no está disponible ahora. Intenta más tarde o contáctanos."
+          : "No se encontró un pedido con ese número y correo. Verifica e intenta de nuevo.",
     };
   }
   const { courier, trackingNumber } = result.order;

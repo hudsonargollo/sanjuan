@@ -3,8 +3,8 @@ import { Emblem } from "@/components/brand/emblem";
 import { OrderLookup } from "@/components/order-lookup";
 
 export const metadata: Metadata = {
-  title: "Order Status",
-  description: "Track your SanJuan Mini Market order — enter your order number and email.",
+  title: "Estado del pedido",
+  description: "Rastrea tu pedido de SanJuan Mini Market — ingresa tu número de pedido y correo.",
   alternates: { canonical: "/account/orders" },
 };
 
@@ -20,7 +20,7 @@ export default async function OrderStatusPage({
       <div className="text-center">
         <Emblem size={40} className="mx-auto text-gold-deep" />
         <span className="eyebrow mt-3 block">Help</span>
-        <h1 className="mt-2 font-serif text-4xl font-semibold text-ink">Order Status</h1>
+        <h1 className="mt-2 font-serif text-4xl font-semibold text-ink">Estado del pedido</h1>
         <p className="mx-auto mt-4 max-w-md text-muted">
           Enter your order number and the email you used at checkout to track your order.
         </p>

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getFeaturedProducts, getProducts, getCategories } from "@/lib/catalog";
+import { getDestacadoProducts, getProducts, getCategories } from "@/lib/catalog";
 import { ProductCard } from "@/components/product-card";
 import { ProductImage } from "@/components/product-image";
 import { HeroSlider } from "@/components/hero-slider";
 import { PromoSlider } from "@/components/promo-slider";
 import { CategoryArt } from "@/components/category-art";
-import { FeaturedCarousel } from "@/components/featured-carousel";
+import { DestacadoCarousel } from "@/components/featured-carousel";
 import { Testimonials } from "@/components/testimonials";
 import { Newsletter } from "@/components/newsletter";
 import { Reveal } from "@/components/reveal";
@@ -57,7 +57,7 @@ export default async function HomePage() {
   const TRUST = trustBadges(settings.shipping.freeThreshold);
   const CONTACT = settings.social;
   const [featured, newest, categories] = await Promise.all([
-    getFeaturedProducts(8),
+    getDestacadoProducts(8),
     getProducts({ sort: "newest" }),
     getCategories(),
   ]);
@@ -174,14 +174,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* New arrivals (sorted by newest — there's no sales ranking yet) */}
+      {/* Nuevos productos (sorted by newest — there's no sales ranking yet) */}
       <section className="bg-cream-soft px-5 py-20">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <div className="flex items-end justify-between">
               <div>
-                <span className="eyebrow">Just in</span>
-                <h2 className="mt-3 font-serif text-4xl font-bold sm:text-5xl">New arrivals</h2>
+                <span className="eyebrow">Recién llegados</span>
+                <h2 className="mt-3 font-serif text-4xl font-bold sm:text-5xl">Nuevos productos</h2>
               </div>
               <Link href="/shop" className="text-sm font-medium text-gold-deep hover:text-gold">
                 View all →
@@ -199,13 +199,13 @@ export default async function HomePage() {
       {/* Promo band — cross-fading editorial slider */}
       <PromoSlider />
 
-      {/* Featured carousel */}
+      {/* Destacado carousel */}
       <section className="mx-auto max-w-6xl px-5 py-20">
         <Reveal>
           <div className="flex items-end justify-between">
             <div>
               <span className="eyebrow">Curated</span>
-              <h2 className="mt-3 font-serif text-4xl font-bold sm:text-5xl">Featured pieces</h2>
+              <h2 className="mt-3 font-serif text-4xl font-bold sm:text-5xl">Destacados</h2>
             </div>
             <Link href="/shop" className="text-sm font-medium text-gold-deep hover:text-gold">
               View all →
@@ -213,7 +213,7 @@ export default async function HomePage() {
           </div>
         </Reveal>
         <div className="mt-10">
-          <FeaturedCarousel products={featured} />
+          <DestacadoCarousel products={featured} />
         </div>
       </section>
 

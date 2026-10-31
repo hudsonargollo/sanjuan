@@ -62,7 +62,7 @@ export function emailSuggestion(value: string): string | null {
 
 export function emailError(value: string): string | null {
   const v = value.trim();
-  if (!v) return "Please enter your email";
+  if (!v) return "Ingresa tu correo";
   if (/\s/.test(v)) return "Email can't contain spaces";
   const at = v.split("@").length - 1;
   if (at === 0) return "Email needs an @, like name@example.com";

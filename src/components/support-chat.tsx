@@ -44,7 +44,7 @@ function buildFaqs(st: StoreSettings): Faq[] {
     id: "shipping",
     label: "🚚 Shipping & delivery",
     keywords: ["shipping", "delivery", "courier", "days", "how long", "kitne din", "kab aayega", "leopard", "tcs"],
-    answer: `We deliver a nivel nacional. Orders arrive in ${deliveryTime} via servicios de mensajería. Shipping is a flat ${formatPrice(
+    answer: `Entregamos a nivel nacional. Los pedidos llegan en ${deliveryTime} vía servicios de mensajería. El envío is a flat ${formatPrice(
       flatFee
     )} — and FREE on orders over ${formatPrice(freeThreshold)}.`,
   },
@@ -72,16 +72,16 @@ function buildFaqs(st: StoreSettings): Faq[] {
   {
     id: "material",
     label: "✨ Material & care",
-    keywords: ["material", "gold", "steel", "rust", "care", "tarnish", "allergy", "hypoallergenic", "kaali"],
+    keywords: ["material", "oro", "acero", "óxido", "cuidado", "manchas", "alergia", "hipoalergénico"],
     answer:
-      "Our pieces are premium stainless steel — rust-free and hypoallergenic, with gold- or silver-tone finishes (see each product's material). Tip: wear after perfume, keep dry, and wipe with a soft cloth to keep the shine.",
+      "Nuestras piezas son de acero inoxidable premium — libres de óxido e hipoalergénicas, con acabados bañados en oro o plata (see each product's material). Tip: wear after perfume, keep dry, and wipe with a soft cloth to keep the shine.",
   },
   {
     id: "track",
     label: "📦 Track my order",
-    keywords: ["track", "tracking", "order status", "where", "kahan", "status", "parcel"],
+    keywords: ["rastrear", "seguimiento", "estado del pedido", "dónde", "paquete", "pedido"],
     answer:
-      "Track any order on our Order Status page (Help → Order Status) with your order number and email. Once shipped, it shows your courier tracking link.",
+      "Rastrea cualquier pedido en la página de Estado del pedido (Ayuda → Estado del pedido) con tu número de pedido y correo. Una vez enviado, it shows your courier tracking link.",
   },
 ];
 }
@@ -100,7 +100,7 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
   const [input, setInput] = useState("");
   const greeting: Msg = {
     from: "bot",
-    text: "Hi! 👋 I'm the SanJuan Mini Market assistant. Ask me anything — products, prices, delivery, payment, returns or your order. Puedes escribir en español.",
+    text: "¡Hola! 👋 Soy el asistente de SanJuan Mini Market. Pregúntame lo que quieras — productos, precios, entrega, pago, returns or your order. Puedes escribir en español.",
   };
   const [msgs, setMsgs] = useState<Msg[]>([greeting]);
   const [typing, setTyping] = useState(false);
@@ -156,8 +156,8 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
     return (
       hit?.answer ??
       (HAS_WHATSAPP
-        ? "I couldn't reach the assistant just now. Our team will help you personally on WhatsApp — tap the green button below. 💬"
-        : "I couldn't reach the assistant just now. Please send us a message from our Contact page and our team will get back to you. 💬")
+        ? "No pude conectar con el asistente ahora. Nuestro equipo te ayudará personalmente por WhatsApp — toca el botón verde abajo. 💬"
+        : "No pude conectar con el asistente ahora. Envíanos un mensaje desde nuestra página de Contacto y nuestro equipo se coet back to you. 💬")
     );
   };
 

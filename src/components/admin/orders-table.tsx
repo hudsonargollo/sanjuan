@@ -40,7 +40,7 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search order # or customer…"
+            placeholder="Buscar pedido # o cliente…"
             className="w-full rounded-lg border border-[var(--line-strong)] bg-cream-soft py-2 pl-9 pr-3 text-sm text-ink outline-none transition focus:border-gold"
           />
         </div>
@@ -74,7 +74,7 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
       {filtered.length === 0 ? (
         <div className="px-4 py-16 text-center">
           <p className="font-serif text-lg text-ink">No matching orders</p>
-          <p className="mt-1 text-sm text-muted">Try a different search or status filter.</p>
+          <p className="mt-1 text-sm text-muted">Prueba otra búsqueda o filtro de estado.</p>
         </div>
       ) : (
         <>

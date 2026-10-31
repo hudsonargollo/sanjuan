@@ -157,7 +157,7 @@ export function ShopFilters({ facets }: { facets: ShopFacets }) {
       <Section title="Offers & availability">
         <div className="space-y-1">
           <Switch
-            label="On sale"
+            label="En oferta"
             hint={
               <span className="rounded bg-maroon px-1.5 py-0.5 text-[0.58rem] font-semibold uppercase tracking-wider text-gold-hi">
                 % Off

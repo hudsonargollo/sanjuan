@@ -56,7 +56,7 @@ export default async function AdminProductsPage() {
                       <span className="font-medium text-ink">{p.name}</span>
                       {p.featured && (
                         <span className="ml-2 rounded-full bg-gold/20 px-2 py-0.5 text-[0.65rem] text-gold-deep">
-                          Featured
+                          Destacado
                         </span>
                       )}
                     </td>

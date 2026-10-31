@@ -30,7 +30,7 @@ export function NotifyForm({ slug, label }: { slug: string; label: string }) {
         name="email"
         required
         placeholder="Your email"
-        aria-label="Email address"
+        aria-label="Correo electrónico"
         className="w-full rounded-full border border-[var(--line-strong)] bg-cream-soft px-5 py-3 text-sm outline-none focus:border-gold"
       />
       <button

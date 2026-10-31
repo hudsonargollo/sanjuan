@@ -17,7 +17,7 @@ export function AddToCart({ product }: { product: Omit<CartItem, "quantity"> }) 
     add(product, qty);
     setAdded(true);
     setTimeout(() => setAdded(false), 1800);
-    toast.success(`${qty} × ${product.name} added to your cart`, { title: "Added to cart" });
+    toast.success(`${qty} × ${product.name} agregado a tu carrito`, { title: "Agregado al carrito" });
   }
 
   // Checks out just this piece (the rest of the cart is left untouched).

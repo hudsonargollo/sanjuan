@@ -8,7 +8,7 @@ import { Emblem } from "@/components/brand/emblem";
 import { logoutAction, startEmailVerification } from "../auth-actions";
 
 export const metadata: Metadata = {
-  title: "My Account",
+  title: "Mi cuenta",
   robots: { index: false },
 };
 
@@ -71,7 +71,7 @@ export default async function AccountPage() {
         </div>
         <form action={logoutAction}>
           <button className="rounded-full border border-[var(--line-strong)] px-5 py-2 text-sm text-ink transition hover:border-gold hover:text-gold-deep">
-            Sign out
+            Cerrar sesión
           </button>
         </form>
       </div>
@@ -117,7 +117,7 @@ export default async function AccountPage() {
             href="/shop"
             className="mt-5 block rounded-full bg-maroon px-5 py-2.5 text-center text-sm font-medium text-light transition hover:bg-maroon-2"
           >
-            Continue shopping
+            Seguir comprando
           </Link>
         </aside>
 

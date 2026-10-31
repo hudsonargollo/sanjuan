@@ -6,7 +6,7 @@ import { ShopBrowser } from "@/components/shop/shop-browser";
 export const metadata: Metadata = {
   alternates: { canonical: "/shop" },
   title: "Shop All productos",
-  description: "Browse the full SanJuan Mini Market collection of premium stainless steel & productos de higiene y cuidado personal.",
+  description: "Explora el catálogo completo de SanJuan Mini Market de acero inoxidable premium y productos de higiene y cuidado personal.",
 };
 
 export default async function ShopPage({ searchParams }: PageProps<"/shop">) {
@@ -16,9 +16,9 @@ export default async function ShopPage({ searchParams }: PageProps<"/shop">) {
 
   return (
     <ShopBrowser
-      eyebrow="The Collection"
+      eyebrow="El catálogo"
       title="All productos"
-      description="Premium stainless steel & gold-plated pieces — rust-free and made to last. Refine by category, price, offers or material to find your next favorite."
+      description="Piezas premium de acero inoxidable y bañadas en oro — libres de óxido y hechas para durar. Filtra por categoría, price, offers or material to find your next favorite."
       products={products}
       facets={facets}
     />

@@ -29,7 +29,7 @@ type Suggest = {
 
 const EXAMPLES = ["rings", "bangles", "gold ring", "butterfly", "under 3000", "sale"];
 
-export function SearchBox({ initial = "", autoFocus = false }: { initial?: string; autoFocus?: boolean }) {
+export function BuscarBox({ initial = "", autoFocus = false }: { initial?: string; autoFocus?: boolean }) {
   const router = useRouter();
   const listId = useId();
   const [q, setQ] = useState(initial);
@@ -160,7 +160,7 @@ export function SearchBox({ initial = "", autoFocus = false }: { initial?: strin
           spellCheck={false}
           enterKeyHint="search"
           placeholder={`Try “${EXAMPLES[hint]}”`}
-          aria-label="Search productos"
+          aria-label="Buscar productos"
           role="combobox"
           aria-expanded={open && !!shown}
           aria-controls={listId}
@@ -176,7 +176,7 @@ export function SearchBox({ initial = "", autoFocus = false }: { initial?: strin
               setData(null);
               inputRef.current?.focus();
             }}
-            aria-label="Clear search"
+            aria-label="Borrar búsqueda"
             className="mr-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted transition hover:bg-gold/10 hover:text-ink"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className="h-4 w-4" aria-hidden="true">
@@ -188,7 +188,7 @@ export function SearchBox({ initial = "", autoFocus = false }: { initial?: strin
           type="submit"
           className="shrink-0 rounded-full bg-gradient-to-r from-gold-hi via-gold to-gold-deep px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] text-maroon shadow-[0_10px_24px_-12px_rgba(169,126,48,0.9)] transition hover:brightness-105 sm:px-7"
         >
-          Search
+          Buscar
         </button>
       </form>
 
@@ -216,7 +216,7 @@ export function SearchBox({ initial = "", autoFocus = false }: { initial?: strin
                 <span className="min-w-0 flex-1">
                   <span className="block text-sm font-semibold text-ink">All {shown.category.name}</span>
                   <span className="block text-xs text-muted">
-                    {shown.category.count} piece{shown.category.count === 1 ? "" : "s"} in the collection
+                    {shown.category.count} producto{shown.category.count === 1 ? "" : "s"} en el catálogo
                   </span>
                 </span>
                 <span className="text-gold-deep">→</span>

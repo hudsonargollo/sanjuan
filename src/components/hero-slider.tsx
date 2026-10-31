@@ -52,14 +52,6 @@ export function HeroSlider() {
         );
       })}
 
-      {/* Maroon overlay */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(38,8,16,0.6) 0%, rgba(38,8,16,0.7) 55%, rgba(38,8,16,0.9) 100%)",
-        }}
-      />
       {/* Thin gold inset frame */}
       <div className="pointer-events-none absolute inset-4 border border-[rgba(230,205,139,0.4)] sm:inset-6" />
 

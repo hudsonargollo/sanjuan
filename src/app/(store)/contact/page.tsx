@@ -6,13 +6,13 @@ import { whatsappUrl, phoneHref } from "@/lib/settings-shared";
 import { EmailLink } from "@/components/email-link";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Questions about an order, a custom piece, or anything else? Get in touch with SanJuan Mini Market.",
+  title: "Contacto",
+  description: "¿Dudas sobre un pedido, un producto especial o algo más? Escríbenos y te respondemos.",
   alternates: { canonical: "/contact" },
 };
 
 const TOPICS: Record<string, string> = {
-  custom: "Custom design request",
+  custom: "Pedido especial",
 };
 
 export default async function ContactPage({ searchParams }: PageProps<"/contact">) {
@@ -25,13 +25,13 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
   return (
     <div className="mx-auto max-w-4xl px-5 py-16">
       <div className="text-center">
-        <Emblem size={44} className="mx-auto text-gold-deep" />
-        <span className="eyebrow mt-3 block">Get in touch</span>
-        <h1 className="mt-2 font-serif text-4xl font-semibold text-ink sm:text-5xl">Contact</h1>
+        <Emblem size={44} className="mx-auto text-accent-strong" />
+        <span className="eyebrow mt-3 block">Estamos para ayudarte</span>
+        <h1 className="mt-2 font-display text-4xl font-semibold text-ink sm:text-5xl">Contacto</h1>
         <p className="mx-auto mt-4 max-w-xl text-muted">
           {topic === "custom"
-            ? "Cuéntanos sobre la pieza que tienes en mente — nombres, tallas, acabado, ocasión y presupuesto — y te responderemos en 1–2 días hábiles, con ideas."
-            : "Questions about an order, a custom piece, or anything else? We'd love to hear from you."}
+            ? "Cuéntanos qué producto necesitas — cantidad, presentación y fecha — y te responderemos en 1–2 días hábiles con opciones y precio."
+            : "¿Dudas sobre un pedido, un producto especial o algo más? Escríbenos, te respondemos con gusto."}
         </p>
       </div>
 
@@ -41,16 +41,16 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
         <aside className="space-y-6 text-sm">
           {CONTACT.email && (
             <div>
-              <h3 className="eyebrow mb-2">Email</h3>
-              <EmailLink email={CONTACT.email} className="text-ink hover:text-gold-deep">
+              <h3 className="eyebrow mb-2">Correo</h3>
+              <EmailLink email={CONTACT.email} className="text-ink hover:text-accent-strong">
                 {CONTACT.email}
               </EmailLink>
             </div>
           )}
           {CONTACT.phone && (
             <div>
-              <h3 className="eyebrow mb-2">Phone</h3>
-              <a href={CONTACT.phoneHref} className="text-ink hover:text-gold-deep">
+              <h3 className="eyebrow mb-2">Teléfono</h3>
+              <a href={CONTACT.phoneHref} className="text-ink hover:text-accent-strong">
                 {CONTACT.phone}
               </a>
             </div>
@@ -58,17 +58,17 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
           {CONTACT.whatsappUrl && (
             <div>
               <h3 className="eyebrow mb-2">WhatsApp</h3>
-              <a href={CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-ink hover:text-gold-deep">
-                Chat with us →
+              <a href={CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-ink hover:text-accent-strong">
+                Escríbenos por WhatsApp →
               </a>
             </div>
           )}
           <div>
-            <h3 className="eyebrow mb-2">Hours</h3>
+            <h3 className="eyebrow mb-2">Horario</h3>
             <p className="text-ink">{CONTACT.hours}</p>
           </div>
           <div>
-            <h3 className="eyebrow mb-2">Based in</h3>
+            <h3 className="eyebrow mb-2">Ubicación</h3>
             <p className="text-ink">{CONTACT.city}</p>
           </div>
         </aside>

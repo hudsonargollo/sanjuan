@@ -19,7 +19,7 @@ export default async function VerifyEmailPage() {
   return (
     <AuthShell backHref="/account" backLabel="Volver a la cuenta">
       <div className="text-center">
-        <h1 className="font-serif text-3xl font-bold text-ink">Verifica tu correo</h1>
+        <h1 className="font-display text-3xl font-bold text-ink">Verifica tu correo</h1>
       </div>
       <div className="mt-5">
         <OtpForm

@@ -33,11 +33,10 @@ export const DEFAULT_SETTINGS: StoreSettings = {
     deliveryTime: DELIVERY_TIME,
   },
   announcements: [
-    `Envío gratis en pedidos desde Bs {freeThreshold}`,
-    "Pago contra entrega en todo el país",
+    "Envío gratis en Buena Vista y zonas cercanas",
+    "Pago contra entrega al recibir",
     "Productos de limpieza y diario · Calidad garantizada",
     "Atención rápida por WhatsApp",
-    "Checkout seguro",
   ],
   inventory: { lowStockThreshold: 5 },
   notifications: { orderEmail: process.env.ADMIN_NOTIFY_EMAIL || "" },

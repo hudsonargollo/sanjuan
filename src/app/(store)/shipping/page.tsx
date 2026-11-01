@@ -6,8 +6,8 @@ import { getStoreSettings } from "@/lib/settings";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/shipping" },
-  title: "Shipping & Returns",
-  description: "SanJuan Mini Market shipping options, delivery times, and our returns policy.",
+  title: "Envíos y devoluciones",
+  description: "Entrega el mismo día en Buena Vista, Santa Cruz: costos de envío y política de devoluciones de SanJuan Mini Market.",
 };
 
 export default async function ShippingPage() {
@@ -17,38 +17,47 @@ export default async function ShippingPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-16">
       <div className="text-center">
-        <Emblem size={40} className="mx-auto text-gold-deep" />
-        <span className="eyebrow mt-3 block">Help</span>
-        <h1 className="mt-2 font-serif text-4xl font-semibold text-ink">Shipping &amp; Returns</h1>
+        <Emblem size={40} className="mx-auto text-brand" accent="var(--color-accent)" />
+        <span className="eyebrow mt-3 block">Ayuda</span>
+        <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight text-ink">
+          Envíos y devoluciones
+        </h1>
       </div>
 
       <div className="mt-12 space-y-10">
         <section>
-          <h2 className="font-serif text-2xl font-semibold text-ink">Shipping</h2>
+          <h2 className="font-display text-2xl font-bold text-ink">Entregas</h2>
           <ul className="mt-4 space-y-3 text-ink/80">
-            <li>• Nationwide delivery a nivel nacional, typically <strong>{DELIVERY_TIME}</strong>.</li>
-            <li>• Flat shipping of <strong>{formatPrice(FLAT_SHIPPING)}</strong> — <strong>free</strong> on orders over {formatPrice(FREE_SHIPPING_THRESHOLD)}.</li>
-            <li>• Every order is carefully packaged in SanJuan Mini Market signature packaging.</li>
-            <li>• You&apos;ll receive an order confirmation, and our team may call to confirm delivery details.</li>
+            <li>• Entregamos en <strong>Buena Vista y zonas cercanas de Santa Cruz</strong>, normalmente {DELIVERY_TIME}.</li>
+            <li>
+              • Costo de envío: <strong>{formatPrice(FLAT_SHIPPING)}</strong>
+              {FREE_SHIPPING_THRESHOLD > 0 ? (
+                <> — <strong>gratis</strong> en pedidos desde {formatPrice(FREE_SHIPPING_THRESHOLD)}.</>
+              ) : (
+                <> — y <strong>gratis</strong> en todos los pedidos de Buena Vista.</>
+              )}
+            </li>
+            <li>• Los lácteos viajan al final de la ruta para mantener la cadena de frío.</li>
+            <li>• Recibirás la confirmación del pedido y podemos escribirte para coordinar la entrega.</li>
           </ul>
         </section>
 
         <section>
-          <h2 className="font-serif text-2xl font-semibold text-ink">Returns &amp; Exchanges</h2>
+          <h2 className="font-display text-2xl font-bold text-ink">Cambios y devoluciones</h2>
           <ul className="mt-4 space-y-3 text-ink/80">
-            <li>• Returns accepted within <strong>7 days</strong> of delivery for unworn items in original condition and packaging.</li>
-            <li>• Exchanges are subject to availability. Contact us to arrange one.</li>
-            <li>• Custom or personalized pieces are non-returnable unless faulty.</li>
-            <li>• Refunds are processed to the original payment method after inspection.</li>
+            <li>• Si un producto llega dañado o vencido, avísanos dentro de las <strong>48 horas</strong> con tu número de pedido.</li>
+            <li>• Lo cambiamos por el mismo producto o te devolvemos el importe.</li>
+            <li>• Los productos deben estar sellados y en su empaque original para el cambio.</li>
+            <li>• Los reembolsos se procesan por el mismo medio de pago tras la verificación.</li>
           </ul>
         </section>
 
         <section className="rounded-xl border border-[var(--line)] bg-cream-soft p-6 text-sm text-muted">
-          Need help with a return? Reach us via the{" "}
-          <Link href="/contact" className="text-gold-deep hover:underline">
-            contact page
+          ¿Necesitas ayuda con un pedido? Escríbenos desde la{" "}
+          <Link href="/contact" className="text-accent-strong hover:underline">
+            página de contacto
           </Link>{" "}
-          and quote your order number.
+          con tu número de orden.
         </section>
       </div>
     </div>

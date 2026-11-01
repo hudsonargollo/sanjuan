@@ -9,19 +9,19 @@ import { useCart } from "./cart/cart-provider";
 import { Emblem } from "./brand/emblem";
 
 const NAV = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Catálogo", href: "/shop" },
-  { label: "Custom", href: "/custom" },
-  { label: "Contact", href: "/contact" },
+  { label: "Inicio", href: "/" },
+  { label: "Productos", href: "/shop" },
+  { label: "Nosotros", href: "/about" },
+  { label: "Pedidos especiales", href: "/custom" },
+  { label: "Contacto", href: "/contact" },
 ];
 
 const HELP = [
   { label: "Mi cuenta", href: "/account" },
   { label: "Rastrear pedido", href: "/account/orders" },
-  { label: "Shipping & Returns", href: "/shipping" },
-  { label: "Care Guide", href: "/care" },
-  { label: "FAQ", href: "/faq" },
+  { label: "Envíos y devoluciones", href: "/shipping" },
+  { label: "Guía de cuidado", href: "/care" },
+  { label: "Preguntas frecuentes", href: "/faq" },
 ];
 
 export function MobileMenu() {
@@ -55,9 +55,9 @@ export function MobileMenu() {
       {/* Hamburger */}
       <button
         onClick={() => setOpen(true)}
-        aria-label="Open menu"
+        aria-label="Abrir menú"
         aria-expanded={open}
-        className="flex h-9 w-9 items-center justify-center text-maroon transition hover:text-gold-deep dark:text-ink"
+        className="flex h-9 w-9 items-center justify-center text-brand transition hover:text-accent-strong dark:text-ink"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
           <path d="M4 7h16M4 12h16M4 17h16" />
@@ -90,18 +90,18 @@ export function MobileMenu() {
           }`}
           role="dialog"
           aria-modal="true"
-          aria-label="Menu"
+          aria-label="Menú"
         >
         {/* Drawer header */}
-        <div className="flex items-center justify-between border-b border-[var(--line)] bg-maroon px-5 py-4">
-          <span className="flex items-center gap-2 text-gold">
-            <Emblem size={22} />
-            <span className="gold-text font-serif text-lg font-bold tracking-[0.22em]">SanJuan Mini Market</span>
+        <div className="flex items-center justify-between border-b border-[var(--line)] bg-brand px-5 py-4">
+          <span className="flex items-center gap-2 text-light">
+            <Emblem size={24} accent="var(--color-accent-soft)" />
+            <span className="font-display text-lg font-extrabold tracking-tight">SanJuan Mini Market</span>
           </span>
           <button
             onClick={() => setOpen(false)}
-            aria-label="Close menu"
-            className="flex h-9 w-9 items-center justify-center text-light/80 transition hover:text-gold"
+            aria-label="Cerrar menú"
+            className="flex h-9 w-9 items-center justify-center text-light/80 transition hover:text-accent-soft"
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
               <path d="M6 6l12 12M18 6L6 18" />
@@ -117,8 +117,8 @@ export function MobileMenu() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className={`border-b border-[var(--line)] py-3.5 font-serif text-xl transition ${
-                  isActive(item.href) ? "text-gold-deep" : "text-ink hover:text-gold-deep"
+                className={`border-b border-[var(--line)] py-3.5 font-display text-xl font-semibold transition ${
+                  isActive(item.href) ? "text-accent-strong" : "text-ink hover:text-brand"
                 }`}
               >
                 {item.label}
@@ -131,7 +131,7 @@ export function MobileMenu() {
             <Link
               href="/search"
               onClick={() => setOpen(false)}
-              className="flex flex-1 items-center justify-center gap-2 rounded-full border border-[var(--line-strong)] py-2.5 text-sm text-ink transition hover:border-gold"
+              className="flex flex-1 items-center justify-center gap-2 rounded-full border border-[var(--line-strong)] py-2.5 text-sm text-ink transition hover:border-accent"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
                 <circle cx="11" cy="11" r="7" />
@@ -142,25 +142,25 @@ export function MobileMenu() {
             <Link
               href="/cart"
               onClick={() => setOpen(false)}
-              className="flex flex-1 items-center justify-center gap-2 rounded-full border border-[var(--line-strong)] py-2.5 text-sm text-ink transition hover:border-gold"
+              className="flex flex-1 items-center justify-center gap-2 rounded-full border border-[var(--line-strong)] py-2.5 text-sm text-ink transition hover:border-accent"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
                 <path d="M6 8h12l-1 12H7L6 8z" strokeLinejoin="round" />
                 <path d="M9 8a3 3 0 0 1 6 0" strokeLinecap="round" />
               </svg>
-              Cart{ready && count > 0 ? ` (${count})` : ""}
+              Carrito{ready && count > 0 ? ` (${count})` : ""}
             </Link>
           </div>
 
           {/* Help */}
-          <h3 className="eyebrow mt-8 mb-2">Help</h3>
+          <h3 className="eyebrow mt-8 mb-2">Ayuda</h3>
           <nav className="flex flex-col">
             {HELP.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="py-2 text-sm text-muted transition hover:text-gold-deep"
+                className="py-2 text-sm text-muted transition hover:text-brand"
               >
                 {item.label}
               </Link>
@@ -173,9 +173,9 @@ export function MobileMenu() {
           <Link
             href="/shop"
             onClick={() => setOpen(false)}
-            className="block rounded-full bg-maroon px-6 py-3 text-center text-sm font-medium uppercase tracking-[0.12em] text-light transition hover:bg-maroon-2"
+            className="block rounded-full bg-accent px-6 py-3 text-center text-sm font-bold text-brand-deep transition hover:bg-accent-soft"
           >
-            Explorar catálogo
+            Ver catálogo
           </Link>
         </div>
           </aside>

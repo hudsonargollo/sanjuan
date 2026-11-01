@@ -8,17 +8,17 @@ export function Marquee({ items }: { items: string[] }) {
 
   return (
     <div
-      className="marquee-pause relative overflow-hidden border-y border-[rgba(230,205,139,0.28)] py-2.5 text-light"
-      style={{ background: "linear-gradient(90deg, #3d1019 0%, #5b1a2b 50%, #3d1019 100%)" }}
+      className="marquee-pause relative overflow-hidden border-y border-[rgba(167,216,178,0.28)] py-2.5 text-light"
+      style={{ background: "linear-gradient(90deg, #16452a 0%, #1f5b33 50%, #16452a 100%)" }}
     >
-      {/* soft gold glow edges */}
+      {/* soft accent glow edges */}
       <div
         className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16"
-        style={{ background: "linear-gradient(90deg, #3d1019, transparent)" }}
+        style={{ background: "linear-gradient(90deg, #16452a, transparent)" }}
       />
       <div
         className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16"
-        style={{ background: "linear-gradient(270deg, #3d1019, transparent)" }}
+        style={{ background: "linear-gradient(270deg, #16452a, transparent)" }}
       />
 
       <div className="flex w-max animate-marquee items-center whitespace-nowrap">
@@ -27,8 +27,8 @@ export function Marquee({ items }: { items: string[] }) {
             <span className="px-7 text-[0.7rem] font-medium uppercase tracking-[0.22em] text-light/90">
               {t}
             </span>
-            {/* gold diamond separator */}
-            <span className="h-1.5 w-1.5 rotate-45 bg-gold-hi/70" aria-hidden="true" />
+            {/* accent diamond separator */}
+            <span className="h-1.5 w-1.5 rotate-45 bg-accent-soft/70" aria-hidden="true" />
           </span>
         ))}
       </div>

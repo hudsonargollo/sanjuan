@@ -77,11 +77,11 @@ export async function issueCode(
     const since = (now - existing.lastSentAt.getTime()) / 1000;
     if (since < RESEND_COOLDOWN_S) {
       const wait = Math.ceil(RESEND_COOLDOWN_S - since);
-      return { ok: false, error: `Please wait ${wait}s before requesting a new code.`, retryAfter: wait };
+      return { ok: false, error: `Espera ${wait}s antes de pedir un nuevo código.`, retryAfter: wait };
     }
     const withinHour = now - existing.createdAt.getTime() < 60 * 60_000;
     if (withinHour && existing.sendCount >= MAX_SENDS_PER_HOUR) {
-      return { ok: false, error: "Too many codes requested. Please try again in an hour." };
+      return { ok: false, error: "Pediste demasiados códigos. Inténtalo de nuevo en una hora." };
     }
   }
 
@@ -115,11 +115,11 @@ export type VerifyResult =
 /** Checks a code. On success the code is consumed and its payload returned. */
 export async function verifyCode(email: string, purpose: OtpPurpose, code: string): Promise<VerifyResult> {
   const rec = await prisma.emailVerification.findUnique({ where: { email_purpose: { email, purpose } } });
-  if (!rec) return { ok: false, reason: "missing", error: "No code found — please request a new one." };
+  if (!rec) return { ok: false, reason: "missing", error: "No encontramos un código: pide uno nuevo." };
   if (rec.expiresAt.getTime() < Date.now())
-    return { ok: false, reason: "expired", error: "This code has expired. Tap “Resend code” to get a new one." };
+    return { ok: false, reason: "expired", error: "El código expiró. Toca “Reenviar código” para obtener uno nuevo." };
   if (rec.attempts >= MAX_ATTEMPTS)
-    return { ok: false, reason: "locked", error: "Too many incorrect attempts. Tap “Resend code” to get a new one." };
+    return { ok: false, reason: "locked", error: "Demasiados intentos incorrectos. Toca “Reenviar código” para obtener uno nuevo." };
 
   const clean = code.replace(/\D/g, "");
   const a = Buffer.from(hashCode(email, purpose, clean));
@@ -134,8 +134,8 @@ export async function verifyCode(email: string, purpose: OtpPurpose, code: strin
     });
     const left = MAX_ATTEMPTS - updated.attempts;
     return left > 0
-      ? { ok: false, reason: "invalid", error: `Incorrect code. ${left} attempt${left === 1 ? "" : "s"} left.` }
-      : { ok: false, reason: "locked", error: "Too many incorrect attempts. Tap “Resend code” to get a new one." };
+      ? { ok: false, reason: "invalid", error: `Código incorrecto. ${left === 1 ? "Queda 1 intento." : `Quedan ${left} intentos.`}` }
+      : { ok: false, reason: "locked", error: "Demasiados intentos incorrectos. Toca “Reenviar código” para obtener uno nuevo." };
   }
 
   await prisma.emailVerification.delete({ where: { id: rec.id } });

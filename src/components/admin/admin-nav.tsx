@@ -87,16 +87,16 @@ function GearIcon() {
 }
 
 export const ADMIN_LINKS: { label: string; href: string; icon: ReactNode }[] = [
-  { label: "Dashboard", href: "/admin", icon: <GridIcon /> },
-  { label: "Analytics", href: "/admin/analytics", icon: <ChartIcon /> },
-  { label: "Insights", href: "/admin/insights", icon: <SparkIcon /> },
-  { label: "Performance", href: "/admin/performance", icon: <GaugeIcon /> },
-  { label: "Orders", href: "/admin/orders", icon: <BagIcon /> },
-  { label: "Products", href: "/admin/products", icon: <TagIcon size={17} /> },
-  { label: "Categories", href: "/admin/categories", icon: <LayersIcon /> },
-  { label: "Customers", href: "/admin/customers", icon: <UsersIcon /> },
-  { label: "Messages", href: "/admin/messages", icon: <InboxIcon /> },
-  { label: "Settings", href: "/admin/settings", icon: <GearIcon /> },
+  { label: "Panel", href: "/admin", icon: <GridIcon /> },
+  { label: "Analíticas", href: "/admin/analytics", icon: <ChartIcon /> },
+  { label: "Tendencias", href: "/admin/insights", icon: <SparkIcon /> },
+  { label: "Rendimiento", href: "/admin/performance", icon: <GaugeIcon /> },
+  { label: "Pedidos", href: "/admin/orders", icon: <BagIcon /> },
+  { label: "Productos", href: "/admin/products", icon: <TagIcon size={17} /> },
+  { label: "Categorías", href: "/admin/categories", icon: <LayersIcon /> },
+  { label: "Clientes", href: "/admin/customers", icon: <UsersIcon /> },
+  { label: "Mensajes", href: "/admin/messages", icon: <InboxIcon /> },
+  { label: "Ajustes", href: "/admin/settings", icon: <GearIcon /> },
 ];
 const LINKS = ADMIN_LINKS;
 
@@ -122,7 +122,7 @@ export function AdminNav({ collapsed = false }: { collapsed?: boolean }) {
             title={collapsed ? l.label : undefined}
             aria-label={l.label}
             className={`flex items-center gap-3 rounded-md px-3 py-2.5 text-sm transition-colors ${
-              active ? "bg-gold text-maroon" : "text-light/80 hover:bg-maroon-2 hover:text-gold"
+              active ? "bg-accent text-brand" : "text-light/80 hover:bg-brand-dark hover:text-accent"
             }`}
           >
             <span className="shrink-0">{l.icon}</span>

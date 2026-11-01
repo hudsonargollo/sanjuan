@@ -1,55 +1,72 @@
-// SanJuan Mini Market lotus emblem — matches the client's approved logo mark:
-// a top diamond sparkle, a central petal with an inner sparkle, and two
-// outward-sweeping side petals. Petals inherit the theme color (gold);
-// the diamonds are white (with a hairline gold outline so they stay
-// visible on light backgrounds too).
+// The store's brand mark — the SanJuan produce-basket icon on a warm cream
+// badge. `BasketMark` is the small line-art basket, kept only for the faint
+// decorative watermarks where the full-colour mark would be too heavy.
 
-export function Emblem({
+type MarkProps = {
+  size?: number;
+  className?: string;
+  /** Kept for call sites that still pass a colour; the logo carries its own. */
+  color?: string;
+  /** Same as `color` — unused by the logo, used by the basket watermark. */
+  accent?: string;
+};
+
+export function Emblem({ size = 44, className = "" }: MarkProps) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/images/sanjuan-icon.webp"
+      alt=""
+      width={size}
+      height={size}
+      aria-hidden="true"
+      className={`shrink-0 rounded-[22%] object-cover ${className}`}
+      style={{ width: size, height: size }}
+    />
+  );
+}
+
+export function BasketMark({
   size = 44,
   className = "",
   color = "currentColor",
-  diamond = "#ffffff",
-}: {
-  size?: number;
-  className?: string;
-  color?: string;
-  diamond?: string;
-}) {
+  accent = "var(--color-accent)",
+}: MarkProps) {
   return (
     <svg
       width={size}
-      height={(size * 66) / 64}
-      viewBox="0 0 64 66"
+      height={size}
+      viewBox="0 0 64 64"
       fill="none"
-      stroke={color}
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
       className={className}
       aria-hidden="true"
     >
-      {/* side petals */}
-      <path d="M32 53 C 19 52, 11 41, 13.5 29 C 21 36, 28 46, 32 53 Z" />
-      <path d="M32 53 C 45 52, 53 41, 50.5 29 C 43 36, 36 46, 32 53 Z" />
-
-      {/* central petal */}
-      <path d="M32 17 C 25 25, 25 46, 32 53 C 39 46, 39 25, 32 17 Z" />
-
-      {/* top diamond */}
+      {/* handle */}
       <path
-        d="M32 2 L33.6 6.4 L38 8 L33.6 9.6 L32 14 L30.4 9.6 L26 8 L30.4 6.4 Z"
-        fill={diamond}
+        d="M22 27c0-6.6 4.5-12 10-12s10 5.4 10 12"
         stroke={color}
-        strokeWidth="0.8"
+        strokeWidth="3.2"
+        strokeLinecap="round"
       />
-
-      {/* inner diamond */}
+      {/* basket body */}
       <path
-        d="M32 30 L33.1 33 L36 34 L33.1 35 L32 38 L30.9 35 L28 34 L30.9 33 Z"
-        fill={diamond}
+        d="M11 27h42l-4.8 27a6 6 0 0 1-5.9 5H21.7a6 6 0 0 1-5.9-5L11 27z"
         stroke={color}
-        strokeWidth="0.7"
+        strokeWidth="3.2"
+        strokeLinejoin="round"
       />
+      {/* weave */}
+      <path
+        d="M19.5 36l2.6 18M32 36v18M44.5 36l-2.6 18"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+        opacity="0.45"
+      />
+      {/* leaf */}
+      <path d="M33 22c0-6.4 4.4-11 9.8-11-1.1 6.6-4.6 10-9.8 11z" fill={accent} />
+      {/* berry */}
+      <circle cx="47" cy="16" r="4.2" fill={accent} />
     </svg>
   );
 }

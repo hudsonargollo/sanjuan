@@ -63,20 +63,20 @@ export function emailSuggestion(value: string): string | null {
 export function emailError(value: string): string | null {
   const v = value.trim();
   if (!v) return "Ingresa tu correo";
-  if (/\s/.test(v)) return "Email can't contain spaces";
+  if (/\s/.test(v)) return "El correo no puede tener espacios";
   const at = v.split("@").length - 1;
-  if (at === 0) return "Email needs an @, like name@example.com";
-  if (at > 1) return "Email can have only one @";
+  if (at === 0) return "Falta el @, por ejemplo nombre@ejemplo.com";
+  if (at > 1) return "El correo solo puede tener un @";
   const [local, domain] = v.split("@");
-  if (!local) return "Add your name before the @";
-  if (!domain) return "Add the domain after the @, like gmail.com";
-  if (/[^a-z.-]/i.test(domain)) return "Use letters only after the @, like gmail.com";
-  if (!domain.includes(".")) return "The domain needs an ending, like .com or .pk";
-  if (v.length > 200 || local.length > 64 || !EMAIL_RE.test(v)) return "Enter a valid email, like name@example.com";
+  if (!local) return "Escribe tu nombre antes del @";
+  if (!domain) return "Agrega el dominio después del @, por ejemplo gmail.com";
+  if (/[^a-z.-]/i.test(domain)) return "Usa solo letras después del @, por ejemplo gmail.com";
+  if (!domain.includes(".")) return "Al dominio le falta una terminación, por ejemplo .com o .bo";
+  if (v.length > 200 || local.length > 64 || !EMAIL_RE.test(v)) return "Ingresa un correo válido, por ejemplo nombre@ejemplo.com";
   const tld = domain.slice(domain.lastIndexOf(".") + 1).toLowerCase();
   const fix = emailSuggestion(v);
-  if (fix) return `Did you mean ${fix}?`;
-  if (tld.length !== 2 && !GENERIC_TLDS.has(tld)) return `".${tld}" isn't a real email ending — check it (e.g. .com, .pk)`;
+  if (fix) return `¿Quisiste decir ${fix}?`;
+  if (tld.length !== 2 && !GENERIC_TLDS.has(tld)) return `".${tld}" no es una terminación real: revísala (ej. .com, .bo)`;
   return null;
 }
 
@@ -86,52 +86,51 @@ export const NAME_RE = /^\p{L}[\p{L}\p{M} .'-]*$/u;
 
 export function nameError(value: string): string | null {
   const v = value.trim();
-  if (!v) return "Please enter your name";
-  if (v.length < 2) return "Name is too short";
-  if (v.length > 120) return "Name is too long";
-  if (!NAME_RE.test(v)) return "Use letters only (spaces, . ' - are fine)";
+  if (!v) return "Ingresa tu nombre";
+  if (v.length < 2) return "El nombre es muy corto";
+  if (v.length > 120) return "El nombre es muy largo";
+  if (!NAME_RE.test(v)) return "Usa solo letras (espacios, . ' - están bien)";
   return null;
 }
 
-// Phone / WhatsApp. Boliviai mobiles in any usual form — 03XX XXXXXXX,
-// 92 3XX XXXXXXX or +92 3XX XXXXXXX — or any number with a "+" country code
-// (E.164: 8–15 digits). Spaces and dashes are fine while typing.
+// Phone / WhatsApp. Bolivian numbers in any usual form — 71234567,
+// 071234567, 591 71234567 or +591 71234567 — or any number with a "+" country
+// code (E.164: 8–15 digits). Spaces and dashes are fine while typing.
 export const PHONE_RE = /^\+[1-9]\d{7,14}$/;
 
-/** Saved form: "0300 1234567" / "92 300-1234567" → "+923001234567"; others lose spaces / dashes. */
+/** Saved form: "071234567" / "591-71234567" → "+59171234567"; others lose spaces / dashes. */
 export function normalizePhone(value: string): string {
   const v = value.trim().replace(/[\s-]/g, "");
-  if (/^03\d{9}$/.test(v)) return `+92${v.slice(1)}`;
-  if (/^923\d{9}$/.test(v)) return `+${v}`;
+  if (/^0\d{8}$/.test(v)) return `+591${v.slice(1)}`;
+  if (/^591\d{8}$/.test(v)) return `+${v}`;
   return v;
 }
 
 export function phoneError(value: string): string | null {
   const v = value.trim().replace(/[\s-]/g, "");
-  if (!v) return "Please enter your phone / WhatsApp number";
-  if (!/^\+?\d+$/.test(v)) return "Use numbers only (a + at the start is fine)";
-  if (v.startsWith("0")) return /^03\d{9}$/.test(v) ? null : "Mobile numbers look like 03XX XXXXXXX (11 digits)";
-  if (v.startsWith("+920")) return "Drop the 0 after +92, like +92 300 1234567";
-  if (v.startsWith("92")) return /^923\d{9}$/.test(v) ? null : "Numbers with 92 look like 92 3XX XXXXXXX";
-  if (v.startsWith("+92")) return /^\+923\d{9}$/.test(v) ? null : "Boliviai mobile numbers look like +92 3XX XXXXXXX";
-  if (!v.startsWith("+")) return "Start with 03, 92 or your country code (like +44)";
-  return PHONE_RE.test(v) ? null : "Enter a full number with country code, like +44 7911 123456";
+  if (!v) return "Ingresa tu teléfono o WhatsApp";
+  if (!/^\+?\d+$/.test(v)) return "Usa solo números (puedes empezar con +)";
+  if (v.startsWith("0")) return /^0\d{8}$/.test(v) ? null : "Los números en Bolivia tienen 8 dígitos, como 71234567";
+  if (v.startsWith("591")) return /^591\d{8}$/.test(v) ? null : "El código de Bolivia es +591, como +591 71234567";
+  if (v.startsWith("+591")) return /^\+591\d{8}$/.test(v) ? null : "El código de Bolivia es +591, como +591 71234567";
+  if (!v.startsWith("+")) return "Empieza con 0, 591 o tu código de país (como +44)";
+  return PHONE_RE.test(v) ? null : "Escribe el número completo con código de país, como +591 71234567";
 }
 
 /** The checklist shown under a new-password field. */
 export function passwordRules(value: string) {
   return [
-    { id: "length", label: `At least ${MIN_PASSWORD} characters`, ok: value.length >= MIN_PASSWORD },
-    { id: "letter", label: "A letter", ok: /\p{L}/u.test(value) },
-    { id: "number", label: "A number", ok: /\d/.test(value) },
+    { id: "length", label: `Al menos ${MIN_PASSWORD} caracteres`, ok: value.length >= MIN_PASSWORD },
+    { id: "letter", label: "Una letra", ok: /\p{L}/u.test(value) },
+    { id: "number", label: "Un número", ok: /\d/.test(value) },
   ];
 }
 
 export function newPasswordError(value: string): string | null {
-  if (!value) return "Please choose a password";
-  if (value.length > 200) return "Password is too long";
+  if (!value) return "Elige una contraseña";
+  if (value.length > 200) return "La contraseña es muy larga";
   const missing = passwordRules(value).find((r) => !r.ok);
-  return missing ? `Password needs ${missing.label.toLowerCase()}` : null;
+  return missing ? `La contraseña necesita ${missing.label.toLowerCase()}` : null;
 }
 
 /** 0–4: drives the strength meter (rules met, plus a bonus for length / symbols). */

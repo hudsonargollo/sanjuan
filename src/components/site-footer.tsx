@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Emblem } from "./brand/emblem";
 import { type StoreSettings, whatsappUrl, phoneHref } from "@/lib/settings-shared";
 import { EmailLink } from "./email-link";
 import { InstagramIcon } from "@/components/icons";
@@ -10,7 +9,7 @@ import { InstagramIcon } from "@/components/icons";
 const NAV = [
   { label: "Inicio", href: "/" },
   { label: "Productos", href: "/shop" },
-  { label: "Cuidado personal", href: "/about" },
+  { label: "Nosotros", href: "/about" },
   { label: "Contacto", href: "/contact" },
 ];
 
@@ -18,14 +17,14 @@ const HELP = [
   { label: "Estado de pedido", href: "/account/orders" },
   { label: "Envíos y devoluciones", href: "/shipping" },
   { label: "Guía de cuidado", href: "/care" },
-  { label: "Preguntas", href: "/faq" },
+  { label: "Preguntas frecuentes", href: "/faq" },
 ];
 
 const TRUST = [
   "Pago contra entrega",
-  "Checkout seguro",
-  "Envío a todo el país",
-  "Calidad premium garantizada",
+  "Entrega el mismo día",
+  "Atención por WhatsApp",
+  "Frescos garantizados",
 ];
 
 export function SiteFooter({ settings }: { settings: StoreSettings }) {
@@ -38,24 +37,31 @@ export function SiteFooter({ settings }: { settings: StoreSettings }) {
   return (
     <footer
       className="relative overflow-hidden text-light/80"
-      style={{ background: "linear-gradient(180deg, #3d1019 0%, #2a0b12 100%)" }}
+      style={{ background: "linear-gradient(180deg, #16452a 0%, #0e2f1c 100%)" }}
     >
-      {/* gold top accent + soft glow */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-[rgba(214,178,104,0.6)] to-transparent" />
+      {/* accent top line + soft glow */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-[rgba(255,162,92,0.7)] to-transparent" />
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-56"
-        style={{ background: "radial-gradient(50% 100% at 50% 0%, rgba(214,178,104,0.10), transparent 70%)" }}
+        style={{ background: "radial-gradient(50% 100% at 50% 0%, rgba(255,162,92,0.12), transparent 70%)" }}
       />
 
       <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-12 md:gap-10">
         {/* Brand + socials */}
         <div className="flex flex-col items-center text-center md:col-span-4 md:items-start md:text-left">
-          <div className="flex items-center gap-2.5">
-            <img src="/images/sanjuan-icon.webp" alt="SanJuan Mini Market" className="h-9 w-9" />
-            <span className="gold-text font-serif text-2xl font-bold tracking-[0.24em]">SanJuan Mini Market</span>
-          </div>
+          <Link href="/" aria-label="SanJuan Mini Market — inicio" className="inline-flex">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/sanjuan-logo-dark.webp"
+              alt="SanJuan Mini Market"
+              width={150}
+              height={48}
+              className="h-12 w-auto"
+            />
+          </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-light/60">
-            Productos de higiene y cuidado personal premium — calidad garantizada y envío a todo el país.
+            Lácteos, yogures, crema, mantequilla y productos de limpieza para tu día a día
+            — con entrega el mismo día en Buena Vista.
           </p>
           <div className="mt-6 flex gap-3">
             {CONTACT.instagram && (
@@ -81,8 +87,8 @@ export function SiteFooter({ settings }: { settings: StoreSettings }) {
             {CONTACT.email && (
               <EmailLink
                 email={CONTACT.email}
-                ariaLabel="Email"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(230,205,139,0.35)] text-light/80 transition hover:border-gold hover:bg-gold hover:text-maroon"
+                ariaLabel="Correo"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(255,162,92,0.35)] text-light/80 transition hover:border-accent hover:bg-accent hover:text-brand-deep"
               >
                 <MailIcon />
               </EmailLink>
@@ -98,21 +104,21 @@ export function SiteFooter({ settings }: { settings: StoreSettings }) {
 
         {/* Contact */}
         <div className="flex flex-col items-center text-center md:col-span-3 md:items-start md:text-left">
-          <h3 className="eyebrow mb-4 text-gold">Contáctanos</h3>
+          <h3 className="eyebrow mb-4 text-accent-soft">Contáctanos</h3>
           <ul className="space-y-3 text-sm text-light/70">
             <li className="flex items-center justify-center gap-2.5 md:justify-start">
               <PinIcon /> {CONTACT.city}
             </li>
             {CONTACT.email && (
               <li>
-                <EmailLink email={CONTACT.email} className="flex items-center justify-center gap-2.5 transition-colors hover:text-gold md:justify-start">
+                <EmailLink email={CONTACT.email} className="flex items-center justify-center gap-2.5 transition-colors hover:text-accent-soft md:justify-start">
                   <MailIcon /> {CONTACT.email}
                 </EmailLink>
               </li>
             )}
             {CONTACT.phone && (
               <li>
-                <a href={CONTACT.phoneHref} className="flex items-center justify-center gap-2.5 transition-colors hover:text-gold md:justify-start">
+                <a href={CONTACT.phoneHref} className="flex items-center justify-center gap-2.5 transition-colors hover:text-accent-soft md:justify-start">
                   <PhoneIcon /> {CONTACT.phone}
                 </a>
               </li>
@@ -121,7 +127,7 @@ export function SiteFooter({ settings }: { settings: StoreSettings }) {
               <ClockIcon /> {CONTACT.hours}
             </li>
             <li>
-              <Link href="/contact" className="flex items-center justify-center gap-2.5 transition-colors hover:text-gold md:justify-start">
+              <Link href="/contact" className="flex items-center justify-center gap-2.5 transition-colors hover:text-accent-soft md:justify-start">
                 <MailIcon /> Envíanos un mensaje
               </Link>
             </li>
@@ -130,11 +136,11 @@ export function SiteFooter({ settings }: { settings: StoreSettings }) {
       </div>
 
       {/* Trust strip */}
-      <div className="relative border-t border-[rgba(230,205,139,0.15)]">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-6 py-4 text-[0.68rem] uppercase tracking-[0.18em] text-light/55">
+      <div className="relative border-t border-[rgba(255,162,92,0.18)]">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-6 py-4 text-[0.68rem] uppercase tracking-[0.16em] text-light/55">
           {TRUST.map((t) => (
             <span key={t} className="flex items-center gap-1.5">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2.4">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-soft)" strokeWidth="2.4">
                 <path d="M5 12l5 5L20 6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               {t}
@@ -144,10 +150,10 @@ export function SiteFooter({ settings }: { settings: StoreSettings }) {
       </div>
 
       {/* Bottom bar */}
-      <div className="relative border-t border-[rgba(230,205,139,0.15)]">
+      <div className="relative border-t border-[rgba(255,162,92,0.18)]">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-5 text-center text-xs text-light/45 sm:flex-row sm:text-left">
           <span>© {new Date().getFullYear()} SanJuan Mini Market. Todos los derechos reservados.</span>
-          <span>Productos premium · Calidad garantizada</span>
+          <span>Hecho en Buena Vista, Santa Cruz · Compra local</span>
         </div>
       </div>
     </footer>
@@ -165,14 +171,14 @@ function FooterCol({
 }) {
   return (
     <nav className={`flex flex-col items-center gap-3 text-center md:items-start md:text-left ${className}`}>
-      <h3 className="eyebrow mb-1 text-gold">{title}</h3>
+      <h3 className="eyebrow mb-1 text-accent-soft">{title}</h3>
       {links.map((l) => (
         <Link
           key={l.href}
           href={l.href}
-          className="group inline-flex items-center gap-2 text-sm text-light/70 transition-colors hover:text-gold"
+          className="group inline-flex items-center gap-2 text-sm text-light/70 transition-colors hover:text-accent-soft"
         >
-          <span className="h-px w-0 bg-gold transition-all duration-300 group-hover:w-4" />
+          <span className="h-px w-0 bg-accent-soft transition-all duration-300 group-hover:w-4" />
           {l.label}
         </Link>
       ))}
@@ -195,7 +201,7 @@ function Social({
       // Web profiles open in a new tab; mailto:/tel: open the mail/phone app directly.
       {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       aria-label={label}
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(230,205,139,0.35)] text-light/80 transition hover:border-gold hover:bg-gold hover:text-maroon"
+      className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(255,162,92,0.35)] text-light/80 transition hover:border-accent hover:bg-accent hover:text-brand-deep"
     >
       {children}
     </a>

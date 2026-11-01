@@ -1,14 +1,14 @@
 // Options for the custom-design request form (shared by the form + server action).
-export const PIECE_TYPES = ["Box / set", "Bottle / pump", "Bar / soap", "Wipes / towel", "Other"] as const;
-export const FINISHES = ["Matte", "Glossy", "Fragrance-free", "Scented", "Not sure yet"] as const;
-export const BUDGETS = ["Under Bs 3,000", "Bs 3,000 – 6,000", "Bs 6,000 – 10,000", "Bs 10,000+", "Not sure yet"] as const;
+export const PIECE_TYPES = ["Lácteos", "Limpieza", "Hogar", "Pedido por volumen", "Otro"] as const;
+export const FINISHES = ["Unidad", "Pack x6", "Pack x12", "Caja", "No estoy seguro"] as const;
+export const BUDGETS = ["Menos de Bs 100", "Bs 100 – 300", "Bs 300 – 600", "Bs 600 o más", "No estoy seguro"] as const;
 
 // Reference photos attached to a custom-design request.
 export const MAX_REFERENCE_PHOTOS = 3;
 /** Per photo, after the browser shrinks it (originals it can't shrink must fit too). */
 export const MAX_REFERENCE_BYTES = 3 * 1024 * 1024;
 /** Heading the server writes above the photo links in the saved message. */
-export const REFERENCE_PHOTOS_HEADING = "Reference photos:";
+export const REFERENCE_PHOTOS_HEADING = "Fotos de referencia:";
 
 // Only links to our own reference uploads are treated as photos (a customer
 // could type the heading into their description).

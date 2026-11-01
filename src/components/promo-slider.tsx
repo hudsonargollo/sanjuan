@@ -4,40 +4,65 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Emblem } from "./brand/emblem";
 
-// Editorial lookbook & statement-productos shots. Horizontal sliding carousel
-// (auto right→left) with a seamless two-way infinite loop and manual arrows.
-// Split layout: text on the maroon panel, photo in its own frame so the
-// productos is always fully visible. `focus` sets the vertical crop point
-// (where the productos sits in each photo).
-const SLIDES: { src: string; focus: string }[] = [
-  { src: "/images/promo/promo-01.webp", focus: "center 60%" },
-  { src: "/images/promo/promo-02.webp", focus: "center 42%" },
-  { src: "/images/promo/promo-03.webp", focus: "center 66%" },
-  { src: "/images/promo/promo-04.webp", focus: "center 60%" },
-  { src: "/images/promo/promo-05.webp", focus: "center 55%" },
-  { src: "/images/promo/promo-06.webp", focus: "center 48%" },
-  { src: "/images/promo/promo-07.webp", focus: "center 44%" },
-  { src: "/images/promo/promo-08.webp", focus: "center 58%" },
-  { src: "/images/promo/promo-09.webp", focus: "center 40%" },
-  { src: "/images/promo/promo-10.webp", focus: "center 55%" },
-  { src: "/images/promo/promo-11.webp", focus: "center 64%" },
-  { src: "/images/promo/promo-12.webp", focus: "center 55%" },
-  { src: "/images/promo/promo-13.webp", focus: "center 45%" }, // cream bottle in frame
-  { src: "/images/promo/promo-14.webp", focus: "center 52%" }, // suavizante & crema
-  { src: "/images/promo/promo-15.webp", focus: "center 52%" }, // detergentes & suavizantes
-  { src: "/images/promo/promo-16.webp", focus: "center 42%" }, // mantequilla & lácteos
+// Weekly-offer carousel: the copy and the photography rotate together like a
+// slideshow (seamless two-way loop, arrows, dots, autoplay progress, pause).
+const SLIDES: {
+  src: string;
+  focus: string;
+  label: string;
+  title: string;
+  copy: string;
+  cta: string;
+  href: string;
+}[] = [
+  {
+    src: "/images/cat-leches.webp",
+    focus: "center 55%",
+    label: "Lácteos frescos",
+    title: "Leche fresca, todos los días",
+    copy: "Leche entera, enriquecida y chocolatada de las marcas de siempre, con rotación diaria y entrega el mismo día en Buena Vista.",
+    cta: "Ver lácteos",
+    href: "/shop/leches",
+  },
+  {
+    src: "/images/cat-yogurts.webp",
+    focus: "center 50%",
+    label: "Yogures y postres",
+    title: "Yogures para toda la familia",
+    copy: "Frutados, bebibles y en vaso: el postre que siempre falta en la heladera, a un clic de tu puerta.",
+    cta: "Ver yogures",
+    href: "/shop/yogurts",
+  },
+  {
+    src: "/images/cat-crema.webp",
+    focus: "center 50%",
+    label: "Crema y mantequilla",
+    title: "El desayuno completo",
+    copy: "Crema de queso para untar y mantequilla PIL en el formato que necesitas, listas para el pan de la mañana.",
+    cta: "Ver crema y mantequilla",
+    href: "/shop/crema-mantequilla",
+  },
+  {
+    src: "/images/cat-limpieza.webp",
+    focus: "center 50%",
+    label: "Limpieza del hogar",
+    title: "Tu casa impecable, sin salir",
+    copy: "Detergentes y suavizantes de Ariel, Skip, Olas y Borita con precios de barrio y pago contra entrega.",
+    cta: "Ver limpieza",
+    href: "/shop/limpieza",
+  },
 ];
 
-const INTERVAL = 4500;
+const INTERVAL = 5200;
 const N = SLIDES.length;
 const TOTAL = N + 2; // clones at both ends for a seamless two-way loop
-// [ lastClone, slide0 … slideN-1, firstClone ]
 const TRACK = [SLIDES[N - 1], ...SLIDES, SLIDES[0]];
 
 export function PromoSlider() {
   const [index, setIndex] = useState(1); // 1..N are the real slides
   const [anim, setAnim] = useState(true);
-  const paused = useRef(false);
+  const [playing, setPlaying] = useState(true);
+  const [hovered, setHovered] = useState(false);
   const touchX = useRef<number | null>(null);
 
   const goNext = useCallback(() => {
@@ -49,13 +74,11 @@ export function PromoSlider() {
     setIndex((i) => i - 1);
   }, []);
 
-  // autoplay
   useEffect(() => {
-    const id = setInterval(() => {
-      if (!paused.current) goNext();
-    }, INTERVAL);
+    if (!playing || hovered) return;
+    const id = setInterval(goNext, INTERVAL);
     return () => clearInterval(id);
-  }, [goNext]);
+  }, [playing, hovered, goNext]);
 
   // re-enable animation on the frame after a seamless snap disabled it
   useEffect(() => {
@@ -68,100 +91,139 @@ export function PromoSlider() {
   const handleTransitionEnd = () => {
     if (index === TOTAL - 1) {
       setAnim(false);
-      setIndex(1); // firstClone → real first slide
+      setIndex(1);
     } else if (index === 0) {
       setAnim(false);
-      setIndex(N); // lastClone → real last slide
+      setIndex(N);
     }
   };
 
   const activeDot = (index - 1 + N) % N;
+  const slide = SLIDES[activeDot];
+  const autoplaying = playing && !hovered;
 
   return (
     <section
-      className="relative overflow-hidden bg-maroon text-light"
-      onMouseEnter={() => (paused.current = true)}
-      onMouseLeave={() => (paused.current = false)}
+      className="relative overflow-hidden bg-brand text-light"
+      onMouseEnter={() => {
+        if (window.matchMedia("(hover: hover)").matches) setHovered(true);
+      }}
+      onMouseLeave={() => setHovered(false)}
     >
       <div className="grid items-stretch lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
         {/* ── Text panel ── */}
         <div className="relative z-10 order-2 flex flex-col items-center justify-center px-6 py-16 text-center lg:order-1 lg:items-start lg:px-14 lg:py-24 lg:text-left">
-          <Emblem size={40} className="text-gold" />
-          <span className="eyebrow mt-4 block text-gold">Signature edit</span>
-          <h2 className="mt-3 font-serif text-4xl font-bold sm:text-5xl">
-            Nueva temporada para tu casa
-          </h2>
-          <p className="mt-4 max-w-md text-light/80">
-            From everyday essentials to the little luxuries — a curated collection
-            for your home and routine.</p>
+          <Emblem size={40} className="text-accent-soft" />
 
-          <Link
-            href="/shop"
-            className="mt-8 inline-block rounded-full bg-gradient-to-r from-gold-hi to-gold px-9 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-maroon shadow-[0_14px_34px_-14px_rgba(230,205,139,0.7)] transition hover:opacity-90"
-          >
-            Explorar el catálogo
-          </Link>
+          <div key={activeDot} className="contents">
+            <span className="slide-text-in eyebrow mt-4 block text-accent-soft">
+              Ofertas de la semana
+            </span>
+            <h2
+              className="slide-text-in mt-3 max-w-[16ch] font-display text-4xl font-extrabold tracking-tight text-balance sm:text-5xl"
+              style={{ animationDelay: "60ms" }}
+            >
+              {slide.title}
+            </h2>
+            <p
+              className="slide-text-in mt-4 max-w-md text-pretty text-light/80"
+              style={{ animationDelay: "130ms" }}
+            >
+              {slide.copy}
+            </p>
 
-          {/* Controls — one row under the CTA (never on top of the photo):
-              ‹  03 / 16 + progress (mobile/tablet) or dots (desktop)  › */}
-          <div className="mt-9 flex w-full max-w-[17rem] items-center justify-center gap-4 sm:max-w-xs lg:max-w-none lg:justify-start">
+            <Link
+              href={slide.href}
+              className="slide-text-in mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-9 py-3.5 text-sm font-bold text-brand-deep shadow-[0_18px_40px_-16px_rgba(239,125,31,0.9)] transition duration-300 hover:-translate-y-0.5 hover:bg-accent-soft"
+              style={{ animationDelay: "200ms" }}
+            >
+              {slide.cta}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </div>
+
+          {/* Controls — arrows, progress, dots, pause */}
+          <div className="mt-9 flex w-full max-w-[18rem] items-center justify-center gap-3 sm:max-w-xs lg:max-w-none lg:justify-start">
             <ArrowButton dir="prev" onClick={goPrev} />
 
-            {/* Compact counter + progress for small screens */}
             <div className="flex min-w-0 flex-1 flex-col items-center gap-2 lg:hidden" aria-live="polite">
-              <span className="font-serif text-sm tracking-[0.2em] text-light/85 [font-variant-numeric:tabular-nums]">
-                <span className="text-gold">{String(activeDot + 1).padStart(2, "0")}</span>
+              <span className="font-display text-sm font-semibold tracking-[0.12em] text-light/85 [font-variant-numeric:tabular-nums]">
+                <span className="text-accent-soft">{String(activeDot + 1).padStart(2, "0")}</span>
                 <span className="mx-1.5 text-light/40">/</span>
                 {String(N).padStart(2, "0")}
               </span>
               <span className="h-0.5 w-full max-w-[9rem] overflow-hidden rounded-full bg-light/20">
                 <span
-                  className="block h-full rounded-full bg-gold transition-[width] duration-700"
-                  style={{ width: `${((activeDot + 1) / N) * 100}%` }}
+                  key={`${activeDot}-${autoplaying}`}
+                  className={`block h-full origin-left rounded-full bg-accent ${autoplaying ? "gallery-progress" : "w-full"}`}
+                  style={
+                    autoplaying
+                      ? ({ "--gal-dur": `${INTERVAL}ms` } as React.CSSProperties)
+                      : undefined
+                  }
                 />
               </span>
             </div>
 
-            {/* Dots on desktop */}
             <div className="hidden flex-wrap items-center gap-2 lg:flex">
-              {SLIDES.map((_, i) => (
+              {SLIDES.map((s, i) => (
                 <button
-                  key={i}
+                  key={s.label}
+                  type="button"
                   onClick={() => {
                     setAnim(true);
                     setIndex(i + 1);
                   }}
-                  aria-label={`Go to slide ${i + 1}`}
+                  aria-label={`Ir a ${s.label}`}
                   aria-current={i === activeDot}
+                  title={s.label}
                   className={`h-2 rounded-full transition-all ${
-                    i === activeDot ? "w-7 bg-gold" : "w-2 bg-light/40 hover:bg-light/70"
+                    i === activeDot ? "w-7 bg-accent" : "w-2 bg-light/40 hover:bg-light/70"
                   }`}
                 />
               ))}
             </div>
 
             <ArrowButton dir="next" onClick={goNext} />
+            <button
+              type="button"
+              onClick={() => setPlaying((p) => !p)}
+              aria-label={playing ? "Pausar las ofertas" : "Reproducir las ofertas"}
+              aria-pressed={!playing}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-light/70 transition hover:bg-light/10 hover:text-accent-soft"
+            >
+              {playing ? (
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <rect x="6" y="4" width="4" height="16" rx="1" />
+                  <rect x="14" y="4" width="4" height="16" rx="1" />
+                </svg>
+              ) : (
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M7 4.5v15l13-7.5z" />
+                </svg>
+              )}
+            </button>
           </div>
         </div>
 
         {/* ── Image slider ── */}
         <div
           className="relative order-1 min-h-[62vh] touch-pan-y overflow-hidden lg:order-2 lg:min-h-[600px]"
-          // Swipe left/right on touch screens
           onTouchStart={(e) => {
             touchX.current = e.touches[0].clientX;
-            paused.current = true;
+            setHovered(true);
           }}
           onTouchEnd={(e) => {
             const start = touchX.current;
             touchX.current = null;
-            paused.current = false;
+            setHovered(false);
             if (start == null) return;
             const dx = e.changedTouches[0].clientX - start;
             if (Math.abs(dx) > 40) (dx < 0 ? goNext : goPrev)();
           }}
         >
-          {/* Sliding track */}
           <div
             className="flex h-full"
             onTransitionEnd={handleTransitionEnd}
@@ -171,35 +233,35 @@ export function PromoSlider() {
               transition: anim ? "transform 900ms cubic-bezier(0.4,0,0.2,1)" : "none",
             }}
           >
-            {TRACK.map((slide, i) => (
+            {TRACK.map((s, i) => (
               <div
                 key={i}
                 aria-hidden="true"
                 className="h-full bg-cover"
                 style={{
                   width: `${100 / TOTAL}%`,
-                  // Lazy: only the visible slide and its neighbours download
-                  // (was all 16 photos on page load). Revisits come from cache.
-                  backgroundImage: Math.abs(i - index) <= 1 ? `url(${slide.src})` : undefined,
-                  backgroundPosition: slide.focus,
+                  backgroundImage: Math.abs(i - index) <= 1 ? `url(${s.src})` : undefined,
+                  backgroundPosition: s.focus,
                 }}
               />
             ))}
           </div>
 
-          {/* Light vignette for depth + seam blend toward the maroon panel */}
           <div
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, rgba(61,16,25,0.55) 0%, rgba(61,16,25,0.12) 22%, rgba(61,16,25,0) 45%), linear-gradient(180deg, rgba(38,8,16,0.18) 0%, rgba(38,8,16,0.28) 100%)",
+                "linear-gradient(90deg, rgba(14,47,28,0.65) 0%, rgba(14,47,28,0.15) 24%, rgba(14,47,28,0) 48%), linear-gradient(180deg, rgba(14,47,28,0.10) 0%, rgba(14,47,28,0.30) 100%)",
             }}
           />
+          <span className="absolute bottom-6 right-6 rounded-full bg-cream/90 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-brand-deep">
+            {slide.label}
+          </span>
         </div>
       </div>
 
-      {/* Thin gold inset frame around the whole band */}
-      <div className="pointer-events-none absolute inset-4 z-10 border border-[rgba(230,205,139,0.3)] sm:inset-6" />
+      {/* Thin accent inset frame around the whole band */}
+      <div className="pointer-events-none absolute inset-4 z-10 border border-[rgba(255,162,92,0.35)] sm:inset-6" />
     </section>
   );
 }
@@ -209,8 +271,8 @@ function ArrowButton({ dir, onClick }: { dir: "prev" | "next"; onClick: () => vo
     <button
       type="button"
       onClick={onClick}
-      aria-label={dir === "prev" ? "Previous slide" : "Next slide"}
-      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[rgba(230,205,139,0.5)] text-gold transition hover:bg-gold hover:text-maroon focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+      aria-label={dir === "prev" ? "Oferta anterior" : "Oferta siguiente"}
+      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[rgba(255,162,92,0.5)] text-accent-soft transition hover:border-accent hover:bg-accent hover:text-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d={dir === "prev" ? "M15 6l-6 6 6 6" : "M9 6l6 6-6 6"} strokeLinecap="round" strokeLinejoin="round" />

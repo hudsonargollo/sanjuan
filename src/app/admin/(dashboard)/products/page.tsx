@@ -6,7 +6,7 @@ import { DeleteButton } from "@/components/admin/delete-button";
 import { deleteProduct } from "./actions";
 import { requireAdmin } from "@/lib/admin";
 
-export const metadata = { title: "Products" };
+export const metadata = { title: "Productos" };
 
 export const dynamic = "force-dynamic";
 
@@ -17,12 +17,12 @@ export default async function AdminProductsPage() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="font-serif text-3xl font-semibold text-ink">Products</h1>
+        <h1 className="font-display text-3xl font-semibold text-ink">Productos</h1>
         <Link
           href="/admin/products/new"
-          className="rounded-full bg-maroon px-5 py-2.5 text-sm font-medium text-light transition hover:bg-maroon-2"
+          className="rounded-full bg-brand px-5 py-2.5 text-sm font-medium text-light transition hover:bg-brand-dark"
         >
-          + Add product
+          + Agregar producto
         </Link>
       </div>
 
@@ -31,9 +31,9 @@ export default async function AdminProductsPage() {
 
         {products.length === 0 ? (
           <div className="rounded-xl border border-dashed border-[var(--line)] bg-cream-soft py-16 text-center">
-            <p className="font-serif text-xl text-ink">No products yet</p>
+            <p className="font-display text-xl text-ink">Aún no hay productos</p>
             <p className="mt-1 text-sm text-muted">
-              {dbConnected ? "Add your first product to get started." : "Connect the database to manage products."}
+              {dbConnected ? "Agrega tu primer producto para empezar." : "Conecta la base de datos para gestionar productos."}
             </p>
           </div>
         ) : (
@@ -41,12 +41,12 @@ export default async function AdminProductsPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-[var(--line)] text-left text-xs uppercase tracking-wider text-muted">
-                  <th className="px-4 py-3">Name</th>
-                  <th className="px-4 py-3">Category</th>
-                  <th className="px-4 py-3">Price</th>
+                  <th className="px-4 py-3">Nombre</th>
+                  <th className="px-4 py-3">Categoría</th>
+                  <th className="px-4 py-3">Precio</th>
                   <th className="px-4 py-3">Stock</th>
-                  <th className="px-4 py-3">Status</th>
-                  <th className="px-4 py-3 text-right">Actions</th>
+                  <th className="px-4 py-3">Estado</th>
+                  <th className="px-4 py-3 text-right">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -55,7 +55,7 @@ export default async function AdminProductsPage() {
                     <td className="px-4 py-3">
                       <span className="font-medium text-ink">{p.name}</span>
                       {p.featured && (
-                        <span className="ml-2 rounded-full bg-gold/20 px-2 py-0.5 text-[0.65rem] text-gold-deep">
+                        <span className="ml-2 rounded-full bg-accent/20 px-2 py-0.5 text-[0.65rem] text-accent-strong">
                           Destacado
                         </span>
                       )}
@@ -69,17 +69,17 @@ export default async function AdminProductsPage() {
                           p.active ? "bg-green-100 text-green-800" : "bg-gray-200 text-gray-600"
                         }`}
                       >
-                        {p.active ? "Active" : "Hidden"}
+                        {p.active ? "Activo" : "Oculto"}
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-end gap-4">
-                        <Link href={`/admin/products/${p.id}`} className="text-sm text-gold-deep hover:underline">
-                          Edit
+                        <Link href={`/admin/products/${p.id}`} className="text-sm text-accent-strong hover:underline">
+                          Editar
                         </Link>
                         <DeleteButton
                           action={deleteProduct.bind(null, p.id)}
-                          confirmText={`Delete "${p.name}"?`}
+                          confirmText={`¿Eliminar «${p.name}»?`}
                         />
                       </div>
                     </td>

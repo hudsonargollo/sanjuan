@@ -31,7 +31,7 @@ async function login(_prev: LoginState, formData: FormData): Promise<LoginState>
       error:
         res.reason === "db"
           ? "No puedo acceder a la base de datos ahora, no puedes iniciar sesión. Intenta de nuevo en un minuto."
-          : "Invalid email or password.",
+          : "Correo o contraseña incorrectos.",
     };
   }
 

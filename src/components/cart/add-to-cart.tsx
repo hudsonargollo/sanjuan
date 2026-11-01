@@ -20,7 +20,7 @@ export function AddToCart({ product }: { product: Omit<CartItem, "quantity"> }) 
     toast.success(`${qty} × ${product.name} agregado a tu carrito`, { title: "Agregado al carrito" });
   }
 
-  // Checks out just this piece (the rest of the cart is left untouched).
+  // Checks out just this product (the rest of the cart is left untouched).
   function handleBuyNow() {
     router.push(`/checkout?buy=${encodeURIComponent(product.slug)}&qty=${qty}`);
   }
@@ -31,7 +31,7 @@ export function AddToCart({ product }: { product: Omit<CartItem, "quantity"> }) 
         disabled
         className="w-full cursor-not-allowed rounded-full border border-[var(--line)] px-8 py-3.5 text-sm font-medium tracking-wide text-muted"
       >
-        Sold out
+        Agotado
       </button>
     );
   }
@@ -43,8 +43,8 @@ export function AddToCart({ product }: { product: Omit<CartItem, "quantity"> }) 
           <button
             type="button"
             onClick={() => setQty((q) => Math.max(1, q - 1))}
-            className="px-4 py-3 text-lg text-ink transition hover:text-gold-deep"
-            aria-label="Decrease quantity"
+            className="px-4 py-3 text-lg text-ink transition hover:text-accent-strong"
+            aria-label="Quitar una unidad"
           >
             −
           </button>
@@ -52,8 +52,8 @@ export function AddToCart({ product }: { product: Omit<CartItem, "quantity"> }) 
           <button
             type="button"
             onClick={() => setQty((q) => Math.min(product.stock, q + 1))}
-            className="px-4 py-3 text-lg text-ink transition hover:text-gold-deep"
-            aria-label="Increase quantity"
+            className="px-4 py-3 text-lg text-ink transition hover:text-accent-strong"
+            aria-label="Agregar una unidad"
           >
             +
           </button>
@@ -62,7 +62,7 @@ export function AddToCart({ product }: { product: Omit<CartItem, "quantity"> }) 
         <button
           type="button"
           onClick={handleAdd}
-          className="flex-1 rounded-full border border-[var(--line-strong)] bg-surface px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-ink transition hover:border-gold hover:text-gold-deep"
+          className="flex-1 rounded-full border border-[var(--line-strong)] bg-surface px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-ink transition hover:border-accent hover:text-accent-strong"
         >
           {added ? "Agregado al carrito ✓" : "Agregar al carrito"}
         </button>
@@ -71,9 +71,9 @@ export function AddToCart({ product }: { product: Omit<CartItem, "quantity"> }) 
       <button
         type="button"
         onClick={handleBuyNow}
-        className="w-full rounded-full bg-gradient-to-r from-gold-hi to-gold px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-maroon shadow-[0_14px_34px_-14px_rgba(169,126,48,0.7)] transition hover:opacity-90"
+        className="w-full rounded-full bg-gradient-to-r from-accent-soft to-accent px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.08em] text-brand shadow-[0_14px_34px_-14px_rgba(239,125,31,0.7)] transition hover:opacity-90"
       >
-        Buy it now
+        Comprar ahora
       </button>
     </div>
   );

@@ -50,10 +50,10 @@ function itemsTable(o: OrderEmailData): string {
     .map(
       (i) => `
       <tr>
-        <td style="padding:8px 0;border-bottom:1px solid #eadfce;color:#3a231e">
-          ${escape(i.name)} <span style="color:#8a6f63">× ${i.quantity}</span>
+        <td style="padding:8px 0;border-bottom:1px solid #eef5ea;color:#1c2b20">
+          ${escape(i.name)} <span style="color:#5c735f">× ${i.quantity}</span>
         </td>
-        <td style="padding:8px 0;border-bottom:1px solid #eadfce;text-align:right;color:#3a231e">
+        <td style="padding:8px 0;border-bottom:1px solid #eef5ea;text-align:right;color:#1c2b20">
           ${formatPrice(i.price * i.quantity)}
         </td>
       </tr>`
@@ -63,26 +63,26 @@ function itemsTable(o: OrderEmailData): string {
   return `
     <table style="width:100%;border-collapse:collapse;font-size:14px">
       ${rows}
-      <tr><td style="padding:8px 0;color:#8a6f63">Subtotal</td><td style="padding:8px 0;text-align:right;color:#3a231e">${formatPrice(o.subtotal)}</td></tr>
-      <tr><td style="padding:8px 0;color:#8a6f63">Shipping</td><td style="padding:8px 0;text-align:right;color:#3a231e">${o.shipping === 0 ? "Free" : formatPrice(o.shipping)}</td></tr>
-      <tr><td style="padding:12px 0 0;font-weight:700;color:#3a231e">Total</td><td style="padding:12px 0 0;text-align:right;font-weight:700;color:#3a231e">${formatPrice(o.total)}</td></tr>
+      <tr><td style="padding:8px 0;color:#5c735f">Subtotal</td><td style="padding:8px 0;text-align:right;color:#1c2b20">${formatPrice(o.subtotal)}</td></tr>
+      <tr><td style="padding:8px 0;color:#5c735f">Envío</td><td style="padding:8px 0;text-align:right;color:#1c2b20">${o.shipping === 0 ? "Gratis" : formatPrice(o.shipping)}</td></tr>
+      <tr><td style="padding:12px 0 0;font-weight:700;color:#1c2b20">Total</td><td style="padding:12px 0 0;text-align:right;font-weight:700;color:#1c2b20">${formatPrice(o.total)}</td></tr>
     </table>`;
 }
 
 function shell(title: string, inner: string): string {
   return `
-  <div style="background:#f4e8d5;padding:24px;font-family:Arial,Helvetica,sans-serif">
-    <div style="max-width:560px;margin:0 auto;background:#fffaf2;border:1px solid #eadfce;border-radius:12px;overflow:hidden">
-      <div style="background:#5b1a2b;padding:22px;text-align:center">
-        <div style="color:#e6cd8b;font-size:24px;letter-spacing:6px;font-weight:700">SanJuan Mini Market</div>
-        <div style="color:#dcc6ad;font-style:italic;font-size:13px;margin-top:4px">Elaboración premium de SanJuan Mini Market</div>
+  <div style="background:#f6f3e8;padding:24px;font-family:Arial,Helvetica,sans-serif">
+    <div style="max-width:560px;margin:0 auto;background:#fffaf2;border:1px solid #eef5ea;border-radius:12px;overflow:hidden">
+      <div style="background:#1f5b33;padding:22px;text-align:center">
+        <div style="color:#ffa25c;font-size:24px;letter-spacing:6px;font-weight:700">SanJuan Mini Market</div>
+        <div style="color:#dcebdc;font-size:13px;margin-top:4px">Frescos, limpieza y hogar</div>
       </div>
       <div style="padding:28px">
-        <h1 style="margin:0 0 8px;color:#3a231e;font-size:22px">${title}</h1>
+        <h1 style="margin:0 0 8px;color:#1c2b20;font-size:22px">${title}</h1>
         ${inner}
       </div>
-      <div style="background:#5b1a2b;padding:16px;text-align:center;color:#dcc6ad;font-size:12px">
-        Premium Stainless Steel productos · Made to last
+      <div style="background:#1f5b33;padding:16px;text-align:center;color:#dcebdc;font-size:12px">
+        Lácteos, limpieza y hogar · Buena Vista, Santa Cruz
       </div>
     </div>
   </div>`;
@@ -90,21 +90,21 @@ function shell(title: string, inner: string): string {
 
 function customerHtml(o: OrderEmailData): string {
   return shell(
-    "Thank you for your order!",
-    `<p style="color:#3a231e;font-size:14px">Hi ${escape(o.customerName)}, we&rsquo;ve received your order and our team will be in touch shortly.</p>
-     <p style="color:#3a231e;font-size:14px">Order number: <strong>${escape(o.orderNumber)}</strong><br/>
-     Payment: <strong>${escape(o.paymentMethod)}</strong></p>
+    "¡Gracias por tu pedido!",
+    `<p style="color:#1c2b20;font-size:14px">Hola ${escape(o.customerName)}, recibimos tu pedido y nuestro equipo se pondrá en contacto contigo en breve.</p>
+     <p style="color:#1c2b20;font-size:14px">Número de pedido: <strong>${escape(o.orderNumber)}</strong><br/>
+     Pago: <strong>${escape(o.paymentMethod)}</strong></p>
      <div style="margin:18px 0">${itemsTable(o)}</div>
-     <p style="color:#8a6f63;font-size:13px">Delivery to: ${escape(o.address)}, ${escape(o.city)}<br/>Phone: ${escape(o.phone)}</p>
-     ${o.paymentMethod === "COD" ? `<p style="color:#8a6f63;font-size:13px">For Cash on Delivery, please keep the amount ready at delivery.</p>` : ""}`
+     <p style="color:#5c735f;font-size:13px">Entrega en: ${escape(o.address)}, ${escape(o.city)}<br/>Teléfono: ${escape(o.phone)}</p>
+     ${o.paymentMethod === "COD" ? `<p style="color:#5c735f;font-size:13px">Si elegiste pago contra entrega, ten el monto listo al recibir tu pedido.</p>` : ""}`
   );
 }
 
 function adminHtml(o: OrderEmailData): string {
   return shell(
-    "New order received",
-    `<p style="color:#3a231e;font-size:14px">Order <strong>${escape(o.orderNumber)}</strong> — ${formatPrice(o.total)} (${escape(o.paymentMethod)})</p>
-     <p style="color:#3a231e;font-size:14px"><strong>${escape(o.customerName)}</strong><br/>
+    "Nuevo pedido",
+    `<p style="color:#1c2b20;font-size:14px">Pedido <strong>${escape(o.orderNumber)}</strong> — ${formatPrice(o.total)} (${escape(o.paymentMethod)})</p>
+     <p style="color:#1c2b20;font-size:14px"><strong>${escape(o.customerName)}</strong><br/>
      ${escape(o.email)} · ${escape(o.phone)}<br/>
      ${escape(o.address)}, ${escape(o.city)}</p>
      <div style="margin:18px 0">${itemsTable(o)}</div>`
@@ -137,13 +137,13 @@ export async function sendOrderEmails(o: OrderEmailData): Promise<void> {
       transport.sendMail({
         from,
         to: o.email,
-        subject: `Your SanJuan Mini Market order ${o.orderNumber}`,
+        subject: `Tu pedido en SanJuan Mini Market ${o.orderNumber}`,
         html: customerHtml(o),
       }),
       transport.sendMail({
         from,
         to: adminTo,
-        subject: `New order ${o.orderNumber} — ${formatPrice(o.total)}`,
+        subject: `Nuevo pedido ${o.orderNumber} — ${formatPrice(o.total)}`,
         html: adminHtml(o),
       }),
     ]);
@@ -163,12 +163,12 @@ export async function sendPasswordResetEmail(p: { to: string; name: string; url:
     await getTransport().sendMail({
       from,
       to: p.to,
-      subject: "Reset your SanJuan Mini Market password",
+      subject: "Restablece tu contraseña de SanJuan Mini Market",
       html: shell(
-        "Reset your password",
-        `<p style="color:#3a231e;font-size:14px">Hi ${escape(p.name)}, we received a request to reset your password.</p>
-         <p style="margin:22px 0"><a href="${escape(p.url)}" style="background:#5b1a2b;color:#f4e8d5;padding:12px 22px;border-radius:999px;text-decoration:none;font-size:14px">Choose a new password</a></p>
-         <p style="color:#8a6f63;font-size:13px">This link expires in 1 hour and can be used once. If you didn&rsquo;t ask for this, you can ignore this email.</p>`
+        "Restablece tu contraseña",
+        `<p style="color:#1c2b20;font-size:14px">Hola ${escape(p.name)}, recibimos una solicitud para restablecer tu contraseña.</p>
+         <p style="margin:22px 0"><a href="${escape(p.url)}" style="background:#1f5b33;color:#f6f3e8;padding:12px 22px;border-radius:999px;text-decoration:none;font-size:14px">Elegir nueva contraseña</a></p>
+         <p style="color:#5c735f;font-size:13px">Este enlace vence en 1 hora y se puede usar una sola vez. Si no lo solicitaste, puedes ignorar este correo.</p>`
       ),
     });
   } catch (err) {
@@ -193,14 +193,14 @@ export async function sendContactNotification(m: {
       from,
       to,
       replyTo: m.email,
-      subject: `New message: ${m.subject || m.topic || "Contact form"} — ${m.name}`,
+      subject: `Nuevo mensaje: ${m.subject || m.topic || "Formulario de contacto"} — ${m.name}`,
       html: shell(
-        "New contact message",
-        `<p style="color:#3a231e;font-size:14px"><strong>${escape(m.name)}</strong> · ${escape(m.email)}${
+        "Nuevo mensaje de contacto",
+        `<p style="color:#1c2b20;font-size:14px"><strong>${escape(m.name)}</strong> · ${escape(m.email)}${
           m.phone ? ` · ${escape(m.phone)}` : ""
         }</p>
-         ${m.subject ? `<p style="color:#3a231e;font-size:14px"><strong>${escape(m.subject)}</strong></p>` : ""}
-         <p style="color:#3a231e;font-size:14px;white-space:pre-wrap">${escape(m.message)}</p>`
+         ${m.subject ? `<p style="color:#1c2b20;font-size:14px"><strong>${escape(m.subject)}</strong></p>` : ""}
+         <p style="color:#1c2b20;font-size:14px;white-space:pre-wrap">${escape(m.message)}</p>`
       ),
     });
   } catch (err) {
@@ -231,18 +231,18 @@ export async function sendOtpEmail(
     await getTransport().sendMail({
       from,
       to,
-      subject: `${code} is your SanJuan Mini Market verification code`,
-      text: `Your SanJuan Mini Market verification code is ${code}. It expires in 10 minutes. If you didn't request it, you can ignore this email.`,
+      subject: `${code} es tu código de verificación de SanJuan Mini Market`,
+      text: `Tu código de verificación de SanJuan Mini Market es ${code}. Vence en 10 minutos. Si no lo solicitaste, puedes ignorar este correo.`,
       html: shell(
         title,
-        `<p style="color:#3a231e;font-size:14px">Use this code to ${
+        `<p style="color:#1c2b20;font-size:14px">Usa este código para ${
           purpose === "register" ? "terminar de crear tu cuenta de SanJuan Mini Market" : "verificar tu correo electrónico"
         }:</p>
          <p style="margin:22px 0;text-align:center">
-           <span style="display:inline-block;background:#f4e8d5;border:1px solid #c39a4e;border-radius:10px;padding:14px 22px;font-size:30px;font-weight:700;letter-spacing:8px;color:#5b1a2b;font-family:'Courier New',monospace">${escape(spaced)}</span>
+           <span style="display:inline-block;background:#f6f3e8;border:1px solid #ef7d1f;border-radius:10px;padding:14px 22px;font-size:30px;font-weight:700;letter-spacing:8px;color:#1f5b33;font-family:'Courier New',monospace">${escape(spaced)}</span>
          </p>
-         <p style="color:#8a6f63;font-size:13px">This code expires in <strong>10 minutes</strong>. Never share it with anyone — SanJuan Mini Market will never ask you for it by phone or WhatsApp.</p>
-         <p style="color:#8a6f63;font-size:13px">Si no intentaste registrarte, puedes ignorar este correo.</p>`
+         <p style="color:#5c735f;font-size:13px">Este código vence en <strong>10 minutos</strong>. No lo compartas con nadie — SanJuan Mini Market nunca te lo pedirá por teléfono ni WhatsApp.</p>
+         <p style="color:#5c735f;font-size:13px">Si no intentaste registrarte, puedes ignorar este correo.</p>`
       ),
     });
     return { ok: true };
@@ -255,7 +255,7 @@ export async function sendOtpEmail(
     return {
       ok: false,
       error: badRecipient
-        ? "We couldn't send the code to that address. Please check your email and try again."
+        ? "No pudimos enviar el código a esa dirección. Revisa tu correo e inténtalo de nuevo."
         : "No podemos enviar correos de verificación ahora. Intenta en un momento o contáctanos.",
     };
   }

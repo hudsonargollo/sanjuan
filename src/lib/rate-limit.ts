@@ -28,4 +28,4 @@ export function rateLimit(key: string, limit: number, windowMs: number): boolean
   return b.count <= limit;
 }
 
-export const TOO_MANY = "Too many attempts. Please wait a few minutes and try again.";
+export const TOO_MANY = "Demasiados intentos. Espera unos minutos e inténtalo de nuevo.";

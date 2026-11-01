@@ -104,7 +104,7 @@ export function OrderNotifications() {
       // OS notification (works even if the tab is in the background)
       try {
         if (typeof Notification !== "undefined" && Notification.permission === "granted") {
-          const n = new Notification("New order · SanJuan Mini Market", {
+          const n = new Notification("Nuevo pedido · SanJuan Mini Market", {
             body: `${order.orderNumber} — ${formatPrice(order.total)} · ${order.customerName}`,
             tag: order.id,
           });
@@ -194,22 +194,22 @@ export function OrderNotifications() {
       {/* Bell */}
       <button
         onClick={toggle}
-        aria-label={`Notifications${unread ? ` (${unread} new)` : ""}`}
-        className="relative flex h-9 w-9 items-center justify-center rounded-full text-light/85 transition hover:bg-maroon-2 hover:text-gold"
+        aria-label={`Notificaciones${unread ? ` (${unread} nuevos)` : ""}`}
+        className="relative flex h-9 w-9 items-center justify-center rounded-full text-light/85 transition hover:bg-brand-dark hover:text-accent"
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
           <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" strokeLinecap="round" strokeLinejoin="round" />
           <path d="M13.7 21a2 2 0 0 1-3.4 0" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
         {unread > 0 && (
-          <span className="absolute -right-0.5 -top-0.5 flex min-w-[18px] items-center justify-center rounded-full bg-gold px-1 text-[0.62rem] font-bold text-maroon ring-2 ring-maroon">
+          <span className="absolute -right-0.5 -top-0.5 flex min-w-[18px] items-center justify-center rounded-full bg-accent px-1 text-[0.62rem] font-bold text-brand ring-2 ring-brand">
             {unread > 9 ? "9+" : unread}
           </span>
         )}
         {/* live-connection dot */}
         <span
-          title={connected ? "Live" : "Reconnecting…"}
-          className={`absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full ring-2 ring-maroon ${
+          title={connected ? "En vivo" : "Reconectando…"}
+          className={`absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full ring-2 ring-brand ${
             connected ? "bg-emerald-400" : "bg-amber-400"
           }`}
         />
@@ -219,16 +219,16 @@ export function OrderNotifications() {
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 z-50 mt-2 w-80 overflow-hidden rounded-xl border border-[var(--line)] bg-surface text-ink shadow-[0_24px_60px_-24px_rgba(38,8,16,0.5)]">
+          <div className="absolute right-0 z-50 mt-2 w-80 overflow-hidden rounded-xl border border-[var(--line)] bg-surface text-ink shadow-[0_24px_60px_-24px_rgba(18,53,31,0.5)]">
             <div className="flex items-center justify-between border-b border-[var(--line)] px-4 py-3">
-              <span className="font-serif text-base font-semibold">Notifications</span>
+              <span className="font-display text-base font-semibold">Notificaciones</span>
               <span className="text-[0.68rem] text-muted">
-                {connected ? "● Live" : "○ Reconnecting"}
+                {connected ? "● En vivo" : "○ Reconectando"}
               </span>
             </div>
             {notes.length === 0 ? (
               <p className="px-4 py-10 text-center text-sm text-muted">
-                No new orders yet. New orders will appear here instantly.
+                Aún no hay pedidos nuevos. Los nuevos pedidos aparecerán aquí al instante.
               </p>
             ) : (
               <ul className="max-h-96 divide-y divide-[var(--line)] overflow-y-auto">
@@ -240,7 +240,7 @@ export function OrderNotifications() {
                       className="block px-4 py-3 transition hover:bg-cream-soft"
                     >
                       <div className="flex items-center justify-between gap-2">
-                        <span className="font-medium text-gold-deep">{n.orderNumber}</span>
+                        <span className="font-medium text-accent-strong">{n.orderNumber}</span>
                         <span className="text-sm font-semibold [font-variant-numeric:tabular-nums]">
                           {formatPrice(n.total)}
                         </span>
@@ -256,9 +256,9 @@ export function OrderNotifications() {
             <Link
               href="/admin/orders"
               onClick={() => setOpen(false)}
-              className="block border-t border-[var(--line)] px-4 py-2.5 text-center text-sm text-gold-deep hover:bg-cream-soft"
+              className="block border-t border-[var(--line)] px-4 py-2.5 text-center text-sm text-accent-strong hover:bg-cream-soft"
             >
-              View all orders →
+              Ver todos los pedidos →
             </Link>
           </div>
         </>
@@ -269,16 +269,16 @@ export function OrderNotifications() {
         <Link
           href={`/admin/orders/${toast.id}`}
           onClick={() => setToast(null)}
-          className="fixed bottom-5 right-5 z-[60] flex w-[19rem] items-start gap-3 rounded-xl border border-gold/40 bg-surface p-4 text-ink shadow-[0_24px_60px_-20px_rgba(38,8,16,0.55)] animate-[toastin_.35s_ease]"
+          className="fixed bottom-5 right-5 z-[60] flex w-[19rem] items-start gap-3 rounded-xl border border-accent/40 bg-surface p-4 text-ink shadow-[0_24px_60px_-20px_rgba(18,53,31,0.55)] animate-[toastin_.35s_ease]"
         >
-          <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold-hi to-gold text-maroon">
+          <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent-soft to-accent text-brand">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M6 8h12l-1 12H7L6 8z" strokeLinejoin="round" />
               <path d="M9 8a3 3 0 0 1 6 0" strokeLinecap="round" />
             </svg>
           </span>
           <span className="min-w-0">
-            <span className="block text-sm font-semibold">New order received 🎉</span>
+            <span className="block text-sm font-semibold">Nuevo pedido recibido 🎉</span>
             <span className="mt-0.5 block truncate text-xs text-muted">
               {toast.orderNumber} · {formatPrice(toast.total)} · {toast.customerName}
             </span>
@@ -291,10 +291,10 @@ export function OrderNotifications() {
 
 function timeAgo(iso: string): string {
   const s = Math.max(0, Math.floor((Date.now() - new Date(iso).getTime()) / 1000));
-  if (s < 60) return "just now";
+  if (s < 60) return "ahora mismo";
   const m = Math.floor(s / 60);
-  if (m < 60) return `${m}m ago`;
+  if (m < 60) return `hace ${m} min`;
   const h = Math.floor(m / 60);
-  if (h < 24) return `${h}h ago`;
-  return `${Math.floor(h / 24)}d ago`;
+  if (h < 24) return `hace ${h} h`;
+  return `hace ${Math.floor(h / 24)} d`;
 }

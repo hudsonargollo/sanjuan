@@ -55,7 +55,7 @@ function simulationAllowed(): boolean {
 function notConfigured(name: string): BookResult {
   return {
     ok: false,
-    error: `${name} API credentials are not configured yet. Add them to the server environment to book shipments.`,
+    error: `${name}: las credenciales de la API aún no están configuradas. Agrégalas al entorno del servidor para reservar envíos.`,
   };
 }
 
@@ -70,7 +70,7 @@ export async function bookShipment(order: OrderForShipment, courier: Courier): P
     return await bookTcs(order);
   } catch (err) {
     console.error("[courier] booking failed:", err);
-    return { ok: false, error: "Courier booking failed. Please try again." };
+    return { ok: false, error: "No se pudo reservar el envío. Inténtalo de nuevo." };
   }
 }
 
@@ -109,7 +109,7 @@ async function bookLeopards(order: OrderForShipment): Promise<BookResult> {
   const data = await res.json().catch(() => ({}));
   const tn = data?.track_number || data?.trackNumber;
   if (data?.status && tn) return { ok: true, trackingNumber: String(tn), simulated: false };
-  return { ok: false, error: data?.error || "Leopards did not return a tracking number." };
+  return { ok: false, error: data?.error || "Leopards no devolvió un número de seguimiento." };
 }
 
 // ---------------- TCS ----------------
@@ -154,5 +154,5 @@ async function bookTcs(order: OrderForShipment): Promise<BookResult> {
   const data = await res.json().catch(() => ({}));
   const tn = data?.consignmentNo || data?.consignmentNumber || data?.trackingNumber;
   if (tn) return { ok: true, trackingNumber: String(tn), simulated: false };
-  return { ok: false, error: data?.returnStatus?.message || "TCS did not return a tracking number." };
+  return { ok: false, error: data?.returnStatus?.message || "TCS no devolvió un número de seguimiento." };
 }

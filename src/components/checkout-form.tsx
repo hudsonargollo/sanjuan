@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useCart, type CartItem } from "@/components/cart/cart-provider";
 import { ProductImage } from "@/components/product-image";
 import { useToast } from "@/components/ui/toast";
-import { formatPrice, savingsOf } from "@/lib/format";
+import { formatPrice, savingsOf, visiblePack } from "@/lib/format";
 import { SavingsStrip } from "@/components/ui/sale-badge";
 import { shippingFor } from "@/lib/settings-shared";
 
@@ -19,12 +19,12 @@ export type CheckoutDefaults = {
 };
 
 const inputCls =
-  "w-full rounded-lg border border-[var(--line-strong)] bg-surface px-4 py-3 text-sm text-ink outline-none transition placeholder:text-muted/60 focus:border-gold focus:ring-2 focus:ring-[rgba(195,154,78,0.22)]";
+  "w-full rounded-lg border border-[var(--line-strong)] bg-surface px-4 py-3 text-sm text-ink outline-none transition placeholder:text-muted/60 focus:border-accent focus:ring-2 focus:ring-[rgba(239,125,31,0.22)]";
 const labelCls = "mb-1.5 block text-xs font-medium uppercase tracking-[0.1em] text-muted";
 
 const NOTICES = {
-  cancelled: "Payment was cancelled. You can try again below.",
-  failed: "Payment failed. Please try again or choose Cash on Delivery.",
+  cancelled: "El pago se canceló. Puedes intentarlo de nuevo abajo.",
+  failed: "El pago falló. Inténtalo de nuevo o elige pago contra entrega.",
 } as const;
 
 export function CheckoutForm({
@@ -32,7 +32,7 @@ export function CheckoutForm({
   paymentNotice = null,
   gateways = { PAYFAST: false, SAFEPAY: false },
   buyNow = null,
-  shippingRules = { flatFee: 500, freeThreshold: 50000, deliveryTime: "" },
+  shippingRules = { flatFee: 15, freeThreshold: 0, deliveryTime: "" },
 }: {
   shippingRules?: { flatFee: number; freeThreshold: number; deliveryTime: string };
   buyNow?: CartItem | null;
@@ -68,7 +68,7 @@ export function CheckoutForm({
   if (!ready) {
     return (
       <div className="mx-auto max-w-6xl px-5 py-12" aria-busy="true">
-        <h1 className="font-serif text-4xl font-semibold text-ink">Pago</h1>
+        <h1 className="font-display text-4xl font-semibold text-ink">Pago</h1>
         <div className="mt-8 h-96 animate-pulse rounded-2xl bg-cream-soft" />
       </div>
     );
@@ -77,10 +77,10 @@ export function CheckoutForm({
   if (items.length === 0) {
     return (
       <div className="mx-auto max-w-2xl px-5 py-24 text-center">
-        <h1 className="font-serif text-3xl font-semibold text-ink">Your cart is empty</h1>
+        <h1 className="font-display text-3xl font-semibold text-ink">Tu carrito está vacío</h1>
         <Link
           href="/shop"
-          className="mt-6 inline-block rounded-full bg-gradient-to-r from-gold-hi to-gold px-8 py-3 text-sm font-medium text-maroon"
+          className="mt-6 inline-block rounded-full bg-gradient-to-r from-accent-soft to-accent px-8 py-3 text-sm font-medium text-brand"
         >
           Explorar el catálogo
         </Link>
@@ -124,7 +124,7 @@ export function CheckoutForm({
         return;
       }
       if (!res.ok || !data.ok) {
-        throw new Error(data.error || "Could not place your order. Please try again.");
+        throw new Error(data.error || "No pudimos procesar tu pedido. Inténtalo de nuevo.");
       }
       if (data.redirectUrl) {
         window.location.href = data.redirectUrl;
@@ -132,67 +132,67 @@ export function CheckoutForm({
       }
       router.push(`/checkout/success?order=${encodeURIComponent(data.orderNumber)}`);
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Something went wrong.";
+      const message = err instanceof Error ? err.message : "Algo salió mal.";
       setError(message);
-      toast.error(message, { title: "Order not placed" });
+      toast.error(message, { title: "Pedido no realizado" });
       setSubmitting(false);
     }
   }
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-12">
-      <h1 className="font-serif text-4xl font-semibold text-ink">Pago</h1>
+      <h1 className="font-display text-4xl font-semibold text-ink">Pago</h1>
       {defaults?.email && (
         <p className="mt-2 text-sm text-muted">
-          Signed in as <span className="text-ink">{defaults.email}</span> — this order will be
-          saved to your account.
+          Sesión iniciada como <span className="text-ink">{defaults.email}</span> — este pedido se
+          guardará en tu cuenta.
         </p>
       )}
 
       <form onSubmit={handleSubmit} className="mt-8 grid items-start gap-8 lg:grid-cols-[1fr_390px] lg:gap-12">
         {/* Details */}
         <div className="space-y-8">
-          <Section step={1} title="Contact & Delivery">
+          <Section step={1} title="Contacto y entrega">
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="sm:col-span-2">
-                <label htmlFor="co-customerName" className={labelCls}>Full name</label>
+                <label htmlFor="co-customerName" className={labelCls}>Nombre completo</label>
                 <input name="customerName" id="co-customerName" required defaultValue={defaults?.name} className={inputCls} />
               </div>
               <div>
-                <label htmlFor="co-email" className={labelCls}>Email</label>
-                <input name="email" id="co-email" type="email" required readOnly defaultValue={defaults?.email} title="Order updates go to your account email" className={`${inputCls} cursor-not-allowed opacity-75`} />
+                <label htmlFor="co-email" className={labelCls}>Correo</label>
+                <input name="email" id="co-email" type="email" required readOnly defaultValue={defaults?.email} title="Las novedades del pedido llegan a tu correo" className={`${inputCls} cursor-not-allowed opacity-75`} />
               </div>
               <div>
-                <label htmlFor="co-phone" className={labelCls}>Phone</label>
-                <input name="phone" id="co-phone" type="tel" required defaultValue={defaults?.phone} placeholder="03xx xxxxxxx" className={inputCls} />
+                <label htmlFor="co-phone" className={labelCls}>Teléfono</label>
+                <input name="phone" id="co-phone" type="tel" required defaultValue={defaults?.phone} placeholder="Ej. 700 00000" className={inputCls} />
               </div>
               <div className="sm:col-span-2">
-                <label htmlFor="co-address" className={labelCls}>Delivery address</label>
-                <input name="address" id="co-address" required placeholder="House #, street, area" className={inputCls} />
+                <label htmlFor="co-address" className={labelCls}>Dirección de entrega</label>
+                <input name="address" id="co-address" required placeholder="Calle, número, zona" className={inputCls} />
               </div>
               <div>
-                <label htmlFor="co-city" className={labelCls}>City</label>
+                <label htmlFor="co-city" className={labelCls}>Ciudad</label>
                 <input name="city" id="co-city" required className={inputCls} />
               </div>
               <div>
-                <label htmlFor="co-postalCode" className={labelCls}>Postal code (optional)</label>
+                <label htmlFor="co-postalCode" className={labelCls}>Código postal (opcional)</label>
                 <input name="postalCode" id="co-postalCode" className={inputCls} />
               </div>
               <div className="sm:col-span-2">
-                <label htmlFor="co-notes" className={labelCls}>Order notes (optional)</label>
+                <label htmlFor="co-notes" className={labelCls}>Notas del pedido (opcional)</label>
                 <textarea name="notes" id="co-notes" rows={3} className={inputCls} />
               </div>
             </div>
           </Section>
 
-          <Section step={2} title="Payment" hint="All transactions are secure and encrypted.">
+          <Section step={2} title="Pago" hint="Todas las transacciones son seguras y cifradas.">
             <div className="overflow-hidden rounded-xl border border-[var(--line-strong)]">
               <PaymentOption
                 value="COD"
                 current={payment}
                 onSelect={setPayment}
-                title="Cash on Delivery (COD)"
-                desc="Shop now & pay in cash at your doorstep."
+                title="Pago contra entrega (COD)"
+                desc="Recibe tu pedido y paga en efectivo."
                 last={!gateways.PAYFAST && !gateways.SAFEPAY}
               />
               {gateways.PAYFAST && (
@@ -200,8 +200,8 @@ export function CheckoutForm({
                   value="PAYFAST"
                   current={payment}
                   onSelect={setPayment}
-                  title="Credit / Debit Card"
-                  desc="Pay securely online via PayFast."
+                  title="Tarjeta de crédito / débito"
+                  desc="Pago seguro en línea con PayFast."
                   icons={<CardBrands />}
                   last={!gateways.SAFEPAY}
                 />
@@ -211,8 +211,8 @@ export function CheckoutForm({
                   value="SAFEPAY"
                   current={payment}
                   onSelect={setPayment}
-                  title="Card / Wallet (Safepay)"
-                  desc="Pay securely online via Safepay."
+                  title="Tarjeta / billetera (Safepay)"
+                  desc="Pago seguro en línea con Safepay."
                   icons={<CardBrands />}
                   last
                 />
@@ -224,8 +224,8 @@ export function CheckoutForm({
 
         {/* Order summary — sticky/locked on desktop */}
         <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-2xl border border-[var(--line-strong)] bg-surface/80 p-6 shadow-[0_24px_60px_-40px_rgba(38,8,16,0.5)]">
-            <h2 className="font-serif text-xl font-semibold text-ink">Order Summary</h2>
+          <div className="rounded-2xl border border-[var(--line-strong)] bg-surface/80 p-6 shadow-[0_24px_60px_-40px_rgba(18,53,31,0.5)]">
+            <h2 className="font-display text-xl font-semibold text-ink">Resumen del pedido</h2>
 
             <ul className="mt-5 max-h-72 space-y-4 overflow-y-auto border-b border-[var(--line)] pb-5 pr-1 text-sm">
               {items.map((i) => (
@@ -234,13 +234,13 @@ export function CheckoutForm({
                     <div className="h-14 w-14 overflow-hidden rounded-lg border border-[var(--line)] bg-sand">
                       <ProductImage src={i.image} alt={i.name} seed={i.slug} />
                     </div>
-                    <span className="absolute -right-1.5 -top-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-maroon px-1 text-[0.62rem] font-semibold text-light">
+                    <span className="absolute -right-1.5 -top-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1 text-[0.62rem] font-semibold text-light">
                       {i.quantity}
                     </span>
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-ink">{i.name}</p>
-                    {i.material && <p className="truncate text-xs text-muted">{i.material}</p>}
+                    {visiblePack(i.material) && <p className="truncate text-xs text-muted">{visiblePack(i.material)}</p>}
                   </div>
                   <div className="shrink-0 text-right">
                     <span className="text-ink">{formatPrice(i.price * i.quantity)}</span>
@@ -258,17 +258,20 @@ export function CheckoutForm({
                 <dd className="text-ink">{formatPrice(subtotal)}</dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-muted">Shipping</dt>
-                <dd className="text-ink">{shipping === 0 ? "Free" : formatPrice(shipping)}</dd>
+                <dt className="text-muted">Envío</dt>
+                <dd className="text-ink">{shipping === 0 ? "Gratis" : formatPrice(shipping)}</dd>
               </div>
-              {shipping > 0 && (
-                <p className="text-xs text-muted">Free shipping over {formatPrice(shippingRules.freeThreshold)}.</p>
+              {shipping > 0 && shippingRules.freeThreshold > 0 && (
+                <p className="text-xs text-muted">Envío gratis desde {formatPrice(shippingRules.freeThreshold)}.</p>
+              )}
+              {shipping === 0 && (
+                <p className="text-xs text-muted">Envío gratis en Buena Vista y zonas cercanas.</p>
               )}
             </dl>
 
             <div className="mt-4 flex items-baseline justify-between border-t border-[var(--line)] pt-4">
               <span className="font-medium text-ink">Total</span>
-              <span className="font-serif text-2xl font-semibold text-ink">{formatPrice(total)}</span>
+              <span className="font-display text-2xl font-semibold text-ink">{formatPrice(total)}</span>
             </div>
             {savings > 0 && <SavingsStrip amount={savings} className="mt-4" />}
 
@@ -279,9 +282,9 @@ export function CheckoutForm({
             <button
               type="submit"
               disabled={submitting}
-              className="mt-6 block w-full rounded-full bg-gradient-to-r from-gold-hi to-gold px-8 py-3.5 text-center text-sm font-semibold uppercase tracking-[0.1em] text-maroon transition hover:opacity-90 disabled:opacity-60"
+              className="mt-6 block w-full rounded-full bg-gradient-to-r from-accent-soft to-accent px-8 py-3.5 text-center text-sm font-semibold uppercase tracking-[0.1em] text-brand transition hover:opacity-90 disabled:opacity-60"
             >
-              {submitting ? "Placing order…" : "Complete Order"}
+              {submitting ? "Procesando pedido…" : "Confirmar pedido"}
             </button>
             <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-xs text-muted">
               <LockIcon /> Pago seguro y encriptado · SanJuan Mini Market
@@ -307,11 +310,11 @@ function Section({
   return (
     <section>
       <div className="mb-4 flex items-center gap-3">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-maroon text-xs font-semibold text-light">
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand text-xs font-semibold text-light">
           {step}
         </span>
         <div>
-          <h2 className="font-serif text-lg font-semibold text-ink">{title}</h2>
+          <h2 className="font-display text-lg font-semibold text-ink">{title}</h2>
           {hint && <p className="text-xs text-muted">{hint}</p>}
         </div>
       </div>
@@ -342,7 +345,7 @@ function PaymentOption({
     <label
       className={`flex cursor-pointer items-center gap-3 p-4 transition ${
         last ? "" : "border-b border-[var(--line)]"
-      } ${active ? "bg-gold/8" : "hover:bg-black/[0.02]"}`}
+      } ${active ? "bg-accent/8" : "hover:bg-black/[0.02]"}`}
     >
       <input
         type="radio"
@@ -350,7 +353,7 @@ function PaymentOption({
         value={value}
         checked={active}
         onChange={() => onSelect(value)}
-        className="h-4 w-4 accent-[var(--color-gold-deep)]"
+        className="h-4 w-4 accent-[var(--color-accent-strong)]"
       />
       <span className="min-w-0 flex-1">
         <span className="block font-medium text-ink">{title}</span>

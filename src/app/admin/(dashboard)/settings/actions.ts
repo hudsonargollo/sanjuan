@@ -16,7 +16,7 @@ const ADMIN_MIN_PASSWORD = 10;
 // Store-wide settings may only be changed by an ADMIN (not STAFF).
 async function requireOwner() {
   const session = await requireAdmin();
-  if (session.role !== "ADMIN") throw new Error("Only an admin can change store settings.");
+  if (session.role !== "ADMIN") throw new Error("Solo un administrador puede cambiar los ajustes de la tienda.");
   return session;
 }
 
@@ -29,7 +29,7 @@ async function save<K extends keyof StoreSettings>(section: K, value: StoreSetti
     await saveStoreSettings(section, value);
   } catch (err) {
     console.error("[settings] save failed:", err);
-    return { error: "Could not save — database unavailable." };
+    return { error: "No se pudo guardar: base de datos no disponible." };
   }
   // Header, footer, chat, shipping and every page read these settings.
   revalidatePath("/", "layout");
@@ -39,7 +39,7 @@ async function save<K extends keyof StoreSettings>(section: K, value: StoreSetti
 const url = z
   .string()
   .trim()
-  .refine((v) => v === "" || /^https:\/\/[^\s]+$/i.test(v), "Links must start with https://");
+  .refine((v) => v === "" || /^https:\/\/[^\s]+$/i.test(v), "Los enlaces deben empezar por https://");
 
 // ---------- Contact ----------
 export async function saveContactSettings(_p: SettingsState, fd: FormData): Promise<SettingsState> {
@@ -52,12 +52,12 @@ export async function saveContactSettings(_p: SettingsState, fd: FormData): Prom
   const values = form(fd, ["email", "phone", "whatsapp", "city", "hours"]);
   const parsed = z
     .object({
-      email: z.string().refine((v) => v === "" || z.string().email().safeParse(v).success, "Enter a valid email"),
+      email: z.string().refine((v) => v === "" || z.string().email().safeParse(v).success, "Ingresa un correo válido"),
       phone: z.string().max(30),
       whatsapp: z
         .string()
         .transform((v) => v.replace(/[^0-9]/g, ""))
-        .refine((v) => v === "" || (v.length >= 10 && v.length <= 15), "WhatsApp: international format, e.g. 923001234567"),
+        .refine((v) => v === "" || (v.length >= 10 && v.length <= 15), "WhatsApp: formato internacional, p. ej. 923001234567"),
       city: z.string().max(120),
       hours: z.string().max(120),
     })
@@ -91,9 +91,9 @@ export async function saveShippingSettings(_p: SettingsState, fd: FormData): Pro
   const values = form(fd, ["flatFee", "freeThreshold", "deliveryTime"]);
   const parsed = z
     .object({
-      flatFee: z.coerce.number().int("Whole rupees only").min(0, "Can't be negative").max(100000),
-      freeThreshold: z.coerce.number().int("Whole rupees only").min(0, "Can't be negative").max(10_000_000),
-      deliveryTime: z.string().min(2, "Enter the delivery time, e.g. 3–5 working days").max(60),
+      flatFee: z.coerce.number().int("Solo bolivianos enteros").min(0, "No puede ser negativo").max(100000),
+      freeThreshold: z.coerce.number().int("Solo bolivianos enteros").min(0, "No puede ser negativo").max(10_000_000),
+      deliveryTime: z.string().min(2, "Ingresa el tiempo de entrega, p. ej. el mismo día").max(60),
     })
     .safeParse(values);
   if (!parsed.success) return { error: parsed.error.issues[0]?.message, values };
@@ -113,8 +113,8 @@ export async function saveAnnouncementSettings(_p: SettingsState, fd: FormData):
     .split(/\r?\n/)
     .map((l) => l.trim())
     .filter(Boolean);
-  if (lines.length > 10) return { error: "Keep it to 10 lines or fewer.", values: { announcements: raw } };
-  if (lines.some((l) => l.length > 120)) return { error: "Each line must be 120 characters or fewer.", values: { announcements: raw } };
+  if (lines.length > 10) return { error: "Usa 10 líneas como máximo.", values: { announcements: raw } };
+  if (lines.some((l) => l.length > 120)) return { error: "Cada línea debe tener 120 caracteres como máximo.", values: { announcements: raw } };
   return { ...(await save("announcements", lines)), values: { announcements: raw } };
 }
 
@@ -130,7 +130,7 @@ export async function saveAlertSettings(_p: SettingsState, fd: FormData): Promis
   const parsed = z
     .object({
       lowStockThreshold: z.coerce.number().int().min(0).max(1000),
-      orderEmail: z.string().refine((v) => v === "" || z.string().email().safeParse(v).success, "Enter a valid email"),
+      orderEmail: z.string().refine((v) => v === "" || z.string().email().safeParse(v).success, "Ingresa un correo válido"),
     })
     .safeParse(values);
   if (!parsed.success) return { error: parsed.error.issues[0]?.message, values };
@@ -145,15 +145,15 @@ export async function changePassword(_p: SettingsState, fd: FormData): Promise<S
   const current = String(fd.get("current") ?? "");
   const next = String(fd.get("next") ?? "");
   const confirm = String(fd.get("confirm") ?? "");
-  if (next.length < ADMIN_MIN_PASSWORD) return { error: `New password must be at least ${ADMIN_MIN_PASSWORD} characters.` };
-  if (next !== confirm) return { error: "The new passwords don't match." };
+  if (next.length < ADMIN_MIN_PASSWORD) return { error: `La nueva contraseña debe tener al menos ${ADMIN_MIN_PASSWORD} caracteres.` };
+  if (next !== confirm) return { error: "Las nuevas contraseñas no coinciden." };
   try {
     const user = await prisma.user.findUnique({ where: { email: session.email } });
-    if (!user || !verifyPassword(current, user.passwordHash)) return { error: "Current password is incorrect." };
+    if (!user || !verifyPassword(current, user.passwordHash)) return { error: "La contraseña actual es incorrecta." };
     await prisma.user.update({ where: { id: user.id }, data: { passwordHash: hashPassword(next) } });
     await refreshAdminSession(session.email); // other devices are signed out
   } catch {
-    return { error: "Could not update — database unavailable." };
+    return { error: "No se pudo actualizar: base de datos no disponible." };
   }
   return { ok: true };
 }
@@ -171,13 +171,13 @@ export async function addTeamMember(_p: SettingsState, fd: FormData): Promise<Se
   const parsed = z
     .object({
       name: z.string().max(120),
-      email: z.string().email("Enter a valid email").max(200),
+      email: z.string().email("Ingresa un correo válido").max(200),
       role: z.enum(["ADMIN", "STAFF"]),
     })
     .safeParse(values);
   if (!parsed.success) return { error: parsed.error.issues[0]?.message, values };
   if (password.length < ADMIN_MIN_PASSWORD)
-    return { error: `Password must be at least ${ADMIN_MIN_PASSWORD} characters.`, values };
+    return { error: `La contraseña debe tener al menos ${ADMIN_MIN_PASSWORD} caracteres.`, values };
   try {
     await prisma.user.create({
       data: {
@@ -188,8 +188,8 @@ export async function addTeamMember(_p: SettingsState, fd: FormData): Promise<Se
       },
     });
   } catch (err) {
-    if (dbErrorKind(err) === "duplicate") return { error: "A team member with that email already exists.", values };
-    return { error: "Could not add — database unavailable.", values };
+    if (dbErrorKind(err) === "duplicate") return { error: "Ya existe un miembro del equipo con ese correo.", values };
+    return { error: "No se pudo agregar: base de datos no disponible.", values };
   }
   revalidatePath("/admin/settings");
   return { ok: true };

@@ -61,18 +61,18 @@ export function AdminShell({ email, children }: { email: string; children: React
           width: collapsed ? 76 : 240,
           transition: ready ? "width 300ms cubic-bezier(0.4, 0, 0.2, 1)" : undefined,
         }}
-        className="hidden h-full shrink-0 flex-col overflow-hidden border-r border-[var(--line)] bg-maroon text-light md:flex"
+        className="hidden h-full shrink-0 flex-col overflow-hidden border-r border-[var(--line)] bg-brand text-light md:flex"
       >
         {/* Brand */}
         <Link
           href="/admin"
           style={{ height: 64 }}
-          className="flex shrink-0 items-center gap-3 border-b border-[rgba(230,205,139,0.2)] px-6"
+          className="flex shrink-0 items-center gap-3 border-b border-[rgba(167,216,178,0.2)] px-6"
         >
-          <Emblem size={24} className="shrink-0 text-gold" />
+          <Emblem size={24} className="shrink-0 text-accent" />
           <span
             style={labelStyle}
-            className={`gold-text font-serif text-lg font-bold tracking-[0.2em] ${labelCls}`}
+            className={`brand-text font-display text-lg font-bold tracking-[0.2em] ${labelCls}`}
           >
             SanJuan Mini Market
           </span>
@@ -84,7 +84,7 @@ export function AdminShell({ email, children }: { email: string; children: React
         </div>
 
         {/* Footer — consistent icon+label rows so nothing jumps on collapse */}
-        <div className="shrink-0 border-t border-[rgba(230,205,139,0.2)] p-3">
+        <div className="shrink-0 border-t border-[rgba(167,216,178,0.2)] p-3">
           <p
             style={labelStyle}
             className={`truncate px-3 pb-1.5 text-xs text-light/50 ${collapsed ? "opacity-0" : "opacity-100"}`}
@@ -94,7 +94,7 @@ export function AdminShell({ email, children }: { email: string; children: React
           <form action={logoutAction}>
             <button
               title={collapsed ? "Cerrar sesión" : undefined}
-              className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm text-light/80 transition-colors hover:bg-maroon-2 hover:text-gold"
+              className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm text-light/80 transition-colors hover:bg-brand-dark hover:text-accent"
             >
               <svg className="shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
                 <path d="M15 12H4M9 7l-5 5 5 5" strokeLinecap="round" strokeLinejoin="round" />
@@ -107,14 +107,14 @@ export function AdminShell({ email, children }: { email: string; children: React
           </form>
           <Link
             href="/"
-            title={collapsed ? "View store" : undefined}
-            className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm text-light/60 transition-colors hover:text-gold"
+            title={collapsed ? "Ver tienda" : undefined}
+            className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm text-light/60 transition-colors hover:text-accent"
           >
             <svg className="shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
               <path d="M3 11l9-7 9 7M5 10v9h14v-9" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <span style={labelStyle} className={labelCls}>
-              View store
+              Ver tienda
             </span>
           </Link>
         </div>
@@ -125,15 +125,15 @@ export function AdminShell({ email, children }: { email: string; children: React
         {/* Top bar (fixed height) */}
         <header
           style={{ height: 64 }}
-          className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--line)] bg-maroon px-4 text-light"
+          className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--line)] bg-brand px-4 text-light"
         >
           <div className="flex items-center gap-2">
             {/* Desktop sidebar toggle — clear, always visible */}
             <button
               onClick={toggle}
-              aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-              title={collapsed ? "Expand menu" : "Collapse menu"}
-              className="hidden h-9 w-9 items-center justify-center rounded-md text-light/85 transition-colors hover:bg-maroon-2 hover:text-gold md:flex"
+              aria-label={collapsed ? "Expandir barra lateral" : "Contraer barra lateral"}
+              title={collapsed ? "Expandir menú" : "Contraer menú"}
+              className="hidden h-9 w-9 items-center justify-center rounded-md text-light/85 transition-colors hover:bg-brand-dark hover:text-accent md:flex"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
                 <rect x="3" y="4" width="18" height="16" rx="2" />
@@ -148,7 +148,7 @@ export function AdminShell({ email, children }: { email: string; children: React
             {/* Mobile brand */}
             <Link
               href="/admin"
-              className="gold-text font-serif text-lg font-bold tracking-[0.2em] md:hidden"
+              className="brand-text font-display text-lg font-bold tracking-[0.2em] md:hidden"
             >
               SanJuan Mini Market
             </Link>
@@ -156,11 +156,11 @@ export function AdminShell({ email, children }: { email: string; children: React
 
           <div className="flex items-center gap-3 text-sm sm:gap-4">
             <OrderNotifications />
-            <Link href="/" className="text-light/70 transition-colors hover:text-gold md:hidden">
-              View store
+            <Link href="/" className="text-light/70 transition-colors hover:text-accent md:hidden">
+              Ver tienda
             </Link>
             <form action={logoutAction} className="md:hidden">
-              <button className="text-light/80 transition-colors hover:text-gold">Cerrar sesión</button>
+              <button className="text-light/80 transition-colors hover:text-accent">Cerrar sesión</button>
             </form>
           </div>
         </header>

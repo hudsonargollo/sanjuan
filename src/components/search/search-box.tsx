@@ -124,7 +124,7 @@ export function BuscarBox({ initial = "", autoFocus = false }: { initial?: strin
   }, [active, listId]);
 
   const rowCls = (i: number) =>
-    `flex items-center gap-3 rounded-xl px-3 py-2.5 transition ${active === i ? "bg-gold/15 ring-1 ring-gold/40" : "hover:bg-gold/10"}`;
+    `flex items-center gap-3 rounded-xl px-3 py-2.5 transition ${active === i ? "bg-accent/15 ring-1 ring-accent/40" : "hover:bg-accent/10"}`;
 
   return (
     <div ref={boxRef} className="relative mx-auto w-full max-w-2xl">
@@ -137,9 +137,9 @@ export function BuscarBox({ initial = "", autoFocus = false }: { initial?: strin
           if (term) go(`/search?q=${encodeURIComponent(term)}`);
           else inputRef.current?.focus();
         }}
-        className="group relative flex items-center rounded-full border border-[var(--line-strong)] bg-surface p-1.5 pl-5 shadow-[0_18px_44px_-28px_rgba(38,8,16,0.55)] transition focus-within:border-gold focus-within:ring-4 focus-within:ring-[rgba(195,154,78,0.18)]"
+        className="group relative flex items-center rounded-full border border-[var(--line-strong)] bg-surface p-1.5 pl-5 shadow-[0_18px_44px_-28px_rgba(18,53,31,0.55)] transition focus-within:border-accent focus-within:ring-4 focus-within:ring-[rgba(239,125,31,0.18)]"
       >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" className="h-5 w-5 shrink-0 text-gold-deep" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" className="h-5 w-5 shrink-0 text-accent-strong" aria-hidden="true">
           <circle cx="11" cy="11" r="7" />
           <path d="m20 20-3.8-3.8" />
         </svg>
@@ -167,7 +167,7 @@ export function BuscarBox({ initial = "", autoFocus = false }: { initial?: strin
           aria-autocomplete="list"
           className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-base text-ink outline-none placeholder:text-muted/60 [&::-webkit-search-cancel-button]:hidden"
         />
-        {loading && <span className="mr-2 h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-gold/25 border-t-gold" aria-hidden="true" />}
+        {loading && <span className="mr-2 h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-accent/25 border-t-accent" aria-hidden="true" />}
         {q && !loading && (
           <button
             type="button"
@@ -177,7 +177,7 @@ export function BuscarBox({ initial = "", autoFocus = false }: { initial?: strin
               inputRef.current?.focus();
             }}
             aria-label="Borrar búsqueda"
-            className="mr-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted transition hover:bg-gold/10 hover:text-ink"
+            className="mr-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted transition hover:bg-accent/10 hover:text-ink"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className="h-4 w-4" aria-hidden="true">
               <path d="M6 6l12 12M18 6 6 18" />
@@ -186,7 +186,7 @@ export function BuscarBox({ initial = "", autoFocus = false }: { initial?: strin
         )}
         <button
           type="submit"
-          className="shrink-0 rounded-full bg-gradient-to-r from-gold-hi via-gold to-gold-deep px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] text-maroon shadow-[0_10px_24px_-12px_rgba(169,126,48,0.9)] transition hover:brightness-105 sm:px-7"
+          className="shrink-0 rounded-full bg-gradient-to-r from-accent-soft via-accent to-accent-strong px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] text-brand shadow-[0_10px_24px_-12px_rgba(239,125,31,0.9)] transition hover:brightness-105 sm:px-7"
         >
           Buscar
         </button>
@@ -196,46 +196,46 @@ export function BuscarBox({ initial = "", autoFocus = false }: { initial?: strin
         <div
           id={listId}
           role="listbox"
-          className="absolute inset-x-0 top-full z-40 mt-2 overflow-hidden rounded-2xl border border-[var(--line-strong)] bg-surface text-left shadow-[0_30px_60px_-30px_rgba(38,8,16,0.7)] animate-chatin [transform-origin:top_center]"
+          className="absolute inset-x-0 top-full z-40 mt-2 overflow-hidden rounded-2xl border border-[var(--line-strong)] bg-surface text-left shadow-[0_30px_60px_-30px_rgba(18,53,31,0.7)] animate-chatin [transform-origin:top_center]"
         >
           {shown.correction && (
             <p className="border-b border-[var(--line)] px-4 py-2.5 text-xs text-muted">
-              Showing results for <span className="font-semibold text-gold-deep">“{shown.correction}”</span>
+              Mostrando resultados para <span className="font-semibold text-accent-strong">“{shown.correction}”</span>
             </p>
           )}
 
           <div className="max-h-[min(26rem,60vh)] overflow-y-auto overscroll-contain p-2 [scrollbar-width:thin]">
             {shown.category && shown.category.count > 0 && (
               <Link href={`/shop/${shown.category.slug}`} role="option" aria-selected={active === 0} onClick={() => setOpen(false)} className={rowCls(0)}>
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-gold-hi via-gold to-gold-deep text-maroon">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent-soft via-accent to-accent-strong text-brand">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" className="h-5 w-5" aria-hidden="true">
                     <path d="M7 5h10l4 5-9 10L3 10z" />
                     <path d="M3 10h18M10 5 8.6 10 12 20l3.4-10L14 5" />
                   </svg>
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-sm font-semibold text-ink">All {shown.category.name}</span>
+                  <span className="block text-sm font-semibold text-ink">Ver todo en {shown.category.name}</span>
                   <span className="block text-xs text-muted">
                     {shown.category.count} producto{shown.category.count === 1 ? "" : "s"} en el catálogo
                   </span>
                 </span>
-                <span className="text-gold-deep">→</span>
+                <span className="text-accent-strong">→</span>
               </Link>
             )}
 
             {shown.category && shown.category.count === 0 && (
-              <Link href={`/shop/${shown.category.slug}`} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-3 hover:bg-gold/10">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-dashed border-gold/60 text-lg text-gold-deep">✦</span>
+              <Link href={`/shop/${shown.category.slug}`} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-3 hover:bg-accent/10">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-dashed border-accent/60 text-lg text-accent-strong">✦</span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-sm font-semibold text-ink">{shown.category.name} are coming soon</span>
-                  <span className="block text-xs text-muted">Tap to get notified when they launch</span>
+                  <span className="block text-sm font-semibold text-ink">{shown.category.name} llega pronto</span>
+                  <span className="block text-xs text-muted">Toca para avisarte cuando llegue</span>
                 </span>
               </Link>
             )}
 
             {shown.products.length > 0 && (
               <p className="px-3 pb-1 pt-2 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-muted">
-                {shown.partial ? "Closest matches" : "Pieces"}
+                {shown.partial ? "Coincidencias cercanas" : "Productos"}
               </p>
             )}
             {shown.products.map((p, i) => {
@@ -250,12 +250,12 @@ export function BuscarBox({ initial = "", autoFocus = false }: { initial?: strin
                     <span className="block truncate text-sm font-medium text-ink">{p.name}</span>
                     <span className="block text-xs text-muted">
                       {p.category}
-                      {p.soldOut && <span className="ml-1.5 text-bad">· Sold out</span>}
+                      {p.soldOut && <span className="ml-1.5 text-bad">· Agotado</span>}
                     </span>
                   </span>
                   <span className="shrink-0 text-right">
-                    <span className={`block text-sm font-semibold ${off ? "text-maroon dark:text-gold-hi" : "text-ink"}`}>{formatPrice(p.price)}</span>
-                    {off && <span className="block text-[0.65rem] font-semibold uppercase tracking-wider text-gold-deep">{off}% off</span>}
+                    <span className={`block text-sm font-semibold ${off ? "text-brand dark:text-accent-soft" : "text-ink"}`}>{formatPrice(p.price)}</span>
+                    {off && <span className="block text-[0.65rem] font-semibold uppercase tracking-wider text-accent-strong">{off}% off</span>}
                   </span>
                 </Link>
               );
@@ -263,7 +263,7 @@ export function BuscarBox({ initial = "", autoFocus = false }: { initial?: strin
 
             {shown.total === 0 && !shown.category && (
               <div className="px-3 py-5 text-center">
-                <p className="font-serif text-lg text-ink">Nothing matches “{term}” yet</p>
+                <p className="font-display text-lg text-ink">Nothing matches “{term}” yet</p>
                 <p className="mt-1 text-xs text-muted">Escribe el nombre de un producto, una categoría o un precio.</p>
               </div>
             )}
@@ -276,7 +276,7 @@ export function BuscarBox({ initial = "", autoFocus = false }: { initial?: strin
               aria-selected={active === links.length - 1}
               onClick={() => setOpen(false)}
               className={`flex items-center justify-between border-t border-[var(--line)] px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] transition ${
-                active === links.length - 1 ? "bg-maroon text-light" : "text-maroon hover:bg-gold/10 dark:text-gold-hi"
+                active === links.length - 1 ? "bg-brand text-light" : "text-brand hover:bg-accent/10 dark:text-accent-soft"
               }`}
             >
               See all {shown.total} result{shown.total === 1 ? "" : "s"}

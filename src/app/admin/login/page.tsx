@@ -4,15 +4,15 @@ import { getVerifiedAdmin } from "@/lib/admin";
 import { AdminLoginForm } from "@/components/admin/admin-login-form";
 
 export const metadata: Metadata = {
-  title: "Admin Login",
+  title: "Acceso al panel",
   robots: { index: false },
 };
 
 export const dynamic = "force-dynamic";
 
 const SIGNED_OUT: Record<string, string> = {
-  replaced: "You were signed out because this admin account was signed in on another device.",
-  db: "You were signed out because the database couldn't be reached. Please sign in again.",
+  replaced: "Tu sesión se cerró porque esta cuenta de administrador inició sesión en otro dispositivo.",
+  db: "Tu sesión se cerró porque no se pudo acceder a la base de datos. Inicia sesión de nuevo.",
 };
 
 export default async function AdminLoginPage({ searchParams }: PageProps<"/admin/login">) {

@@ -11,7 +11,7 @@ const initial: AuthState = {};
 
 const VALIDATE = {
   email: emailError,
-  password: (v: string) => (v ? null : "Please enter your password"),
+  password: (v: string) => (v ? null : "Ingresa tu contraseña"),
 };
 
 export function LoginForm({ next }: { next?: string }) {
@@ -23,12 +23,12 @@ export function LoginForm({ next }: { next?: string }) {
   return (
     <AuthShell>
       <div className="text-center">
-        <h1 className="font-serif text-3xl font-bold text-ink">Welcome back</h1>
+        <h1 className="font-display text-3xl font-bold text-ink">Hola de nuevo</h1>
         <p className="mt-1 text-sm text-muted">Inicia sesión para seguir comprando.</p>
       </div>
 
       {next?.startsWith("/checkout") && (
-        <p className="mt-5 rounded-xl border border-gold/50 bg-gold/10 px-3.5 py-3 text-center text-sm text-ink">
+        <p className="mt-5 rounded-xl border border-accent/50 bg-accent/10 px-3.5 py-3 text-center text-sm text-ink">
           Inicia sesión o crea una cuenta gratis para realizar tu pedido — tu carrito se guarda.
         </p>
       )}
@@ -37,24 +37,24 @@ export function LoginForm({ next }: { next?: string }) {
         {next && <input type="hidden" name="next" value={next} />}
         <AuthField
           name="email"
-          label="Email"
+          label="Correo electrónico"
           icon="mail"
           type="email"
           autoComplete="email"
-          placeholder="you@example.com"
+          placeholder="tu@ejemplo.com"
           {...f.bind("email")}
           {...email}
         />
         <AuthField
           name="password"
-          label="Password"
+          label="Contraseña"
           icon="lock"
           password
           autoComplete="current-password"
-          placeholder="Your password"
+          placeholder="Tu contraseña"
           {...f.bind("password")}
           labelAside={
-            <Link href="/forgot-password" className="text-xs font-medium text-gold-deep hover:underline">
+            <Link href="/forgot-password" className="text-xs font-medium text-accent-strong hover:underline">
               ¿Olvidaste tu contraseña?
             </Link>
           }
@@ -71,14 +71,14 @@ export function LoginForm({ next }: { next?: string }) {
 
       <div className="mt-6 flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.2em] text-muted">
         <span className="h-px flex-1 bg-[var(--line)]" />
-        New to SanJuan Mini Market?
+        ¿Primera vez en SanJuan Mini Market?
         <span className="h-px flex-1 bg-[var(--line)]" />
       </div>
       <Link
         href={next ? `/register?next=${encodeURIComponent(next)}` : "/register"}
-        className="mt-4 block rounded-full border border-gold/60 py-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-gold-deep transition hover:border-gold hover:bg-gold/10"
+        className="mt-4 block rounded-full border border-accent/60 py-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-accent-strong transition hover:border-accent hover:bg-accent/10"
       >
-        Create an account
+        Crear una cuenta
       </Link>
     </AuthShell>
   );

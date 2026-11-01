@@ -1,69 +1,86 @@
-/** Elegant product icons for category tiles (until real photos). */
+/** Line icons for supermarket category tiles. */
 
 type Props = { className?: string };
 
-function Necklace({ className = "" }: Props) {
+function Milk({ className = "" }: Props) {
   return (
-    <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.5" className={className} aria-hidden="true">
-      <path d="M22 34 C 40 78, 80 78, 98 34" strokeLinecap="round" />
-      <path d="M60 76 v10" strokeLinecap="round" />
-      <path d="M60 86 l7 10 -7 10 -7 -10 z" fill="currentColor" stroke="none" />
-      <circle cx="22" cy="34" r="2.5" fill="currentColor" stroke="none" />
-      <circle cx="98" cy="34" r="2.5" fill="currentColor" stroke="none" />
-      {[30, 42, 54, 66, 78, 90].map((x, i) => (
-        <circle key={i} cx={x} cy={i < 3 ? 44 + i * 8 : 44 + (5 - i) * 8} r="1.4" fill="currentColor" stroke="none" />
-      ))}
+    <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="2" className={className} aria-hidden="true">
+      {/* gable-top carton */}
+      <path d="M44 46V28l12-9 12 9v18" strokeLinejoin="round" />
+      <path d="M44 46h24v52a4 4 0 0 1-4 4H48a4 4 0 0 1-4-4V46z" strokeLinejoin="round" />
+      <path d="M56 19v27" />
+      <path d="M44 62h24" strokeWidth="1.4" opacity="0.6" />
+      <path d="M50 74c2-3 5-4 8-3" strokeLinecap="round" opacity="0.6" />
     </svg>
   );
 }
 
-function Ring({ className = "" }: Props) {
+function Yogurt({ className = "" }: Props) {
   return (
-    <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.5" className={className} aria-hidden="true">
-      <circle cx="60" cy="74" r="28" />
-      <circle cx="60" cy="74" r="22" strokeWidth="1" opacity="0.5" />
-      <path d="M60 30 l10 12 -10 12 -10 -12 z" fill="currentColor" stroke="none" />
-      <path d="M50 42 h20" strokeWidth="1" opacity="0.6" />
+    <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="2" className={className} aria-hidden="true">
+      {/* cup */}
+      <path d="M38 44h44l-6 48a5 5 0 0 1-5 4H49a5 5 0 0 1-5-4l-6-48z" strokeLinejoin="round" />
+      {/* lid */}
+      <rect x="34" y="36" width="52" height="9" rx="2.5" />
+      {/* spoon */}
+      <ellipse cx="60" cy="28" rx="7" ry="9" />
+      <path d="M60 37v12" strokeLinecap="round" />
+      {/* soft swirl */}
+      <path d="M52 78c4-4 8-4 12 0s8 4 12 0" strokeLinecap="round" opacity="0.6" strokeWidth="1.6" />
     </svg>
   );
 }
 
-function Earrings({ className = "" }: Props) {
+function Butter({ className = "" }: Props) {
   return (
-    <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.5" className={className} aria-hidden="true">
-      {[42, 78].map((x, i) => (
-        <g key={i}>
-          <path d={`M${x} 26 a10 10 0 0 1 0 20`} strokeLinecap="round" />
-          <circle cx={x} cy={50} r="3" fill="currentColor" stroke="none" />
-          <path d={`M${x} 56 l9 16 -9 18 -9 -18 z`} />
-          <circle cx={x} cy={74} r="3.5" fill="currentColor" stroke="none" />
-        </g>
-      ))}
+    <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="2" className={className} aria-hidden="true">
+      {/* butter block in perspective */}
+      <path d="M26 62l26-14 42 10-26 14-42-10z" strokeLinejoin="round" />
+      <path d="M26 62v14l42 10V76" strokeLinejoin="round" />
+      <path d="M68 76l26-14V48" strokeLinejoin="round" />
+      <path d="M40 63l24-12M48 67l24-12" strokeWidth="1.4" opacity="0.55" strokeLinecap="round" />
+      {/* knife */}
+      <path d="M72 30l16 5-4 10-16-5z" strokeLinejoin="round" />
     </svg>
   );
 }
 
-function Bracelet({ className = "" }: Props) {
+function Cleaning({ className = "" }: Props) {
   return (
-    <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="1.5" className={className} aria-hidden="true">
-      <ellipse cx="60" cy="62" rx="40" ry="30" />
-      <ellipse cx="60" cy="62" rx="34" ry="24" strokeWidth="1" opacity="0.5" />
-      <path d="M60 30 l7 9 -7 9 -7 -9 z" fill="currentColor" stroke="none" />
-      {[30, 60, 90].map((x, i) => (
-        <circle key={i} cx={x} cy={i === 1 ? 92 : 78} r="2" fill="currentColor" stroke="none" />
-      ))}
+    <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="2" className={className} aria-hidden="true">
+      {/* spray bottle */}
+      <path d="M46 52h20l5 48a4 4 0 0 1-4 4H45a4 4 0 0 1-4-4l5-48z" strokeLinejoin="round" />
+      <path d="M50 52V36h12v16" strokeLinejoin="round" />
+      <path d="M62 34h8l8 6v8l-16-4" strokeLinejoin="round" />
+      {/* trigger */}
+      <path d="M62 40l-8 6" strokeLinecap="round" />
+      {/* spray droplets */}
+      <path d="M84 30l6-4M88 40h7M82 22l2-6" strokeLinecap="round" opacity="0.65" />
+      {/* label */}
+      <rect x="48" y="70" width="16" height="16" rx="2" strokeWidth="1.4" opacity="0.55" />
+    </svg>
+  );
+}
+
+function Basket({ className = "" }: Props) {
+  return (
+    <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="2" className={className} aria-hidden="true">
+      <path d="M42 50c0-8 6-15 15-15s15 7 15 15" />
+      <path d="M24 50h72l-8 40a7 7 0 0 1-7 6H39a7 7 0 0 1-7-6l-8-40z" strokeLinejoin="round" />
+      <path d="M36 64l4 26M52 64v26M68 64v26M84 64l-4 26" strokeWidth="1.5" opacity="0.5" strokeLinecap="round" />
+      <path d="M72 40c0-8 5-14 12-14-1.3 8-5.6 12.5-12 14z" fill="currentColor" stroke="none" opacity="0.85" />
     </svg>
   );
 }
 
 const MAP: Record<string, (p: Props) => React.ReactElement> = {
-  necklaces: Necklace,
-  rings: Ring,
-  earrings: Earrings,
-  bracelets: Bracelet,
+  leches: Milk,
+  yogurts: Yogurt,
+  "crema-mantequilla": Butter,
+  limpieza: Cleaning,
 };
 
 export function CategoryArt({ slug, className }: { slug: string; className?: string }) {
-  const Art = MAP[slug] ?? Necklace;
+  const Art = MAP[slug] ?? Basket;
   return <Art className={className} />;
 }

@@ -6,9 +6,9 @@ import { formatPrice } from "@/lib/format";
 import { FILTER_KEYS, ShopFilters, useShopQuery } from "./shop-filters";
 
 const SORTS = [
-  { value: "newest", label: "Newest" },
-  { value: "price-asc", label: "Price: Low to High" },
-  { value: "price-desc", label: "Price: High to Low" },
+  { value: "newest", label: "Más recientes" },
+  { value: "price-asc", label: "Precio: menor a mayor" },
+  { value: "price-desc", label: "Precio: mayor a menor" },
 ];
 
 /** Results bar above the grid: count, Sort, active-filter chips, and the mobile
@@ -28,12 +28,12 @@ export function ShopToolbar({ count, facets }: { count: number; facets: ShopFace
       minPrice != null && maxPrice != null
         ? `${formatPrice(minPrice)} – ${formatPrice(maxPrice)}`
         : minPrice != null
-          ? `From ${formatPrice(minPrice)}`
-          : `Up to ${formatPrice(maxPrice!)}`;
+          ? `Desde ${formatPrice(minPrice)}`
+          : `Hasta ${formatPrice(maxPrice!)}`;
     chips.push({ label, clear: { minPrice: null, maxPrice: null } });
   }
   if (params.get("sale") === "1") chips.push({ label: "En oferta", clear: { sale: null } });
-  if (params.get("stock") === "1") chips.push({ label: "In stock", clear: { stock: null } });
+  if (params.get("stock") === "1") chips.push({ label: "Solo disponibles", clear: { stock: null } });
   if (material) chips.push({ label: material, clear: { material: null } });
 
   const clearAll = () => setParams(Object.fromEntries(FILTER_KEYS.map((k) => [k, null])));
@@ -58,7 +58,7 @@ export function ShopToolbar({ count, facets }: { count: number; facets: ShopFace
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="inline-flex items-center gap-2 rounded-full border border-[var(--line-strong)] bg-surface/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-ink transition hover:border-gold lg:hidden"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--line-strong)] bg-surface/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-ink transition hover:border-accent lg:hidden"
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
               <path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12" />
@@ -66,25 +66,25 @@ export function ShopToolbar({ count, facets }: { count: number; facets: ShopFace
               <circle cx="10" cy="12" r="2" />
               <circle cx="18" cy="18" r="2" />
             </svg>
-            Filters
+            Filtros
             {chips.length > 0 && (
-              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-maroon px-1 text-[0.62rem] text-gold-hi">
+              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1 text-[0.62rem] text-accent-soft">
                 {chips.length}
               </span>
             )}
           </button>
           <p className="hidden text-sm text-muted sm:block">
-            <span className="font-medium text-ink">{count}</span> {count === 1 ? "piece" : "pieces"}
+            <span className="font-medium text-ink">{count}</span> {count === 1 ? "producto" : "productos"}
           </p>
         </div>
 
         <label className="flex items-center gap-2 text-sm">
-          <span className="hidden text-xs uppercase tracking-[0.14em] text-muted sm:inline">Sort by</span>
+          <span className="hidden text-xs uppercase tracking-[0.14em] text-muted sm:inline">Ordenar por</span>
           <span className="relative">
             <select
               value={sort}
               onChange={(e) => setParams({ sort: e.target.value === "newest" ? null : e.target.value })}
-              className="appearance-none rounded-full border border-[var(--line-strong)] bg-surface/70 py-2 pl-4 pr-9 text-sm text-ink outline-none transition hover:border-gold focus:border-gold"
+              className="appearance-none rounded-full border border-[var(--line-strong)] bg-surface/70 py-2 pl-4 pr-9 text-sm text-ink outline-none transition hover:border-accent focus:border-accent"
             >
               {SORTS.map((s) => (
                 <option key={s.value} value={s.value}>
@@ -92,7 +92,7 @@ export function ShopToolbar({ count, facets }: { count: number; facets: ShopFace
                 </option>
               ))}
             </select>
-            <svg viewBox="0 0 20 20" className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gold-deep" fill="currentColor" aria-hidden="true">
+            <svg viewBox="0 0 20 20" className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-accent-strong" fill="currentColor" aria-hidden="true">
               <path d="M5.5 7.5 10 12l4.5-4.5" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </span>
@@ -100,7 +100,7 @@ export function ShopToolbar({ count, facets }: { count: number; facets: ShopFace
       </div>
 
       <p className="-mt-1 mb-4 text-sm text-muted sm:hidden">
-        <span className="font-medium text-ink">{count}</span> {count === 1 ? "piece" : "pieces"}
+        <span className="font-medium text-ink">{count}</span> {count === 1 ? "producto" : "productos"}
       </p>
 
       {chips.length > 0 && (
@@ -110,8 +110,8 @@ export function ShopToolbar({ count, facets }: { count: number; facets: ShopFace
               key={c.label}
               type="button"
               onClick={() => setParams(c.clear)}
-              aria-label={`Remove filter: ${c.label}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-gold/60 bg-gold/10 py-1.5 pl-3 pr-2 text-xs font-medium text-ink transition hover:border-maroon hover:bg-maroon hover:text-gold-hi"
+              aria-label={`Quitar filtro: ${c.label}`}
+              className="inline-flex items-center gap-1.5 rounded-full border border-accent/60 bg-accent/10 py-1.5 pl-3 pr-2 text-xs font-medium text-ink transition hover:border-accent hover:bg-accent hover:text-brand-deep"
             >
               {c.label}
               <span aria-hidden="true" className="text-sm leading-none">×</span>
@@ -120,9 +120,9 @@ export function ShopToolbar({ count, facets }: { count: number; facets: ShopFace
           <button
             type="button"
             onClick={clearAll}
-            className="ml-1 text-xs font-medium uppercase tracking-[0.12em] text-gold-deep underline-offset-4 hover:underline"
+            className="ml-1 text-xs font-medium uppercase tracking-[0.12em] text-accent-strong underline-offset-4 hover:underline"
           >
-            Clear all
+            Limpiar todo
           </button>
         </div>
       )}
@@ -141,18 +141,18 @@ export function ShopToolbar({ count, facets }: { count: number; facets: ShopFace
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Filters"
+          aria-label="Filtros"
           className={`absolute inset-y-0 left-0 flex w-[88%] max-w-sm flex-col bg-cream shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
             open ? "translate-x-0" : "-translate-x-full"
           }`}
         >
           <div className="flex items-center justify-between border-b border-[var(--line)] px-5 py-4">
-            <p className="font-serif text-2xl font-semibold text-ink">Filters</p>
+            <p className="font-display text-2xl font-semibold text-ink">Filtros</p>
             <button
               type="button"
               onClick={() => setOpen(false)}
-              aria-label="Close filters"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line-strong)] text-lg text-ink transition hover:border-gold"
+              aria-label="Cerrar filtros"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line-strong)] text-lg text-ink transition hover:border-accent"
             >
               ×
             </button>
@@ -167,15 +167,15 @@ export function ShopToolbar({ count, facets }: { count: number; facets: ShopFace
                 onClick={clearAll}
                 className="rounded-full border border-[var(--line-strong)] px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-ink"
               >
-                Clear
+                Limpiar
               </button>
             )}
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="flex-1 rounded-full bg-gradient-to-r from-gold-hi to-gold px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-maroon"
+              className="flex-1 rounded-full bg-gradient-to-r from-accent-soft to-accent px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-brand"
             >
-              Show {count} {count === 1 ? "piece" : "pieces"}
+              Ver {count} {count === 1 ? "producto" : "productos"}
             </button>
           </div>
         </div>

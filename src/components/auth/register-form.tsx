@@ -26,15 +26,15 @@ export function RegisterForm({ next }: { next?: string }) {
   return (
     <AuthShell>
       <div className="text-center">
-        <h1 className="font-serif text-3xl font-bold text-ink">Crear cuenta</h1>
+        <h1 className="font-display text-3xl font-bold text-ink">Crear cuenta</h1>
         <p className="mt-1 text-sm text-muted">
           Únete a SanJuan Mini Market para un pago más rápido. Te enviaremos un código para confirmar que eres tú.
         </p>
       </div>
 
       {next?.startsWith("/checkout") && (
-        <p className="mt-5 rounded-xl border border-gold/50 bg-gold/10 px-3.5 py-3 text-center text-sm text-ink">
-          An account is needed to place an order — it takes a minute and your cart is saved.
+        <p className="mt-5 rounded-xl border border-accent/50 bg-accent/10 px-3.5 py-3 text-center text-sm text-ink">
+          Necesitas una cuenta para hacer tu pedido: toma un minuto y tu carrito se guarda.
         </p>
       )}
 
@@ -42,30 +42,30 @@ export function RegisterForm({ next }: { next?: string }) {
         {next && <input type="hidden" name="next" value={next} />}
         <AuthField
           name="name"
-          label="Full name"
+          label="Nombre completo"
           icon="user"
           autoComplete="name"
-          placeholder="Your name"
+          placeholder="Tu nombre"
           {...f.bind("name")}
           {...f.field("name")}
         />
         <AuthField
           name="email"
-          label="Email"
+          label="Correo electrónico"
           icon="mail"
           type="email"
           autoComplete="email"
-          placeholder="you@example.com"
+          placeholder="tu@ejemplo.com"
           {...f.bind("email")}
           {...f.field("email")}
         />
         <AuthField
           name="password"
-          label="Password"
+          label="Contraseña"
           icon="lock"
           password
           autoComplete="new-password"
-          placeholder="Create a password"
+          placeholder="Crea una contraseña"
           {...f.bind("password")}
           {...password}
         >
@@ -75,16 +75,16 @@ export function RegisterForm({ next }: { next?: string }) {
         {state.error && <AuthAlert>{state.error}</AuthAlert>}
 
         <div>
-          <AuthSubmit pending={pending} label="Continue" pendingLabel="Sending code…" />
+          <AuthSubmit pending={pending} label="Continuar" pendingLabel="Enviando código…" />
           <SecureNote />
         </div>
       </form>
 
       <p className="mt-6 text-center text-sm text-muted">
-        Already have an account?{" "}
+        ¿Ya tienes una cuenta?{" "}
         <Link
           href={next ? `/login?next=${encodeURIComponent(next)}` : "/login"}
-          className="font-semibold text-gold-deep hover:underline"
+          className="font-semibold text-accent-strong hover:underline"
         >
           Iniciar sesión
         </Link>

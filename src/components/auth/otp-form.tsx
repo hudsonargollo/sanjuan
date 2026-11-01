@@ -10,10 +10,10 @@ type Action = (prev: OtpState, fd: FormData) => Promise<OtpState>;
 const LENGTH = 6;
 
 const boxCls =
-  "h-14 w-11 rounded-xl border border-[var(--line-strong)] bg-surface text-center font-serif text-2xl font-semibold text-ink outline-none transition focus:border-gold focus:ring-2 focus:ring-[rgba(195,154,78,0.3)] disabled:opacity-60 sm:h-16 sm:w-12";
+  "h-14 w-11 rounded-xl border border-[var(--line-strong)] bg-surface text-center font-display text-2xl font-semibold text-ink outline-none transition focus:border-accent focus:ring-2 focus:ring-[rgba(239,125,31,0.3)] disabled:opacity-60 sm:h-16 sm:w-12";
 
 const submitBtn =
-  "w-full rounded-full bg-maroon px-6 py-3.5 text-sm font-medium uppercase tracking-[0.14em] text-light shadow-[0_14px_34px_-14px_rgba(91,26,43,0.7)] transition hover:bg-maroon-2 disabled:opacity-60";
+  "w-full rounded-full bg-gradient-to-r from-accent-soft via-accent to-accent-strong px-6 py-3.5 text-sm font-bold uppercase tracking-[0.14em] text-brand-deep shadow-[0_16px_36px_-14px_rgba(239,125,31,0.75)] transition duration-300 hover:-translate-y-0.5 hover:brightness-105 disabled:opacity-60";
 
 export function OtpForm({
   maskedEmail,
@@ -75,7 +75,7 @@ export function OtpForm({
     if (resendState === lastResend.current) return;
     lastResend.current = resendState;
     if (resendState.ok) {
-      toast.success(resendState.message ?? "New code sent.", { title: "Check your inbox" });
+      toast.success(resendState.message ?? "Código reenviado.", { title: "Revisa tu correo" });
       inputs.current[0]?.focus();
     } else if (resendState.error) toast.error(resendState.error);
   }, [resendState, toast]);
@@ -111,13 +111,13 @@ export function OtpForm({
   return (
     <div>
       <p className="text-center text-sm text-muted">
-        We sent a 6-digit code to <span className="font-medium text-ink">{maskedEmail}</span>. Enter it below — it
-        expires in 10 minutes.
+        Enviamos un código de 6 dígitos a <span className="font-medium text-ink">{maskedEmail}</span>. Ingrésalo
+        abajo; vence en 10 minutos.
       </p>
 
       <form ref={formRef} action={formAction} className="mt-7 space-y-5">
         <input type="hidden" name="code" value={code} />
-        <div className="flex justify-center gap-2 sm:gap-2.5" role="group" aria-label="Verification code">
+        <div className="flex justify-center gap-2 sm:gap-2.5" role="group" aria-label="Código de verificación">
           {digits.map((d, i) => (
             <input
               key={i}
@@ -141,7 +141,7 @@ export function OtpForm({
               maxLength={LENGTH}
               autoFocus={i === 0}
               disabled={pending}
-              aria-label={`Digit ${i + 1}`}
+              aria-label={`Dígito ${i + 1}`}
               className={boxCls}
             />
           ))}
@@ -160,16 +160,16 @@ export function OtpForm({
         <form action={resendFormAction}>
           {wait > 0 ? (
             <span>
-              Didn&apos;t get it? You can resend in <span className="font-medium text-ink tabular-nums">{wait}s</span>
+              ¿No lo recibiste? Podrás reenviar en <span className="font-medium text-ink tabular-nums">{wait}s</span>
             </span>
           ) : (
-            <button type="submit" disabled={resending} className="font-medium text-gold-deep hover:underline disabled:opacity-60">
-              {resending ? "Sending…" : "Resend code"}
+            <button type="submit" disabled={resending} className="font-medium text-accent-strong hover:underline disabled:opacity-60">
+              {resending ? "Enviando…" : "Reenviar código"}
             </button>
           )}
         </form>
-        <p className="text-xs">Check your spam / promotions folder too.</p>
-        <Link href={changeHref} className="text-xs text-gold-deep hover:underline">
+        <p className="text-xs">Revisa también las carpetas de spam o promociones.</p>
+        <Link href={changeHref} className="text-xs text-accent-strong hover:underline">
           {changeLabel}
         </Link>
       </div>

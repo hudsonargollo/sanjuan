@@ -28,7 +28,7 @@ async function lookup(_prev: LookupState, formData: FormData): Promise<LookupSta
   const orderNumber = String(formData.get("order") ?? "").trim().toUpperCase();
   const email = String(formData.get("email") ?? "").trim();
   if (!orderNumber || !email) {
-    return { status: "error", message: "Enter your order number and email." };
+    return { status: "error", message: "Ingresa tu número de pedido y tu correo." };
   }
   if (!rateLimit(`track:${await clientIp()}`, 20, 10 * 60_000)) {
     return { status: "error", message: TOO_MANY };

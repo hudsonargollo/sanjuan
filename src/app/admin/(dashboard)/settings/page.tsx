@@ -6,17 +6,17 @@ import { DeleteButton } from "@/components/admin/delete-button";
 import { StoreSettingsForms, PasswordForm, AddTeamMemberForm } from "@/components/admin/settings-forms";
 import { removeTeamMember } from "./actions";
 
-export const metadata = { title: "Settings" };
+export const metadata = { title: "Ajustes" };
 export const dynamic = "force-dynamic";
 
 const SECTIONS = [
-  { id: "contact", label: "Contact" },
-  { id: "social", label: "Social" },
-  { id: "shipping", label: "Shipping" },
-  { id: "announcements", label: "Announcement bar" },
-  { id: "alerts", label: "Alerts" },
+  { id: "contact", label: "Contacto" },
+  { id: "social", label: "Redes sociales" },
+  { id: "shipping", label: "Envío" },
+  { id: "announcements", label: "Barra de anuncios" },
+  { id: "alerts", label: "Alertas" },
   { id: "account", label: "Mi cuenta" },
-  { id: "team", label: "Team" },
+  { id: "team", label: "Equipo" },
 ];
 
 async function loadTeam() {
@@ -39,18 +39,18 @@ export default async function AdminSettingsPage() {
 
   return (
     <div>
-      <h1 className="font-serif text-3xl font-bold text-ink">Settings</h1>
+      <h1 className="font-display text-3xl font-bold text-ink">Ajustes</h1>
       <p className="mt-1 text-sm text-muted">
-        Store details, shipping, the announcement bar, your password and your team. Changes go live on
-        the store immediately.
+        Datos de la tienda, envío, la barra de anuncios, tu contraseña y tu equipo. Los cambios se
+        aplican en la tienda al instante.
       </p>
 
-      <nav className="mt-5 flex flex-wrap gap-2" aria-label="Settings sections">
+      <nav className="mt-5 flex flex-wrap gap-2" aria-label="Secciones de ajustes">
         {SECTIONS.map((s) => (
           <a
             key={s.id}
             href={`#${s.id}`}
-            className="rounded-full border border-[var(--line-strong)] px-3.5 py-1.5 text-xs font-medium text-ink transition hover:border-gold hover:text-gold-deep"
+            className="rounded-full border border-[var(--line-strong)] px-3.5 py-1.5 text-xs font-medium text-ink transition hover:border-accent hover:text-accent-strong"
           >
             {s.label}
           </a>
@@ -61,8 +61,8 @@ export default async function AdminSettingsPage() {
         {!team.dbConnected && <DbBanner />}
         {!isOwner && (
           <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-            You&apos;re signed in as <strong>staff</strong> — store settings and the team can only be changed by an
-            admin. You can still change your own password below.
+            Has iniciado sesión como <strong>personal</strong>: solo un administrador puede cambiar los
+            ajustes de la tienda y el equipo. Aún puedes cambiar tu propia contraseña abajo.
           </p>
         )}
 
@@ -72,9 +72,9 @@ export default async function AdminSettingsPage() {
         {/* Team */}
         <section
           id="team"
-          className="scroll-mt-24 rounded-2xl border border-[var(--line)] bg-surface p-5 shadow-[0_10px_30px_-22px_rgba(38,8,16,0.4)] sm:p-6"
+          className="scroll-mt-24 rounded-2xl border border-[var(--line)] bg-surface p-5 shadow-[0_10px_30px_-22px_rgba(18,53,31,0.4)] sm:p-6"
         >
-          <h2 className="font-serif text-xl font-semibold text-ink">Team</h2>
+          <h2 className="font-display text-xl font-semibold text-ink">Equipo</h2>
           <p className="mt-1 text-sm text-muted">Personas que pueden iniciar sesión en este panel.</p>
           <ul className="mt-4 divide-y divide-[var(--line)]">
             {team.users.map((u) => {
@@ -85,22 +85,22 @@ export default async function AdminSettingsPage() {
                   <div className="min-w-0">
                     <p className="font-medium text-ink">
                       {u.name || u.email}
-                      {isSelf && <span className="ml-2 text-xs font-normal text-muted">(you)</span>}
+                      {isSelf && <span className="ml-2 text-xs font-normal text-muted">(tú)</span>}
                     </p>
                     <p className="text-xs text-muted">{u.email}</p>
                   </div>
                   <div className="flex items-center gap-4">
                     <span
                       className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                        u.role === "ADMIN" ? "bg-maroon text-gold" : "bg-cream-soft text-ink"
+                        u.role === "ADMIN" ? "bg-brand text-accent" : "bg-cream-soft text-ink"
                       }`}
                     >
-                      {u.role === "ADMIN" ? "Admin" : "Staff"}
+                      {u.role === "ADMIN" ? "Administrador" : "Personal"}
                     </span>
                     {isOwner && !isSelf && !lastAdmin && (
                       <DeleteButton
                         action={removeTeamMember.bind(null, u.id)}
-                        label="Remove"
+                        label="Quitar"
                         confirmText={`¿Quitar a ${u.email} del equipo? Ya no podrá iniciar sesión.`}
                       />
                     )}

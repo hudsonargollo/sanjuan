@@ -4,7 +4,7 @@ import { SalesChartPro } from "@/components/admin/sales-chart-pro";
 import { PaymentMethodPanel, SalesHighlightsPanel } from "@/components/admin/dashboard-insights";
 import { requireAdmin } from "@/lib/admin";
 
-export const metadata = { title: "Analytics" };
+export const metadata = { title: "Analíticas" };
 
 export const dynamic = "force-dynamic";
 
@@ -18,17 +18,17 @@ export default async function AnalyticsPage() {
 
   const aov = stats.orders > 0 ? Math.round(stats.revenue / stats.orders) : 0;
   const kpis = [
-    { label: "Total revenue", value: formatPrice(stats.revenue), hint: "All confirmed orders" },
-    { label: "Total orders", value: String(stats.orders), hint: "All time" },
-    { label: "Avg. order value", value: formatPrice(aov), hint: "Revenue ÷ orders" },
-    { label: "This month", value: formatPrice(stats.monthRevenue), hint: "Revenue this month" },
+    { label: "Ingresos totales", value: formatPrice(stats.revenue), hint: "Todos los pedidos confirmados" },
+    { label: "Pedidos totales", value: String(stats.orders), hint: "Histórico" },
+    { label: "Valor medio del pedido", value: formatPrice(aov), hint: "Ingresos ÷ pedidos" },
+    { label: "Este mes", value: formatPrice(stats.monthRevenue), hint: "Ingresos de este mes" },
   ];
 
   return (
     <div>
-      <h1 className="font-serif text-3xl font-bold text-ink">Analytics</h1>
+      <h1 className="font-display text-3xl font-bold text-ink">Analíticas</h1>
       <p className="mt-1 text-sm text-muted">
-        Daily revenue — scroll to zoom, drag to pan, and explore any period.
+        Ingresos diarios: desplázate para hacer zoom, arrastra para moverte y explora cualquier periodo.
       </p>
 
       {/* KPI summary */}
@@ -36,10 +36,10 @@ export default async function AnalyticsPage() {
         {kpis.map((k) => (
           <div
             key={k.label}
-            className="rounded-2xl border border-[var(--line)] bg-surface p-5 shadow-[0_10px_30px_-22px_rgba(38,8,16,0.4)]"
+            className="rounded-2xl border border-[var(--line)] bg-surface p-5 shadow-[0_10px_30px_-22px_rgba(18,53,31,0.4)]"
           >
             <p className="text-[0.62rem] font-medium uppercase tracking-[0.16em] text-muted">{k.label}</p>
-            <p className="mt-2 font-serif text-2xl font-bold text-ink [font-variant-numeric:tabular-nums]">
+            <p className="mt-2 font-display text-2xl font-bold text-ink [font-variant-numeric:tabular-nums]">
               {k.value}
             </p>
             <p className="mt-1 text-xs text-muted">{k.hint}</p>

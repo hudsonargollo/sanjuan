@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { AdminShell } from "@/components/admin/admin-shell";
 
 export const metadata: Metadata = {
-  title: { default: "Dashboard", template: "%s · SanJuan Mini Market Admin" },
+  title: { default: "Panel", template: "%s · SanJuan Mini Market" },
   robots: { index: false, follow: false },
 };
 

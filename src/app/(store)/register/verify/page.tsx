@@ -16,10 +16,10 @@ export default async function RegisterVerifyPage() {
   const wait = await resendWaitSeconds(pending.email, "register").catch(() => 0);
 
   return (
-    <AuthShell backHref="/register" backLabel="Back">
+    <AuthShell backHref="/register" backLabel="Volver">
       <div className="text-center">
-        <span className="eyebrow">Step 2 of 2</span>
-        <h1 className="mt-1 font-serif text-3xl font-bold text-ink">Verifica tu correo</h1>
+        <span className="eyebrow">Paso 2 de 2</span>
+        <h1 className="mt-1 font-display text-3xl font-bold text-ink">Verifica tu correo</h1>
       </div>
       <div className="mt-5">
         <OtpForm

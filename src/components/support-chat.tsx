@@ -15,7 +15,7 @@ function linkify(text: string): ReactNode[] {
     const raw = m[0].replace(/[.,;:!?]+$/, "");
     const start = m.index ?? 0;
     if (start > last) out.push(text.slice(last, start));
-    const cls = "font-medium text-gold-deep underline underline-offset-2 break-all hover:text-gold";
+    const cls = "font-medium text-accent-strong underline underline-offset-2 break-all hover:text-accent";
     out.push(
       raw.startsWith("/") ? (
         <Link key={start} href={raw} className={cls}>
@@ -41,47 +41,54 @@ function buildFaqs(st: StoreSettings): Faq[] {
   const { deliveryTime, flatFee, freeThreshold } = st.shipping;
   return [
   {
+    id: "location",
+    label: "📍 Ubicación y horario",
+    keywords: ["ubicación", "ubicacion", "dónde están", "donde estan", "dónde queda", "donde queda", "dirección", "direccion", "buena vista", "santa cruz", "horario", "abierto", "abren"],
+    answer: `Estamos en ${st.contact.city}. Atendemos ${st.contact.hours}. Cómo llegar y datos de contacto: /contact`,
+  },
+  {
     id: "shipping",
-    label: "🚚 Shipping & delivery",
-    keywords: ["shipping", "delivery", "courier", "days", "how long", "kitne din", "kab aayega", "leopard", "tcs"],
-    answer: `Entregamos a nivel nacional. Los pedidos llegan en ${deliveryTime} vía servicios de mensajería. El envío is a flat ${formatPrice(
-      flatFee
-    )} — and FREE on orders over ${formatPrice(freeThreshold)}.`,
+    label: "🚚 Envíos y entrega",
+    keywords: ["envío", "envio", "entrega", "delivery", "demora", "tarda", "llega", "shipping", "courier", "días", "dias"],
+    answer:
+      freeThreshold > 0
+        ? `Entregamos en Buena Vista y zonas cercanas de Santa Cruz, normalmente ${deliveryTime}. El envío cuesta ${formatPrice(flatFee)} y es GRATIS en pedidos desde ${formatPrice(freeThreshold)}.`
+        : `Entregamos en Buena Vista y zonas cercanas de Santa Cruz, normalmente ${deliveryTime}. El envío es GRATIS, sin mínimo de compra.`,
   },
   {
     id: "payment",
-    label: "💵 Payment & COD",
-    keywords: ["payment", "cod", "cash on delivery", "cash", "card", "pay", "online", "paisa", "advance"],
+    label: "💵 Pago y contra entrega",
+    keywords: ["pago", "pagar", "contra entrega", "cod", "efectivo", "tarjeta", "payment", "cash", "online", "adelanto"],
     answer:
-      "You can pay with Cash on Delivery (COD) or securely online by card/wallet (PayFast & Safepay). No advance needed for COD.",
+      "Puedes pagar contra entrega (COD) al recibir en Buena Vista y zonas cercanas — sin adelanto. El pago en línea con tarjeta o billetera aparece al finalizar tu compra cuando está habilitado.",
   },
   {
     id: "returns",
-    label: "🔄 Returns & exchange",
-    keywords: ["return", "exchange", "refund", "wapas", "change", "size change"],
+    label: "🔄 Devoluciones y cambios",
+    keywords: ["devolución", "devolucion", "cambio", "reembolso", "return", "exchange", "refund"],
     answer:
-      "Not happy or need a different size? We offer easy 7-day exchange/return on unused items in original packaging. Message us and we'll arrange it.",
+      "Aceptamos devolución o cambio dentro de 7 días en productos sin usar y en su empaque original. Escríbenos y lo coordinamos contigo.",
   },
   {
-    id: "sizing",
-    label: "📏 Sizing & fit",
-    keywords: ["size", "sizing", "fit", "ring size", "length", "adjustable", "chota", "bara"],
+    id: "custom",
+    label: "🛒 Pedidos especiales",
+    keywords: ["especial", "mayorista", "por mayor", "volumen", "negocio", "tienda", "custom", "personalizado"],
     answer:
-      "Sizes are listed on each product page, and many rings/bracelets are adjustable. Unsure of your size? Tell us your usual size on WhatsApp and we'll guide you.",
+      "Preparamos pedidos especiales y por volumen para tiendas y negocios. Llena el formulario de /custom y te respondemos en 1–2 días hábiles con opciones y precio, sin pago por adelantado.",
   },
   {
-    id: "material",
-    label: "✨ Material & care",
-    keywords: ["material", "oro", "acero", "óxido", "cuidado", "manchas", "alergia", "hipoalergénico"],
+    id: "care",
+    label: "🧊 Conservación",
+    keywords: ["vencimiento", "caduc", "conserv", "frío", "frio", "refriger", "guardar", "care"],
     answer:
-      "Nuestras piezas son de acero inoxidable premium — libres de óxido e hipoalergénicas, con acabados bañados en oro o plata (see each product's material). Tip: wear after perfume, keep dry, and wipe with a soft cloth to keep the shine.",
+      "Revisa la fecha de vencimiento en el envase y guarda el producto en un lugar fresco y seco. Los perecederos van refrigerados hasta la entrega. Más consejos en /care.",
   },
   {
     id: "track",
-    label: "📦 Track my order",
-    keywords: ["rastrear", "seguimiento", "estado del pedido", "dónde", "paquete", "pedido"],
+    label: "📦 Rastrear mi pedido",
+    keywords: ["rastrear", "seguimiento", "estado del pedido", "dónde está mi pedido", "donde esta mi pedido", "paquete", "track"],
     answer:
-      "Rastrea cualquier pedido en la página de Estado del pedido (Ayuda → Estado del pedido) con tu número de pedido y correo. Una vez enviado, it shows your courier tracking link.",
+      "Rastrea cualquier pedido en la página de Estado del pedido (Ayuda → Estado del pedido) con tu número de pedido y el correo usado al pagar. Una vez enviado, verás la empresa de envío y el enlace de seguimiento.",
   },
 ];
 }
@@ -100,7 +107,7 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
   const [input, setInput] = useState("");
   const greeting: Msg = {
     from: "bot",
-    text: "¡Hola! 👋 Soy el asistente de SanJuan Mini Market. Pregúntame lo que quieras — productos, precios, entrega, pago, returns or your order. Puedes escribir en español.",
+    text: "¡Hola! 👋 Soy el asistente de SanJuan Mini Market, tu minimarket en Buena Vista. Pregúntame lo que quieras — productos, precios, entrega, pago, devoluciones o tu pedido.",
   };
   const [msgs, setMsgs] = useState<Msg[]>([greeting]);
   const [typing, setTyping] = useState(false);
@@ -157,7 +164,7 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
       hit?.answer ??
       (HAS_WHATSAPP
         ? "No pude conectar con el asistente ahora. Nuestro equipo te ayudará personalmente por WhatsApp — toca el botón verde abajo. 💬"
-        : "No pude conectar con el asistente ahora. Envíanos un mensaje desde nuestra página de Contacto y nuestro equipo se coet back to you. 💬")
+        : "No pude conectar con el asistente ahora. Envíanos un mensaje desde nuestra página de Contacto y nuestro equipo te responderá. 💬")
     );
   };
 
@@ -191,14 +198,14 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
       <div className="group/launch fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-[70] flex items-center gap-3 sm:bottom-5 sm:right-5">
         {/* hover label (desktop) */}
         {!open && (
-          <span className="pointer-events-none hidden translate-x-2 items-center rounded-full border border-[var(--line)] bg-surface px-3.5 py-2 text-sm font-medium text-ink opacity-0 shadow-[0_10px_30px_-12px_rgba(38,8,16,0.4)] transition-all duration-300 group-hover/launch:translate-x-0 group-hover/launch:opacity-100 md:flex">
-            Need help? Chat with us
+          <span className="pointer-events-none hidden translate-x-2 items-center rounded-full border border-[var(--line)] bg-surface px-3.5 py-2 text-sm font-medium text-ink opacity-0 shadow-[0_10px_30px_-12px_rgba(18,53,31,0.4)] transition-all duration-300 group-hover/launch:translate-x-0 group-hover/launch:opacity-100 md:flex">
+            ¿Necesitas ayuda? Escríbenos
           </span>
         )}
         <button
           onClick={toggleOpen}
-          aria-label={open ? "Close chat" : "Chat with us"}
-          className={`relative flex h-12 w-12 items-center justify-center rounded-full sm:h-14 sm:w-14 bg-gradient-to-br from-gold-hi via-gold to-gold-deep text-maroon shadow-[0_16px_40px_-12px_rgba(169,126,48,0.75)] ring-1 ring-[rgba(230,205,139,0.6)] transition-transform duration-300 hover:scale-110 active:scale-95 ${
+          aria-label={open ? "Cerrar chat" : "Abrir chat"}
+          className={`relative flex h-12 w-12 items-center justify-center rounded-full sm:h-14 sm:w-14 bg-gradient-to-br from-accent-soft via-accent to-accent-strong text-brand shadow-[0_16px_40px_-12px_rgba(239,125,31,0.75)] ring-1 ring-[rgba(167,216,178,0.6)] transition-transform duration-300 hover:scale-110 active:scale-95 ${
             open ? "" : "animate-chatpulse"
           }`}
         >
@@ -225,30 +232,30 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
 
       {/* ── Panel ── */}
       {open && (
-        <div className="animate-chatin fixed bottom-20 right-4 z-[70] sm:bottom-24 sm:right-5 flex h-[32rem] max-h-[calc(100dvh-7.5rem)] w-[23rem] max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-3xl border border-[rgba(230,205,139,0.35)] bg-surface shadow-[0_40px_90px_-30px_rgba(38,8,16,0.7)]">
+        <div className="animate-chatin fixed bottom-20 right-4 z-[70] sm:bottom-24 sm:right-5 flex h-[32rem] max-h-[calc(100dvh-7.5rem)] w-[23rem] max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-3xl border border-[rgba(167,216,178,0.35)] bg-surface shadow-[0_40px_90px_-30px_rgba(18,53,31,0.7)]">
           {/* Header */}
-          <div className="relative overflow-hidden bg-gradient-to-br from-maroon via-maroon-2 to-wine-deep px-5 pb-5 pt-4 text-light">
+          <div className="relative overflow-hidden bg-gradient-to-br from-brand via-brand-dark to-brand-deep px-5 pb-5 pt-4 text-light">
             <div
               className="pointer-events-none absolute inset-0 opacity-[0.12]"
-              style={{ background: "radial-gradient(120px 80px at 85% 0%, #e6cd8b, transparent 70%)" }}
+              style={{ background: "radial-gradient(120px 80px at 85% 0%, #ffa25c, transparent 70%)" }}
             />
             <div className="relative flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(230,205,139,0.16)] text-gold ring-1 ring-[rgba(230,205,139,0.4)]">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(167,216,178,0.16)] text-accent ring-1 ring-[rgba(167,216,178,0.4)]">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
               <div className="min-w-0 flex-1">
-                <p className="font-serif text-lg font-semibold leading-tight">SanJuan Mini Market Support</p>
+                <p className="font-display text-lg font-semibold leading-tight">SanJuan Mini Market</p>
                 <p className="mt-0.5 flex items-center gap-1.5 text-xs text-light/75">
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-                  Instant answers 24/7 · team replies {CONTACT.hours}
+                  Buena Vista, Santa Cruz · {CONTACT.hours}
                 </p>
               </div>
               <button
                 onClick={() => setOpen(false)}
-                aria-label="Close"
-                className="rounded-full p-1 text-light/80 transition hover:bg-white/10 hover:text-gold"
+                aria-label="Cerrar"
+                className="rounded-full p-1 text-light/80 transition hover:bg-white/10 hover:text-accent"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
@@ -256,8 +263,8 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
               </button>
             </div>
           </div>
-          {/* gold hairline */}
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-gold to-transparent" />
+          {/* accent hairline */}
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-accent to-transparent" />
 
           {/* Messages (scrolls independently — page stays put) */}
           <div
@@ -267,14 +274,14 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
             {msgs.map((m, i) => (
               <div key={i} className={`flex ${m.from === "user" ? "justify-end" : "justify-start"}`}>
                 {m.from === "bot" && (
-                  <span className="mr-2 mt-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-maroon to-wine-deep text-[0.6rem] text-gold">
-                    Z
+                  <span className="mr-2 mt-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand to-brand-deep text-[0.6rem] text-accent">
+                    S
                   </span>
                 )}
                 <div
-                  className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed shadow-[0_6px_18px_-10px_rgba(38,8,16,0.35)] ${
+                  className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed shadow-[0_6px_18px_-10px_rgba(18,53,31,0.35)] ${
                     m.from === "user"
-                      ? "rounded-br-md bg-gradient-to-br from-gold-hi to-gold text-maroon"
+                      ? "rounded-br-md bg-gradient-to-br from-accent-soft to-accent text-brand"
                       : "rounded-bl-md border border-[var(--line)] bg-surface text-ink"
                   }`}
                 >
@@ -293,15 +300,15 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
 
             {typing && (
               <div className="flex justify-start" aria-live="polite">
-                <span className="mr-2 mt-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-maroon to-wine-deep text-[0.6rem] text-gold">
-                  Z
+                <span className="mr-2 mt-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand to-brand-deep text-[0.6rem] text-accent">
+                  S
                 </span>
                 <div className="flex items-center gap-1 rounded-2xl rounded-bl-md border border-[var(--line)] bg-surface px-3.5 py-3">
-                  <span className="sr-only">Assistant is typing</span>
+                  <span className="sr-only">El asistente está escribiendo</span>
                   {[0, 1, 2].map((d) => (
                     <span
                       key={d}
-                      className="h-1.5 w-1.5 animate-bounce rounded-full bg-gold-deep"
+                      className="h-1.5 w-1.5 animate-bounce rounded-full bg-accent-strong"
                       style={{ animationDelay: `${d * 150}ms` }}
                     />
                   ))}
@@ -312,14 +319,14 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
             {/* Quick replies */}
             <div className="pt-1.5">
               <p className="mb-2 pl-1 text-[0.65rem] font-medium uppercase tracking-[0.16em] text-muted">
-                Popular questions
+                Preguntas frecuentes
               </p>
               <div className="flex flex-wrap gap-2">
                 {FAQS.map((f) => (
                   <button
                     key={f.id}
                     onClick={() => answer(f)}
-                    className="rounded-full border border-[var(--line-strong)] bg-surface px-3 py-1.5 text-xs font-medium text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-gold hover:text-gold-deep hover:shadow-[0_8px_20px_-10px_rgba(169,126,48,0.6)]"
+                    className="rounded-full border border-[var(--line-strong)] bg-surface px-3 py-1.5 text-xs font-medium text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent-strong hover:shadow-[0_8px_20px_-10px_rgba(239,125,31,0.6)]"
                   >
                     {f.label}
                   </button>
@@ -330,7 +337,7 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
 
           {/* WhatsApp CTA (or contact page when no number is configured) */}
           <a
-            href={HAS_WHATSAPP ? waLink("Hi SanJuan Mini Market! I have a question 😊") : "/contact"}
+            href={HAS_WHATSAPP ? waLink("¡Hola SanJuan Mini Market! Tengo una consulta 😊") : "/contact"}
             target={HAS_WHATSAPP ? "_blank" : undefined}
             rel={HAS_WHATSAPP ? "noopener noreferrer" : undefined}
             className="flex items-center justify-center gap-2 bg-[#25D366] py-2.5 text-sm font-semibold text-white transition hover:brightness-105"
@@ -338,7 +345,7 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.9 14.2c-.2.7-1.2 1.3-1.9 1.4-.5.1-1.1.2-3.5-.8-2.9-1.2-4.8-4.2-4.9-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.2.1.4.1.6-.1l.9-1c.2-.2.4-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.3.1.7-.1 1.4z" />
             </svg>
-            {HAS_WHATSAPP ? "Chat with us on WhatsApp" : "Contact our team"}
+            {HAS_WHATSAPP ? "Escríbenos por WhatsApp" : "Contacta a nuestro equipo"}
           </a>
 
           {/* Input */}
@@ -352,15 +359,15 @@ export function SupportChat({ settings }: { settings: StoreSettings }) {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Pregunta lo que quieras… (español)"
+              placeholder="Pregunta lo que quieras…"
               maxLength={600}
-              className="min-w-0 flex-1 rounded-full border border-[var(--line-strong)] bg-cream-soft px-4 py-2.5 text-sm text-ink outline-none transition focus:border-gold focus:ring-2 focus:ring-[rgba(195,154,78,0.22)]"
+              className="min-w-0 flex-1 rounded-full border border-[var(--line-strong)] bg-cream-soft px-4 py-2.5 text-sm text-ink outline-none transition focus:border-accent focus:ring-2 focus:ring-[rgba(239,125,31,0.22)]"
             />
             <button
               type="submit"
-              aria-label="Send"
+              aria-label="Enviar"
               disabled={!input.trim() || typing}
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold-hi to-gold-deep text-maroon shadow-sm transition hover:opacity-90 disabled:opacity-40"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent-soft to-accent-strong text-brand shadow-sm transition hover:opacity-90 disabled:opacity-40"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" strokeLinecap="round" strokeLinejoin="round" />

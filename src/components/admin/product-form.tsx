@@ -31,21 +31,21 @@ export function ProductForm({
 
   return (
     <form action={formAction} className="max-w-2xl space-y-5">
-      <Row label="Name" required>
+      <Row label="Nombre" required>
         <input name="name" required defaultValue={v?.name ?? product?.name} className={input} />
       </Row>
-      <Row label="Slug" hint="Leave blank to auto-generate from the name">
-        <input name="slug" defaultValue={v?.slug ?? product?.slug} className={input} placeholder="auto" />
+      <Row label="Slug" hint="Déjalo en blanco para generarlo automáticamente a partir del nombre">
+        <input name="slug" defaultValue={v?.slug ?? product?.slug} className={input} placeholder="automático" />
       </Row>
-      <Row label="Description">
+      <Row label="Descripción">
         <textarea name="description" rows={4} defaultValue={v?.description ?? product?.description ?? ""} className={input} />
       </Row>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Row label="Price (Bs)" required>
+        <Row label="Precio (Bs)" required>
           <input name="price" type="number" min="0" step="1" required defaultValue={v?.price ?? product?.price} className={input} />
         </Row>
-        <Row label="Compare-at price (Bs)" hint="Optional — shows a strikethrough">
+        <Row label="Precio anterior (Bs)" hint="Opcional: se muestra tachado">
           <input name="compareAtPrice" type="number" min="0" step="1" defaultValue={v?.compareAtPrice ?? product?.compareAtPrice ?? ""} className={input} />
         </Row>
         <Row label="Stock" required>
@@ -55,12 +55,12 @@ export function ProductForm({
           <input name="sku" defaultValue={v?.sku ?? product?.sku ?? ""} className={input} />
         </Row>
         <Row label="Material">
-          <input name="material" defaultValue={v?.material ?? product?.material ?? ""} className={input} placeholder="e.g. Gold-Plated Steel" />
+          <input name="material" defaultValue={v?.material ?? product?.material ?? ""} className={input} placeholder="Ej. Botella 1 L" />
         </Row>
-        <Row label="Category" required>
+        <Row label="Categoría" required>
           <select key={v?.categoryId ?? "init"} name="categoryId" required defaultValue={v?.categoryId ?? product?.categoryId ?? ""} className={input}>
             <option value="" disabled>
-              Choose a category
+              Elige una categoría
             </option>
             {categories.map((c) => (
               <option key={c.id} value={c.id}>
@@ -72,30 +72,30 @@ export function ProductForm({
       </div>
 
       <Row
-        label="Specifications"
-        hint={'One per line as “Label: Value”. These show in the product page’s Highlights & specs table.'}
+        label="Especificaciones"
+        hint={'Una por línea con el formato «Etiqueta: Valor». Se muestran en la tabla de destacados y especificaciones de la página del producto.'}
       >
         <textarea
           name="specs"
           rows={6}
           defaultValue={v?.specs ?? product?.specs ?? ""}
           className={input}
-          placeholder={`Size: 200 ml\nFormula: Light lotion\nScent: Fresh\nPackaging: Recyclable bottle`}
+          placeholder={`Tamaño: 200 ml\nFórmula: Loción ligera\nAroma: Fresco\nEnvase: Botella reciclable`}
         />
       </Row>
 
-      <Row label="Product images" hint="Upload from your device — first image is the main one.">
+      <Row label="Imágenes del producto" hint="Sube desde tu dispositivo: la primera imagen es la principal.">
         <ImageUploader initial={product?.images ?? []} />
       </Row>
 
       <div className="flex gap-6">
         <label className="flex items-center gap-2 text-sm text-ink">
-          <input type="checkbox" name="featured" defaultChecked={v ? v.featured === "on" : product?.featured} className="accent-[var(--color-gold-deep)]" />
+          <input type="checkbox" name="featured" defaultChecked={v ? v.featured === "on" : product?.featured} className="accent-[var(--color-accent-strong)]" />
           Destacado
         </label>
         <label className="flex items-center gap-2 text-sm text-ink">
-          <input type="checkbox" name="active" defaultChecked={v ? v.active === "on" : product?.active ?? true} className="accent-[var(--color-gold-deep)]" />
-          Active (visible in store)
+          <input type="checkbox" name="active" defaultChecked={v ? v.active === "on" : product?.active ?? true} className="accent-[var(--color-accent-strong)]" />
+          Activo (visible en la tienda)
         </label>
       </div>
 
@@ -107,12 +107,12 @@ export function ProductForm({
         <button
           type="submit"
           disabled={pending}
-          className="rounded-full bg-maroon px-8 py-3 text-sm font-medium uppercase tracking-[0.12em] text-light transition hover:bg-maroon-2 disabled:opacity-60"
+          className="rounded-full bg-accent px-8 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-brand-deep shadow-[0_14px_32px_-16px_rgba(239,125,31,0.9)] transition duration-300 hover:-translate-y-0.5 hover:bg-accent-soft disabled:opacity-60"
         >
-          {pending ? "Saving…" : submitLabel}
+          {pending ? "Guardando…" : submitLabel}
         </button>
         <Link href="/admin/products" className="text-sm text-muted hover:text-ink">
-          Cancel
+          Cancelar
         </Link>
       </div>
     </form>
@@ -120,7 +120,7 @@ export function ProductForm({
 }
 
 const input =
-  "w-full rounded-lg border border-[var(--line-strong)] bg-surface px-3.5 py-2.5 text-sm text-ink outline-none transition focus:border-gold focus:ring-2 focus:ring-[rgba(195,154,78,0.2)]";
+  "w-full rounded-lg border border-[var(--line-strong)] bg-surface px-3.5 py-2.5 text-sm text-ink outline-none transition focus:border-accent focus:ring-2 focus:ring-[rgba(239,125,31,0.2)]";
 
 function ImageUploader({ initial }: { initial: string[] }) {
   const [urls, setUrls] = useState<string[]>(initial);
@@ -140,10 +140,10 @@ function ImageUploader({ initial }: { initial: string[] }) {
         fd.append("file", f);
         const r = await fetch("/api/admin/upload", { method: "POST", body: fd });
         const d = await r.json();
-        if (!r.ok || !d.ok) throw new Error(d.error || "Upload failed");
+        if (!r.ok || !d.ok) throw new Error(d.error || "Error al subir");
         setUrls((prev) => [...prev, d.url]);
       } catch (e) {
-        setErr(e instanceof Error ? e.message : "Upload failed");
+        setErr(e instanceof Error ? e.message : "Error al subir");
       }
     }
     setBusy(false);
@@ -175,16 +175,16 @@ function ImageUploader({ initial }: { initial: string[] }) {
             <div key={u} className="group relative aspect-square overflow-hidden rounded-lg border border-[var(--line)] bg-sand">
               <img src={u} alt="" className="h-full w-full object-cover" />
               {i === 0 && (
-                <span className="absolute left-1 top-1 rounded bg-maroon px-1.5 py-0.5 text-[0.55rem] font-semibold uppercase tracking-wide text-light">
-                  Main
+                <span className="absolute left-1 top-1 rounded bg-brand px-1.5 py-0.5 text-[0.55rem] font-semibold uppercase tracking-wide text-light">
+                  Principal
                 </span>
               )}
               <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-1 bg-black/45 px-1.5 py-1 opacity-0 transition-opacity group-hover:opacity-100">
                 <div className="flex gap-1">
-                  <button type="button" onClick={() => move(u, -1)} disabled={i === 0} className="text-light disabled:opacity-30" aria-label="Move left">‹</button>
-                  <button type="button" onClick={() => move(u, 1)} disabled={i === urls.length - 1} className="text-light disabled:opacity-30" aria-label="Move right">›</button>
+                  <button type="button" onClick={() => move(u, -1)} disabled={i === 0} className="text-light disabled:opacity-30" aria-label="Mover a la izquierda">‹</button>
+                  <button type="button" onClick={() => move(u, 1)} disabled={i === urls.length - 1} className="text-light disabled:opacity-30" aria-label="Mover a la derecha">›</button>
                 </div>
-                <button type="button" onClick={() => remove(u)} className="text-light hover:text-red-300" aria-label="Remove">✕</button>
+                <button type="button" onClick={() => remove(u)} className="text-light hover:text-red-300" aria-label="Quitar">✕</button>
               </div>
             </div>
           ))}
@@ -197,17 +197,17 @@ function ImageUploader({ initial }: { initial: string[] }) {
         onDrop={(e) => { e.preventDefault(); setDrag(false); upload(e.dataTransfer.files); }}
         onClick={() => fileRef.current?.click()}
         className={`flex cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed px-4 py-8 text-center transition ${
-          drag ? "border-gold bg-gold/10" : "border-[var(--line-strong)] bg-surface hover:border-gold"
+          drag ? "border-accent bg-accent/10" : "border-[var(--line-strong)] bg-surface hover:border-accent"
         }`}
       >
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold-deep)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-strong)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 16V4M7 9l5-5 5 5" />
           <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
         </svg>
         <p className="text-sm text-ink">
-          {busy ? "Uploading…" : "Click to upload or drag & drop images"}
+          {busy ? "Subiendo…" : "Haz clic para subir o arrastra las imágenes"}
         </p>
-        <p className="text-xs text-muted">JPG, PNG, WEBP · up to 5 MB each</p>
+        <p className="text-xs text-muted">JPG, PNG, WEBP · hasta 5 MB cada una</p>
         <input
           ref={fileRef}
           type="file"

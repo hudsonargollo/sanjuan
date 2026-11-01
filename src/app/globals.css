@@ -4,84 +4,83 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* ============================================================
-   ZARIERA — stainless steel & artificial jewelry brand theme
-   Warm cream + deep wine + antique gold (per client mockup)
+   SanJuan Mini Market — neighbourhood grocery theme
+   Leaf green + market orange + warm cream, taken from the
+   client's produce-basket logo.
    ============================================================ */
 @theme {
-  /* Brand — deep wine/maroon */
-  --color-maroon: #1f3d2b;     /* primary dark — forest green */
-  --color-maroon-2: #162e20;
-  --color-wine-deep: #0d1f14;
-  --color-panel: #eaf5ee;      /* hero / framed panel (deeper cream) */
-  --color-panel-2: #ddeee3;
+  /* Brand — leaf green */
+  --color-brand: #1f5b33;      /* primary dark */
+  --color-brand-dark: #16452a;
+  --color-brand-deep: #0e2f1c;
+  --color-panel: #eaf4e6;      /* soft green panel */
+  --color-panel-2: #dcecd6;
 
-  /* Antique gold */
-  --color-gold: #4a9d6e;
-  --color-gold-hi: #7ec99a;
-  --color-gold-deep: #2f7a52;
+  /* Accent — market orange (kept vivid: buttons read orange, never brown) */
+  --color-accent: #ef7d1f;
+  --color-accent-soft: #ffa25c;
+  --color-accent-strong: #ce5f10;
+  --color-gold: #e8c88e;
 
-  /* Neutrals — warm */
-  --color-ink: #1f3d2b;        /* dark green text */
-  --color-cream: #f3faf5;      /* mint cream bg */
-  --color-cream-soft: #f7fcf9;
-  --color-sand: #e4f2ea;
+  /* Neutrals — warm cream */
+  --color-ink: #1c2b20;
+  --color-cream: #f7f5ea;
+  --color-cream-soft: #fbf9f1;
+  --color-sand: #eef3e4;
   --color-surface: #ffffff;    /* cards / inputs (flips in dark mode) */
-  --color-light: #f4e8d5;      /* fixed ivory — light text on dark buttons/footer (never flips) */
-  --color-muted: #5a8a6e;      /* muted text on light */
-  --color-muted-dark: #b0d4bc; /* muted text on dark maroon */
+  --color-light: #f6f3e8;      /* fixed cream — text on dark surfaces (never flips) */
+  --color-muted: #5c735f;      /* muted text on light */
+  --color-muted-dark: #b9d3bf; /* muted text on dark green */
 
-  /* Form feedback — jewel-tone emerald / garnet that sit well with maroon + gold */
+  /* Form feedback */
   --color-ok: #2f7d5c;
   --color-bad: #b3261e;
 
   /* Fonts (wired via next/font in layout.tsx) */
-  --font-serif: var(--font-cormorant), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-jost), system-ui, sans-serif;
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
   color-scheme: light;
-  --background: #f4f9f5;
-  --foreground: #1c2b23;
-  /* Framing lines are maroon-tinted (classic, per mockup) */
-  --line: rgba(28, 43, 35, 0.18);
-  --line-strong: rgba(28, 43, 35, 0.4);
-  --frame: rgba(28, 43, 35, 0.7);
+  --background: #f9f7ee;
+  --foreground: #1c2b20;
+  --line: rgba(28, 43, 32, 0.16);
+  --line-strong: rgba(28, 43, 32, 0.38);
+  --frame: rgba(28, 43, 32, 0.55);
 }
 
 /* ---------- Dark theme (toggle sets data-theme="dark" on <html>) ---------- */
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  /* Deep wine so full bg-maroon sections stay elegant (not washed) on dark.
-     Maroon-as-text/icon contrast is handled per-element with dark: variants. */
-  --color-maroon: #162e20;
-  --color-maroon-2: #0d1f14;
-  --color-wine-deep: #081510;
-  --color-panel: #162e20;
-  --color-panel-2: #1d3a28;
+  --color-brand: #3f8a52;
+  --color-brand-dark: #34744a;
+  --color-brand-deep: #1d4a30;
+  --color-panel: #16281b;
+  --color-panel-2: #1c3323;
 
-  /* Gold brightens for dark backgrounds */
-  --color-gold: #5ab88a;
-  --color-gold-hi: #8fd4b0;
-  --color-gold-deep: #4a9d6e;
+  --color-accent: #ff9548;
+  --color-accent-soft: #ffb87d;
+  --color-accent-strong: #e8742a;
+  --color-gold: #f0d7a6;
 
-  /* Neutrals invert: light text on a deep, warm-dark ground */
-  --color-ink: #eaf5ee;
-  --color-cream: #0d1f14;
-  --color-cream-soft: #142518;
-  --color-sand: #1a3324;
-  --color-surface: #241319;
-  --color-muted: #8ab8a0;
-  --color-muted-dark: #c0e3ce;
+  --color-ink: #ecf4ea;
+  --color-cream: #0f1a13;
+  --color-cream-soft: #14211a;
+  --color-sand: #1a2b20;
+  --color-surface: #16241b;
+  --color-light: #f6f3e8;
+  --color-muted: #9fbfa8;
+  --color-muted-dark: #c4dfca;
   --color-ok: #6cc59a;
   --color-bad: #f08a80;
 
-  --background: #160c10;
-  --foreground: #f3e7d6;
-  --line: rgba(230, 205, 139, 0.14);
-  --line-strong: rgba(230, 205, 139, 0.30);
-  --frame: rgba(230, 205, 139, 0.5);
+  --background: #0f1a13;
+  --foreground: #ecf4ea;
+  --line: rgba(236, 244, 234, 0.14);
+  --line-strong: rgba(236, 244, 234, 0.30);
+  --frame: rgba(240, 149, 79, 0.45);
 }
 
 * {
@@ -124,15 +123,16 @@ body {
 }
 
 h1, h2, h3, h4, .serif {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
 }
 
-/* Serif headings carry more weight so they read as substantial, not thin */
 h1, h2 {
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 h3, h4 {
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 /* Body copy sits at a comfortable, readable weight */
@@ -140,9 +140,9 @@ p {
   font-weight: 400;
 }
 
-/* Gold gradient text utility */
-.gold-text {
-  background: linear-gradient(120deg, var(--color-gold-hi), var(--color-gold) 55%, var(--color-gold-deep));
+/* Brand gradient text utility */
+.brand-text {
+  background: linear-gradient(120deg, var(--color-accent), var(--color-accent-strong) 55%, var(--color-brand));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -150,14 +150,14 @@ p {
 
 /* Thin uppercase label */
 .eyebrow {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.72rem;
-  letter-spacing: 0.34em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--color-gold-deep);
+  color: var(--color-accent-strong);
 }
 
-/* Decorative double-line frame (classic jewelry-box border) */
+/* Double-line frame for editorial panels */
 .ornate-frame {
   position: relative;
   border: 1px solid var(--frame);
@@ -223,15 +223,15 @@ p {
 }
 /* Soft attention pulse for the chat launcher */
 @keyframes chatpulse {
-  0% { box-shadow: 0 0 0 0 rgba(195, 154, 78, 0.5); }
-  70% { box-shadow: 0 0 0 14px rgba(195, 154, 78, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(195, 154, 78, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(224, 123, 42, 0.5); }
+  70% { box-shadow: 0 0 0 14px rgba(224, 123, 42, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(224, 123, 42, 0); }
 }
 .animate-chatpulse {
   animation: chatpulse 2.6s ease-out infinite;
 }
 
-/* Gold-foil sheen sweeping across sale badges */
+/* Shine sweeping across sale badges */
 @keyframes sale-shine {
   0% { transform: translateX(-160%) skewX(-20deg); }
   55%, 100% { transform: translateX(260%) skewX(-20deg); }
@@ -256,7 +256,7 @@ p {
 }
 
 /* Dual-thumb price slider: two stacked range inputs, only the thumbs take
-   pointer events; the track + gold fill are drawn by sibling divs. */
+   pointer events; the track + accent fill are drawn by sibling divs. */
 .range-dual {
   position: relative;
   height: 1.5rem;
@@ -286,9 +286,9 @@ p {
   height: 1.25rem;
   margin-top: 0.125rem;
   border-radius: 9999px;
-  border: 2px solid var(--color-gold-deep);
-  background: radial-gradient(circle, var(--color-gold-hi) 0 28%, var(--color-surface) 32%);
-  box-shadow: 0 3px 10px rgba(38, 8, 16, 0.28);
+  border: 2px solid var(--color-accent-strong);
+  background: radial-gradient(circle, var(--color-accent-soft) 0 28%, var(--color-surface) 32%);
+  box-shadow: 0 3px 10px rgba(18, 53, 31, 0.28);
   cursor: grab;
   transition: transform 0.15s ease;
 }
@@ -297,9 +297,9 @@ p {
   width: 1rem;
   height: 1rem;
   border-radius: 9999px;
-  border: 2px solid var(--color-gold-deep);
-  background: radial-gradient(circle, var(--color-gold-hi) 0 28%, var(--color-surface) 32%);
-  box-shadow: 0 3px 10px rgba(38, 8, 16, 0.28);
+  border: 2px solid var(--color-accent-strong);
+  background: radial-gradient(circle, var(--color-accent-soft) 0 28%, var(--color-surface) 32%);
+  box-shadow: 0 3px 10px rgba(18, 53, 31, 0.28);
   cursor: grab;
 }
 .range-dual input[type="range"]:active::-webkit-slider-thumb {
@@ -307,10 +307,10 @@ p {
   transform: scale(1.12);
 }
 .range-dual input[type="range"]:focus-visible::-webkit-slider-thumb {
-  box-shadow: 0 0 0 4px rgba(195, 154, 78, 0.35);
+  box-shadow: 0 0 0 4px rgba(224, 123, 42, 0.35);
 }
 .range-dual input[type="range"]:focus-visible::-moz-range-thumb {
-  box-shadow: 0 0 0 4px rgba(195, 154, 78, 0.35);
+  box-shadow: 0 0 0 4px rgba(224, 123, 42, 0.35);
 }
 .range-dual input[type="range"]:focus {
   outline: none;
@@ -337,7 +337,63 @@ p {
   animation: auth-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* ---------- Typographic motion (21st.dev-style word reveals) ---------- */
+/* Split heading: each word rises out of blur once the line enters view. */
+@keyframes word-in {
+  from { opacity: 0; filter: blur(10px); transform: translateY(0.5em) scale(0.985); }
+  to   { opacity: 1; filter: blur(0);   transform: none; }
+}
+.split-word { opacity: 0; }
+.split-word.is-in {
+  animation: word-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.rotate-word {
+  animation: word-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Promotion slider copy swap */
+@keyframes slide-text-in {
+  from { opacity: 0; filter: blur(8px); transform: translateY(14px); }
+  to   { opacity: 1; filter: blur(0);   transform: none; }
+}
+.slide-text-in { animation: slide-text-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Product-gallery autoplay bar */
+@keyframes gallery-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.gallery-progress {
+  transform-origin: left center;
+  animation: gallery-progress var(--gal-dur, 5.2s) linear forwards;
+}
+
+/* Delivery band: travelling dashes + gentle truck drift */
+@keyframes route-dash {
+  to { stroke-dashoffset: -260; }
+}
+.route-dash { animation: route-dash 9s linear infinite; }
+@keyframes truck-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-0.8deg); }
+  50%      { transform: translate3d(0, -9px, 0) rotate(0.8deg); }
+}
+.animate-truck { animation: truck-drift 6.5s ease-in-out infinite; }
+@keyframes ring-pulse {
+  0%   { opacity: 0.55; transform: scale(0.72); }
+  70%  { opacity: 0;    transform: scale(1.18); }
+  100% { opacity: 0;    transform: scale(1.18); }
+}
+.animate-ring { animation: ring-pulse 4.8s ease-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
+  .split-word, .split-word.is-in, .rotate-word, .slide-text-in {
+    animation: none !important;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+  .gallery-progress { animation: none; transform: none; }
+  .route-dash, .animate-truck, .animate-ring { animation: none; }
   .animate-shake, .animate-auth-in { animation: none; }
   .animate-marquee, .animate-marquee-slow, .animate-marquee-slow-rev, .animate-floaty,
   .animate-chatin, .animate-chatpulse { animation: none; }

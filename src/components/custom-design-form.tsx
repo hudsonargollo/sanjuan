@@ -19,22 +19,21 @@ export function CustomDesignForm({ whatsappUrl }: { whatsappUrl?: string }) {
 
   useEffect(() => {
     if (state.error) toast.error(state.error);
-    else if (state.ok) toast.success("We'll contact you within 1–2 working days.", { title: "Request received" });
+    else if (state.ok) toast.success("Te contactaremos en 1–2 días hábiles.", { title: "Pedido recibido" });
   }, [state, toast]);
 
   const bind = (name: string, filter?: (v: string) => string) => bindControl(f, name, filter);
 
   if (state.ok) {
     return (
-      <div className="rounded-2xl border border-gold/40 bg-gold/5 px-6 py-12 text-center">
-        <h3 className="font-serif text-2xl font-semibold text-ink">Thank you — your design request is in!</h3>
+      <div className="rounded-2xl border border-accent/40 bg-accent/5 px-6 py-12 text-center">
+        <h3 className="font-display text-2xl font-semibold text-ink">¡Gracias! Recibimos tu pedido.</h3>
         <p className="mx-auto mt-2 max-w-md text-muted">
-          Our team will review your idea and contact you within 1–2 working days with design options and a
-          price.
+          Nuestro equipo revisará tu pedido y te contactará en 1–2 días hábiles con opciones y precio.
         </p>
         <Link
           href="/shop"
-          className="mt-6 inline-block rounded-full border border-[var(--line-strong)] px-7 py-2.5 text-sm font-medium text-ink transition hover:border-gold hover:text-gold-deep"
+          className="mt-6 inline-block rounded-full border border-[var(--line-strong)] px-7 py-2.5 text-sm font-medium text-ink transition hover:border-accent hover:text-accent-strong"
         >
           Explora el catálogo mientras tanto
         </Link>
@@ -46,7 +45,7 @@ export function CustomDesignForm({ whatsappUrl }: { whatsappUrl?: string }) {
     <Field label={label} {...f.field(name)}>
       {(a11y) => (
         <select {...a11y} {...bind(name)} className={`${control} cursor-pointer`}>
-          <option value="" disabled>Choose…</option>
+          <option value="" disabled>Elegir…</option>
           {options.map((o) => <option key={o} value={o}>{o}</option>)}
         </select>
       )}
@@ -59,39 +58,39 @@ export function CustomDesignForm({ whatsappUrl }: { whatsappUrl?: string }) {
       <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <Field label="Your name" hint="5–10 letters (A–Z)" {...f.field("name")}>
-          {(a11y) => <input {...a11y} {...bind("name")} autoComplete="name" maxLength={20} placeholder="e.g. Ayesha" className={control} />}
+        <Field label="Tu nombre" hint="5–10 letras (A–Z)" {...f.field("name")}>
+          {(a11y) => <input {...a11y} {...bind("name")} autoComplete="name" maxLength={20} placeholder="Ej. María" className={control} />}
         </Field>
-        <Field label="Email" {...f.field("email")}>
+        <Field label="Correo" {...f.field("email")}>
           {(a11y) => (
-            <input {...a11y} {...bind("email")} type="email" autoComplete="email" spellCheck={false} placeholder="you@example.com" className={control} />
+            <input {...a11y} {...bind("email")} type="email" autoComplete="email" spellCheck={false} placeholder="tu@correo.com" className={control} />
           )}
         </Field>
-        <Field label="Phone / WhatsApp" hint="03XX XXXXXXX, 92… or +country code" {...f.field("phone")}>
+        <Field label="Teléfono / WhatsApp" hint="Ej. 700 00000 o +591…" {...f.field("phone")}>
           {(a11y) => (
-            <input {...a11y} {...bind("phone", phoneChars)} type="tel" inputMode="tel" autoComplete="tel" maxLength={20} placeholder="0300 1234567" className={control} />
+            <input {...a11y} {...bind("phone", phoneChars)} type="tel" inputMode="tel" autoComplete="tel" maxLength={20} placeholder="700 00000" className={control} />
           )}
         </Field>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        {select("pieceType", "What should we make?", PIECE_TYPES)}
-        {select("finish", "Finish", FINISHES)}
-        {select("budget", "Budget", BUDGETS)}
+        {select("pieceType", "¿Qué necesitas?", PIECE_TYPES)}
+        {select("finish", "Presentación", FINISHES)}
+        {select("budget", "Presupuesto", BUDGETS)}
       </div>
 
-      <Field label="Needed by (optional)" {...f.field("neededBy")}>
-        {(a11y) => <input {...a11y} {...bind("neededBy")} maxLength={60} placeholder="e.g. 15 December, or flexible" className={control} />}
+      <Field label="¿Para cuándo? (opcional)" {...f.field("neededBy")}>
+        {(a11y) => <input {...a11y} {...bind("neededBy")} maxLength={60} placeholder="Ej. 15 de diciembre, o flexible" className={control} />}
       </Field>
 
-      <Field label="Describe your design" multiline {...f.field("details")}>
+      <Field label="Cuéntanos tu pedido" multiline {...f.field("details")}>
         {(a11y) => (
           <textarea
             {...a11y}
             {...bind("details")}
             rows={5}
             maxLength={3000}
-            placeholder="Tell us what you need — size, formula, scent, packaging, the occasion…"
+            placeholder="Cuéntanos qué necesitas — producto, cantidad, presentación y para cuándo…"
             className={`${control} resize-y`}
           />
         )}
@@ -102,13 +101,13 @@ export function CustomDesignForm({ whatsappUrl }: { whatsappUrl?: string }) {
       {state.error && <AuthAlert>{state.error}</AuthAlert>}
 
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-xs text-muted">No payment now — we&apos;ll share designs and a price first.</p>
+        <p className="text-xs text-muted">Sin pago por ahora — primero te enviamos opciones y precio.</p>
         <button
           type="submit"
           disabled={pending}
-          className="rounded-full bg-maroon px-9 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-light transition hover:bg-maroon-2 disabled:opacity-60"
+          className="rounded-full bg-accent px-9 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-brand-deep shadow-[0_14px_32px_-16px_rgba(239,125,31,0.9)] transition duration-300 hover:-translate-y-0.5 hover:bg-accent-soft disabled:opacity-60"
         >
-          {pending ? "Sending…" : "Send Design Request"}
+          {pending ? "Enviando…" : "Enviar pedido"}
         </button>
       </div>
     </form>

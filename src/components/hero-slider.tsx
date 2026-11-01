@@ -1,100 +1,80 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { preload } from "react-dom";
 import Link from "next/link";
-import { Emblem } from "./brand/emblem";
+import { RotatingWord, SplitText } from "./text-reveal";
 
-// Mix of fresh product shots and models using productos.
-// Models using everyday productos (gold-plated finish / clean aesthetics).
-const HERO = "/imgs/sanjuan-hero1.webp";
-const SLIDES = [
-  HERO,
-];
-
-const INTERVAL = 5000;
+const HERO = "/images/hero-sanjuan.webp";
 
 export function HeroSlider() {
-  // The first photo is a CSS background (found late by the browser) and the
-  // biggest thing above the fold — fetch it straight away.
-  preload(SLIDES[0], { as: "image", fetchPriority: "high" });
-  const [index, setIndex] = useState(0);
-  const paused = useRef(false);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      if (!paused.current) setIndex((i) => (i + 1) % SLIDES.length);
-    }, INTERVAL);
-    return () => clearInterval(id);
-  }, []);
+  // The hero photo is the biggest thing above the fold — fetch it straight away.
+  preload(HERO, { as: "image", fetchPriority: "high" });
 
   return (
-    <section
-      className="relative overflow-hidden bg-maroon text-light"
-      onMouseEnter={() => (paused.current = true)}
-      onMouseLeave={() => (paused.current = false)}
-    >
-      {/* Slides (cross-fade) */}
-      {SLIDES.map((src, i) => {
-        // Only download the visible slide and its neighbours (needed for the
-        // cross-fade) — not all 5 photos on first load.
-        const n = SLIDES.length;
-        const near = i === index || i === (index + 1) % n || i === (index - 1 + n) % n;
-        return (
-          <div
-            key={src}
-            aria-hidden="true"
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms] ease-in-out ${
-              i === index ? "opacity-100" : "opacity-0"
-            }`}
-            style={near ? { backgroundImage: `url(${src})` } : undefined}
-          />
-        );
-      })}
-
-      {/* Thin gold inset frame */}
-      <div className="pointer-events-none absolute inset-4 border border-[rgba(230,205,139,0.4)] sm:inset-6" />
+    <section className="relative overflow-hidden bg-brand text-light">
+      {/* Slide */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${HERO})` }}
+      />
+      {/* Readability overlay: strong on the left, clearing toward the shelves */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(14,47,28,0.92) 0%, rgba(14,47,28,0.72) 38%, rgba(14,47,28,0.25) 66%, rgba(14,47,28,0.05) 100%)",
+        }}
+      />
+      <div aria-hidden="true" className="absolute inset-0 bg-brand/45 lg:hidden" />
 
       {/* Content */}
-      <div className="relative mx-auto max-w-4xl px-6 py-32 text-center sm:py-44">
-        <Emblem size={56} className="mx-auto animate-floaty text-gold" />
-        <h1 className="mt-5 gold-text font-serif text-5xl font-bold tracking-[0.2em] sm:text-7xl">
-          SanJuan Mini Market
-        </h1>
-        <p className="mt-4 font-serif text-2xl italic text-light/90 sm:text-3xl">
-          Productos de higiene y cuidado personal premium
-        </p>
-        <p className="mt-2 text-sm uppercase tracking-[0.2em] text-light/70">
-          Envío a todo el país · Pago contra entrega
-        </p>
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-          <Link
-            href="/shop"
-            className="inline-block rounded-full bg-gradient-to-r from-gold-hi to-gold px-9 py-3.5 text-sm font-medium uppercase tracking-[0.12em] text-maroon transition hover:opacity-90"
-          >
-            Ver productos
-          </Link>
-          <Link
-            href="/about"
-            className="inline-block rounded-full border border-[rgba(230,205,139,0.5)] px-9 py-3.5 text-sm font-light uppercase tracking-[0.12em] text-light transition hover:border-gold hover:text-gold"
-          >
-            Nuestra historia
-          </Link>
-        </div>
-      </div>
-
-      {/* Dots */}
-      <div className="absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 gap-2.5">
-        {SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setIndex(i)}
-            aria-label={`Go to slide ${i + 1}`}
-            className={`h-2 rounded-full transition-all ${
-              i === index ? "w-7 bg-gold" : "w-2 bg-cream/40 hover:bg-cream/70"
-            }`}
+      <div className="relative mx-auto max-w-6xl px-6 py-24 sm:py-32 lg:py-36">
+        <div className="mx-auto max-w-xl text-center lg:mx-0 lg:text-left">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/sanjuan-logo-dark.webp"
+            alt="SanJuan Mini Market"
+            width={220}
+            height={70}
+            className="mx-auto h-14 w-auto sm:h-16 lg:mx-0"
           />
-        ))}
+          <span className="mt-5 inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent-soft">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-soft" aria-hidden="true" />
+            Minimarket de barrio · Buena Vista
+          </span>
+          <h1 className="mt-3 max-w-[19ch] font-display text-4xl font-extrabold leading-[1.04] tracking-tight text-balance sm:text-5xl lg:text-[4rem]">
+            <SplitText text="Frescos, limpieza y todo para" delay={80} />{" "}
+            <RotatingWord
+              words={["tu día", "tu casa", "tu familia"]}
+              className="text-accent-soft"
+            />
+          </h1>
+          <p className="mt-5 max-w-md text-pretty text-lg leading-relaxed text-light/85">
+            Lácteos, yogures, crema y productos de limpieza con entrega el mismo día en Buena
+            Vista y pago contra entrega.
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+            <Link
+              href="/shop"
+              className="inline-block rounded-full bg-accent px-8 py-3.5 text-sm font-bold text-brand-deep shadow-[0_18px_40px_-16px_rgba(239,125,31,0.9)] transition duration-300 hover:-translate-y-0.5 hover:bg-accent-soft"
+            >
+              Ver productos
+            </Link>
+            <Link
+              href="/about"
+              className="inline-block rounded-full border border-light/50 px-8 py-3.5 text-sm font-semibold text-light transition hover:border-accent-soft hover:bg-light/5 hover:text-accent-soft"
+            >
+              Nuestra historia
+            </Link>
+          </div>
+
+          <p className="mt-8 text-xs font-medium uppercase tracking-[0.16em] text-light/60">
+            Pago contra entrega · Entrega el mismo día
+          </p>
+        </div>
       </div>
     </section>
   );

@@ -573,7 +573,7 @@ export async function getSalesBreakdown(): Promise<{
       cur.units += it.quantity;
       cur.revenue += rev;
       prodMap.set(it.productId, cur);
-      const cat = it.product?.category?.name ?? "Other";
+      const cat = it.product?.category?.name ?? "Otros";
       catMap.set(cat, (catMap.get(cat) ?? 0) + rev);
     }
     const topProducts = [...prodMap.values()].sort((a, b) => b.revenue - a.revenue).slice(0, 5);
@@ -631,8 +631,8 @@ export async function getPaymentBreakdown(): Promise<{
     });
     const totalRev = grouped.reduce((s, g) => s + Number(g._sum.total ?? 0), 0);
     const LABELS: Record<string, string> = {
-      COD: "Cash on Delivery",
-      PAYFAST: "PayFast (Card)",
+      COD: "Pago contra entrega",
+      PAYFAST: "Tarjeta (PayFast)",
       SAFEPAY: "Safepay",
     };
     const methods = grouped

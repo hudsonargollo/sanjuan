@@ -21,7 +21,7 @@ const PRESETS: { key: string; label: string; days: number | "all" }[] = [
   { key: "3M", label: "3M", days: 90 },
   { key: "6M", label: "6M", days: 180 },
   { key: "1Y", label: "1Y", days: 365 },
-  { key: "ALL", label: "All", days: "all" },
+  { key: "ALL", label: "Todo", days: "all" },
 ];
 
 function shortMoney(n: number): string {
@@ -52,24 +52,24 @@ function palette() {
     typeof document !== "undefined" && document.documentElement.getAttribute("data-theme") === "dark";
   return dark
     ? {
-        text: "#dcc6ad",
-        grid: "rgba(230,205,139,0.10)",
-        border: "rgba(230,205,139,0.18)",
+        text: "#dcebdc",
+        grid: "rgba(167,216,178,0.10)",
+        border: "rgba(167,216,178,0.18)",
         line: "#cda65a",
         top: "rgba(205,166,90,0.5)",
         bottom: "rgba(205,166,90,0.02)",
-        cross: "#e6cd8b",
+        cross: "#ffa25c",
         marker: "#241319",
         orders: "#818cf8",
       }
     : {
-        text: "#8a6f63",
-        grid: "rgba(91,26,43,0.07)",
-        border: "rgba(91,26,43,0.14)",
-        line: "#a97e30",
-        top: "rgba(195,154,78,0.45)",
-        bottom: "rgba(195,154,78,0.02)",
-        cross: "#a97e30",
+        text: "#5c735f",
+        grid: "rgba(22,69,42,0.07)",
+        border: "rgba(22,69,42,0.14)",
+        line: "#ce5f10",
+        top: "rgba(239,125,31,0.45)",
+        bottom: "rgba(239,125,31,0.02)",
+        cross: "#ce5f10",
         marker: "#ffffff",
         orders: "#6366f1",
       };
@@ -286,20 +286,20 @@ export function SalesChartPro({ points }: { points: DailyPoint[] }) {
   const empty = points.every((p) => p.revenue === 0);
 
   return (
-    <section className="rounded-2xl border border-[var(--line)] bg-surface p-5 shadow-[0_10px_30px_-22px_rgba(38,8,16,0.4)] sm:p-6">
+    <section className="rounded-2xl border border-[var(--line)] bg-surface p-5 shadow-[0_10px_30px_-22px_rgba(18,53,31,0.4)] sm:p-6">
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <span className="eyebrow">Analytics</span>
-          <h2 className="mt-1 font-serif text-xl font-semibold text-ink">Sales performance</h2>
-          <p className="mt-0.5 text-xs text-muted">{stats.label || "Scroll to zoom · drag to pan"}</p>
+          <span className="eyebrow">Analíticas</span>
+          <h2 className="mt-1 font-display text-xl font-semibold text-ink">Rendimiento de ventas</h2>
+          <p className="mt-0.5 text-xs text-muted">{stats.label || "Desplázate para hacer zoom · arrastra para moverte"}</p>
           {/* Legend */}
           <div className="mt-2 flex items-center gap-4 text-xs text-muted">
             <span className="flex items-center gap-1.5">
-              <span className="h-2 w-3 rounded-sm bg-gold-deep" /> Revenue
+              <span className="h-2 w-3 rounded-sm bg-accent-strong" /> Ingresos
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="h-2 w-3 rounded-sm" style={{ background: "#6366f1" }} /> Orders
+              <span className="h-2 w-3 rounded-sm" style={{ background: "#6366f1" }} /> Pedidos
             </span>
           </div>
         </div>
@@ -311,7 +311,7 @@ export function SalesChartPro({ points }: { points: DailyPoint[] }) {
                 key={p.key}
                 onClick={() => onPreset(p.key, p.days)}
                 className={`rounded-full px-2.5 py-1 text-xs font-semibold transition-colors ${
-                  preset === p.key ? "bg-maroon text-light shadow-sm" : "text-muted hover:text-ink"
+                  preset === p.key ? "bg-brand text-light shadow-sm" : "text-muted hover:text-ink"
                 }`}
               >
                 {p.label}
@@ -320,13 +320,13 @@ export function SalesChartPro({ points }: { points: DailyPoint[] }) {
           </div>
           {/* Zoom controls */}
           <div className="inline-flex items-center gap-1">
-            <ZoomBtn label="Zoom out" onClick={() => zoom(1.6)}>
+            <ZoomBtn label="Alejar" onClick={() => zoom(1.6)}>
               <path d="M5 12h14" strokeLinecap="round" />
             </ZoomBtn>
-            <ZoomBtn label="Zoom in" onClick={() => zoom(0.6)}>
+            <ZoomBtn label="Acercar" onClick={() => zoom(0.6)}>
               <path d="M12 5v14M5 12h14" strokeLinecap="round" />
             </ZoomBtn>
-            <ZoomBtn label="Reset zoom" onClick={() => onPreset("ALL", "all")}>
+            <ZoomBtn label="Restablecer zoom" onClick={() => onPreset("ALL", "all")}>
               <path d="M4 4v6h6M20 20v-6h-6" strokeLinecap="round" strokeLinejoin="round" />
               <path d="M20 10a8 8 0 0 0-14-4M4 14a8 8 0 0 0 14 4" strokeLinecap="round" />
             </ZoomBtn>
@@ -336,13 +336,13 @@ export function SalesChartPro({ points }: { points: DailyPoint[] }) {
 
       {/* Insight tiles (reflect the visible window) */}
       <div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <Insight label="Sales (shown)" value={formatPrice(stats.revenue)} />
-        <Insight label="Orders (shown)" value={String(stats.orders)} />
-        <Insight label="Avg. order value" value={formatPrice(stats.avg)} />
+        <Insight label="Ventas (visibles)" value={formatPrice(stats.revenue)} />
+        <Insight label="Pedidos (visibles)" value={String(stats.orders)} />
+        <Insight label="Valor medio del pedido" value={formatPrice(stats.avg)} />
         <Insight
-          label="Growth"
+          label="Crecimiento"
           value={stats.change == null ? "—" : `${stats.change >= 0 ? "+" : ""}${stats.change}%`}
-          hint="vs previous equal window"
+          hint="frente al periodo anterior equivalente"
           tone={stats.change == null ? "neutral" : stats.change >= 0 ? "up" : "down"}
         />
       </div>
@@ -352,7 +352,7 @@ export function SalesChartPro({ points }: { points: DailyPoint[] }) {
         <div ref={wrapRef} style={{ width: "100%", height: 340 }} />
         {tip && (
           <div
-            className="pointer-events-none absolute z-10 rounded-xl border border-[var(--line)] bg-surface px-3.5 py-2.5 shadow-[0_18px_44px_-18px_rgba(38,8,16,0.5)]"
+            className="pointer-events-none absolute z-10 rounded-xl border border-[var(--line)] bg-surface px-3.5 py-2.5 shadow-[0_18px_44px_-18px_rgba(18,53,31,0.5)]"
             style={{
               left: Math.min(Math.max(tip.x, 70), tip.width - 70),
               top: Math.max(tip.y - 16, 4),
@@ -362,18 +362,18 @@ export function SalesChartPro({ points }: { points: DailyPoint[] }) {
             <p className="text-[0.7rem] font-medium uppercase tracking-wider text-muted">
               {prettyDate(tip.date)}
             </p>
-            <p className="mt-0.5 font-serif text-lg font-semibold text-ink [font-variant-numeric:tabular-nums]">
+            <p className="mt-0.5 font-display text-lg font-semibold text-ink [font-variant-numeric:tabular-nums]">
               {formatPrice(tip.revenue)}
             </p>
             <p className="text-xs text-muted">
-              {tip.orders} order{tip.orders === 1 ? "" : "s"}
+              {tip.orders} pedido{tip.orders === 1 ? "" : "s"}
             </p>
           </div>
         )}
         {empty && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <p className="rounded-full bg-cream-soft px-4 py-1.5 text-xs text-muted">
-              No sales yet — your daily revenue will chart here as orders arrive.
+              Aún no hay ventas: tus ingresos diarios se mostrarán aquí a medida que lleguen pedidos.
             </p>
           </div>
         )}
@@ -396,7 +396,7 @@ function ZoomBtn({
       onClick={onClick}
       aria-label={label}
       title={label}
-      className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--line)] bg-cream-soft text-ink transition-colors hover:border-gold hover:text-gold-deep"
+      className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--line)] bg-cream-soft text-ink transition-colors hover:border-accent hover:text-accent-strong"
     >
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         {children}
@@ -425,7 +425,7 @@ function Insight({
   return (
     <div className="rounded-xl border border-[var(--line)] bg-cream-soft px-4 py-3">
       <p className="text-[0.62rem] font-medium uppercase tracking-[0.16em] text-muted">{label}</p>
-      <p className={`mt-1 font-serif text-xl font-bold [font-variant-numeric:tabular-nums] ${toneCls}`}>
+      <p className={`mt-1 font-display text-xl font-bold [font-variant-numeric:tabular-nums] ${toneCls}`}>
         {value}
       </p>
       {hint && <p className="mt-0.5 text-[0.65rem] text-muted">{hint}</p>}

@@ -6,38 +6,38 @@ import { AccordionItem } from "@/components/ui/accordion-item";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/faq" },
-  title: "FAQ",
-  description: "Respuestas a preguntas comunes sobre pedidos, pago, envío y devoluciones en SanJuan Mini Market.",
+  title: "Preguntas frecuentes",
+  description: "Respuestas sobre pedidos, pagos, entregas y devoluciones en SanJuan Mini Market, Buena Vista, Santa Cruz.",
 };
 
 const faqs = (DELIVERY_TIME: string) => [
   {
-    q: "¿Cómo realizo un pedido?",
-    a: "Explora nuestra colección, agrega productos a tu carrito y finaliza en elcheckout. Puedes pagar contra entrega o de forma segura online.",
+    q: "¿Cómo hago un pedido?",
+    a: "Explora el catálogo, agrega productos al carrito y confirma tu pedido. Puedes pagar contra entrega o de forma segura en línea.",
   },
   {
     q: "¿Qué métodos de pago aceptan?",
-    a: "Pago contra entrega (COD) a nivel nacional, y pagos online vía PayFast y Safepay (tarjeta y billetera).",
+    a: "Pago contra entrega en Buena Vista y zonas cercanas, y pagos en línea con tarjeta o billetera a través de nuestras pasarelas.",
   },
   {
-    q: "¿Cuánto tarda el envío?",
-    a: `Los pedidos llegan típicamente en ${DELIVERY_TIME}. Nuestro equipo puede llamarte para confirmar detalles de entrega.`,
+    q: "¿Cuánto tarda la entrega?",
+    a: `Los pedidos llegan normalmente ${DELIVERY_TIME} en Buena Vista. Si necesitas coordinación especial, te escribimos por WhatsApp.`,
   },
   {
-    q: "¿Puedo rastrear mi pedido?",
-    a: "Sí — usa la página de Estado de Pedidos e ingresa tu número de orden y email para ver el estado actualizado.",
+    q: "¿Los lácteos llegan fríos?",
+    a: "Sí. Mantenemos la cadena de frío desde la tienda hasta tu puerta y despachamos los lácteos al final de la ruta.",
   },
   {
-    q: "¿Cuál es su política de devoluciones?",
-    a: "Artículos sin usar en condición original pueden devolverse en 7 días. Productos personalizados no son elegibles para devolución. Ver Envíos y Devoluciones.",
+    q: "¿Puedo pedir algo que no está en el catálogo?",
+    a: "Sí. Usa la página de Pedidos especiales y cuéntanos qué necesitas; lo conseguimos para ti.",
   },
   {
-    q: "¿Hacen productos personalizados?",
-    a: "Sí. Visita la página Personalizados para crear tu diseño — cuéntanos tu necesidad y lo prepararemos en acero inoxidable.",
+    q: "¿Cuál es la política de devoluciones?",
+    a: "Si un producto llega dañado o vencido, escríbenos dentro de las 48 horas con tu número de pedido y lo cambiamos o reembolsamos. Ver Envíos y devoluciones.",
   },
   {
-    q: "¿De qué están hechos sus productos?",
-    a: "Acero inoxidable pulido — muchos con acabado dorado o plata. Antialérgico y no oxida con uso diario. Detalles en cada página de producto.",
+    q: "¿Entregan en mi zona?",
+    a: "Entregamos en Buena Vista y zonas cercanas de Santa Cruz. Si tienes dudas sobre tu dirección, consúltanos por WhatsApp antes de pedir.",
   },
 ];
 
@@ -46,10 +46,10 @@ export default async function FaqPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-16">
       <div className="text-center">
-        <Emblem size={40} className="mx-auto text-gold-deep" />
-        <span className="eyebrow mt-3 block">Help</span>
-        <h1 className="mt-2 font-serif text-4xl font-semibold text-ink">
-          Frequently Asked Questions
+        <Emblem size={40} className="mx-auto text-brand" accent="var(--color-accent)" />
+        <span className="eyebrow mt-3 block">Ayuda</span>
+        <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight text-ink">
+          Preguntas frecuentes
         </h1>
       </div>
 
@@ -60,11 +60,11 @@ export default async function FaqPage() {
             title={item.q}
             group="faq"
             className="py-4"
-            summaryClassName="font-serif text-lg text-ink"
+            summaryClassName="font-display text-lg text-ink"
             icon={
               <span
                 aria-hidden="true"
-                className="shrink-0 text-xl leading-none text-gold-deep transition-transform duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-data-[state=open]:rotate-45"
+                className="shrink-0 text-xl leading-none text-accent-strong transition-transform duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-data-[state=open]:rotate-45"
               >
                 +
               </span>
@@ -76,8 +76,8 @@ export default async function FaqPage() {
       </div>
 
       <p className="mt-10 text-center text-sm text-muted">
-        Still have a question?{" "}
-        <Link href="/contact" className="text-gold-deep hover:underline">
+        ¿Sigues con dudas?{" "}
+        <Link href="/contact" className="text-accent-strong hover:underline">
           Contáctanos
         </Link>
         .

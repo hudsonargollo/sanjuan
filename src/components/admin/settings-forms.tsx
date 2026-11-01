@@ -17,10 +17,10 @@ import {
 type Action = (prev: SettingsState, fd: FormData) => Promise<SettingsState>;
 
 const input =
-  "w-full rounded-lg border border-[var(--line-strong)] bg-surface px-3.5 py-2.5 text-sm text-ink outline-none transition focus:border-gold focus:ring-2 focus:ring-[rgba(195,154,78,0.2)] disabled:opacity-60";
+  "w-full rounded-lg border border-[var(--line-strong)] bg-surface px-3.5 py-2.5 text-sm text-ink outline-none transition focus:border-accent focus:ring-2 focus:ring-[rgba(239,125,31,0.2)] disabled:opacity-60";
 const labelCls = "mb-1.5 block text-xs font-medium uppercase tracking-[0.1em] text-muted";
 const saveBtn =
-  "rounded-lg bg-maroon px-5 py-2.5 text-sm font-medium text-light transition hover:bg-maroon-2 disabled:opacity-60";
+  "rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-brand-deep transition hover:bg-accent-soft disabled:opacity-60";
 
 /** One settings card: a form wired to a server action with toast feedback. */
 function Card({
@@ -48,14 +48,14 @@ function Card({
 
   useEffect(() => {
     if (state.ok) {
-      toast.success(success, { title: "Saved" });
+      toast.success(success, { title: "Guardado" });
       if (resetOnSuccess) formRef.current?.reset();
     } else if (state.error) toast.error(state.error);
   }, [state, toast, success, resetOnSuccess]);
 
   return (
-    <section id={id} className="scroll-mt-24 rounded-2xl border border-[var(--line)] bg-surface p-5 shadow-[0_10px_30px_-22px_rgba(38,8,16,0.4)] sm:p-6">
-      <h2 className="font-serif text-xl font-semibold text-ink">{title}</h2>
+    <section id={id} className="scroll-mt-24 rounded-2xl border border-[var(--line)] bg-surface p-5 shadow-[0_10px_30px_-22px_rgba(18,53,31,0.4)] sm:p-6">
+      <h2 className="font-display text-xl font-semibold text-ink">{title}</h2>
       <p className="mt-1 text-sm text-muted">{description}</p>
       <form ref={formRef} action={formAction} className="mt-5 space-y-4">
         <fieldset disabled={disabled || pending} className="space-y-4">
@@ -67,7 +67,7 @@ function Card({
         {!disabled && (
           <div className="flex justify-end">
             <button type="submit" disabled={pending} className={saveBtn}>
-              {pending ? "Saving…" : "Save"}
+              {pending ? "Guardando…" : "Guardar"}
             </button>
           </div>
         )}
@@ -124,26 +124,26 @@ export function StoreSettingsForms({ settings, canEdit }: { settings: StoreSetti
     <>
       <Card
         id="contact"
-        title="Store contact"
-        description="Shown in the footer, contact page and support chat. Leave a field empty to hide it."
+        title="Contacto de la tienda"
+        description="Se muestra en el pie de página, la página de contacto y el chat de soporte. Deja un campo vacío para ocultarlo."
         action={saveContactSettings}
-        success="Contact details updated"
+        success="Datos de contacto actualizados"
         disabled={lock}
       >
         {(s) => (
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field name="email" label="Email" type="email" defaultValue={v(s, "email", settings.contact.email)} placeholder="hello@SanJuan Mini Market.com" />
-            <Field name="phone" label="Phone" defaultValue={v(s, "phone", settings.contact.phone)} placeholder="+92 300 1234567" />
+            <Field name="email" label="Correo electrónico" type="email" defaultValue={v(s, "email", settings.contact.email)} placeholder="ventas@sanjuanmini.market" />
+            <Field name="phone" label="Teléfono" defaultValue={v(s, "phone", settings.contact.phone)} placeholder="+591 700 00000" />
             <Field
               name="whatsapp"
-              label="WhatsApp number"
+              label="Número de WhatsApp"
               defaultValue={v(s, "whatsapp", settings.contact.whatsapp)}
-              placeholder="923001234567"
-              hint="International format, digits only. Enables the WhatsApp icon + chat button."
+              placeholder="59170000000"
+              hint="Formato internacional, solo dígitos. Activa el icono de WhatsApp y el botón de chat."
             />
-            <Field name="city" label="City / address" defaultValue={v(s, "city", settings.contact.city)} placeholder="Santa Cruz, Bolivia" />
+            <Field name="city" label="Ciudad / dirección" defaultValue={v(s, "city", settings.contact.city)} placeholder="Buena Vista, Santa Cruz" />
             <div className="sm:col-span-2">
-              <Field name="hours" label="Opening hours" defaultValue={v(s, "hours", settings.contact.hours)} placeholder="Mon–Sat, 11am – 8pm" />
+              <Field name="hours" label="Horario de atención" defaultValue={v(s, "hours", settings.contact.hours)} placeholder="Lunes a sábado · 8:00 a 20:00" />
             </div>
           </div>
         )}
@@ -151,10 +151,10 @@ export function StoreSettingsForms({ settings, canEdit }: { settings: StoreSetti
 
       <Card
         id="social"
-        title="Social links"
-        description="Footer icons and the home-page “Follow us” button. Use the full https:// link; empty = hidden."
+        title="Redes sociales"
+        description="Iconos del pie de página y el botón «Síguenos» de la página de inicio. Usa el enlace completo con https://; vacío = oculto."
         action={saveSocialSettings}
-        success="Social links updated"
+        success="Redes sociales actualizadas"
         disabled={lock}
       >
         {(s) => (
@@ -168,40 +168,40 @@ export function StoreSettingsForms({ settings, canEdit }: { settings: StoreSetti
 
       <Card
         id="shipping"
-        title="Shipping & delivery"
-        description="Se usa al pagar (el total del pedido se calcula con estos) y en las páginas de envío, FAQ y producto pages."
+        title="Envío y entrega"
+        description="Se usa al pagar (el total del pedido se calcula con estos) y en las páginas de envío, FAQ y producto."
         action={saveShippingSettings}
-        success="Shipping settings updated"
+        success="Ajustes de envío actualizados"
         disabled={lock}
       >
         {(s) => (
           <div className="grid gap-4 sm:grid-cols-3">
-            <Field name="flatFee" label="Shipping fee (Bs)" type="number" defaultValue={v(s, "flatFee", settings.shipping.flatFee)} required />
+            <Field name="flatFee" label="Costo de envío (Bs)" type="number" defaultValue={v(s, "flatFee", settings.shipping.flatFee)} required />
             <Field
               name="freeThreshold"
-              label="Free shipping over (Bs)"
+              label="Envío gratis desde (Bs)"
               type="number"
               defaultValue={v(s, "freeThreshold", settings.shipping.freeThreshold)}
               required
-              hint="Set 0 for free shipping on every order."
+              hint="Usa 0 para envío gratis en todos los pedidos."
             />
-            <Field name="deliveryTime" label="Delivery time" defaultValue={v(s, "deliveryTime", settings.shipping.deliveryTime)} required />
+            <Field name="deliveryTime" label="Tiempo de entrega" defaultValue={v(s, "deliveryTime", settings.shipping.deliveryTime)} required />
           </div>
         )}
       </Card>
 
       <Card
         id="announcements"
-        title="Announcement bar"
-        description="The scrolling strip at the top of the store. One message per line (max 10). {freeThreshold} and {flatFee} insert the current amounts. Empty = bar hidden."
+        title="Barra de anuncios"
+        description="La franja que se desplaza en la parte superior de la tienda. Un mensaje por línea (máx. 10). {freeThreshold} y {flatFee} insertan los importes actuales. Vacío = barra oculta."
         action={saveAnnouncementSettings}
-        success="Announcement bar updated"
+        success="Barra de anuncios actualizada"
         disabled={lock}
       >
         {(s) => (
           <div>
             <label htmlFor="set-announcements" className={labelCls}>
-              Messages
+              Mensajes
             </label>
             <textarea
               id="set-announcements"
@@ -216,28 +216,28 @@ export function StoreSettingsForms({ settings, canEdit }: { settings: StoreSetti
 
       <Card
         id="alerts"
-        title="Inventory & notifications"
-        description="When products count as “low stock”, and where new-order / contact-form emails go (needs SMTP)."
+        title="Inventario y notificaciones"
+        description="Cuándo se considera que un producto tiene «stock bajo» y a dónde llegan los correos de nuevos pedidos y del formulario de contacto (requiere SMTP)."
         action={saveAlertSettings}
-        success="Alert settings updated"
+        success="Ajustes de alertas actualizados"
         disabled={lock}
       >
         {(s) => (
           <div className="grid gap-4 sm:grid-cols-2">
             <Field
               name="lowStockThreshold"
-              label="Low-stock alert at"
+              label="Alerta de stock bajo en"
               type="number"
               defaultValue={v(s, "lowStockThreshold", settings.inventory.lowStockThreshold)}
-              hint="Products with this many or fewer left are flagged."
+              hint="Se marcan los productos con esta cantidad o menos disponibles."
               required
             />
             <Field
               name="orderEmail"
-              label="Send order alerts to"
+              label="Enviar alertas de pedidos a"
               type="email"
               defaultValue={v(s, "orderEmail", settings.notifications.orderEmail)}
-              placeholder="owner@example.com"
+              placeholder="propietario@ejemplo.com"
             />
           </div>
         )}
@@ -253,14 +253,14 @@ export function PasswordForm() {
       title="Mi cuenta"
       description="Cambia la contraseña que usas para iniciar sesión en este panel."
       action={changePassword}
-      success="Password changed"
+      success="Contraseña actualizada"
       resetOnSuccess
     >
       {() => (
         <div className="grid gap-4 sm:grid-cols-3">
-          <Field name="current" label="Current password" type="password" required autoComplete="current-password" />
-          <Field name="next" label="New password" type="password" required autoComplete="new-password" hint="At least 10 characters." />
-          <Field name="confirm" label="Repeat new password" type="password" required autoComplete="new-password" />
+          <Field name="current" label="Contraseña actual" type="password" required autoComplete="current-password" />
+          <Field name="next" label="Nueva contraseña" type="password" required autoComplete="new-password" hint="Al menos 10 caracteres." />
+          <Field name="confirm" label="Repite la nueva contraseña" type="password" required autoComplete="new-password" />
         </div>
       )}
     </Card>
@@ -271,24 +271,24 @@ export function AddTeamMemberForm() {
   return (
     <Card
       id="team-add"
-      title="Add team member"
-      description="Staff can manage orders, products and categories. Only admins can change settings and the team."
+      title="Agregar miembro del equipo"
+      description="El personal puede gestionar pedidos, productos y categorías. Solo los administradores pueden cambiar los ajustes y el equipo."
       action={addTeamMember}
       success="Miembro del equipo agregado"
       resetOnSuccess
     >
       {(s) => (
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field name="name" label="Name" defaultValue={s.ok ? "" : s.values?.name} />
-          <Field name="email" label="Email" type="email" required defaultValue={s.ok ? "" : s.values?.email} />
-          <Field name="password" label="Temporary password" type="password" required autoComplete="new-password" hint="At least 10 characters — they can change it in My account." />
+          <Field name="name" label="Nombre" defaultValue={s.ok ? "" : s.values?.name} />
+          <Field name="email" label="Correo electrónico" type="email" required defaultValue={s.ok ? "" : s.values?.email} />
+          <Field name="password" label="Contraseña temporal" type="password" required autoComplete="new-password" hint="Al menos 10 caracteres: podrá cambiarla en Mi cuenta." />
           <div>
             <label htmlFor="set-role" className={labelCls}>
-              Role
+              Rol
             </label>
             <select key={s.ok ? "reset" : s.values?.role ?? "STAFF"} id="set-role" name="role" defaultValue={s.ok ? "STAFF" : s.values?.role ?? "STAFF"} className={input}>
-              <option value="STAFF">Staff</option>
-              <option value="ADMIN">Admin</option>
+              <option value="STAFF">Personal</option>
+              <option value="ADMIN">Administrador</option>
             </select>
           </div>
         </div>

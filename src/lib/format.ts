@@ -5,6 +5,12 @@ export function formatPrice(amount: number): string {
   return `Bs ${bo.format(Math.round(amount))}`;
 }
 
+/** Legacy `material` field from the old catalog is sometimes a filler string. */
+export function visiblePack(material: string | null | undefined): string | null {
+  if (!material || /f[oó]rmula|matem[aá]tica/i.test(material)) return null;
+  return material;
+}
+
 export function discountPercent(price: number, compareAt: number | null | undefined): number | null {
   if (!compareAt || compareAt <= price) return null;
   return Math.round(((compareAt - price) / compareAt) * 100);

@@ -14,22 +14,22 @@ type Gauge = {
 export function PerformanceRings({ data }: { data: StorePerformance }) {
   const gauges: Gauge[] = [
     {
-      label: "Order fulfilment",
-      sub: `${data.delivered} of ${data.totalOrders} delivered`,
+      label: "Pedidos entregados",
+      sub: `${data.delivered} de ${data.totalOrders} entregados`,
       pct: data.fulfillmentPct,
-      from: "#e6cd8b",
-      to: "#a97e30",
+      from: "#ffa25c",
+      to: "#ce5f10",
     },
     {
-      label: "Payments collected",
-      sub: `${data.paid} of ${data.totalOrders} paid`,
+      label: "Pagos cobrados",
+      sub: `${data.paid} de ${data.totalOrders} pagados`,
       pct: data.paymentPct,
       from: "#34d399",
       to: "#059669",
     },
     {
-      label: "Catalog in stock",
-      sub: `${data.inStock} of ${data.totalProducts} products`,
+      label: "Catálogo con stock",
+      sub: `${data.inStock} de ${data.totalProducts} productos`,
       pct: data.stockPct,
       from: "#5eead4",
       to: "#0d9488",
@@ -37,9 +37,9 @@ export function PerformanceRings({ data }: { data: StorePerformance }) {
   ];
 
   return (
-    <section className="rounded-2xl border border-[var(--line)] bg-surface p-5 shadow-[0_10px_30px_-22px_rgba(38,8,16,0.4)] sm:p-6">
-      <span className="eyebrow">Performance</span>
-      <h2 className="mt-1 font-serif text-xl font-semibold text-ink">Store health</h2>
+    <section className="rounded-2xl border border-[var(--line)] bg-surface p-5 shadow-[0_10px_30px_-22px_rgba(18,53,31,0.4)] sm:p-6">
+      <span className="eyebrow">Rendimiento</span>
+      <h2 className="mt-1 font-display text-xl font-semibold text-ink">Salud de la tienda</h2>
 
       <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
         {gauges.map((g, i) => (
@@ -103,7 +103,7 @@ function Ring({ gauge, delay }: { gauge: Gauge; delay: number }) {
         {/* Center value */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span
-            className="font-serif text-[1.9rem] font-bold leading-none [font-variant-numeric:tabular-nums]"
+            className="font-display text-[1.9rem] font-bold leading-none [font-variant-numeric:tabular-nums]"
             style={{ color: gauge.to }}
           >
             {pct}

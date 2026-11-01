@@ -64,13 +64,13 @@ export function useShake<T extends HTMLElement>() {
   return [ref, shake] as const;
 }
 
-/** Border + focus ring for a field box: red when invalid, green when valid, gold focus otherwise. */
+/** Border + focus ring for a field box: red when invalid, green when valid, accent focus otherwise. */
 export function statusRing(status: FieldStatus): string {
   return status === "invalid"
     ? "border-bad bg-bad/[0.04] focus-within:ring-[3px] focus-within:ring-bad/15"
     : status === "valid"
       ? "border-ok/70 focus-within:border-ok focus-within:ring-[3px] focus-within:ring-ok/15"
-      : "border-[var(--line-strong)] focus-within:border-gold focus-within:ring-[3px] focus-within:ring-[rgba(195,154,78,0.22)]";
+      : "border-[var(--line-strong)] focus-within:border-accent focus-within:ring-[3px] focus-within:ring-[rgba(239,125,31,0.22)]";
 }
 
 /** Green tick / red alert at the end of a field box. */
@@ -199,7 +199,7 @@ export function AuthField({
   placeholder?: string;
   /** Adds a show / hide toggle. */
   password?: boolean;
-  /** Small element at the right of the label row (e.g. "Forgot password?"). */
+  /** Small element at the right of the label row (e.g. "¿Olvidaste tu contraseña?"). */
   labelAside?: ReactNode;
   children?: ReactNode;
 }) {
@@ -208,7 +208,7 @@ export function AuthField({
   const errId = `${id}-err`;
 
   const ring = statusRing(status);
-  const iconColor = status === "invalid" ? "text-bad" : status === "valid" ? "text-ok" : "text-muted group-focus-within:text-gold-deep";
+  const iconColor = status === "invalid" ? "text-bad" : status === "valid" ? "text-ok" : "text-muted group-focus-within:text-accent-strong";
 
   return (
     <div>
@@ -219,7 +219,7 @@ export function AuthField({
         {labelAside}
       </div>
 
-      <div className={`group relative flex items-center rounded-xl border bg-surface shadow-[inset_0_1px_2px_rgba(38,8,16,0.05)] transition ${ring}`}>
+      <div className={`group relative flex items-center rounded-xl border bg-surface shadow-[inset_0_1px_2px_rgba(18,53,31,0.05)] transition ${ring}`}>
         <Svg className={`pointer-events-none ml-3.5 h-[1.15rem] w-[1.15rem] shrink-0 transition-colors ${iconColor}`}>
           {ICONS[icon]}
         </Svg>
@@ -255,8 +255,8 @@ export function AuthField({
 export function PasswordStrength({ value, highlight }: { value: string; highlight?: boolean }) {
   const rules = passwordRules(value);
   const score = passwordStrength(value);
-  const names = ["", "Weak", "Fair", "Good", "Strong"];
-  const bar = score <= 1 ? "bg-bad" : score === 2 ? "bg-gold" : "bg-ok";
+  const names = ["", "Débil", "Regular", "Buena", "Fuerte"];
+  const bar = score <= 1 ? "bg-bad" : score === 2 ? "bg-accent" : "bg-ok";
 
   return (
     <div className="mt-2.5 rounded-lg bg-sand/40 px-3 py-2.5">
@@ -266,7 +266,7 @@ export function PasswordStrength({ value, highlight }: { value: string; highligh
             <span key={i} className={`h-1 flex-1 rounded-full transition-colors duration-300 ${i <= score ? bar : "bg-[var(--line)]"}`} />
           ))}
         </div>
-        <span className={`w-12 text-right text-[0.65rem] font-semibold uppercase tracking-wider ${score ? (score <= 1 ? "text-bad" : score === 2 ? "text-gold-deep" : "text-ok") : "text-muted"}`}>
+        <span className={`w-12 text-right text-[0.65rem] font-semibold uppercase tracking-wider ${score ? (score <= 1 ? "text-bad" : score === 2 ? "text-accent-strong" : "text-ok") : "text-muted"}`}>
           {names[score] || "—"}
         </span>
       </div>
@@ -297,19 +297,19 @@ export function AuthAlert({ children }: { children: ReactNode }) {
   );
 }
 
-/** Maroon pill with a gold sheen on hover and a spinner while pending. */
+/** Brand pill with an accent sheen on hover and a spinner while pending. */
 export function AuthSubmit({ pending, label, pendingLabel }: { pending: boolean; label: string; pendingLabel: string }) {
   return (
     <button
       type="submit"
       disabled={pending}
-      className="group relative w-full overflow-hidden rounded-full bg-gradient-to-r from-[#6b2133] via-maroon to-wine-deep px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-light shadow-[0_16px_34px_-14px_rgba(91,26,43,0.8)] transition hover:shadow-[0_18px_40px_-14px_rgba(91,26,43,0.95)] disabled:cursor-wait disabled:opacity-80"
+      className="group relative w-full overflow-hidden rounded-full bg-gradient-to-r from-accent-soft via-accent to-accent-strong px-6 py-3.5 text-sm font-bold uppercase tracking-[0.16em] text-brand-deep shadow-[0_16px_36px_-14px_rgba(239,125,31,0.75)] transition duration-300 hover:-translate-y-0.5 hover:brightness-105 hover:shadow-[0_20px_44px_-14px_rgba(239,125,31,0.9)] disabled:cursor-wait disabled:opacity-80"
     >
       <span className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-[rgba(236,208,140,0.35)] to-transparent opacity-0 transition-all duration-700 group-hover:left-[110%] group-hover:opacity-100" />
       <span className="relative inline-flex items-center justify-center gap-2.5">
-        {pending && <span className="h-4 w-4 animate-spin rounded-full border-2 border-light/30 border-t-gold-hi" />}
+        {pending && <span className="h-4 w-4 animate-spin rounded-full border-2 border-light/30 border-t-accent-soft" />}
         {pending ? pendingLabel : label}
-        {!pending && <span className="text-gold-hi transition-transform group-hover:translate-x-0.5">→</span>}
+        {!pending && <span className="text-accent-soft transition-transform group-hover:translate-x-0.5">→</span>}
       </span>
     </button>
   );
@@ -319,8 +319,8 @@ export function AuthSubmit({ pending, label, pendingLabel }: { pending: boolean;
 export function SecureNote() {
   return (
     <p className="mt-3 flex items-center justify-center gap-1.5 text-[0.68rem] uppercase tracking-[0.14em] text-muted">
-      <Svg className="h-3.5 w-3.5 text-gold-deep">{ICONS.lock}</Svg>
-      Secure, encrypted sign-in
+      <Svg className="h-3.5 w-3.5 text-accent-strong">{ICONS.lock}</Svg>
+      Inicio de sesión seguro y cifrado
     </p>
   );
 }

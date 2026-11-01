@@ -3,7 +3,7 @@
 import { useId, type ReactNode } from "react";
 import { FieldError, StatusIcon, statusRing, useAuthForm, type FieldStatus } from "@/components/auth/auth-field";
 
-// Labelled field box for the Custom-design and Contact forms: gold focus, green
+// Labelled field box for the Custom-design and Contact forms: accent focus, green
 // with a tick when valid, red with a message when not (rules: lib/inbound-rules.ts).
 
 /** Classes for the input / select / textarea inside a Field box. */

@@ -6,10 +6,22 @@ import { useToast } from "@/components/ui/toast";
 
 type Action = (prev: StatusState, formData: FormData) => Promise<StatusState>;
 
+const STATUS_LABELS: Record<string, string> = {
+  PENDING: "Pendiente",
+  CONFIRMED: "Confirmado",
+  PROCESSING: "En preparación",
+  SHIPPED: "Enviado",
+  DELIVERED: "Entregado",
+  CANCELLED: "Cancelado",
+  PAID: "Pagado",
+  FAILED: "Fallido",
+  REFUNDED: "Reembolsado",
+};
+
 const select =
-  "w-full rounded-md border border-[var(--line-strong)] bg-cream px-3 py-2 text-sm text-ink outline-none focus:border-gold";
+  "w-full rounded-md border border-[var(--line-strong)] bg-cream px-3 py-2 text-sm text-ink outline-none focus:border-accent";
 const saveBtn =
-  "rounded-md bg-maroon px-4 py-2 text-sm font-medium text-light transition hover:bg-maroon-2 disabled:opacity-60";
+  "rounded-md bg-accent px-4 py-2 text-sm font-semibold text-brand-deep transition hover:bg-accent-soft disabled:opacity-60";
 
 // Small client wrapper so status/payment updates give a toast on save.
 export function StatusUpdateForm({
@@ -29,7 +41,7 @@ export function StatusUpdateForm({
   const toast = useToast();
 
   useEffect(() => {
-    if (state.ok) toast.success(successMessage, { title: "Saved" });
+    if (state.ok) toast.success(successMessage, { title: "Guardado" });
     else if (state.error) toast.error(state.error);
   }, [state, toast, successMessage]);
 
@@ -38,12 +50,12 @@ export function StatusUpdateForm({
       <select key={defaultValue} name={name} defaultValue={defaultValue} className={select} disabled={options.length <= 1}>
         {options.map((s) => (
           <option key={s} value={s}>
-            {s.charAt(0) + s.slice(1).toLowerCase()}
+            {STATUS_LABELS[s] ?? s}
           </option>
         ))}
       </select>
-      <button disabled={pending || options.length <= 1} className={saveBtn} title={options.length <= 1 ? "This status is final" : undefined}>
-        {pending ? "Saving…" : "Save"}
+      <button disabled={pending || options.length <= 1} className={saveBtn} title={options.length <= 1 ? "Este estado es definitivo" : undefined}>
+        {pending ? "Guardando…" : "Guardar"}
       </button>
     </form>
   );

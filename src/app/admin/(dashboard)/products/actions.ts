@@ -18,22 +18,22 @@ function keep(fd: FormData): Record<string, string> {
 }
 
 const schema = z.object({
-  name: z.string().min(2, "Name is required"),
+  name: z.string().min(2, "El nombre es obligatorio"),
   slug: z.string().optional(),
   description: z.string().optional(),
-  price: z.coerce.number().nonnegative("Price must be 0 or more"),
+  price: z.coerce.number().nonnegative("El precio debe ser 0 o más"),
   compareAtPrice: z.coerce.number().nonnegative().optional(),
   sku: z.string().optional(),
   stock: z.coerce.number().int().min(0),
   material: z.string().optional(),
   specs: z.string().optional(),
-  categoryId: z.string().min(1, "Choose a category"),
+  categoryId: z.string().min(1, "Elige una categoría"),
   images: z.string().optional(),
   featured: z.boolean(),
   active: z.boolean(),
 }).refine((d) => !d.active || (d.images ?? "").split(/[\n,]/).some((u) => u.trim()), {
   // A live piece without a photo shows as a blank tile in the shop.
-  message: "Add at least one photo — or untick “Active” to save it as a hidden draft.",
+  message: "Agrega al menos una foto o desmarca «Activo» para guardarlo como borrador oculto.",
   path: ["images"],
 });
 
@@ -126,7 +126,7 @@ export async function deleteProduct(id: string): Promise<void> {
 
 function dbError(err: unknown): string {
   const kind = dbErrorKind(err);
-  if (kind === "unavailable") return "Database not connected. Connect DATABASE_URL to save products.";
-  if (kind === "duplicate") return "A product with that slug or SKU already exists.";
-  return "Could not save the product. Please try again.";
+  if (kind === "unavailable") return "Base de datos no conectada. Configura DATABASE_URL para guardar productos.";
+  if (kind === "duplicate") return "Ya existe un producto con ese slug o SKU.";
+  return "No se pudo guardar el producto. Inténtalo de nuevo.";
 }

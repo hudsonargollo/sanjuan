@@ -12,8 +12,8 @@ export function OrnateFrame({
   className?: string;
   tone?: "light" | "dark";
 }) {
-  const border = tone === "dark" ? "border-[rgba(230,205,139,0.5)]" : "border-[var(--frame)]";
-  const corner = tone === "dark" ? "border-gold" : "border-maroon";
+  const border = tone === "dark" ? "border-[rgba(167,216,178,0.5)]" : "border-[var(--frame)]";
+  const corner = tone === "dark" ? "border-accent" : "border-brand";
 
   return (
     <div className={`relative ${className}`}>

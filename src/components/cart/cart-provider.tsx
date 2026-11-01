@@ -28,7 +28,7 @@ type CartContextValue = {
   items: CartItem[];
   count: number;
   subtotal: number;
-  /** Total rupees saved vs regular prices across the cart. */
+  /** Total bolivianos saved vs regular prices across the cart. */
   savings: number;
   add: (item: Omit<CartItem, "quantity">, qty?: number) => void;
   remove: (id: string) => void;

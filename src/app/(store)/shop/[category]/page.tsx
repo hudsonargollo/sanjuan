@@ -12,10 +12,10 @@ export async function generateMetadata({
 }: PageProps<"/shop/[category]">): Promise<Metadata> {
   const { category } = await params;
   const cat = await getCategoryBySlug(category);
-  if (!cat) return { title: "Not found" };
+  if (!cat) return { title: "No encontrado" };
   return {
     title: cat.name,
-    description: cat.description ?? `Shop SanJuan Mini Market ${cat.name.toLowerCase()}.`,
+    description: cat.description ?? `Compra ${cat.name.toLowerCase()} en SanJuan Mini Market.`,
     alternates: { canonical: `/shop/${cat.slug}` },
   };
 }
@@ -37,27 +37,29 @@ export default async function CategoryPage({
     parsed.q || parsed.material || parsed.minPrice || parsed.maxPrice || parsed.onSale || parsed.inStock
   );
 
-  // Category with no products yet → elegant "Coming soon" (e.g. Necklaces, Earrings).
+  // Category with no products yet → friendly "coming soon" card.
   if (products.length === 0 && !hasFilters) {
     return (
       <div className="mx-auto max-w-2xl px-5 py-24 text-center">
-        <Emblem size={48} className="mx-auto text-gold-deep" />
+        <Emblem size={48} className="mx-auto text-brand" accent="var(--color-accent)" />
         <span className="eyebrow mt-4 block">{cat.name}</span>
-        <h1 className="mt-2 font-serif text-4xl font-bold text-ink sm:text-5xl">Coming soon</h1>
+        <h1 className="mt-2 font-display text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
+          Próximamente
+        </h1>
         <p className="relative mx-auto mt-2 max-w-md text-muted">
-          Nuestra colección de {cat.name.toLowerCase()} está en camino. Estar atento — piezas
-          nuevas llegando pronto.
+          Estamos preparando nuestra selección de {cat.name.toLowerCase()}. Déjanos tu correo y te
+          avisamos en cuanto llegue.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/shop"
-            className="rounded-full bg-maroon px-8 py-3 text-sm font-medium uppercase tracking-[0.12em] text-light transition hover:bg-maroon-2"
+            className="rounded-full bg-accent px-8 py-3 text-sm font-semibold text-brand-deep shadow-[0_14px_32px_-16px_rgba(239,125,31,0.9)] transition duration-300 hover:-translate-y-0.5 hover:bg-accent-soft"
           >
-            Shop available pieces
+            Ver productos disponibles
           </Link>
         </div>
         <div className="mt-8">
-          <p className="mb-3 text-sm text-muted">Get an email when they launch:</p>
+          <p className="mb-3 text-sm text-muted">Avísame cuando lleguen:</p>
           <NotifyForm slug={cat.slug} label={cat.name} />
         </div>
       </div>

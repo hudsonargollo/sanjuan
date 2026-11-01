@@ -16,7 +16,7 @@ export function QuickAdd({ product }: { product: ProductView }) {
   if (soldOut) {
     return (
       <span className="mt-3 block w-full cursor-not-allowed rounded-full border border-[var(--line)] py-2 text-center text-xs uppercase tracking-[0.12em] text-muted">
-        Sold out
+        Agotado
       </span>
     );
   }
@@ -30,7 +30,7 @@ export function QuickAdd({ product }: { product: ProductView }) {
         setTimeout(() => setAdded(false), 1500);
         toast.success(`${product.name} agregado a tu carrito`, { title: "Agregado al carrito" });
       }}
-      className="mt-3 block w-full rounded-full border border-maroon bg-transparent py-2 text-center text-xs font-medium uppercase tracking-[0.12em] text-maroon transition hover:bg-maroon hover:text-light dark:border-gold-deep/50 dark:text-gold-deep"
+      className="mt-3 block w-full rounded-full border border-accent/70 bg-transparent py-2 text-center text-xs font-semibold uppercase tracking-[0.12em] text-accent-strong transition duration-300 hover:bg-accent hover:text-brand-deep dark:border-accent-strong/50 dark:text-accent-soft"
     >
       {added ? "Agregado ✓" : "Agregar al carrito"}
     </button>

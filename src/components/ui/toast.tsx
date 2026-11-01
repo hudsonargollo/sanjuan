@@ -165,20 +165,20 @@ function ToastCard({
       ? "text-emerald-600 dark:text-emerald-400"
       : variant === "error"
         ? "text-red-600 dark:text-red-400"
-        : "text-gold-deep";
+        : "text-accent-strong";
   const border =
     variant === "success"
       ? "border-emerald-500/35"
       : variant === "error"
         ? "border-red-500/35"
-        : "border-gold/45";
+        : "border-accent/45";
 
   return (
     <div
       role={variant === "error" ? "alert" : "status"}
       onMouseEnter={onPause}
       onMouseLeave={onResume}
-      className={`pointer-events-auto flex w-[21rem] max-w-[calc(100vw-2rem)] items-start gap-3 rounded-xl border ${border} bg-surface p-4 text-ink shadow-[0_24px_60px_-20px_rgba(38,8,16,0.5)] animate-[toastin_.35s_cubic-bezier(.2,.8,.2,1)]`}
+      className={`pointer-events-auto flex w-[21rem] max-w-[calc(100vw-2rem)] items-start gap-3 rounded-xl border ${border} bg-surface p-4 text-ink shadow-[0_24px_60px_-20px_rgba(18,53,31,0.5)] animate-[toastin_.35s_cubic-bezier(.2,.8,.2,1)]`}
     >
       <span className={`mt-0.5 shrink-0 ${accent}`}>
         <VariantIcon variant={variant} />
@@ -191,7 +191,7 @@ function ToastCard({
       </div>
       <button
         onClick={onDismiss}
-        aria-label="Dismiss notification"
+        aria-label="Cerrar notificación"
         className="-mr-1 -mt-1 shrink-0 rounded-md p-1 text-muted transition hover:bg-cream-soft hover:text-ink"
       >
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

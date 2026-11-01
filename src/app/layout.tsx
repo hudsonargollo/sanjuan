@@ -1,53 +1,56 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Jost } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 import { CartProvider } from "@/components/cart/cart-provider";
 import { ToastProvider } from "@/components/ui/toast";
 import { FlashToast } from "@/components/ui/flash-toast";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 
-const jost = Jost({
-  variable: "--font-jost",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "SanJuan Mini Market - Productos de higiene y cuidado personal",
+    default: "SanJuan Mini Market | Minimarket en Buena Vista, Santa Cruz",
     template: "%s | SanJuan Mini Market",
   },
   description:
-    "SanJuan Mini Market - productos de higiene y cuidado personal premium, limpieza del día, artículos para el hogar y cuidado personal de calidad. Compra con confianza.",
+    "Tu minimarket de barrio en Buena Vista, Santa Cruz: lácteos, yogures, crema, mantequilla y productos de limpieza. Entrega el mismo día y pago contra entrega.",
   keywords: [
     "SanJuan Mini Market",
-    "productos de higiene y cuidado personal",
-    "artículos de limpieza",
-    "productos con acabado dorado",
-    " productos Bolivia",
-    "hipoalergénico",
+    "minimarket",
+    "lácteos",
+    "yogur",
+    "productos de limpieza",
+    "compra de barrio",
+    "minimarket Buena Vista",
+    "Santa Cruz",
+    "delivery",
+    "Bolivia",
   ],
   applicationName: "SanJuan Mini Market",
   openGraph: {
-    title: "SanJuan Mini Market - Productos de higiene y cuidado personal",
-    description: "Productos premium de higiene y cuidado personal, artículos de limpieza y cuidado diario. Compra segura con envío a todo el país.",
+    title: "SanJuan Mini Market | Lácteos, limpieza y tu día a día",
+    description: "Lácteos, yogures, crema y productos de limpieza con entrega el mismo día en Buena Vista y pago contra entrega.",
     type: "website",
     siteName: "SanJuan Mini Market",
     url: siteUrl,
   },
   twitter: {
     card: "summary_large_image",
-    title: "SanJuan Mini Market - Productos de higiene y cuidado personal",
-    description: "Productos premium de higiene y cuidado personal, artículos de limpieza y cuidado diario. Compra segura.",
+    title: "SanJuan Mini Market | Lácteos, limpieza y tu día a día",
+    description: "Lácteos, yogures, crema y productos de limpieza con entrega el mismo día en Buena Vista y pago contra entrega.",
   },
 };
 
@@ -56,9 +59,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${cormorant.variable} ${jost.variable} h-full antialiased`}
+      className={`${outfit.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">
+        <noscript>
+          <style>{`.split-word{opacity:1 !important;filter:none !important;transform:none !important}`}</style>
+        </noscript>
         {/* Apply saved theme before paint to avoid a flash of the wrong theme */}
         <script
           dangerouslySetInnerHTML={{

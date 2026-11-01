@@ -140,7 +140,7 @@ export async function getRelatedProducts(product: ProductView, limit = 4): Promi
 // ---------- Search ----------
 
 /** Full /search answer: ranked pieces plus how the query was read. All
- *  categories are passed (even empty ones) so "necklaces" can say "coming soon". */
+ *  categories are passed (even empty ones) so an empty category can say "coming soon". */
 export async function searchStore(
   q: string
 ): Promise<SearchResult & { categories: SearchCategory[]; all: ProductView[] }> {
@@ -172,11 +172,13 @@ export async function getShopFacets(categorySlug?: string): Promise<ShopFacets> 
 
   return {
     total: rows.length,
-    categories: categories.map((c) => ({
-      name: c.name,
-      slug: c.slug,
-      count: rows.filter((r) => r.category.slug === c.slug).length,
-    })),
+    categories: categories
+      .map((c) => ({
+        name: c.name,
+        slug: c.slug,
+        count: rows.filter((r) => r.category.slug === c.slug).length,
+      }))
+      .filter((c) => c.count > 0),
     priceMin,
     priceMax,
     materials: [...materialCounts]

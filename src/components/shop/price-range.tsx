@@ -25,9 +25,9 @@ function presets(lo: number, hi: number) {
   const t2 = Math.min(r(lo + (2 * span) / 3), hi - STEP);
   if (t2 <= t1) return [];
   return [
-    { label: `Under ${formatPrice(t1)}`, min: null, max: t1 },
+    { label: `Hasta ${formatPrice(t1)}`, min: null, max: t1 },
     { label: `${formatPrice(t1)} – ${formatPrice(t2).replace("Bs ", "")}`, min: t1, max: t2 },
-    { label: `${formatPrice(t2)} & above`, min: t2, max: null },
+    { label: `${formatPrice(t2)} o más`, min: t2, max: null },
   ];
 }
 
@@ -73,9 +73,9 @@ export function PriceRange({ bounds: [lo, hi], min, max, onCommit }: Props) {
   return (
     <div>
       {/* Selected range, large */}
-      <p className="flex items-baseline justify-between font-serif text-lg font-semibold text-ink">
+      <p className="flex items-baseline justify-between font-display text-lg font-semibold text-ink">
         <span>{formatPrice(a)}</span>
-        <span className="text-sm text-muted">to</span>
+        <span className="text-sm text-muted">a</span>
         <span>{formatPrice(b)}</span>
       </p>
 
@@ -83,7 +83,7 @@ export function PriceRange({ bounds: [lo, hi], min, max, onCommit }: Props) {
       <div className="range-dual mt-3">
         <div className="absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-[var(--line-strong)]" />
         <div
-          className="absolute top-1/2 h-1 -translate-y-1/2 rounded-full bg-gradient-to-r from-gold-hi via-gold to-gold-deep"
+          className="absolute top-1/2 h-1 -translate-y-1/2 rounded-full bg-gradient-to-r from-accent-soft via-accent to-accent-strong"
           style={{ left: `${pct(a)}%`, right: `${100 - pct(b)}%` }}
         />
         <input
@@ -92,7 +92,7 @@ export function PriceRange({ bounds: [lo, hi], min, max, onCommit }: Props) {
           max={hi}
           step={STEP}
           value={a}
-          aria-label="Minimum price"
+          aria-label="Precio mínimo"
           aria-valuetext={formatPrice(a)}
           // keep the low thumb grabbable when both sit at the top end
           style={{ zIndex: a >= b - STEP ? 4 : 3 }}
@@ -106,7 +106,7 @@ export function PriceRange({ bounds: [lo, hi], min, max, onCommit }: Props) {
           max={hi}
           step={STEP}
           value={b}
-          aria-label="Maximum price"
+          aria-label="Precio máximo"
           aria-valuetext={formatPrice(b)}
           onChange={(e) => setB(Math.max(Number(e.target.value), a))}
           onPointerUp={() => commit()}
@@ -119,7 +119,7 @@ export function PriceRange({ bounds: [lo, hi], min, max, onCommit }: Props) {
         {(["a", "b"] as const).map((which, i) => (
           <label
             key={which}
-            className={`flex items-center rounded-lg border border-[var(--line-strong)] bg-surface/80 pl-3 transition focus-within:border-gold focus-within:ring-2 focus-within:ring-[rgba(195,154,78,0.22)] ${
+            className={`flex items-center rounded-lg border border-[var(--line-strong)] bg-surface/80 pl-3 transition focus-within:border-accent focus-within:ring-2 focus-within:ring-[rgba(239,125,31,0.22)] ${
               i === 1 ? "col-start-3" : ""
             }`}
           >
@@ -127,7 +127,7 @@ export function PriceRange({ bounds: [lo, hi], min, max, onCommit }: Props) {
             <input
               type="text"
               inputMode="numeric"
-              aria-label={which === "a" ? "Minimum price in rupees" : "Maximum price in rupees"}
+              aria-label={which === "a" ? "Precio mínimo en bolivianos" : "Precio máximo en bolivianos"}
               value={
                 which === "a"
                   ? (draftA ?? a.toLocaleString("es-BO"))
@@ -162,8 +162,8 @@ export function PriceRange({ bounds: [lo, hi], min, max, onCommit }: Props) {
                 onClick={() => (active ? onCommit(null, null) : onCommit(c.min, c.max))}
                 className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
                   active
-                    ? "border-maroon bg-maroon text-gold-hi dark:border-gold-deep"
-                    : "border-[var(--line-strong)] text-ink hover:border-gold hover:text-gold-deep"
+                    ? "border-brand bg-brand text-accent-soft dark:border-accent-strong"
+                    : "border-[var(--line-strong)] text-ink hover:border-accent hover:text-accent-strong"
                 }`}
               >
                 {c.label}

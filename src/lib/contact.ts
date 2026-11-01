@@ -3,6 +3,9 @@
 // of showing a placeholder number or a generic instagram.com link.
 // NEXT_PUBLIC_* values are inlined at build time, so this is safe in client code.
 
+/** Where the shop is — default address shown in the footer, contact page and chat. */
+export const STORE_LOCATION = "Buena Vista, Santa Cruz";
+
 function clean(v: string | undefined): string {
   return (v ?? "").trim();
 }
@@ -11,15 +14,15 @@ const whatsapp = clean(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER).replace(/[^0-9]/
 const phone = clean(process.env.NEXT_PUBLIC_CONTACT_PHONE);
 
 export const CONTACT = {
-  /** International format, digits only (e.g. 923001234567). */
+  /** International format, digits only (e.g. 59171662586). */
   whatsapp,
   whatsappUrl: whatsapp ? `https://wa.me/${whatsapp}` : "",
-  /** Display format (e.g. "+92 300 1234567"). */
+  /** Display format (e.g. "+591 71 662 586"). */
   phone,
   phoneHref: phone ? `tel:${phone.replace(/[^0-9+]/g, "")}` : "",
   email: clean(process.env.NEXT_PUBLIC_CONTACT_EMAIL),
-  city: clean(process.env.NEXT_PUBLIC_CONTACT_CITY) || "Santa Cruz, Bolivia",
-  hours: clean(process.env.NEXT_PUBLIC_CONTACT_HOURS) || "Mon–Sat, 11am – 8pm",
+  city: clean(process.env.NEXT_PUBLIC_CONTACT_CITY) || STORE_LOCATION,
+  hours: clean(process.env.NEXT_PUBLIC_CONTACT_HOURS) || "Lunes a sábado · 8:00 a 20:00",
   instagram: clean(process.env.NEXT_PUBLIC_INSTAGRAM_URL),
   facebook: clean(process.env.NEXT_PUBLIC_FACEBOOK_URL),
   tiktok: clean(process.env.NEXT_PUBLIC_TIKTOK_URL),

@@ -5,7 +5,7 @@ import { toggleMessageHandled } from "./actions";
 import { splitReferencePhotos } from "@/lib/custom-request";
 import { formatDate } from "@/lib/format";
 
-export const metadata = { title: "Messages" };
+export const metadata = { title: "Mensajes" };
 
 export const dynamic = "force-dynamic";
 
@@ -30,8 +30,8 @@ function MessageBody({ message }: { message: string }) {
       <p className="mt-2 whitespace-pre-wrap text-sm text-ink/85">{text}</p>
       {photos.length > 0 && (
         <div className="mt-3">
-          <p className="mb-2 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-gold-deep">
-            Reference photos ({photos.length}) — click to open full size
+          <p className="mb-2 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-accent-strong">
+            Fotos de referencia ({photos.length}): haz clic para abrir a tamaño completo
           </p>
           <div className="flex flex-wrap gap-2">
             {photos.map((src, i) => (
@@ -40,10 +40,10 @@ function MessageBody({ message }: { message: string }) {
                 href={src}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block h-24 w-24 overflow-hidden rounded-lg border border-[var(--line-strong)] transition hover:border-gold"
+                className="block h-24 w-24 overflow-hidden rounded-lg border border-[var(--line-strong)] transition hover:border-accent"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element -- customer upload, any size */}
-                <img src={src} alt={`Reference photo ${i + 1}`} className="h-full w-full object-cover" loading="lazy" />
+                <img src={src} alt={`Foto de referencia ${i + 1}`} className="h-full w-full object-cover" loading="lazy" />
               </a>
             ))}
           </div>
@@ -60,7 +60,7 @@ export default async function AdminMessagesPage() {
 
   return (
     <div>
-      <h1 className="font-serif text-3xl font-bold text-ink">Messages</h1>
+      <h1 className="font-display text-3xl font-bold text-ink">Mensajes</h1>
       <p className="mt-1 text-sm text-muted">
         Mensajes del formulario de contacto ({open} abiertos) y suscripciones al newsletter / “avísame”.
       </p>
@@ -68,10 +68,10 @@ export default async function AdminMessagesPage() {
       <div className="mt-6 space-y-8">
         {!dbConnected && <DbBanner />}
 
-        <section className="rounded-2xl border border-[var(--line)] bg-surface shadow-[0_10px_30px_-22px_rgba(38,8,16,0.4)]">
-          <h2 className="border-b border-[var(--line)] px-5 py-4 font-serif text-xl font-semibold text-ink">Inbox</h2>
+        <section className="rounded-2xl border border-[var(--line)] bg-surface shadow-[0_10px_30px_-22px_rgba(18,53,31,0.4)]">
+          <h2 className="border-b border-[var(--line)] px-5 py-4 font-display text-xl font-semibold text-ink">Bandeja de entrada</h2>
           {messages.length === 0 ? (
-            <p className="px-5 py-12 text-center text-sm text-muted">No messages yet.</p>
+            <p className="px-5 py-12 text-center text-sm text-muted">Aún no hay mensajes.</p>
           ) : (
             <ul>
               {messages.map((m) => (
@@ -79,24 +79,24 @@ export default async function AdminMessagesPage() {
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div className="min-w-0">
                       <p className="font-medium text-ink">
-                        {m.subject || "Message"}{" "}
+                        {m.subject || "Mensaje"}{" "}
                         {m.topic && (
-                          <span className="ml-1 rounded-full bg-gold/10 px-2 py-0.5 text-[0.65rem] uppercase tracking-wider text-gold-deep">
+                          <span className="ml-1 rounded-full bg-accent/10 px-2 py-0.5 text-[0.65rem] uppercase tracking-wider text-accent-strong">
                             {m.topic}
                           </span>
                         )}
                       </p>
                       <p className="text-xs text-muted">
                         {m.name} ·{" "}
-                        <a href={`mailto:${m.email}`} className="hover:text-gold-deep">
+                        <a href={`mailto:${m.email}`} className="hover:text-accent-strong">
                           {m.email}
                         </a>
                         {m.phone ? ` · ${m.phone}` : ""} · {formatDate(m.createdAt, { time: true })}
                       </p>
                     </div>
                     <form action={toggleMessageHandled.bind(null, m.id, !m.handled)}>
-                      <button className="rounded-md border border-[var(--line-strong)] px-3 py-1.5 text-xs text-ink transition hover:border-gold hover:text-gold-deep">
-                        {m.handled ? "Reopen" : "Mark handled"}
+                      <button className="rounded-md border border-[var(--line-strong)] px-3 py-1.5 text-xs text-ink transition hover:border-accent hover:text-accent-strong">
+                        {m.handled ? "Reabrir" : "Marcar como atendido"}
                       </button>
                     </form>
                   </div>
@@ -107,19 +107,19 @@ export default async function AdminMessagesPage() {
           )}
         </section>
 
-        <section className="rounded-2xl border border-[var(--line)] bg-surface shadow-[0_10px_30px_-22px_rgba(38,8,16,0.4)]">
-          <h2 className="border-b border-[var(--line)] px-5 py-4 font-serif text-xl font-semibold text-ink">
+        <section className="rounded-2xl border border-[var(--line)] bg-surface shadow-[0_10px_30px_-22px_rgba(18,53,31,0.4)]">
+          <h2 className="border-b border-[var(--line)] px-5 py-4 font-display text-xl font-semibold text-ink">
             Suscriptores <span className="text-sm font-normal text-muted">({subscriberCount})</span>
           </h2>
           {subscribers.length === 0 ? (
-            <p className="px-5 py-12 text-center text-sm text-muted">No sign-ups yet.</p>
+            <p className="px-5 py-12 text-center text-sm text-muted">Aún no hay suscripciones.</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-[var(--line)] text-left text-[0.68rem] uppercase tracking-wider text-muted">
-                    <th className="px-5 py-3 font-medium">Email</th>
-                    <th className="px-5 py-3 font-medium">Source</th>
+                    <th className="px-5 py-3 font-medium">Correo electrónico</th>
+                    <th className="px-5 py-3 font-medium">Origen</th>
                     <th className="px-5 py-3 font-medium">Se unió</th>
                   </tr>
                 </thead>

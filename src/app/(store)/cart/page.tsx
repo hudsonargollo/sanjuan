@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCart } from "@/components/cart/cart-provider";
 import { ProductImage } from "@/components/product-image";
 import { useToast } from "@/components/ui/toast";
-import { formatPrice } from "@/lib/format";
+import { formatPrice, visiblePack } from "@/lib/format";
 import { LinePrice, SavingsStrip } from "@/components/ui/sale-badge";
 
 export default function CartPage() {
@@ -13,14 +13,14 @@ export default function CartPage() {
 
   function handleRemove(id: string, name: string) {
     remove(id);
-    toast.info(`${name} removed from your bag`);
+    toast.info(`${name} se quitó del carrito`);
   }
 
   // Cart lives in localStorage — avoid flashing an empty "Bs 0" bag before it loads.
   if (!ready) {
     return (
       <div className="mx-auto max-w-6xl px-5 py-14" aria-busy="true">
-        <h1 className="font-serif text-4xl font-semibold text-ink">Shopping Bag</h1>
+        <h1 className="font-display text-4xl font-semibold text-ink">Carrito</h1>
         <div className="mt-10 space-y-4">
           {[0, 1].map((i) => (
             <div key={i} className="h-28 animate-pulse rounded-xl bg-cream-soft" />
@@ -33,11 +33,11 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="mx-auto max-w-2xl px-5 py-24 text-center">
-        <h1 className="font-serif text-4xl font-semibold text-ink">Your cart is empty</h1>
-        <p className="mt-3 text-muted">Discover something you&apos;ll treasure.</p>
+        <h1 className="font-display text-4xl font-semibold text-ink">Tu carrito está vacío</h1>
+        <p className="mt-3 text-muted">Encuentra lo que necesitas para tu casa.</p>
         <Link
           href="/shop"
-          className="mt-8 inline-block rounded-full bg-gradient-to-r from-gold-hi to-gold px-8 py-3 text-sm font-medium text-maroon transition hover:opacity-90"
+          className="mt-8 inline-block rounded-full bg-gradient-to-r from-accent-soft to-accent px-8 py-3 text-sm font-medium text-brand transition hover:opacity-90"
         >
           Explorar el catálogo
         </Link>
@@ -47,8 +47,8 @@ export default function CartPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-14">
-      <h1 className="font-serif text-4xl font-semibold text-ink">
-        Shopping Bag{ready && count > 0 ? ` (${count})` : ""}
+      <h1 className="font-display text-4xl font-semibold text-ink">
+        Carrito{ready && count > 0 ? ` (${count})` : ""}
       </h1>
 
       <div className="mt-10 grid items-start gap-10 lg:grid-cols-[1fr_360px]">
@@ -68,12 +68,12 @@ export default function CartPage() {
                   <div>
                     <Link
                       href={`/product/${item.slug}`}
-                      className="font-serif text-lg text-ink hover:text-gold-deep"
+                      className="font-display text-lg text-ink hover:text-accent-strong"
                     >
                       {item.name}
                     </Link>
-                    {item.material && (
-                      <p className="text-sm text-muted">{item.material}</p>
+                    {visiblePack(item.material) && (
+                      <p className="text-sm text-muted">{visiblePack(item.material)}</p>
                     )}
                   </div>
                   <LinePrice price={item.price} compareAt={item.compareAtPrice} quantity={item.quantity} />
@@ -83,16 +83,16 @@ export default function CartPage() {
                   <div className="flex items-center rounded-full border border-[var(--line-strong)]">
                     <button
                       onClick={() => setQuantity(item.id, item.quantity - 1)}
-                      className="px-3 py-1.5 text-ink transition hover:text-gold-deep"
-                      aria-label="Decrease quantity"
+                      className="px-3 py-1.5 text-ink transition hover:text-accent-strong"
+                      aria-label="Quitar una unidad"
                     >
                       −
                     </button>
                     <span className="w-8 text-center text-sm">{item.quantity}</span>
                     <button
                       onClick={() => setQuantity(item.id, item.quantity + 1)}
-                      className="px-3 py-1.5 text-ink transition hover:text-gold-deep"
-                      aria-label="Increase quantity"
+                      className="px-3 py-1.5 text-ink transition hover:text-accent-strong"
+                      aria-label="Agregar una unidad"
                     >
                       +
                     </button>
@@ -101,7 +101,7 @@ export default function CartPage() {
                     onClick={() => handleRemove(item.id, item.name)}
                     className="text-sm text-muted underline-offset-4 hover:text-red-700 hover:underline"
                   >
-                    Remove
+                    Quitar
                   </button>
                 </div>
               </div>
@@ -111,20 +111,20 @@ export default function CartPage() {
 
         {/* Summary — locked in place while items scroll */}
         <aside className="rounded-xl border border-[var(--line)] bg-surface/70 p-6 lg:sticky lg:top-24 lg:self-start">
-          <h2 className="font-serif text-xl font-semibold text-ink">Order Summary</h2>
+          <h2 className="font-display text-xl font-semibold text-ink">Resumen del pedido</h2>
           <dl className="mt-5 space-y-3 text-sm">
             <div className="flex justify-between">
               <dt className="text-muted">Subtotal</dt>
               <dd className="text-ink">{formatPrice(subtotal)}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-muted">Shipping</dt>
+              <dt className="text-muted">Envío</dt>
               <dd className="text-ink">Calculado al pagar</dd>
             </div>
           </dl>
           <div className="mt-5 flex justify-between border-t border-[var(--line)] pt-5">
             <span className="font-medium text-ink">Total</span>
-            <span className="font-serif text-xl font-semibold text-ink">
+            <span className="font-display text-xl font-semibold text-ink">
               {formatPrice(subtotal)}
             </span>
           </div>
@@ -132,13 +132,13 @@ export default function CartPage() {
           {/* Guests are sent to sign in first (checkout needs an account), then back. */}
           <Link
             href="/checkout"
-            className="mt-6 block rounded-full bg-gradient-to-r from-gold-hi to-gold px-8 py-3.5 text-center text-sm font-medium text-maroon transition hover:opacity-90"
+            className="mt-6 block rounded-full bg-gradient-to-r from-accent-soft to-accent px-8 py-3.5 text-center text-sm font-medium text-brand transition hover:opacity-90"
           >
             Proceder al pago
           </Link>
           <Link
             href="/shop"
-            className="mt-3 block text-center text-sm text-gold-deep hover:underline"
+            className="mt-3 block text-center text-sm text-accent-strong hover:underline"
           >
             Seguir comprando
           </Link>

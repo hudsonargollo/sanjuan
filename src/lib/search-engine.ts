@@ -1,53 +1,56 @@
 import type { CategoryView, ProductView } from "./types";
 
-// Storefront search: typo-tolerant, plural-aware, understands a few Urdu /
-// everyday words ("angoothi", "kangan", "jhumka"), price phrases ("under 3000")
-// and offer words ("sale"). Pure — runs on the product list in memory, which is
-// fine for a catalog of a few thousand pieces.
+// Storefront search: typo-tolerant, plural-aware, understands everyday Spanish
+// words ("lacteo", "detergente", "mantequilla"), price phrases ("hasta 50") and
+// offer words ("oferta"). Pure — runs on the product list in memory, which is
+// fine for a minimarket catalog.
 
 export type SearchCategory = CategoryView & { count: number };
 
 export type SearchResult = {
   products: ProductView[];
-  /** Category the query asked for (e.g. "rings", "necklecs" → Necklaces). */
+  /** Category the query asked for (e.g. "leche", "yogures" → Leches). */
   category: SearchCategory | null;
-  /** Typos we read past: "necklecs" → "necklace". */
+  /** Typos we read past: "leceh" → "leche". */
   corrections: { from: string; to: string }[];
   minPrice: number | null;
   maxPrice: number | null;
   onSale: boolean;
-  /** Not every word matched — these are the closest pieces instead. */
+  /** Not every word matched — these are the closest products instead. */
   partial: boolean;
 };
 
 const STOP = new Set(
-  "a an and the for of with in on to my me i want need show find looking some any all piece pieces productos jewellery jewel item items product products buy Bs BOB price under below above over less more than upto up max min within from between ki ka ke ky chahiye chahye dikhao wala wali waly".split(" ")
+  "a an and the for of with in on to my me i want need show find looking some any all producto productos item items buy Bs BOB price la el los las un una unos unas de del al y o para por con en que cual como cuanto quiero necesito busco buscar muestrame hay tienen tienes es son mi mis lacteo lacteos ki ka ke ky chahiye chahye dikhao wala wali waly".split(" ")
 );
 
-/** Everyday / Urdu words → the word the catalog uses. */
+/** Everyday / colloquial words → the word the catalog uses. */
 const ALIASES: Record<string, string> = {
-  angoothi: "ring", anguthi: "ring", angothi: "ring", angootha: "ring", challa: "ring",
-  haar: "necklace", har: "necklace", mala: "necklace", pendant: "necklace", locket: "necklace", choker: "necklace",
-  jhumka: "earring", jhumki: "earring", bali: "earring", baliyan: "earring", tops: "earring", stud: "earring", hoop: "earring", earing: "earring",
-  kangan: "bangle", kara: "bangle", kada: "bangle", churi: "bangle", chudi: "bangle",
-  sona: "gold", sonay: "gold", golden: "gold", chandi: "silver", silvery: "silver",
-  stainless: "steel", ss: "steel",
+  lacteo: "leche", lactea: "leche", lacteos: "leche", lacteas: "leche",
+  yogurt: "yogurt", yogures: "yogurt", yogurcito: "yogurt",
+  mantequilla: "mantequilla", margarina: "mantequilla",
+  nata: "crema", cremita: "crema",
+  detergente: "limpieza", lavandina: "limpieza", lejia: "limpieza", jabon: "limpieza",
+  desinfectante: "limpieza", limpiador: "limpieza", lavar: "limpieza", limpiar: "limpieza",
+  hogar: "limpieza", casa: "limpieza",
 };
 
 /** Words that point at a category even when the product name doesn't use them. */
 const CATEGORY_HINTS: Record<string, string> = {
-  bangle: "bracelet",
+  yogurt: "yogurt",
 };
 
-const SALE_WORDS = new Set(["sale", "sales", "discount", "discounted", "offer", "offers", "deal", "deals", "off"]);
+const SALE_WORDS = new Set([
+  "sale", "sales", "discount", "discounted", "offer", "offers", "deal", "deals", "off",
+  "oferta", "ofertas", "descuento", "descuentos", "promo", "promos", "rebaja", "rebajas",
+]);
 
 function fold(s: string): string {
   return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 }
 
-/** rings → ring, necklaces → necklace, watches → watch. */
+/** leches → leche, yogurts → yogurt, productos → producto. */
 function singular(w: string): string {
-  if (w.length > 4 && /(ches|shes|xes|sses)$/.test(w)) return w.slice(0, -2);
   if (w.length > 3 && w.endsWith("s") && !w.endsWith("ss")) return w.slice(0, -1);
   return w;
 }
@@ -108,21 +111,21 @@ function parsePrice(text: string): { min: number | null; max: number | null; res
   };
   const N = String.raw`(?:Bs\.?\s*)?(\d[\d,]*k?)`;
   let rest = text
-    .replace(new RegExp(String.raw`\b${N}\s*(?:-|to)\s*${N}\b`, "gi"), (_, a, b) => {
+    .replace(new RegExp(String.raw`\b${N}\s*(?:-|a|to)\s*${N}\b`, "gi"), (_, a, b) => {
       min = num(a);
       max = num(b);
       return " ";
     })
-    .replace(new RegExp(String.raw`\b(?:under|below|less than|upto|up to|within|max|tak)\s*${N}`, "gi"), (_, a) => {
+    .replace(new RegExp(String.raw`\b(?:menos de|hasta|bajo|max|máximo|maximo|upto|up to|within|under|below|less than|tak)\s*${N}`, "gi"), (_, a) => {
       max = num(a);
       return " ";
     })
-    .replace(new RegExp(String.raw`\b(?:above|over|more than|from|min)\s*${N}`, "gi"), (_, a) => {
+    .replace(new RegExp(String.raw`\b(?:desde|más de|mas de|mínimo|minimo|over|above|more than|from|min)\s*${N}`, "gi"), (_, a) => {
       min = num(a);
       return " ";
     });
-  // "3000 se kam" / "3000 tak"
-  rest = rest.replace(new RegExp(String.raw`${N}\s*(?:se kam|tak|or less)\b`, "gi"), (_, a) => {
+  // "50 para arriba" / "50 o menos"
+  rest = rest.replace(new RegExp(String.raw`${N}\s*(?:o menos|para arriba)\b`, "gi"), (_, a) => {
     max = num(a);
     return " ";
   });
@@ -164,7 +167,7 @@ export function searchCatalog(
     return t;
   });
 
-  // A word that names a category ("ring", "necklace", "bangle" → bracelet).
+  // A word that names a category ("leche", "mantequilla", "limpieza").
   let category: SearchCategory | null = null;
   for (const t of fixed) {
     const target = CATEGORY_HINTS[t] ?? t;
@@ -187,12 +190,12 @@ export function searchCatalog(
     let matched = 0;
     for (const t of fixed) {
       const isCategoryWord = (CATEGORY_HINTS[t] ?? t) === categoryWord;
-      // "necklace" shouldn't pull in a ring whose description mentions necklaces.
+      // "leche" shouldn't pull in a yogurt whose description mentions milk.
       const usable = isCategoryWord && p.category.slug !== category!.slug ? fields.slice(0, 3) : fields;
       let best = 0;
       for (const f of usable) for (const w of f.words) best = Math.max(best, similarity(t, w) * f.weight);
       if (isCategoryWord && p.category.slug === category!.slug) {
-        // In the category; pieces whose name says it too ("… Bangle" for "bangles") come first.
+        // In the category; products whose name says it too come first.
         const named = fields[0].words.some((w) => similarity(t, w) > 0);
         best = Math.max(best, 6) + (named ? 2 : 0);
       }
@@ -205,7 +208,7 @@ export function searchCatalog(
   });
 
   if (fixed.length === 0) {
-    // Only a price range and/or "sale" — list everything that fits.
+    // Only a price range and/or "oferta" — list everything that fits.
     const list = scored.sort((a, b) => b.score - a.score).map((x) => x.p);
     return { products: list, category: null, corrections, minPrice: min, maxPrice: max, onSale, partial: false };
   }

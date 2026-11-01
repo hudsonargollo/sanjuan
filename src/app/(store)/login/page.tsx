@@ -4,7 +4,7 @@ import { getCustomerSession, safeNext } from "@/lib/customer-auth";
 import { LoginForm } from "@/components/auth/login-form";
 
 export const metadata: Metadata = {
-  title: "Sign In",
+  title: "Iniciar sesión",
   robots: { index: false },
 };
 

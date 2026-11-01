@@ -40,7 +40,23 @@ export function canMovePayment(from: PaymentStatus, to: PaymentStatus): boolean 
 }
 
 export const PAYMENT_METHOD_LABEL: Record<string, string> = {
-  COD: "Cash on Delivery",
-  PAYFAST: "Card (PayFast)",
-  SAFEPAY: "Card / Wallet (Safepay)",
+  COD: "Pago contra entrega",
+  PAYFAST: "Tarjeta (PayFast)",
+  SAFEPAY: "Tarjeta / billetera (Safepay)",
+};
+
+export const ORDER_STATUS_LABEL: Record<string, string> = {
+  PENDING: "Pendiente",
+  CONFIRMED: "Confirmado",
+  PROCESSING: "En preparación",
+  SHIPPED: "Enviado",
+  DELIVERED: "Entregado",
+  CANCELLED: "Cancelado",
+};
+
+export const PAYMENT_STATUS_LABEL: Record<string, string> = {
+  PENDING: "Pendiente",
+  PAID: "Pagado",
+  FAILED: "Fallido",
+  REFUNDED: "Reembolsado",
 };

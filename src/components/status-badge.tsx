@@ -10,6 +10,18 @@ const STYLES: Record<string, { dot: string; cls: string }> = {
   REFUNDED: { dot: "bg-gray-400", cls: "bg-gray-100 text-gray-600 ring-gray-500/20" },
 };
 
+const LABELS: Record<string, string> = {
+  PENDING: "Pendiente",
+  CONFIRMED: "Confirmado",
+  PROCESSING: "En preparación",
+  SHIPPED: "Enviado",
+  DELIVERED: "Entregado",
+  CANCELLED: "Cancelado",
+  PAID: "Pagado",
+  FAILED: "Fallido",
+  REFUNDED: "Reembolsado",
+};
+
 export function StatusBadge({ status }: { status: string }) {
   const s = STYLES[status] ?? { dot: "bg-gray-400", cls: "bg-gray-100 text-gray-600 ring-gray-500/20" };
   return (
@@ -17,7 +29,7 @@ export function StatusBadge({ status }: { status: string }) {
       className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${s.cls}`}
     >
       <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} />
-      {status.charAt(0) + status.slice(1).toLowerCase()}
+      {LABELS[status] ?? status}
     </span>
   );
 }

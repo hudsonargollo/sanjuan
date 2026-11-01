@@ -21,7 +21,7 @@ export function PromoOverlay() {
       initial="hidden"
       animate="show"
       transition={{ staggerChildren: 0.12 }}
-      className="relative overflow-hidden bg-maroon text-light"
+      className="relative overflow-hidden bg-brand text-light"
     >
       <div className="mx-auto max-w-6xl px-5 py-16 sm:py-24">
         <div className="grid items-center gap-10 md:grid-cols-2">
@@ -29,25 +29,25 @@ export function PromoOverlay() {
           <motion.div variants={slideUp} className="text-center md:text-left">
             <motion.span
               variants={slideUp}
-              className="inline-block rounded-full border border-[rgba(230,205,139,0.55)] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-gold"
+              className="inline-block rounded-full border border-[rgba(167,216,178,0.55)] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-accent"
             >
               Entrega inmediata
             </motion.span>
 
             <motion.h2
               variants={slideUp}
-              className="mt-5 font-serif text-4xl font-black leading-tight tracking-tight sm:text-6xl"
+              className="mt-5 font-display text-4xl font-black leading-tight tracking-tight sm:text-6xl"
             >
               LLEGÓ LO NUEVO
               <br />
-              <span className="bg-gradient-to-r from-gold-hi to-gold bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-accent-soft to-accent bg-clip-text text-transparent">
                 ¡OFERTA POR POCO TIEMPO!
               </span>
             </motion.h2>
 
             <motion.p variants={slideUp} className="mt-4 text-lg text-light/80">
-              Pedí ahora y recibilo hoy mismo en{" "}
-              <span className="font-semibold text-gold">Buena Vista</span>, Santa Cruz.
+              Pide ahora y recíbelo hoy mismo en{" "}
+              <span className="font-semibold text-accent">Buena Vista</span>, Santa Cruz.
               <br className="hidden sm:block" />
               Pago contra entrega · Sin tarjetas · Sin complicaciones.
             </motion.p>
@@ -55,15 +55,15 @@ export function PromoOverlay() {
             <motion.div variants={slideUp} className="mt-8 flex flex-wrap items-center justify-center gap-3 md:justify-start">
               <Link
                 href="/shop"
-                className="inline-block rounded-full bg-gradient-to-r from-gold-hi to-gold px-9 py-3.5 text-sm font-bold uppercase tracking-[0.14em] text-maroon shadow-[0_14px_34px_-14px_rgba(230,205,139,0.7)] transition hover:opacity-90"
+                className="inline-block rounded-full bg-gradient-to-r from-accent-soft to-accent px-9 py-3.5 text-sm font-bold uppercase tracking-[0.14em] text-brand shadow-[0_14px_34px_-14px_rgba(167,216,178,0.7)] transition hover:opacity-90"
               >
                 Comprar ahora
               </Link>
               <a
-                href="https://wa.me/5910000000"
+                href="https://wa.me/59171662586"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block rounded-full border border-[rgba(230,205,139,0.55)] px-9 py-3.5 text-sm font-medium uppercase tracking-[0.14em] text-light transition hover:border-gold hover:text-gold"
+                className="inline-block rounded-full border border-[rgba(167,216,178,0.55)] px-9 py-3.5 text-sm font-medium uppercase tracking-[0.14em] text-light transition hover:border-accent hover:text-accent"
               >
                 WhatsApp
               </a>
@@ -83,9 +83,9 @@ export function PromoOverlay() {
         </div>
       </div>
 
-      {/* thin gold hairline */}
+      {/* thin accent hairline */}
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(230,205,139,0.55)] to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(167,216,178,0.55)] to-transparent"
         aria-hidden="true"
       />
     </motion.section>

@@ -5,7 +5,7 @@ import { ProductForm } from "@/components/admin/product-form";
 import { updateProduct } from "../actions";
 import { requireAdmin } from "@/lib/admin";
 
-export const metadata = { title: "Edit product" };
+export const metadata = { title: "Editar producto" };
 
 export const dynamic = "force-dynamic";
 
@@ -25,14 +25,14 @@ export default async function EditProductPage({ params }: PageProps<"/admin/prod
       <Link href="/admin/products" className="text-sm text-muted hover:text-ink">
         ← Volver a productos
       </Link>
-      <h1 className="mt-2 font-serif text-3xl font-semibold text-ink">Edit Product</h1>
+      <h1 className="mt-2 font-display text-3xl font-semibold text-ink">Editar producto</h1>
 
       <div className="mt-6">
         <ProductForm
           action={action}
           categories={categories}
           product={product}
-          submitLabel="Save changes"
+          submitLabel="Guardar cambios"
         />
       </div>
     </div>

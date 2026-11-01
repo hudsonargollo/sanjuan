@@ -4,9 +4,9 @@
 export type StoreSettings = {
   contact: {
     email: string;
-    /** Display format, e.g. "+92 300 1234567" */
+    /** Display format, e.g. "+591 71 662 586" */
     phone: string;
-    /** International digits only, e.g. "923001234567" */
+    /** International digits only, e.g. "59171662586" */
     whatsapp: string;
     city: string;
     hours: string;

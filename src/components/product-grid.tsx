@@ -13,8 +13,8 @@ export function ProductGrid({ products, layout = "full" }: { products: ProductVi
   if (products.length === 0) {
     return (
       <div className="rounded-lg border border-dashed border-[var(--line)] bg-surface/50 py-20 text-center">
-        <p className="font-serif text-xl text-ink">No pieces found</p>
-        <p className="mt-1 text-sm text-muted">Try adjusting your filters.</p>
+        <p className="font-display text-xl text-ink">No encontramos productos</p>
+        <p className="mt-1 text-sm text-muted">Prueba ajustando los filtros.</p>
       </div>
     );
   }

@@ -9,6 +9,16 @@ import type { AdminOrderRow } from "@/lib/admin-data";
 const TABS = ["ALL", "PENDING", "CONFIRMED", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED"] as const;
 type Tab = (typeof TABS)[number];
 
+const TAB_LABELS: Record<Tab, string> = {
+  ALL: "Todos",
+  PENDING: "Pendientes",
+  CONFIRMED: "Confirmados",
+  PROCESSING: "En preparación",
+  SHIPPED: "Enviados",
+  DELIVERED: "Entregados",
+  CANCELLED: "Cancelados",
+};
+
 export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("ALL");
@@ -30,7 +40,7 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
   }, [orders, tab, q]);
 
   return (
-    <div className="rounded-2xl border border-[var(--line)] bg-surface shadow-[0_10px_30px_-22px_rgba(38,8,16,0.4)]">
+    <div className="rounded-2xl border border-[var(--line)] bg-surface shadow-[0_10px_30px_-22px_rgba(18,53,31,0.4)]">
       {/* Toolbar */}
       <div className="flex flex-col gap-3 border-b border-[var(--line)] p-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative w-full sm:max-w-xs">
@@ -41,11 +51,11 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Buscar pedido # o cliente…"
-            className="w-full rounded-lg border border-[var(--line-strong)] bg-cream-soft py-2 pl-9 pr-3 text-sm text-ink outline-none transition focus:border-gold"
+            className="w-full rounded-lg border border-[var(--line-strong)] bg-cream-soft py-2 pl-9 pr-3 text-sm text-ink outline-none transition focus:border-accent"
           />
         </div>
         <p className="text-xs text-muted">
-          {filtered.length} of {orders.length} order{orders.length === 1 ? "" : "s"}
+          {filtered.length} de {orders.length} pedido{orders.length === 1 ? "" : "s"}
         </p>
       </div>
 
@@ -59,10 +69,10 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
               key={t}
               onClick={() => setTab(t)}
               className={`flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition ${
-                active ? "bg-maroon text-light" : "text-muted hover:bg-cream-soft hover:text-ink"
+                active ? "bg-brand text-light" : "text-muted hover:bg-cream-soft hover:text-ink"
               }`}
             >
-              {t === "ALL" ? "All" : t.charAt(0) + t.slice(1).toLowerCase()}
+              {TAB_LABELS[t]}
               <span className={`rounded-full px-1.5 text-[0.62rem] ${active ? "bg-light/20 text-light" : "bg-cream-soft text-muted"}`}>
                 {n}
               </span>
@@ -73,7 +83,7 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
 
       {filtered.length === 0 ? (
         <div className="px-4 py-16 text-center">
-          <p className="font-serif text-lg text-ink">No matching orders</p>
+          <p className="font-display text-lg text-ink">No hay pedidos que coincidan</p>
           <p className="mt-1 text-sm text-muted">Prueba otra búsqueda o filtro de estado.</p>
         </div>
       ) : (
@@ -83,12 +93,12 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-[var(--line)] text-left text-[0.68rem] uppercase tracking-wider text-muted">
-                  <th className="px-4 py-3 font-medium">Order</th>
-                  <th className="px-4 py-3 font-medium">Customer</th>
-                  <th className="px-4 py-3 font-medium">Payment</th>
-                  <th className="px-4 py-3 font-medium">Status</th>
+                  <th className="px-4 py-3 font-medium">Pedido</th>
+                  <th className="px-4 py-3 font-medium">Cliente</th>
+                  <th className="px-4 py-3 font-medium">Pago</th>
+                  <th className="px-4 py-3 font-medium">Estado</th>
                   <th className="px-4 py-3 text-right font-medium">Total</th>
-                  <th className="px-4 py-3 font-medium">Date</th>
+                  <th className="px-4 py-3 font-medium">Fecha</th>
                 </tr>
               </thead>
               <tbody>
@@ -99,8 +109,8 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
                     className="cursor-pointer border-b border-[var(--line)] transition-colors last:border-0 hover:bg-cream-soft"
                   >
                     <td className="px-4 py-3">
-                      <span className="block whitespace-nowrap font-medium text-gold-deep">{o.orderNumber}</span>
-                      <span className="mt-0.5 block text-xs text-muted">{o.itemCount} item{o.itemCount === 1 ? "" : "s"}</span>
+                      <span className="block whitespace-nowrap font-medium text-accent-strong">{o.orderNumber}</span>
+                      <span className="mt-0.5 block text-xs text-muted">{o.itemCount} producto{o.itemCount === 1 ? "" : "s"}</span>
                     </td>
                     <td className="px-4 py-3 text-ink">{o.customerName}</td>
                     <td className="px-4 py-3">
@@ -125,7 +135,7 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
                 className="flex w-full flex-col gap-2 p-4 text-left transition hover:bg-cream-soft"
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-medium text-gold-deep">{o.orderNumber}</span>
+                  <span className="font-medium text-accent-strong">{o.orderNumber}</span>
                   <StatusBadge status={o.status} />
                 </div>
                 <div className="flex items-center justify-between gap-2 text-sm">
@@ -133,7 +143,7 @@ export function OrdersTable({ orders }: { orders: AdminOrderRow[] }) {
                   <span className="font-semibold text-ink [font-variant-numeric:tabular-nums]">{formatPrice(o.total)}</span>
                 </div>
                 <div className="flex items-center justify-between gap-2 text-xs text-muted">
-                  <span>{o.itemCount} item{o.itemCount === 1 ? "" : "s"} · {o.paymentMethod}</span>
+                  <span>{o.itemCount} producto{o.itemCount === 1 ? "" : "s"} · {o.paymentMethod}</span>
                   <span>{formatDate(o.createdAt)}</span>
                 </div>
               </button>

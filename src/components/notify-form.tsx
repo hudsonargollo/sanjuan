@@ -14,11 +14,11 @@ export function NotifyForm({ slug, label }: { slug: string; label: string }) {
 
   useEffect(() => {
     if (state.error) toast.error(state.error);
-    else if (state.ok) toast.success(`We'll email you when ${label.toLowerCase()} launch.`, { title: "You're on the list" });
+    else if (state.ok) toast.success(`Te avisaremos cuando llegue ${label.toLowerCase()}.`, { title: "Ya estás en la lista" });
   }, [state, toast, label]);
 
   if (state.ok) {
-    return <p className="text-sm text-gold-deep">Thanks! We&apos;ll let you know as soon as they&apos;re here.</p>;
+    return <p className="text-sm text-accent-strong">¡Listo! Te avisaremos en cuanto llegue.</p>;
   }
 
   return (
@@ -29,16 +29,16 @@ export function NotifyForm({ slug, label }: { slug: string; label: string }) {
         type="email"
         name="email"
         required
-        placeholder="Your email"
+        placeholder="Tu correo"
         aria-label="Correo electrónico"
-        className="w-full rounded-full border border-[var(--line-strong)] bg-cream-soft px-5 py-3 text-sm outline-none focus:border-gold"
+        className="w-full rounded-full border border-[var(--line-strong)] bg-cream-soft px-5 py-3 text-sm outline-none focus:border-accent"
       />
       <button
         type="submit"
         disabled={pending}
-        className="shrink-0 rounded-full border border-[var(--line-strong)] px-8 py-3 text-sm text-ink transition hover:border-gold hover:text-gold-deep disabled:opacity-60"
+        className="shrink-0 rounded-full border border-[var(--line-strong)] px-8 py-3 text-sm text-ink transition hover:border-accent hover:text-accent-strong disabled:opacity-60"
       >
-        {pending ? "Saving…" : "Notify me"}
+        {pending ? "Guardando…" : "Avísame"}
       </button>
     </form>
   );

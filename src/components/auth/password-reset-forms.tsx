@@ -20,35 +20,35 @@ export function ForgotPasswordForm() {
   return (
     <AuthShell backHref="/login" backLabel="Volver a iniciar sesión">
       <div className="text-center">
-        <h1 className="font-serif text-3xl font-bold text-ink">Olvidé mi contraseña</h1>
-        <p className="mt-1 text-sm text-muted">We&apos;ll email you a link to choose a new one.</p>
+        <h1 className="font-display text-3xl font-bold text-ink">Olvidé mi contraseña</h1>
+        <p className="mt-1 text-sm text-muted">Te enviaremos un enlace por correo para que elijas una nueva.</p>
       </div>
 
       {state.ok ? (
         <div className="mt-7 rounded-xl border border-ok/40 bg-ok/[0.07] px-4 py-4 text-center text-sm text-ink">
-          <p className="font-serif text-lg font-semibold text-ok">Check your inbox</p>
+          <p className="font-display text-lg font-semibold text-ok">Revisa tu correo</p>
           <p className="mt-1">{state.message}</p>
         </div>
       ) : (
         <form ref={formRef} action={formAction} onSubmit={f.onSubmit} noValidate className="mt-7 space-y-5">
           <AuthField
             name="email"
-            label="Email"
+            label="Correo electrónico"
             icon="mail"
             type="email"
             autoComplete="email"
-            placeholder="you@example.com"
+            placeholder="tu@ejemplo.com"
             {...f.bind("email")}
             {...f.field("email")}
           />
           {state.error && <AuthAlert>{state.error}</AuthAlert>}
-          <AuthSubmit pending={pending} label="Send Reset Link" pendingLabel="Sending…" />
+          <AuthSubmit pending={pending} label="Enviar enlace" pendingLabel="Enviando…" />
         </form>
       )}
 
       <p className="mt-6 text-center text-sm text-muted">
-        Remembered it?{" "}
-        <Link href="/login" className="font-semibold text-gold-deep hover:underline">
+        ¿La recordaste?{" "}
+        <Link href="/login" className="font-semibold text-accent-strong hover:underline">
           Iniciar sesión
         </Link>
       </p>
@@ -64,8 +64,8 @@ export function ResetPasswordForm({ token }: { token: string }) {
   return (
     <AuthShell backHref="/login" backLabel="Volver a iniciar sesión">
       <div className="text-center">
-        <h1 className="font-serif text-3xl font-bold text-ink">Choose a new password</h1>
-        <p className="mt-1 text-sm text-muted">You&apos;ll be signed in right after.</p>
+        <h1 className="font-display text-3xl font-bold text-ink">Elige una nueva contraseña</h1>
+        <p className="mt-1 text-sm text-muted">Iniciarás sesión justo después.</p>
       </div>
 
       {token ? (
@@ -73,25 +73,25 @@ export function ResetPasswordForm({ token }: { token: string }) {
           <input type="hidden" name="token" value={token} />
           <AuthField
             name="password"
-            label="New password"
+            label="Nueva contraseña"
             icon="lock"
             password
             autoComplete="new-password"
-            placeholder="Create a password"
+            placeholder="Crea una contraseña"
             {...f.bind("password")}
             {...password}
           >
             <PasswordStrength value={f.value("password")} highlight={password.status === "invalid"} />
           </AuthField>
           {state.error && <AuthAlert>{state.error}</AuthAlert>}
-          <AuthSubmit pending={pending} label="Update Password" pendingLabel="Saving…" />
+          <AuthSubmit pending={pending} label="Actualizar contraseña" pendingLabel="Guardando…" />
         </form>
       ) : (
         <div className="mt-7">
           <AuthAlert>
-            This reset link is incomplete.{" "}
+            Este enlace de recuperación está incompleto.{" "}
             <Link href="/forgot-password" className="font-semibold underline">
-              Request a new one
+              Solicitar uno nuevo
             </Link>
             .
           </AuthAlert>

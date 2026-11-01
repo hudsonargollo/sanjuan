@@ -100,13 +100,13 @@ export function ReferencePhotos({
     setError(null);
     const picked = Array.from(list).filter((f) => f.type.startsWith("image/") || f.type === "");
     if (picked.length === 0) {
-      setError("Please choose a photo (JPG, PNG or WEBP).");
+      setError("Elige una foto (JPG, PNG o WEBP).");
       return;
     }
     if (picked.length > room) {
       setError(
         room === 0
-          ? `You can add up to ${MAX_REFERENCE_PHOTOS} photos.`
+          ? `Puedes agregar hasta ${MAX_REFERENCE_PHOTOS} fotos.`
           : `Solo se pueden agregar ${room} foto${room === 1 ? "" : "s"} más.`
       );
     }
@@ -117,7 +117,7 @@ export function ReferencePhotos({
         const file = await shrink(f);
         added.push({ id: `${Date.now()}-${Math.random().toString(36).slice(2)}`, file, url: URL.createObjectURL(file) });
       } catch {
-        setError("One photo couldn't be read — please use a JPG, PNG or WEBP image.");
+        setError("Una foto no se pudo leer — usa una imagen JPG, PNG o WEBP.");
       }
     }
     setItems((prev) => [...prev, ...added].slice(0, MAX_REFERENCE_PHOTOS));
@@ -151,8 +151,8 @@ export function ReferencePhotos({
   return (
     <div>
       <p className="mb-1.5 flex items-baseline gap-2 text-xs font-medium uppercase tracking-[0.1em] text-muted">
-        Reference photos
-        <span className="text-[0.65rem] normal-case tracking-normal text-muted/80">(optional)</span>
+        Fotos de referencia
+        <span className="text-[0.65rem] normal-case tracking-normal text-muted/80">(opcional)</span>
       </p>
 
       {/* Picker (no name — the shrunk copies go in the hidden field below) */}
@@ -177,47 +177,47 @@ export function ReferencePhotos({
           {...dropProps}
           className={`group relative flex w-full flex-col items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed px-6 py-9 text-center transition ${
             dragging
-              ? "border-gold bg-gold/10"
-              : "border-gold/45 bg-gradient-to-br from-cream-soft via-surface to-panel/60 hover:border-gold hover:bg-gold/5"
+              ? "border-accent bg-accent/10"
+              : "border-accent/45 bg-gradient-to-br from-cream-soft via-surface to-panel/60 hover:border-accent hover:bg-accent/5"
           }`}
         >
-          <span className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full bg-gold/15 blur-2xl" aria-hidden="true" />
-          <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-gold-hi via-gold to-gold-deep text-maroon shadow-[0_10px_24px_-10px_rgba(169,126,48,0.9)] transition group-hover:scale-105">
+          <span className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full bg-accent/15 blur-2xl" aria-hidden="true" />
+          <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-accent-soft via-accent to-accent-strong text-brand shadow-[0_10px_24px_-10px_rgba(239,125,31,0.9)] transition group-hover:scale-105">
             {busy ? (
-              <span className="h-5 w-5 animate-spin rounded-full border-2 border-maroon/30 border-t-maroon" />
+              <span className="h-5 w-5 animate-spin rounded-full border-2 border-brand/30 border-t-brand" />
             ) : (
               <ImageIcon className="h-6 w-6" />
             )}
           </span>
-          <span className="relative mt-4 font-serif text-xl font-semibold text-ink">
-            {busy ? "Preparing your photos…" : "Add reference photos"}
+          <span className="relative mt-4 font-display text-xl font-semibold text-ink">
+            {busy ? "Preparando tus fotos…" : "Agregar fotos de referencia"}
           </span>
           <span className="relative mt-1 text-sm text-muted">
-            <span className="sm:hidden">Tap to choose from your gallery</span>
-            <span className="hidden sm:inline">Click to browse your files — or drag &amp; drop them here</span>
+            <span className="sm:hidden">Toca para elegir de tu galería</span>
+            <span className="hidden sm:inline">Haz clic para buscar tus archivos o arrástralos aquí</span>
           </span>
-          <span className="relative mt-4 inline-flex items-center gap-2 rounded-full border border-maroon/80 px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-maroon transition group-hover:bg-maroon group-hover:text-gold-hi dark:border-gold-deep dark:text-gold-hi">
-            Choose photos
+          <span className="relative mt-4 inline-flex items-center gap-2 rounded-full border border-brand/80 px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-brand transition group-hover:bg-brand group-hover:text-accent-soft dark:border-accent-strong dark:text-accent-soft">
+            Elegir fotos
           </span>
           <span className="relative mt-3 text-[0.7rem] uppercase tracking-[0.14em] text-muted/90">
-            Up to {MAX_REFERENCE_PHOTOS} photos · JPG, PNG or WEBP
+            Hasta {MAX_REFERENCE_PHOTOS} fotos · JPG, PNG o WEBP
           </span>
         </button>
       ) : (
-        <div {...dropProps} className={`rounded-2xl border p-3 transition sm:p-4 ${dragging ? "border-gold bg-gold/10" : "border-[var(--line-strong)] bg-surface/60"}`}>
+        <div {...dropProps} className={`rounded-2xl border p-3 transition sm:p-4 ${dragging ? "border-accent bg-accent/10" : "border-[var(--line-strong)] bg-surface/60"}`}>
           <ul className="grid grid-cols-3 gap-3">
             {items.map((it, i) => (
-              <li key={it.id} className="group relative aspect-square overflow-hidden rounded-xl border border-gold/40 bg-sand shadow-[0_10px_24px_-18px_rgba(38,8,16,0.6)]">
+              <li key={it.id} className="group relative aspect-square overflow-hidden rounded-xl border border-accent/40 bg-sand shadow-[0_10px_24px_-18px_rgba(18,53,31,0.6)]">
                 {/* eslint-disable-next-line @next/next/no-img-element -- local blob preview */}
-                <img src={it.url} alt={`Reference photo ${i + 1}`} className="h-full w-full object-cover" />
-                <span className="absolute left-2 top-2 rounded-full bg-maroon/90 px-2 py-0.5 text-[0.6rem] font-semibold text-gold-hi">
+                <img src={it.url} alt={`Foto de referencia ${i + 1}`} className="h-full w-full object-cover" />
+                <span className="absolute left-2 top-2 rounded-full bg-brand/90 px-2 py-0.5 text-[0.6rem] font-semibold text-accent-soft">
                   {i + 1}
                 </span>
                 <button
                   type="button"
                   onClick={() => remove(it.id)}
-                  aria-label={`Remove photo ${i + 1}`}
-                  className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-black/55 text-base leading-none text-white backdrop-blur transition hover:bg-maroon"
+                  aria-label={`Quitar foto ${i + 1}`}
+                  className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-black/55 text-base leading-none text-white backdrop-blur transition hover:bg-brand"
                 >
                   ×
                 </button>
@@ -229,20 +229,20 @@ export function ReferencePhotos({
                   type="button"
                   onClick={open}
                   disabled={busy}
-                  className="flex aspect-square w-full flex-col items-center justify-center gap-1.5 rounded-xl border-2 border-dashed border-gold/50 text-gold-deep transition hover:border-gold hover:bg-gold/5"
+                  className="flex aspect-square w-full flex-col items-center justify-center gap-1.5 rounded-xl border-2 border-dashed border-accent/50 text-accent-strong transition hover:border-accent hover:bg-accent/5"
                 >
                   {busy ? (
-                    <span className="h-5 w-5 animate-spin rounded-full border-2 border-gold/30 border-t-gold-deep" />
+                    <span className="h-5 w-5 animate-spin rounded-full border-2 border-accent/30 border-t-accent-strong" />
                   ) : (
                     <span className="text-2xl leading-none">+</span>
                   )}
-                  <span className="text-[0.65rem] font-semibold uppercase tracking-[0.12em]">Add more</span>
+                  <span className="text-[0.65rem] font-semibold uppercase tracking-[0.12em]">Agregar más</span>
                 </button>
               </li>
             )}
           </ul>
           <p className="mt-3 flex items-center gap-1.5 text-xs text-muted">
-            <span className="text-gold-deep" aria-hidden="true">✓</span>
+            <span className="text-accent-strong" aria-hidden="true">✓</span>
             {items.length} de {MAX_REFERENCE_PHOTOS} fotos agregadas — se enviarán con tu solicitud.
           </p>
         </div>
@@ -252,11 +252,11 @@ export function ReferencePhotos({
 
       {whatsappUrl && (
         <p className="mt-2 text-xs text-muted">
-          Prefer WhatsApp?{" "}
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-gold-deep underline underline-offset-2">
-            Send photos there
+          ¿Prefieres WhatsApp?{" "}
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-accent-strong underline underline-offset-2">
+            Enviar fotos por ahí
           </a>{" "}
-          instead.
+          en su lugar.
         </p>
       )}
     </div>

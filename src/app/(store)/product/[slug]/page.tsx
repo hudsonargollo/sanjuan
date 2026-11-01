@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getRelatedProducts } from "@/lib/catalog";
-import { formatPrice, discountPercent } from "@/lib/format";
+import { formatPrice, discountPercent, visiblePack } from "@/lib/format";
 import { ProductGallery } from "@/components/product-gallery";
 import { getStoreSettings } from "@/lib/settings";
 import { ProductCard } from "@/components/product-card";
 import { DealPanel } from "@/components/ui/sale-badge";
 import { AddToCart } from "@/components/cart/add-to-cart";
 import { JsonLd } from "@/components/json-ld";
+import { SplitText } from "@/components/text-reveal";
 
 import { siteUrl } from "@/lib/site";
 import { AccordionItem } from "@/components/ui/accordion-item";
@@ -26,8 +27,8 @@ export async function generateMetadata({
 }: PageProps<"/product/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
-  if (!product) return { title: "Not found" };
-  const description = product.description ?? `${product.name} — SanJuan Mini Market stainless steel productos.`;
+  if (!product) return { title: "No encontrado" };
+  const description = product.description ?? `${product.name} — disponible en SanJuan Mini Market.`;
   return {
     title: product.name,
     description,
@@ -42,24 +43,11 @@ export async function generateMetadata({
   };
 }
 
-function isGoldTone(material?: string | null): boolean {
-  return /gold/i.test(material ?? "");
-}
-
-function finishOf(material?: string | null): string {
-  if (!material) return "Polished stainless steel";
-  if (/two-tone/i.test(material)) return "Two-tone silver & gold";
-  if (/matte/i.test(material)) return "Matte";
-  if (/glossy|brillante/i.test(material)) return "Glossy";
-  if (/gold-plated|gold plated/i.test(material)) return "Gold-plated";
-  return material;
-}
-
 /** Returns a short neutral attribute note inferred from the product description. */
 function attributeOf(text: string): string | null {
-  if (/anti-bacterial|antiséptico/i.test(text)) return "Antibacterial";
-  if (/sin aroma|unscented/i.test(text)) return "Fragrance-free";
-  if (/refresco|crudo/i.test(text)) return "Refreshing";
+  if (/anti-bacterial|antiséptico/i.test(text)) return "Antibacteriano";
+  if (/sin aroma|unscented/i.test(text)) return "Sin aroma";
+  if (/refresco|crudo/i.test(text)) return "Refrescante";
   if (/natural|orgánico|eco/i.test(text)) return "Natural";
   return null;
 }
@@ -79,24 +67,24 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
   const desc = product.description ?? "";
   const sentences = desc.split(/(?<=\.)\s+/).map((s) => s.trim()).filter(Boolean);
   const lead = sentences.slice(0, 2).join(" ");
-  const finish = finishOf(product.material);
   const attribute = attributeOf(desc);
+  const pack = visiblePack(product.material);
   const customSpecs: [string, string][] = (product.specs ?? "")
     .split(/\r?\n/)
     .map((l) => l.trim())
     .filter(Boolean)
     .map((l) => {
       const idx = l.indexOf(":");
-      return (idx === -1 ? ["Detail", l] : [l.slice(0, idx).trim(), l.slice(idx + 1).trim()]) as [string, string];
+      return (idx === -1 ? ["Detalle", l] : [l.slice(0, idx).trim(), l.slice(idx + 1).trim()]) as [string, string];
     });
   const hasCustom = customSpecs.length > 0;
 
   // Compact highlights shown up top (Amazon-style "Top highlights")
   const derivedHighlights: [string, string][] = [
-    ["Material", product.material || "Stainless steel"],
-    ["Finish", finish],
-    ["Quality", "Tarnish-resistant & hypoallergenic"],
-    ["Category", product.category.name],
+    ["Categoría", product.category.name],
+    ...(pack ? ([["Presentación", pack]] as [string, string][]) : []),
+    ...(attribute ? ([["Tipo", attribute]] as [string, string][]) : []),
+    ["Entrega", DELIVERY_TIME],
   ];
   const highlights = hasCustom ? customSpecs.slice(0, 4) : derivedHighlights;
 
@@ -104,21 +92,19 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
   const specs: [string, string][] = hasCustom
     ? customSpecs
     : [
-        ["Material", product.material || "Stainless steel"],
-        ["Base metal", "Surgical-grade stainless steel"],
-        ["Finish", finish],
-        ...(attribute ? ([["Attribute", attribute]] as [string, string][]) : []),
-        ["Skin-friendly", "Hypoallergenic"],
-        ["Care", "Keep away from water & perfume"],
-        ["Category", product.category.name],
+        ["Categoría", product.category.name],
+        ...(pack ? ([["Presentación", pack]] as [string, string][]) : []),
+        ...(attribute ? ([["Tipo", attribute]] as [string, string][]) : []),
+        ["Disponibilidad", inStock ? "En stock" : "Agotado"],
+        ["Entrega", `Entrega ${DELIVERY_TIME}`],
+        ["Pago", "Contra entrega en Buena Vista y zonas cercanas"],
+        ["Devoluciones", "7 días"],
       ];
 
   const aboutBullets = [
     ...sentences,
-    "Tarnish-resistant, hypoallergenic and gentle on sensitive skin.",
-    isGoldTone(product.material)
-      ? "Gold-plated over stainless steel — with simple care it keeps its shine for years."
-      : "Solid stainless steel — with simple care it keeps its shine for years.",
+    "Producto seleccionado para tu día a día y revisado antes de la entrega.",
+    "Pago contra entrega al recibir en Buena Vista y zonas cercanas.",
   ];
 
   const productJsonLd = {
@@ -127,7 +113,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
     name: product.name,
     description: product.description ?? undefined,
     category: product.category.name,
-    ...(product.material ? { material: product.material } : {}),
+    ...(pack ? { material: pack } : {}),
     ...(product.images.length ? { image: product.images } : {}),
     brand: { "@type": "Brand", name: "SanJuan Mini Market" },
     offers: {
@@ -146,9 +132,9 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
       <JsonLd data={productJsonLd} />
       {/* Breadcrumb */}
       <nav className="text-sm text-muted">
-        <Link href="/shop" className="hover:text-gold-deep">Shop</Link>
+        <Link href="/shop" className="hover:text-accent-strong">Productos</Link>
         <span className="mx-2">/</span>
-        <Link href={`/shop/${product.category.slug}`} className="hover:text-gold-deep">
+        <Link href={`/shop/${product.category.slug}`} className="hover:text-accent-strong">
           {product.category.name}
         </Link>
         <span className="mx-2">/</span>
@@ -166,23 +152,25 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
           <div className="flex items-center gap-2">
             <p className="text-[0.7rem] uppercase tracking-[0.2em] text-muted">{product.category.name}</p>
             {product.featured && (
-              <span className="rounded-full bg-maroon px-2.5 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wide text-gold">
+              <span className="rounded-full bg-brand px-2.5 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wide text-accent">
                 Destacado
               </span>
             )}
           </div>
-          <h1 className="mt-2 font-serif text-4xl font-semibold text-ink">{product.name}</h1>
+          <h1 className="mt-2 font-display text-4xl font-semibold leading-tight text-ink text-balance">
+            <SplitText text={product.name} />
+          </h1>
 
 
           {off && product.compareAtPrice ? (
             <DealPanel price={product.price} compareAt={product.compareAtPrice} percent={off} />
           ) : (
             <div className="mt-4 flex flex-wrap items-baseline gap-3">
-              <span className="font-serif text-3xl font-semibold text-ink">{formatPrice(product.price)}</span>
+              <span className="font-display text-3xl font-semibold text-ink">{formatPrice(product.price)}</span>
             </div>
           )}
 
-          {lead && <p className="mt-4 leading-relaxed text-ink/80">{lead}</p>}
+          {lead && <p className="mt-4 max-w-prose text-pretty leading-relaxed text-ink/80">{lead}</p>}
 
           {/* Top highlights */}
           <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 rounded-xl border border-[var(--line)] bg-surface/60 p-5">
@@ -197,9 +185,9 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
           {/* Availability */}
           <p className="mt-4 text-sm">
             <span className={inStock ? "font-medium text-green-700" : "font-medium text-red-700"}>
-              {inStock ? "In stock" : "Sold out"}
+              {inStock ? "En stock" : "Agotado"}
             </span>
-            {lowStock && <span className="text-amber-700"> · only {product.stock} left</span>}
+            {lowStock && <span className="text-amber-700"> · quedan {product.stock}</span>}
           </p>
 
           {/* Actions */}
@@ -211,10 +199,10 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
 
           {/* Delivery & assurance */}
           <div className="mt-6 space-y-2.5 rounded-xl border border-[var(--line)] p-4 text-sm">
-            <Assure icon="truck">Delivery in <b className="font-medium text-ink">{DELIVERY_TIME}</b> nationwide</Assure>
-            <Assure icon="cash">Cash on Delivery available</Assure>
-            <Assure icon="return">Easy <b className="font-medium text-ink">7-day returns</b></Assure>
-            <Assure icon="shield">Secure payment · tarnish-resistant & hypoallergenic</Assure>
+            <Assure icon="truck">Entrega <b className="font-medium text-ink">{DELIVERY_TIME}</b> en Buena Vista y zonas cercanas</Assure>
+            <Assure icon="cash">Pago contra entrega disponible</Assure>
+            <Assure icon="return">Devoluciones fáciles en <b className="font-medium text-ink">7 días</b></Assure>
+            <Assure icon="shield">Compra segura y atención directa</Assure>
           </div>
         </div>
       </div>
@@ -222,9 +210,9 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
       {/* ---------- Detailed sections (Amazon-style) ---------- */}
       <section className="mt-14 grid gap-10 lg:grid-cols-[1fr_360px]">
         <div>
-          <h2 className="font-serif text-2xl font-semibold text-ink">Product details</h2>
+          <h2 className="font-display text-2xl font-semibold text-ink">Detalles del producto</h2>
           <div className="mt-4 divide-y divide-[var(--line)] border-y border-[var(--line)]">
-            <Accordion title="Highlights & specifications" open>
+            <Accordion title="Detalles y especificaciones" open>
               <dl className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
                 {specs.map(([k, v]) => (
                   <div key={k} className="flex justify-between gap-3 border-b border-[var(--line)]/60 pb-2">
@@ -235,39 +223,42 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
               </dl>
             </Accordion>
 
-            <Accordion title="About this item">
+            <Accordion title="Sobre este producto">
               <ul className="space-y-2.5">
                 {aboutBullets.map((b, i) => (
                   <li key={i} className="flex gap-2.5">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" />
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-strong" />
                     <span>{b}</span>
                   </li>
                 ))}
               </ul>
             </Accordion>
 
-            <Accordion title="Size & fit">
+            <Accordion title="Presentación y uso">
               <p>
-                Designed for a comfortable everyday fit. Home and personal-care products use
-                adjustable or standard packaging — exact measurements are shown on the product page.
-                <Link href="/contact" className="text-gold-deep underline">Contact us</Link> if you need help choosing the right size.
+                Se entrega en su presentación original sellada. Si buscas una cantidad mayor o un
+                producto que no está en el catálogo,{" "}
+                <Link href="/contact" className="text-accent-strong underline">escríbenos</Link>{" "}
+                y lo conseguimos para ti.
               </p>
             </Accordion>
 
-            <Accordion title="Care & cleaning">
+            <Accordion title="Conservación">
               <ul className="space-y-2 [&>li]:flex [&>li]:gap-2.5">
-                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" /> Keep away from water, perfume and lotion.</li>
-                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" /> Wipe gently with a soft, dry cloth after use.</li>
-                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" /> Store in a dry place, away from direct sunlight.</li>
-                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" /> Avoid harsh chemicals, chlorine and abrasive cleaners.</li>
+                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-strong" /> Revisa la fecha de vencimiento en el envase.</li>
+                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-strong" /> Guarda en un lugar fresco y seco, lejos del sol directo.</li>
+                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-strong" /> Sigue las indicaciones de uso de la etiqueta.</li>
+                <li><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-strong" /> Mantén fuera del alcance de los niños.</li>
               </ul>
             </Accordion>
 
-            <Accordion title="Shipping & returns">
+            <Accordion title="Envíos y devoluciones">
               <p>
-                We ship nationwide via servicios de mensajería with <b className="font-medium text-ink">Cash on Delivery</b>{" "}
-                disponible. Los pedidos se envían en 1–2 días y suelen llegar en {DELIVERY_TIME}.
-                Not happy? Return unused items in original condition within <b className="font-medium text-ink">7 days</b>.
+                Entregamos en Buena Vista y zonas cercanas de Santa Cruz con{" "}
+                <b className="font-medium text-ink">pago contra entrega</b>. Los pedidos se preparan
+                el mismo día y llegan en la ruta de entrega.
+                Si algo no está bien, devuelve el producto sin usar en su empaque original dentro de{" "}
+                <b className="font-medium text-ink">7 días</b>.
               </p>
             </Accordion>
           </div>
@@ -275,13 +266,13 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
 
         {/* Sticky assurance rail on desktop */}
         <aside className="hidden lg:block">
-          <div className="sticky top-24 rounded-2xl border border-[var(--line)] bg-surface p-6 shadow-[0_20px_50px_-40px_rgba(38,8,16,0.5)]">
-            <p className="font-serif text-xl font-semibold text-ink">Why SanJuan Mini Market</p>
+          <div className="sticky top-24 rounded-2xl border border-[var(--line)] bg-surface p-6 shadow-[0_20px_50px_-40px_rgba(18,53,31,0.5)]">
+            <p className="font-display text-xl font-semibold text-ink">¿Por qué SanJuan Mini Market?</p>
             <ul className="mt-4 space-y-3 text-sm text-ink/80">
-              <li className="flex gap-2.5"><Dot /> Acero inoxidable premium — libre de óxido y hecho para durar</li>
-              <li className="flex gap-2.5"><Dot /> Amigable con la piel e hipoalergénico</li>
-              <li className="flex gap-2.5"><Dot /> Cash on Delivery, nationwide</li>
-              <li className="flex gap-2.5"><Dot /> Complimentary care guidance with every order</li>
+              <li className="flex gap-2.5"><Dot /> Productos revisados antes de cada entrega</li>
+              <li className="flex gap-2.5"><Dot /> Pago contra entrega en Buena Vista</li>
+              <li className="flex gap-2.5"><Dot /> Entrega {DELIVERY_TIME}</li>
+              <li className="flex gap-2.5"><Dot /> Atención cercana por WhatsApp</li>
             </ul>
           </div>
         </aside>
@@ -290,7 +281,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
       {/* Related */}
       {related.length > 0 && (
         <section className="mt-20">
-          <h2 className="font-serif text-2xl font-semibold text-ink">You may also like</h2>
+          <h2 className="font-display text-2xl font-semibold text-ink">También te puede gustar</h2>
           <div className="mt-6 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
             {related.map((p) => (
               <ProductCard key={p.id} product={p} />
@@ -316,7 +307,7 @@ function Accordion({
       title={title}
       group="product-details"
       defaultOpen={open}
-      summaryClassName="py-4 font-serif text-lg font-semibold text-ink"
+      summaryClassName="py-4 font-display text-lg font-semibold text-ink"
       icon={
         <svg
           className="shrink-0 text-muted transition-transform duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-data-[state=open]:rotate-180"
@@ -333,7 +324,7 @@ function Accordion({
 }
 
 function Dot() {
-  return <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-deep" />;
+  return <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-strong" />;
 }
 
 function Assure({ icon, children }: { icon: "truck" | "cash" | "return" | "shield"; children: React.ReactNode }) {
@@ -345,7 +336,7 @@ function Assure({ icon, children }: { icon: "truck" | "cash" | "return" | "shiel
   };
   return (
     <div className="flex items-center gap-3 text-muted">
-      <svg className="shrink-0 text-gold-deep" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg className="shrink-0 text-accent-strong" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         {paths[icon]}
       </svg>
       <span className="text-ink/80">{children}</span>

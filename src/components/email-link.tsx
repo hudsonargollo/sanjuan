@@ -22,10 +22,10 @@ export function EmailLink({
   async function handleClick() {
     try {
       await navigator.clipboard.writeText(email);
-      toast.success(`${email} — paste it in your email app or Gmail.`, { title: "Email copied" });
+      toast.success(`${email} — pégalo en tu aplicación de correo.`, { title: "Correo copiado" });
     } catch {
       // Clipboard blocked (e.g. non-secure context): still show the address.
-      toast.info(email, { title: "Our email" });
+      toast.info(email, { title: "Nuestro correo" });
     }
   }
 

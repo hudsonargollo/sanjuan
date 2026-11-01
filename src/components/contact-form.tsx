@@ -25,8 +25,8 @@ export function ContactForm({ topic, defaultSubject }: { topic?: string; default
   if (state.ok) {
     return (
       <div className="flex flex-col items-center justify-center rounded-xl border border-[var(--line)] bg-cream-soft p-10 text-center">
-        <h2 className="font-serif text-2xl font-semibold text-ink">Thank you!</h2>
-        <p className="mt-2 text-muted">Your message has been received. We&apos;ll reply shortly.</p>
+        <h2 className="font-display text-2xl font-semibold text-ink">¡Gracias por escribirnos!</h2>
+        <p className="mt-2 text-muted">Recibimos tu mensaje. Te responderemos pronto.</p>
       </div>
     );
   }
@@ -37,37 +37,37 @@ export function ContactForm({ topic, defaultSubject }: { topic?: string; default
       {/* Honeypot for bots — hidden from people and screen readers */}
       <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Your name" hint="5–10 letters (A–Z)" {...f.field("name")}>
-          {(a11y) => <input {...a11y} {...bind("name")} autoComplete="name" maxLength={20} placeholder="e.g. Ayesha" className={control} />}
+        <Field label="Tu nombre" hint="5–10 letras (A–Z)" {...f.field("name")}>
+          {(a11y) => <input {...a11y} {...bind("name")} autoComplete="name" maxLength={20} placeholder="Ej. María" className={control} />}
         </Field>
-        <Field label="Email" {...f.field("email")}>
+        <Field label="Correo" {...f.field("email")}>
           {(a11y) => (
-            <input {...a11y} {...bind("email")} type="email" autoComplete="email" spellCheck={false} placeholder="you@example.com" className={control} />
+            <input {...a11y} {...bind("email")} type="email" autoComplete="email" spellCheck={false} placeholder="tu@correo.com" className={control} />
           )}
         </Field>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Phone (optional)" hint="03XX XXXXXXX, 92… or +country code" {...f.field("phone")}>
+        <Field label="Teléfono (opcional)" hint="Ej. 700 00000 o +591…" {...f.field("phone")}>
           {(a11y) => (
-            <input {...a11y} {...bind("phone", phoneChars)} type="tel" inputMode="tel" autoComplete="tel" maxLength={20} placeholder="0300 1234567" className={control} />
+            <input {...a11y} {...bind("phone", phoneChars)} type="tel" inputMode="tel" autoComplete="tel" maxLength={20} placeholder="700 00000" className={control} />
           )}
         </Field>
-        <Field label="Subject (optional)" {...f.field("subject")}>
-          {(a11y) => <input {...a11y} {...bind("subject")} maxLength={200} placeholder="What's it about?" className={control} />}
+        <Field label="Asunto (opcional)" {...f.field("subject")}>
+          {(a11y) => <input {...a11y} {...bind("subject")} maxLength={200} placeholder="¿De qué se trata?" className={control} />}
         </Field>
       </div>
-      <Field label="Your message" multiline {...f.field("message")}>
+      <Field label="Tu mensaje" multiline {...f.field("message")}>
         {(a11y) => (
-          <textarea {...a11y} {...bind("message")} rows={5} maxLength={5000} placeholder="How can we help?" className={`${control} resize-y`} />
+          <textarea {...a11y} {...bind("message")} rows={5} maxLength={5000} placeholder="¿En qué te ayudamos?" className={`${control} resize-y`} />
         )}
       </Field>
       {state.error && <AuthAlert>{state.error}</AuthAlert>}
       <button
         type="submit"
         disabled={pending}
-        className="rounded-full bg-maroon px-9 py-3 text-sm font-medium uppercase tracking-[0.12em] text-light transition hover:bg-maroon-2 disabled:opacity-60"
+        className="rounded-full bg-accent px-9 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-brand-deep shadow-[0_14px_32px_-16px_rgba(239,125,31,0.9)] transition duration-300 hover:-translate-y-0.5 hover:bg-accent-soft disabled:opacity-60"
       >
-        {pending ? "Sending…" : "Send Message"}
+        {pending ? "Enviando…" : "Enviar mensaje"}
       </button>
     </form>
   );

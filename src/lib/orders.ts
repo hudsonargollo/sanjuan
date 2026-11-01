@@ -9,11 +9,11 @@ import { refreshCatalog } from "./cache-tags";
 
 
 export const checkoutSchema = z.object({
-  customerName: z.string().trim().min(2, "Please enter your full name").max(120),
-  email: z.string().trim().email("Enter a valid email").max(200),
-  phone: z.string().trim().min(7, "Enter a valid phone number").max(30),
-  address: z.string().trim().min(5, "Enter your delivery address").max(500),
-  city: z.string().trim().min(2, "Enter your city").max(100),
+  customerName: z.string().trim().min(2, "Ingresa tu nombre completo").max(120),
+  email: z.string().trim().email("Ingresa un correo válido").max(200),
+  phone: z.string().trim().min(7, "Ingresa un teléfono válido").max(30),
+  address: z.string().trim().min(5, "Ingresa tu dirección de entrega").max(500),
+  city: z.string().trim().min(2, "Ingresa tu ciudad").max(100),
   postalCode: z.string().max(20).nullish(),
   notes: z.string().max(1000).nullish(),
   paymentMethod: z.enum(["COD", "PAYFAST", "SAFEPAY"]),
@@ -26,7 +26,7 @@ export const checkoutSchema = z.object({
         quantity: z.number().int().positive().max(99),
       })
     )
-    .min(1, "Your cart is empty")
+    .min(1, "Tu carrito está vacío")
     .max(50),
 });
 
@@ -47,7 +47,7 @@ function generateOrderNumber(): string {
   const stamp = Date.now().toString(36).toUpperCase().slice(-6);
   let rand = "";
   for (let i = 0; i < 8; i++) rand += ORDER_ALPHABET[randomInt(ORDER_ALPHABET.length)];
-  return `ZR-${stamp}-${rand}`;
+  return `SJ-${stamp}-${rand}`;
 }
 
 // Cancels an order exactly once and puts its items back into stock.
@@ -81,7 +81,7 @@ export async function createOrder(
 ): Promise<CreateOrderResult> {
   const parsed = checkoutSchema.safeParse(input);
   if (!parsed.success) {
-    return { ok: false, error: parsed.error.issues[0]?.message ?? "Invalid order" };
+    return { ok: false, error: parsed.error.issues[0]?.message ?? "Pedido inválido" };
   }
   const data = parsed.data;
 
@@ -101,16 +101,16 @@ export async function createOrder(
 
     const lineItems = [...qtyById].map(([productId, quantity]) => {
       const p = byId.get(productId);
-      const name = data.items.find((i) => i.productId === productId)?.name ?? "An item";
+      const name = data.items.find((i) => i.productId === productId)?.name ?? "Un producto";
       if (!p)
         throw new OrderValidationError(
-          `"${name}" is no longer available. Please remove it from your cart and try again.`
+          `"${name}" ya no está disponible. Quítalo de tu carrito e inténtalo de nuevo.`
         );
       if (p.stock < quantity)
         throw new OrderValidationError(
           p.stock <= 0
-            ? `"${p.name}" is sold out. Please remove it from your cart.`
-            : `Only ${p.stock} left of "${p.name}". Please lower the quantity.`
+            ? `"${p.name}" está agotado. Quítalo de tu carrito.`
+            : `Solo quedan ${p.stock} de "${p.name}". Baja la cantidad.`
         );
       return { productId: p.id, name: p.name, price: Number(p.price), quantity };
     });
@@ -148,7 +148,7 @@ export async function createOrder(
             });
             if (res.count !== 1)
               throw new OrderValidationError(
-                `"${i.name}" just sold out or has fewer pieces left. Please update your cart.`
+                `"${i.name}" se agotó o quedan menos unidades. Actualiza tu carrito.`
               );
           }
           return tx.order.create({
@@ -218,7 +218,7 @@ export async function createOrder(
     console.error("[order] failed to create order:", err);
     return {
       ok: false,
-      error: "Sorry, we couldn't place your order right now. Please try again in a moment.",
+      error: "Lo sentimos, no pudimos registrar tu pedido ahora. Inténtalo de nuevo en un momento.",
     };
   }
 }
